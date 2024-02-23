@@ -4,6 +4,8 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 
+const { signin } = require('../../api/signin');
+
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,21 +14,17 @@ const SignInPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        // Redirigir a la página principal u otra página después de iniciar sesión
-        window.location.href = '/';
-      } else {
-        const data = await response.json();
-        setErrorMessage(data.message);
-      }
+      const body = { correo: email, password: password };
+      console.log(body);
+      const response = await signin(body);
+      console.log(response);
+      // if (response.ok) {
+      //   // Redirigir a la página principal u otra página después de iniciar sesión
+      //   window.location.href = '/';
+      // } else {
+      //   const data = await response.json();
+      //   setErrorMessage(data.message);
+      // }
     } catch (error) {
       console.error('An unexpected error occurred:', error);
       setErrorMessage('An unexpected error occurred');
