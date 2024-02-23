@@ -1,0 +1,25 @@
+POST https://proyectos3.sertor.es/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "correo": "adriantoral@live.u-tad.com",
+  "nombre_completo": "Adrian Toral",
+  "alias": "adriantoral",
+  "password": "12345",
+  "frase_recuperacion": "adriantoral"
+}
+
+###
+
+POST https://proyectos3.sertor.es/api/v1/auth/signin
+Content-Type: application/json
+
+{
+  "correo": "adriantoral@live.u-tad.com",
+  "password": "12345"
+}
+
+###
+
+GET https://proyectos3.sertor.es/api/v1/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NzE5OTI3LCJleHAiOjE3MDg4MDYzMjd9.7D_feqDbTJ3MOB1MTc0iMnKdYK51D-bdKkjc-FIOeDk
