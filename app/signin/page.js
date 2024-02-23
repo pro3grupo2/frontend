@@ -1,6 +1,7 @@
 "use client"
 // pages/signin.js
 import { useState } from 'react';
+import Link from 'next/link'; // Importa la etiqueta <Link> de Next.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../globals.css';
 
@@ -59,6 +60,10 @@ const SignInPage = () => {
         </div>
         <button type="submit" className="btn btn-primary">Sign In</button>
         {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+        <div className="mb-3">
+          {/* Cambia el elemento <a> por <span> */}
+          <p><Link href="/recover"><span>¿Has olvidado la contraseña? </span></Link></p>
+        </div>
       </form>
     </div>
   );
