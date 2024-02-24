@@ -24,12 +24,12 @@ const signup = async (body) => {
     return data.data;
 }
 
-const me = async (body) => {
+const me = async (token) => {
     const response = await fetch("https://proyectos3.sertor.es/api/v1/auth/me", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${body.token}`
+            'Authorization': `Bearer ${token}`
         }
     });
 

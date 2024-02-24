@@ -3,6 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 
+const { me } = require('../api/sign');
+
+async function ME(token) {
+    const data = await me(token);
+    console.log(data);
+    return data;
+}
+
 const HomePage = () => {
   return (
     <div className="container mt-5">
@@ -14,6 +22,7 @@ const HomePage = () => {
         <Link href="/signup">
           <button className="btn btn-success">Sign up</button>
         </Link>
+        <button className="btn btn-danger ml-2" onClick={() => ME(localStorage.getItem("token"))}>Me</button>
       </div>
     </div>
   );
