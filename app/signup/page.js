@@ -18,6 +18,7 @@ const RegisterPage = () => {
 		const body = { correo: email, nombre_completo: name, alias, password, frase_recuperacion: recoveryPhrase };
 		const data = await signup(body);
 		console.log(data);
+		window.location.href="/";
 	};
 
 	return (
