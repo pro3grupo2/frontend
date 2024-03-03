@@ -21,7 +21,7 @@ const SignInPage = () => {
 
         if (token) {
             localStorage.setItem('token', token);
-            window.location.href = '/';
+            window.location.href = '/home';
         } else {
             setErrorMessage('Email o contraseña incorrectos');
         }

@@ -1,0 +1,15 @@
+/* styles/animations.css */
+
+@keyframes moveUpDown {
+    0%, 100% {
+      transform: translateY(0); /* El texto está en su posición original */
+    }
+    50% {
+      transform: translateY(-20px); /* El texto se desplaza hacia arriba */
+    }
+  }
+  
+  .move-up-down {
+    animation: moveUpDown 2s ease-in-out infinite; /* Animación que se repite infinitamente */
+  }
+  
