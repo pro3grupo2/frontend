@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link'; // Importa la etiqueta <Link> de Next.js
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../globals.css';
+import '../../styles/password-styles.css';
 
 const RecoverPasswordPage = () => {
   const [newPassword, setNewPassword] = useState('');

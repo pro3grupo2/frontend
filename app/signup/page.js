@@ -1,9 +1,10 @@
 "use client"
-// pages/register.js
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { signup } from '../../api/sign';
+import '../styles/signup-styles.css';
 
-const { signup } = require('../../api/sign');
+
 
 const RegisterPage = () => {
 	const [name, setName] = useState('');
@@ -22,77 +23,81 @@ const RegisterPage = () => {
 	};
 
 	return (
-		<div className="container mt-5">
-			<h2>Registro</h2>
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<label htmlFor="name">Nombre:</label>
-					<input
-						type="text"
-						className="form-control"
-						id="name"
-						placeholder="Enter your name"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="email">Correo electrónico:</label>
-					<input
-						type="email"
-						className="form-control"
-						id="email"
-						placeholder="Enter email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="password">Contraseña:</label>
-					<input
-						type="password"
-						className="form-control"
-						id="password"
-						placeholder="Enter password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="alias">Alias:</label>
-					<input
-						type="text"
-						className="form-control"
-						id="alias"
-						placeholder="Enter alias"
-						value={alias}
-						onChange={(e) => setAlias(e.target.value)}
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="recoveryPhrase">Recover phrase:</label>
-					<input
-						type="text"
-						className="form-control"
-						id="recoveryPhrase"
-						placeholder="Enter recovery phrase"
-						value={recoveryPhrase}
-						onChange={(e) => setRecoveryPhrase(e.target.value)}
-						required
-					/>
-				</div>
-				<button type="submit" className="btn btn-primary">Registrarse</button>
-				{errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
-			</form>
-			<div className="mt-3">
-				<p>¿Ya tienes una cuenta? <Link href="/signin">Inicia sesión aquí</Link></p>
-			</div>
-		</div>
-	);
+        <div className="container">
+            <div className="split-container">
+                <div className="form-container">
+                    <div className="text-container">
+                        <h1>Configura tu cuenta</h1>
+                    </div>
+                    <form onSubmit={handleSubmit} className="form-container">
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                id="name"
+                                className="form-control"
+                                placeholder="Nombre"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="email"
+                                id="email"
+                                className="form-control"
+                                placeholder="Correo Electrónico"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="password"
+                                id="password"
+                                className="form-control"
+                                placeholder="Contraseña"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                id="alias"
+                                className="form-control"
+                                placeholder="Alias"
+                                value={alias}
+                                onChange={(e) => setAlias(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                id="recoveryPhrase"
+                                className="form-control"
+                                placeholder="Frase de recuperación"
+                                value={recoveryPhrase}
+                                onChange={(e) => setRecoveryPhrase(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Registrarse</button>
+                        {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+                    </form>
+                    <div className="mt-3">
+                        <p>¿Ya tienes una cuenta? <Link href="/signin">Inicia sesión aquí</Link></p>
+                    </div>
+                </div>
+                <div className="image-container">
+                    {/* Aquí puedes añadir una imagen si deseas */}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default RegisterPage;

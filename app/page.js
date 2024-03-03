@@ -1,24 +1,15 @@
 "use client"
-// pages/index.js
 import React from 'react';
 import Link from 'next/link';
-
-const { me } = require('../api/sign');
-
-async function ME(token) {
-    const data = await me(token);
-    console.log(data);
-    return data;
-}
+import NavBar from '../components/NavBar';
 
 const HomePage = () => {
   return (
-    <div className="container mt-5">
-      <h2>Bienvenido a nuestra aplicación</h2>
-      <div className="mt-3">
-        <Link href="/signin">
-          <button className="btn btn-primary mr-2">Sign in</button>
-        </Link>
+    <div className="main-content">
+      <NavBar />
+      <h1 className="title">Trabajos de alumnos/nis</h1>
+      <h2 className="subtitle">¡Descubre el talento de U-tad!</h2>
+      <div className="buttons">
         <Link href="/signup">
           <button className="btn btn-success">Sign up</button>
         </Link>
@@ -29,4 +20,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

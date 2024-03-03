@@ -1,9 +1,8 @@
 "use client"
-// pages/recover.js
 import { useState } from 'react';
-import Link from 'next/link'; // Importa la etiqueta <Link> de Next.js
+import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../globals.css';
+import '../styles/recover-styles.css';
 
 const RecoverPage = () => {
   const [email, setEmail] = useState('');
@@ -33,7 +32,6 @@ const RecoverPage = () => {
     }*/
     window.location.href="/recover/password"
   };
-
   return (
     <div className="container mt-5">
       <h2>¿Has olvidado tu contraseña?</h2>
@@ -45,6 +43,7 @@ const RecoverPage = () => {
             type="email"
             id="email"
             className="form-control"
+            placeholder="Ingresa tu correo electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

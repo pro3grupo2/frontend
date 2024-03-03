@@ -1,54 +1,129 @@
+/* Estilos globales */
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* Estilos para el NavBar */
+.navbar {
+  position: fixed; /* Fija el navbar en la parte superior de la ventana */
+  top: 0; /* Lo posiciona en la parte superior */
+  left: 0; /* Alinea el navbar a la izquierda */
+  width: 100%; /* Ocupa todo el ancho de la ventana */
+  z-index: 1000; /* Asegura que esté por encima del resto del contenido */
+  background-color: #000000; /* Color del navbar */
+  padding: 10px 20px; /* Ajusta el espaciado según sea necesario */
+}
+
+/* Estilo para el botón de inicio de sesión en la barra de navegación */
+.navbar .btn-primary {
+  background-color: #0065ef; /* Color principal del botón */
+  border-color: #0065ef; /* Color principal del botón */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Estilo para el número de teléfono en la barra de navegación */
+.navbar .phone-number {
+  color: #ffffff; /* Color del texto */
+  margin-right: 20px; /* Margen a la derecha para separarlo del botón de inicio de sesión */
+}
+
+
+/* Estilo para el texto principal */
+h2 {
+  color: #ffffff; /* Color del logo de U-tad */
+}
+
+/* Estilo para los botones */
+.btn {
+  background-color: #0065ef; /* Color principal del botón */
+  border-color: #0065ef; /* Color principal del botón */
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0051b5; /* Color de resaltado */
+  border-color: #0051b5; /* Color de resaltado */
+}
+
+/* Estilo para las tarjetas de proyectos */
+.project-card {
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilos adicionales para el NavBar */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Asegura que el contenedor abarque todo el ancho */
+}
+
+.logo {
+  order: 1; /* Cambia el orden al principio */
+}
+
+.signin-button {
+  order: 2; /* Cambia el orden al final */
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #f5f5f5;
-  }
-  
-  .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    font-weight: bold;
-    font-size: 2.5rem;
-    margin-top: 0;
-    margin-bottom: 2rem;
-  }
-  
-  .form-control {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    box-shadow: none;
-  }
-  
-  .form-control:focus {
-    box-shadow: none;
-  }
-  
-  .btn {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    background-color: #5e5ce6;
-    border: none;
-    color: #fff;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .btn:hover {
-    background-color: #4a47c6;
-  }
-  
-  .text-danger {
-    color: #dc3545;
-  }
+  background-image: url('/images/fondo5.jpeg');
+  background-size: cover;
+}
+
+/* Estilos para la página de inicio */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Esto asegura que ocupe el 100% de la altura de la ventana */
+}
+
+.title {
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.btn {
+  margin-bottom: 10px;
+}
+
+.signin-button {
+  margin-right: 100px; /* Ajusta el margen derecho para mover el botón hacia la izquierda */
+}
