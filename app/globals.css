@@ -1,129 +1,16 @@
-/* Estilos globales */
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* Estilos para el NavBar */
-.navbar {
-  position: fixed; /* Fija el navbar en la parte superior de la ventana */
-  top: 0; /* Lo posiciona en la parte superior */
-  left: 0; /* Alinea el navbar a la izquierda */
-  width: 100%; /* Ocupa todo el ancho de la ventana */
-  z-index: 1000; /* Asegura que esté por encima del resto del contenido */
-  background-color: #000000; /* Color del navbar */
-  padding: 10px 20px; /* Ajusta el espaciado según sea necesario */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Estilo para el botón de inicio de sesión en la barra de navegación */
-.navbar .btn-primary {
-  background-color: #0065ef; /* Color principal del botón */
-  border-color: #0065ef; /* Color principal del botón */
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 16px;
+.ms-font {
+    font-family: "Montserrat", sans-serif;
 }
 
-/* Estilo para el número de teléfono en la barra de navegación */
-.navbar .phone-number {
-  color: #ffffff; /* Color del texto */
-  margin-right: 20px; /* Margen a la derecha para separarlo del botón de inicio de sesión */
-}
-
-
-/* Estilo para el texto principal */
-h2 {
-  color: #ffffff; /* Color del logo de U-tad */
-}
-
-/* Estilo para los botones */
-.btn {
-  background-color: #0065ef; /* Color principal del botón */
-  border-color: #0065ef; /* Color principal del botón */
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.btn:hover {
-  background-color: #0051b5; /* Color de resaltado */
-  border-color: #0051b5; /* Color de resaltado */
-}
-
-/* Estilo para las tarjetas de proyectos */
-.project-card {
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.project-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-/* Estilos adicionales para el NavBar */
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; /* Asegura que el contenedor abarque todo el ancho */
-}
-
-.logo {
-  order: 1; /* Cambia el orden al principio */
-}
-
-.signin-button {
-  order: 2; /* Cambia el orden al final */
-}
-
-body {
-  background-image: url('/images/fondo5.jpeg');
-  background-size: cover;
-}
-
-/* Estilos para la página de inicio */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Esto asegura que ocupe el 100% de la altura de la ventana */
-}
-
-.title {
-  font-size: 3rem;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.btn {
-  margin-bottom: 10px;
-}
-
-.signin-button {
-  margin-right: 100px; /* Ajusta el margen derecho para mover el botón hacia la izquierda */
+.ms-light {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 100;
 }
