@@ -1,3 +1,7 @@
+/*paleta colores*/
+:root{
+    --secundario-gris-claro: #9DA4A8;
+}
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
