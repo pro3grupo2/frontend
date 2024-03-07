@@ -31,17 +31,17 @@ export default function SignIn() {
             <div className="form-container">
               <div className="text-container ">
                 <h1>Iniciar Sesión con el Correo de U-tad</h1>
-                <p className="subtext">
+                <p className="subtext py-2 mb-4">
                   El desarrollo de proyectos es una carta de presentación de los
                   conocimientos, experiencia y capacidad de trabajo en equipo.
                 </p>
               </div>
               <form onSubmit={handleSubmit}>
-                <div className="mb-3 ">
+                <div className="py-3 ">
                   <input
                     type="email"
                     id="email"
-                    className="form-control"
+                    className="form-control py-3"
                     style={{backgroundColor:"var(--secundario-gris-claro)"}}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -53,7 +53,7 @@ export default function SignIn() {
                   <input
                     type="password"
                     id="password"
-                    className="form-control"
+                    className="form-control py-3"
                     style={{backgroundColor:"var(--secundario-gris-claro)"}}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -72,8 +72,8 @@ export default function SignIn() {
 
               <button
                 type="submit"
-                className="btn btn-primary mt-5 w-100 border-5 btn-lg py-5">
-                Iniciar Sesión
+                className="btn btn-primary mt-4 w-100 border-5 btn-lg py-3 fs-3">
+                INICIAR SESIÓN
               </button>
               <p className="text-center">
                 <span >
@@ -86,7 +86,7 @@ export default function SignIn() {
             </div>
           </div>
         </div>
-        <div className="col-md-6 m">
+        <div className="col-md-6">
           <div className="image-container ">
             <Image
               src="/images/img_placeholder.png"
@@ -94,7 +94,6 @@ export default function SignIn() {
               width={0}
               height={0}
               sizes="(max-width: 80px) 50vw, 100vw"
-              
               className="img-fluid h-100 w-100"
             />
           </div>
