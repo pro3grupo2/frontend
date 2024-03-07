@@ -1,9 +1,8 @@
 "use client"
 
 import React from 'react';
-import Link from 'next/link';
 
-const { me } = require('../api/sign');
+import {me} from '@/api/v1/auth';
 
 async function ME(token) {
     const data = await me(token);
@@ -13,7 +12,7 @@ async function ME(token) {
 export default function HomePage() {
     return (
         <div className="container-fluid text-center mt-5">
-            
+
         </div>
     )
 }

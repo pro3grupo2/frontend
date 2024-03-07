@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import {useState} from 'react';
+import {useRouter} from "next/navigation";
 
-const { signin } = require('../../api/sign');
+import {signin} from '@/api/v1/auth';
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -12,14 +12,13 @@ export default function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const body = { correo: email, password: password };
-        const token = await signin(body);
 
+        const token = await signin(email, password)
         if (token) {
             localStorage.setItem('token', token);
             router.push("/home");
         }
-    };
+    }
 
     return (
         <div>
