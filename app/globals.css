@@ -44,9 +44,13 @@
 }
 
 .bg-image-main {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQcmrXJy8NiZnwe2qfBEg44NS96_1cvgwcjQ&usqp=CAU');
+    background-image: url('../public/images/img_placeholder.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: fit-content;
+    height: 88.5%;
+}
+
+html, body {
+    height: 100%;
 }
