@@ -14,6 +14,7 @@ export default function SignIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(email); 
 
         const token = await signin(email, password)
         if (token) {
@@ -30,7 +31,7 @@ export default function SignIn() {
                     <div className="split-container">
                         <div className="form-container">
                             <div className="text-container ">
-                                <h1>Iniciar Sesión con el Correo de U-tad</h1>
+                                <h1 className='ms-black'>Iniciar Sesión con el Correo de U-tad</h1>
                                 <p className="subtext py-2 mb-4">
                                     El desarrollo de proyectos es una carta de presentación de los
                                     conocimientos, experiencia y capacidad de trabajo en equipo.
@@ -68,13 +69,13 @@ export default function SignIn() {
                                         </span>
                                     </Link>
                                 </p>
+                                <button
+                                    type="submit"
+                                    className="btn ms-black btn-primary mt-4 w-100 border-5 btn-lg py-3 fs-3">
+                                    INICIAR SESIÓN
+                                </button>
                             </form>
-
-                            <button
-                                type="submit"
-                                className="btn btn-primary mt-4 w-100 border-5 btn-lg py-3 fs-3">
-                                INICIAR SESIÓN
-                            </button>
+                            
                             <p className="text-center">
                                 <span >
                                     ¿Aún no tienes cuenta?{" "}

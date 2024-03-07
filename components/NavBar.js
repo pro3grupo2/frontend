@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div className="container-fluid p-3 d-flex justify-content-between">
                 <Image className="img-fluid" src="/images/logo_utad.png" alt="Logo de U-tad" height={100} width={180} />
                 <div className="d-flex align-items-center">

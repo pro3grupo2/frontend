@@ -3,6 +3,12 @@
     --secundario-gris-claro: #E4EAED;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -48,9 +54,5 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 88.5%;
-}
-
-html, body {
     height: 100%;
 }

@@ -12,7 +12,7 @@ async function ME(token) {
 
 export default function HomePage() {
     return (
-        <div className="container-fluid bg-image-main text-center d-flex flex-column justify-content-center align-items-center" style={{minHeight: "85vh"}}>
+        <div className="container-fluid bg-image-main text-center d-flex flex-column justify-content-center align-items-center mx-0">
             <h1 className="display-1 ms-black mb-4">Trabajos de alumnos/nis</h1>
             <p className="ms-extrabold fs-2 mb-4">¡Descubre aquí el talento U-tad!</p>
             <p className="ms-light fs-5 mb-0">Bienvenido al repositorio de proyectos oficial de la U-tad.</p>
