@@ -24,7 +24,7 @@ export default function SignIn() {
     return (
         <div className="container-fluid">
             <div className="row vh-100">
-                <div className="form-container col-12 col-xl-4 align-self-center px-5">
+                <div className="form-container col-12 col-xl-4 align-self-center px-5 mt-5">
                     <div>
                         <h1 className="display-3 ms-extrabold">Iniciar Sesión con el Correo de U-tad</h1>
                         <p className="lead py-2 mb-4">

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
@@ -10,69 +10,35 @@ import { signup } from '@/api/v1/auth';
 
 export default function SignUp() {
 
-    const [email, setEmail] = useState('');
-    const [fullName, setFullName] = useState('');
-    const [alias, setAlias] = useState('');
     const [password, setPassword] = useState('');
-    const [recoveryPhrase, setRecoveryPhrase] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = await signup(email, fullName, alias, password, recoveryPhrase, "alumno")
+        if (password !== confirmPassword) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        const data = await signup(password, "alumno"); // Usar la contraseña en lugar del email
         console.log(data);
         router.push("/signin");
     }
+
     return (
         <div className="container-fluid">
             <div className="row vh-100">
-                <div className="form-container col-12 col-xl-4 align-self-center px-5 mt-5 ">
+                <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
                     <div>
-                        <h1 className="display-3 ms-extrabold">Crear cuenta</h1>
+                        <h1 className="display-3 ms-extrabold">Termina de configurar tu cuenta</h1>
                         <p className="lead py-2 mb-4">
-                            Indícanos tus datos para crear tu cuenta en U-tad.
+                        Paso 1 de 3. Crea una contraseña para continuar
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="py-3 ">
-                            <input
-                                type="email"
-                                id="email"
-                                className="form-control py-3"
-                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Correo Electrónico"
-                                required
-                                autoComplete="off"
-                            />
-                        </div>
-                        <div className="py-3 ">
-                            <input
-                                type="text"
-                                id="fullName"
-                                className="form-control py-3"
-                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                value={fullName}
-                                onChange={(e) => setFullName(e.target.value)}
-                                placeholder="Nombre Completo"
-                                required
-                            />
-                        </div>
-                        <div className="py-3 ">
-                            <input
-                                type="text"
-                                id="alias"
-                                className="form-control py-3"
-                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                value={alias}
-                                onChange={(e) => setAlias(e.target.value)}
-                                placeholder="Alias"
-                                required
-                            />
-                        </div>
                         <div className="py-3 ">
                             <input
                                 type="password"
@@ -88,14 +54,15 @@ export default function SignUp() {
                         </div>
                         <div className="py-3 ">
                             <input
-                                type="text"
-                                id="recoveryPhrase"
+                                type="password"
+                                id="confirmPassword"
                                 className="form-control py-3"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                value={recoveryPhrase}
-                                onChange={(e) => setRecoveryPhrase(e.target.value)}
-                                placeholder="Frase de Recuperación"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirmar Contraseña"
                                 required
+                                autoComplete="new-password"
                             />
                         </div>
                         <div className="d-flex justify-content-between align-items-center mt-5">
