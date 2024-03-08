@@ -74,5 +74,5 @@ const validar_proyecto = async (token, id) => {
 }
 
 module.exports = {
-    get_proyectos, get_proyecto, crear_proyecto, editar_proyecto, eliminar_proyecto, validar_proyecto
+    get_proyectos, get_proyecto, subir_ficheros, crear_proyecto, editar_proyecto, eliminar_proyecto, validar_proyecto
 }
