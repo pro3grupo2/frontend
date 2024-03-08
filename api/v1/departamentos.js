@@ -22,7 +22,7 @@ const get_departamento = async (token, id) => {
 
 const crear_departamento = async (token, titulo) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo
     })
@@ -33,7 +33,7 @@ const crear_departamento = async (token, titulo) => {
 
 const editar_departamento = async (token, id, titulo) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo
     })

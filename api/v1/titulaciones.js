@@ -22,7 +22,7 @@ const get_titulacion = async (token, id) => {
 
 const crear_titulacion = async (token, titulo, id_area) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo, id_area: id_area
     })
@@ -33,7 +33,7 @@ const crear_titulacion = async (token, titulo, id_area) => {
 
 const editar_titulacion = async (token, id, titulo, id_area) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo, id_area: id_area
     })

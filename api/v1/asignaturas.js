@@ -22,7 +22,7 @@ const get_asignatura = async (token, id) => {
 
 const crear_asignatura = async (token, titulo, curso, letra) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo, curso: curso, letra: letra
     })
@@ -33,7 +33,7 @@ const crear_asignatura = async (token, titulo, curso, letra) => {
 
 const editar_asignatura = async (token, id, titulo, curso, letra) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo, curso: curso, letra: letra
     })

@@ -22,7 +22,7 @@ const get_area = async (token, id) => {
 
 const crear_area = async (token, titulo) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo
     })
@@ -33,7 +33,7 @@ const crear_area = async (token, titulo) => {
 
 const editar_area = async (token, id, titulo) => {
     const headers = {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
         titulo: titulo
     })
