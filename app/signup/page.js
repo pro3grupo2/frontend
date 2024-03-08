@@ -36,11 +36,11 @@ export default function SignUp() {
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="py-3 ">
+                        <div className="py-2 ">
                             <input
                                 type="email"
                                 id="email"
-                                className="form-control py-3"
+                                className="form-control py-2"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -49,11 +49,11 @@ export default function SignUp() {
                                 autoComplete="off"
                             />
                         </div>
-                        <div className="py-3 ">
+                        <div className="py-2 ">
                             <input
                                 type="text"
                                 id="fullName"
-                                className="form-control py-3"
+                                className="form-control py-2"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
@@ -61,11 +61,11 @@ export default function SignUp() {
                                 required
                             />
                         </div>
-                        <div className="py-3 ">
+                        <div className="py-2 ">
                             <input
                                 type="text"
                                 id="alias"
-                                className="form-control py-3"
+                                className="form-control py-2"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
                                 value={alias}
                                 onChange={(e) => setAlias(e.target.value)}
@@ -73,11 +73,11 @@ export default function SignUp() {
                                 required
                             />
                         </div>
-                        <div className="py-3 ">
+                        <div className="py-2 ">
                             <input
                                 type="password"
                                 id="password"
-                                className="form-control py-3"
+                                className="form-control py-2"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -86,11 +86,11 @@ export default function SignUp() {
                                 autoComplete="new-password"
                             />
                         </div>
-                        <div className="py-3 ">
+                        <div className="py-2 ">
                             <input
                                 type="text"
                                 id="recoveryPhrase"
-                                className="form-control py-3"
+                                className="form-control py-2"
                                 style={{ backgroundColor: "var(--secundario-gris-claro)" }}
                                 value={recoveryPhrase}
                                 onChange={(e) => setRecoveryPhrase(e.target.value)}
