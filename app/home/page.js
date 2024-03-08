@@ -16,6 +16,8 @@ export default function Home() {
                 setUser(data);
                 console.log(data);
             });
+        } else {
+            router.push('/signin');
         }
     }, []);
 
