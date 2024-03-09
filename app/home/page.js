@@ -1,41 +1,16 @@
 "use client"
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { me } from '@/api/v1/auth';
+import React from 'react';
+import useAuth from '@/hooks/useAuth';
 
 export default function Home() {
-    const [user, setUser] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const router = useRouter();
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        
-        if (!token) {
-            router.push('/signin');
-        } else {
-            me(token).then((data) => {
-                setUser(data);
-                setIsLoading(false); // desactivo carga de pagina web
-            }).catch(() => {
-                // si token invalido entonces redirige
-                router.push('/signin');
-            });
-        }
-    }, [router]);
+    const { user, isLoading } = useAuth();
 
     if (isLoading) {
-        return <div>Cargando...</div>; // pagina mientras verifica token
+        return <div>Cargando...</div>;
     }
 
-    // si ha cargado pero hay algun problema con el user tambien redirige
-    if (!user) {
-        router.push('/signin');
-        return null;
-    }
-    //contenido del home
-    return ( 
+    return (
         <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
             <h1 className="display-1 ms-extrabold">Bienvenido {user.rol}, {user.nombre_completo}!</h1>
         </div>
