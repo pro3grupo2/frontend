@@ -5,36 +5,42 @@ import {useRouter} from "next/navigation";
 import Link from 'next/link';
 
 import {signin} from '@/api/v1/auth';
+import NavBar from "@/components/NavBar"
+import {AlertContainer, create_alert} from "@/components/Alerts"
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    const [alerts, setAlerts] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const token = await signin(email, password)
-        if (token) {
-            localStorage.setItem('token', token);
-            router.push("/home");
-        }
+        if (!token) return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger")
+
+        localStorage.setItem('token', token)
+        router.push("/home")
     }
 
     return (
-        <div className="container-fluid">
-            <div className="row vh-100">
-                <div className="form-container col-12 col-xl-4 align-self-center px-5 mt-5">
-                    <div>
-                        <h1 className="display-3 ms-extrabold">Iniciar Sesión con el Correo de U-tad</h1>
-                        <p className="lead py-2 mb-4">
-                            El desarrollo de proyectos es una carta de presentación de los
-                            conocimientos, experiencia y capacidad de trabajo en equipo.
-                        </p>
-                    </div>
+        <div className="d-flex flex-column vh-100 p-0 m-0">
+            <AlertContainer alerts={alerts}/>
+            <NavBar/>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="py-3 ">
+            <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
+                <div className="px-5">
+                    <div className="form-container flex-shrink-1 p-5">
+                        <div>
+                            <h1 className="display-3 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
+                            <p className="d-none d-sm-block lead">
+                                El desarrollo de proyectos es una carta de presentación de los
+                                conocimientos, experiencia y capacidad de trabajo en equipo.
+                            </p>
+                        </div>
+
+                        <form className="row row-gap-3" onSubmit={handleSubmit}>
                             <input
                                 type="email"
                                 id="email"
@@ -46,8 +52,7 @@ export default function SignIn() {
                                 required
                                 autoComplete="off"
                             />
-                        </div>
-                        <div className="mb-3">
+
                             <input
                                 type="password"
                                 id="password"
@@ -59,33 +64,24 @@ export default function SignIn() {
                                 required
                                 autoComplete="off"
                             />
-                        </div>
-                        <p>
-                            <Link className="link-underline-dark link-dark fw-bold" href="/recover">
-                                        <span>
-                                            ¿Has olvidado la contraseña?
-                                        </span>
-                            </Link>
-                        </p>
-                        <button
-                            type="submit"
-                            className="btn btn-primary mt-4 w-100 border-5 btn-lg py-3 fs-3">
-                            INICIAR SESIÓN
-                        </button>
-                        <p className="text-center">
-                                <span>
-                                    ¿Aún no tienes cuenta?{" "}
-                                    <Link className="link-underline-dark link-dark fw-bold" href="/signup">
-                                        <span>¡Inscríbete ahora!</span>
-                                    </Link>
-                                </span>
-                        </p>
-                    </form>
+
+                            <Link className="link-underline-dark link-dark fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
+
+                            <button
+                                type="submit"
+                                className="btn btn-primary border-5 py-3 fs-3">
+                                INICIAR SESIÓN
+                            </button>
+
+                            <div className="text-center">
+                                <span className="pe-1">¿Aún no tienes cuenta?</span>
+                                <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
-                <div className="d-none d-xl-inline col-xl-8">
-                    <div className="bg-image-main"></div>
-                </div>
+                <div className="d-none d-xl-block bg-image-main w-100"></div>
             </div>
         </div>
     )
