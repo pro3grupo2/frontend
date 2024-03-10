@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import {useState} from 'react';
+import {useRouter} from "next/navigation";
 import Link from 'next/link';
 
-import { signin } from '@/api/v1/auth';
+import {signin} from '@/api/v1/auth';
 import NavBar from "@/components/NavBar"
-import { AlertContainer, create_alert } from "@/components/Alerts"
+import {AlertContainer, create_alert} from "@/components/Alerts"
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -18,11 +18,11 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const token = await signin(email, password);
-        if (!token) return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger");
+        const token = await signin(email, password)
+        if (!token) return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger")
 
-        localStorage.setItem('token', token);
-        router.push("/home");
+        localStorage.setItem('token', token)
+        router.push("/home")
     }
 
     const togglePasswordVisibility = () => {
@@ -30,21 +30,22 @@ export default function SignIn() {
     }
 
     return (
-        <div className="vh-100 d-flex flex-column">
+        <div className="d-flex flex-column vh-100 p-0 m-0">
             <AlertContainer alerts={alerts}/>
             <NavBar/>
-            <div className="container-fluid flex-fill d-flex flex-column">
-                <div className="row flex-fill">
-                    <div className="col-md-6 d-flex flex-column">
-                        <div className="row justify-content-center mt-5">
-                            <div className="col-md-10 col-12 d-flex flex-column">
-                                <h1 className="display-4 ms-extrabold mt-5">Iniciar sesión con el correo de la U-tad</h1>
-                                <p className="d-none d-sm-block lead mt-3">
-                                    El desarrollo de proyectos es una carta de presentación de los
-                                    conocimientos, experiencia y capacidad de trabajo en equipo.
-                                </p>
-                                <form className="row row-gap-3 mx-0 mt-5" onSubmit={handleSubmit}>
-                                    <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
+
+            <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
+                <div className="flex-shrink- px-5 mx-xl-5"> 
+                    <div className="pb-4">
+                        <h1 className="display-2 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
+                        <p className="d-none d-sm-block lead">
+                            El desarrollo de proyectos es una carta de presentación de los
+                            conocimientos, experiencia y capacidad de trabajo en equipo.
+                        </p>
+                    </div>
+
+                    <form className="row row-gap-3 m-0 mt-xl-5" onSubmit={handleSubmit}>
+                        <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
                                         <input
                                             type="email"
                                             id="email"
@@ -75,28 +76,25 @@ export default function SignIn() {
                                         </button>
                                     </div>
 
-                                    <Link className="link-underline-dark link-dark fw-bold mt-2 px-0" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="link-underline-dark link-dark fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
 
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary border-5 py-3 ms-extrabold fs-2 mt-5"
-                                        style={{ width: "90%" }}>
-                                        INICIAR SESIÓN
-                                    </button>
+                        <div className="pt-4 mt-xl-5 px-0">
+                            <button
+                                type="submit"
+                                className="w-100 btn btn-primary border-5 py-3 fs-3">
+                                INICIAR SESIÓN
+                            </button>
 
-                                    <div className="text-center mt-5">
-                                        <span className="pe-1">¿Aún no tienes cuenta?</span>
-                                        <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
-                                    </div>
-                                </form>
+                            <div className="col-12 mt-xl-4 text-center">
+                                <span className="pe-1">¿Aún no tienes cuenta?</span>
+                                <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-md-6 d-md-block p-0">
-                        <div className=" d-md-block bg-image-main w-100 h-100"></div>
-                    </div>
+                    </form>
                 </div>
+                <div className="d-none d-xl-block w-100" style={{ maxWidth: '5%' }}></div>
+                <div className="d-none d-xl-block bg-image-main w-100" style={{ maxWidth: '50%' }}></div>
             </div>
         </div>
-    );
+    )
 }
