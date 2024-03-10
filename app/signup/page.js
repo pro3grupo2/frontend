@@ -9,18 +9,29 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Obtener el alias del correo electrónico (parte antes del @)
-    const alias = email.substring(0, email.indexOf('@'));
-
-    // Redireccionar a la página de registro de contraseña con el correo electrónico y el alias como parámetros en la URL
-    router.push({
-      pathname: '/signup/password',
-      query: { email: email, alias: alias }
-    });
+    
+    if (email) {
+      try {
+        // Llamada a la función signup para registrar el correo electrónico
+        const alias = email.substring(0, email.indexOf('@'));
+        await signup(email, alias); // Enviar correo electrónico y alias al servidor
+  
+        // Redireccionar a la página de registro de contraseña con el correo electrónico y alias como parámetros en la URL
+        router.push({
+          pathname: '/signup/password',
+          query: { email: email, alias: alias }
+        });
+      } catch (error) {
+        console.error("Error al registrar el correo electrónico:", error);
+      }
+    } else {
+      console.error("El correo electrónico está vacío");
+    }
   };
+  
+  
 
   return (
     <div className="container-fluid">
@@ -41,25 +52,21 @@ export default function SignUp() {
               />
             </div>
             <div className="d-flex justify-content-between align-items-center mt-5">
-              {/* Botón "Atrás" */}
               <button className="btn btn-secondary" onClick={() => router.push('/signin')} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
                   <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
                 </svg>
               </button>
-              {/* Botón "SIGUIENTE" */}
               <button className="btn btn-primary w-40 btn-lg" type="submit">
                 SIGUIENTE
               </button>
             </div>
           </form>
           <p className="text-center mt-5">
-            <span>
-              ¿Ya tienes una cuenta?{" "}
-              <Link href="/signin">
-                <a className="link-underline-dark link-dark fw-bold">Iniciar sesión</a>
-              </Link>
-            </span>
+            ¿Ya tienes una cuenta?{" "}
+            <Link href="/signin">
+              <span className="link-underline-dark link-dark fw-bold">Iniciar sesión</span>
+            </Link>
           </p>
         </div>
         <div className="d-none d-xl-inline col-xl-8">
