@@ -37,14 +37,14 @@ export default function SignIn() {
             <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
                 <div className="flex-shrink- px-5 mx-xl-5"> 
                     <div className="pb-4">
-                        <h1 className="display-2 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
-                        <p className="d-none fs-4 d-sm-block lead">
+                        <h1 className="display-4 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
+                        <p className="d-none fs-5 d-sm-block lead">
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
                     </div>
 
-                    <form className="row row-gap-3 m-0 mt-xl-5" onSubmit={handleSubmit}>
+                    <form className="row row-gap-3 m-0" onSubmit={handleSubmit}>
                         <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
                                         <input
                                             type="email"
@@ -78,14 +78,14 @@ export default function SignIn() {
 
                         <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
 
-                        <div className="pt-4 mt-xl-5 px-0">
+                        <div className="pt-4 px-0">
                             <button
                                 type="submit"
                                 className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
                                 INICIAR SESIÓN
                             </button>
 
-                            <div className="col-12 mt-xl-4 text-center">
+                            <div className="col-12 text-center">
                                 <span className="pe-1 fs-5">¿Aún no tienes cuenta?</span>
                                 <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signup">¡Inscríbete ahora!</Link>
                             </div>
