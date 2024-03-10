@@ -1,9 +1,25 @@
 /*paleta colores*/
 :root {
-    --secundario-gris-claro: #E4EAED;
+    --color-principal: #0065F3;
+    --color-secundario-negro: #091229;
+    --color-secundario-gris-oscuro: #343840;
+    --color-secundario-gris: #6E7377;
+    --color-secundario-gris-claro: #9DA4A8;
+    --color-secundario-gris-claro-extra: #E4EAED;
+    --color-secundario-blanco: #FFFFFF;
+    --color-titulacion-didi: #FF3757;
+    --color-titulacion-anim: #FFE900;
+    --color-titulacion-anim-alternativo: #FFCF00;
+    --color-titulacion-dipi: #773CCA;
+    --color-titulacion-inso: #00CDD4;
+    --color-titulacion-software-mates: #56C397;
+    --color-titulacion-aplicaciones: #00BCEC;
+    --color-titulacion-anim3d: #BDD23A;
+    --color-error: #D71B1B;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     margin: 0;
