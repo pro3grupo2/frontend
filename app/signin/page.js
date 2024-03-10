@@ -1,12 +1,12 @@
 "use client";
 
-import {useState} from 'react';
-import {useRouter} from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from 'next/link';
 
-import {signin} from '@/api/v1/auth';
+import { signin } from '@/api/v1/auth';
 import NavBar from "@/components/NavBar"
-import {AlertContainer, create_alert} from "@/components/Alerts"
+import { AlertContainer, create_alert } from "@/components/Alerts"
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -30,12 +30,11 @@ export default function SignIn() {
     }
 
     return (
-        <div className="d-flex flex-column vh-100 p-0 m-0">
-            <AlertContainer alerts={alerts}/>
-            <NavBar/>
+        <>
+            <AlertContainer alerts={alerts} />
 
             <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
-                <div className="flex-shrink- px-5 mx-xl-5"> 
+                <div className="flex-shrink- px-5 mx-xl-5">
                     <div className="pb-4">
                         <h1 className="display-4 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
                         <p className="d-none fs-5 d-sm-block lead">
@@ -46,35 +45,35 @@ export default function SignIn() {
 
                     <form className="row row-gap-3 m-0" onSubmit={handleSubmit}>
                         <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            className="form-control py-3 fs-5"
-                                            style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Correo Electrónico"
-                                            required
-                                            autoComplete="off"
-                                        />
-                                    </div>
+                            <input
+                                type="email"
+                                id="email"
+                                className="form-control py-3 fs-5"
+                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Correo Electrónico"
+                                required
+                                autoComplete="off"
+                            />
+                        </div>
 
-                                    <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            id="password"
-                                            className="form-control py-3 fs-5"
-                                            style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            placeholder="Contraseña"
-                                            required
-                                            autoComplete="off"
-                                        />
-                                        <button type="button" className="btn btn-dark" onClick={togglePasswordVisibility}>
-                                            <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
-                                        </button>
-                                    </div>
+                        <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                className="form-control py-3 fs-5"
+                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Contraseña"
+                                required
+                                autoComplete="off"
+                            />
+                            <button type="button" className="btn btn-dark" onClick={togglePasswordVisibility}>
+                                <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                            </button>
+                        </div>
 
                         <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
 
@@ -95,6 +94,6 @@ export default function SignIn() {
                 <div className="d-none d-xl-block w-100" style={{ maxWidth: '5%' }}></div>
                 <div className="d-none d-xl-block bg-image-main w-100" style={{ maxWidth: '50%' }}></div>
             </div>
-        </div>
+        </>
     )
 }
