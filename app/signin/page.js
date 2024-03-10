@@ -38,7 +38,7 @@ export default function SignIn() {
                 <div className="flex-shrink- px-5 mx-xl-5"> 
                     <div className="pb-4">
                         <h1 className="display-2 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
-                        <p className="d-none d-sm-block lead">
+                        <p className="d-none fs-4 d-sm-block lead">
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
@@ -76,18 +76,18 @@ export default function SignIn() {
                                         </button>
                                     </div>
 
-                        <Link className="link-underline-dark link-dark fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
 
                         <div className="pt-4 mt-xl-5 px-0">
                             <button
                                 type="submit"
-                                className="w-100 btn btn-primary border-5 py-3 fs-3">
+                                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
                                 INICIAR SESIÓN
                             </button>
 
                             <div className="col-12 mt-xl-4 text-center">
-                                <span className="pe-1">¿Aún no tienes cuenta?</span>
-                                <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
+                                <span className="pe-1 fs-5">¿Aún no tienes cuenta?</span>
+                                <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signup">¡Inscríbete ahora!</Link>
                             </div>
                         </div>
                     </form>
