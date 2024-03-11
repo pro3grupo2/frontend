@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import { useRouter } from "next/router"; // Cambio en la importación
+import { useRouter } from "next/navigation"; // Cambio en la importación
 import Link from 'next/link';
 import Image from 'next/image';
 
