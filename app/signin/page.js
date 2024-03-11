@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
-
 import { signin } from '@/api/v1/auth';
 import NavBar from "@/components/NavBar"
 import { AlertContainer, create_alert } from "@/components/Alerts"
@@ -11,15 +10,46 @@ import { AlertContainer, create_alert } from "@/components/Alerts"
 export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
     const [alerts, setAlerts] = useState([])
 
+    const validateInput = () => {
+        let isValid = true;
+        if (!email.includes('@')) {
+            setEmailError(true);
+            isValid = false;
+            create_alert(setAlerts, "El correo no tiene @", "danger")
+        } else {
+            setEmailError(false);
+        }
+    
+        if (password.length < 1) {
+            setPasswordError(true);
+            isValid = false;
+            create_alert(setAlerts, "Longitud de contraseña incorrecta", "danger")
+        } else {
+            setPasswordError(false);
+        }
+    
+        return isValid;
+    }
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!validateInput()) {
+            return;
+        }
+
         const token = await signin(email, password)
-        if (!token) return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger")
+        if (!token){
+            setPasswordError(true);
+            setEmailError(true);
+            return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger")
+        } 
 
         localStorage.setItem('token', token)
         router.push("/home")
@@ -43,13 +73,14 @@ export default function SignIn() {
                         </p>
                     </div>
 
-                    <form className="row row-gap-3 m-0" onSubmit={handleSubmit}>
-                        <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
+                    <form className="row row-gap-3 m-0" onSubmit={handleSubmit} noValidate>
+                        <div className="input-group mb-3 px-0" style={{ width: "75%", borderRadius: '0.25rem', 
+                        backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '3px solid transparent'}}>
                             <input
                                 type="email"
                                 id="email"
                                 className="form-control py-3 fs-5"
-                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
+                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Correo Electrónico"
@@ -58,22 +89,23 @@ export default function SignIn() {
                             />
                         </div>
 
-                        <div className="input-group mb-3 px-0" style={{ width: "75%" }}>
+                        <div className="input-group mb-3 px-0" style={{ width: "75%", borderRadius: '0.25rem', 
+                        backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent'}}>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 className="form-control py-3 fs-5"
-                                style={{ backgroundColor: "var(--secundario-gris-claro)" }}
+                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Contraseña"
-                                required
                                 autoComplete="off"
                             />
-                            <button type="button" className="btn btn-dark" onClick={togglePasswordVisibility}>
-                                <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                            <button type="button" className="input-group-text" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none' }}>
+                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{ height: '24px', width: '24px' }} />
                             </button>
                         </div>
+
 
                         <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
 
