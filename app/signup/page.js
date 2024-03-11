@@ -15,7 +15,7 @@ export default function SignUp() {
     // const [confirmPassword, setConfirmPassword] = useState('');
 
     const router = useRouter();
-    const [alerts, setAlerts] = useState([])
+    const [alerts, setAlerts] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
