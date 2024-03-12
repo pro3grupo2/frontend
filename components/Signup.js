@@ -1,5 +1,31 @@
 import Link from 'next/link';
-const PasoInicio = ({setNextPaso, setPreviousPaso, setEmail}) => {
+import { useState } from 'react';
+
+const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
+    const [email, setEmailLocal] = useState('');
+    const [emailError, setEmailError] = useState(false);
+
+    // Esta función maneja el cambio en el input y actualiza el estado
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmailLocal(value);
+        setEmail(value); // Actualiza el estado en el componente padre
+    };
+
+    // Esta función se llama cuando el campo de correo obtiene el foco
+    const handleEmailFocus = () => {
+        setEmailError(false);
+    };
+
+    // Esta función maneja el clic en 'Siguiente', impidiendo avanzar si el correo no es válido
+    const handleNextClick = () => {
+        const isValidEmail = email.includes('@');
+        setEmailError(!isValidEmail); // Actualizar el estado de error basado en la validez del correo
+        if (isValidEmail) {
+            setNextPaso();
+        }
+    };
+
     return (
         <>
             <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
@@ -15,24 +41,26 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, setEmail}) => {
                             <input
                                 type="email"
                                 className="form-control py-3 fs-5"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={handleEmailChange}
+                                onFocus={handleEmailFocus}
                                 placeholder="Correo Electrónico"
-                                style={{ borderColor: '#091229' }}
+                                style={{ border: emailError ? '3px solid var(--color-error)' : `3px solid #091229` }}
                                 required
                                 autoComplete="off"
+                                value={email}
                             />
                             <div className="d-flex justify-content-between mt-5">
                                 <button
                                     type="button"
                                     onClick={setPreviousPaso}
-                                    className=" btn btn-primary border-5 py-1 fs-3 fw-bold">
+                                    className="btn btn-primary border-5 py-1 fs-3 fw-bold">
                                     Volver
                                 </button>
 
                                 <button
                                     type="button"
-                                    onClick={setNextPaso}
-                                    className=" btn btn-primary border-5 py-1 px-5 fs-3 fw-bold">
+                                    onClick={handleNextClick}
+                                    className="btn btn-primary border-5 py-1 px-5 fs-3 fw-bold">
                                     Siguiente
                                 </button>
                             </div>
@@ -48,9 +76,9 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, setEmail}) => {
                 <div className="d-none d-xl-block bg-image-main w-100" style={{ maxWidth: '50%' }}></div>
             </div>
         </>
-        
-    )
-}
+    );
+};
+
 
 const Paso1 = ({setNextPaso, setPreviousPaso, setPassword}) => {
     return (
