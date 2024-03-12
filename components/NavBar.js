@@ -7,7 +7,9 @@ export default function NavBar() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid py-3">
                 <div className="navbar-brand" style={{ maxWidth: '20vw', minWidth: '50px' }}>
-                    <Image className="img-fluid" src="/images/logo_utad.svg" alt="Logo de U-tad" width={180} height={100}/>
+                    <Link className="mx-2" href="/home">
+                        <Image className="img-fluid" src="/images/logo_utad.svg" alt="Logo de U-tad" width={180} height={100}/>
+                    </Link>
                 </div>
 
                 <div className="d-flex align-items-center mx-3">

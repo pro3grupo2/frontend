@@ -1,5 +1,5 @@
 "use client";
-
+import "../globals.css";
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
@@ -83,6 +83,7 @@ export default function SignIn() {
                                 style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                onFocus={() => setEmailError(false)}
                                 placeholder="Correo Electrónico"
                                 required
                                 autoComplete="off"
@@ -90,14 +91,15 @@ export default function SignIn() {
                         </div>
 
                         <div className="input-group mb-3 px-0" style={{ width: "75%", borderRadius: '0.25rem', 
-                        backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent'}}>
+                        backgroundColor: "var(--color-secundario-gris-claro-extra)"}}>
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 className="form-control py-3 fs-5"
-                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
+                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent' }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                onFocus={() => setPasswordError(false)}
                                 placeholder="Contraseña"
                                 autoComplete="off"
                             />

@@ -18,6 +18,11 @@
     --color-error: #D71B1B;
 }
 
+.form-control:focus {
+    border-color: #0065F3;
+    box-shadow: 0 0 0 0.2rem #0065F3;
+} 
+
 html,
 body {
     width: 100%;
