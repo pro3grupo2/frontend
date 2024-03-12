@@ -17,7 +17,13 @@
     --color-titulacion-anim3d: #BDD23A;
     --color-error: #D71B1B;
 }
-
+.btn-outline-primary {
+  border-color: #0065F3;
+}
+.btn-color-primary {
+    color: #FFFFFF;
+    background-color: #0065F3;
+}
 .form-control:focus {
     border-color: #0065F3;
     box-shadow: 0 0 0 0.2rem #0065F3;

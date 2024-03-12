@@ -5,22 +5,19 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
     const [email, setEmailLocal] = useState('');
     const [emailError, setEmailError] = useState(false);
 
-    // Esta función maneja el cambio en el input y actualiza el estado
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setEmailLocal(value);
-        setEmail(value); // Actualiza el estado en el componente padre
+        setEmail(value);
     };
 
-    // Esta función se llama cuando el campo de correo obtiene el foco
     const handleEmailFocus = () => {
         setEmailError(false);
     };
 
-    // Esta función maneja el clic en 'Siguiente', impidiendo avanzar si el correo no es válido
     const handleNextClick = () => {
         const isValidEmail = email.includes('@');
-        setEmailError(!isValidEmail); // Actualizar el estado de error basado en la validez del correo
+        setEmailError(!isValidEmail); 
         if (isValidEmail) {
             setNextPaso();
         }
@@ -34,7 +31,7 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                         <div className="pb-4 mt-5">
                             <h1 className="display-4 ms-extrabold">Crear cuenta</h1>
                             <p className="d-none fs-5 d-sm-block lead">
-                                Infícanos cuál es tu correo asociado a la U-tad.
+                                Indícanos cuál es tu correo asociado a la U-tad.
                             </p>
                         </div>
                         <div>
@@ -50,17 +47,18 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                                 value={email}
                             />
                             <div className="d-flex justify-content-between mt-5">
-                                <button
-                                    type="button"
-                                    onClick={setPreviousPaso}
-                                    className="btn btn-primary border-5 py-1 fs-3 fw-bold">
-                                    Volver
-                                </button>
+                                <Link href="/signin">
+                                    <button className="btn btn-outline-primary" type="button" style={{width: '60px', height: '60px'}} >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
+                                        </svg>
+                                    </button>
+                                </Link>
 
                                 <button
                                     type="button"
                                     onClick={handleNextClick}
-                                    className="btn btn-primary border-5 py-1 px-5 fs-3 fw-bold">
+                                    className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-3 fw-bold">
                                     Siguiente
                                 </button>
                             </div>
