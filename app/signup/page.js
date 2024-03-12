@@ -1,5 +1,5 @@
 "use client";
-
+import "../globals.css";
 import {useState} from 'react';
 import {Paso1, Paso2, Paso3, PasoFin, PasoInicio} from "@/components/Signup";
 

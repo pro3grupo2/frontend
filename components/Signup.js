@@ -1,33 +1,54 @@
+import Link from 'next/link';
 const PasoInicio = ({setNextPaso, setPreviousPaso, setEmail}) => {
     return (
-        <div className="input-group mb-3 px-0" style={{
-            width: "75%", borderRadius: '0.25rem',
-            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: '3px solid transparent'
-        }}>
-            <input
-                type="email"
-                className="form-control py-3 fs-5"
-                style={{border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)"}}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Correo Electrónico"
-                required
-                autoComplete="off"
-            />
+        <>
+            <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
+                <div className="flex-shrink- px-5 mx-xl-5 w-100" style={{ height: '90%' }}>
+                    <div className="d-flex flex-column justify-content-between h-100">
+                        <div className="pb-4 mt-5">
+                            <h1 className="display-4 ms-extrabold">Crear cuenta</h1>
+                            <p className="d-none fs-5 d-sm-block lead">
+                                Infícanos cuál es tu correo asociado a la U-tad.
+                            </p>
+                        </div>
+                        <div>
+                            <input
+                                type="email"
+                                className="form-control py-3 fs-5"
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Correo Electrónico"
+                                style={{ borderColor: '#091229' }}
+                                required
+                                autoComplete="off"
+                            />
+                            <div className="d-flex justify-content-between mt-5">
+                                <button
+                                    type="button"
+                                    onClick={setPreviousPaso}
+                                    className=" btn btn-primary border-5 py-1 fs-3 fw-bold">
+                                    Volver
+                                </button>
 
-            <button
-                type="button"
-                onClick={setPreviousPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Volver
-            </button>
-
-            <button
-                type="button"
-                onClick={setNextPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Siguiente
-            </button>
-        </div>
+                                <button
+                                    type="button"
+                                    onClick={setNextPaso}
+                                    className=" btn btn-primary border-5 py-1 px-5 fs-3 fw-bold">
+                                    Siguiente
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div className="col-12 text-center mb-5">
+                            <span className="pe-1 fs-5">¿Ya tienes una cuenta?</span>
+                            <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signin">Iniciar sesión</Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="d-none d-xl-block w-100" style={{ maxWidth: '5%' }}></div>
+                <div className="d-none d-xl-block bg-image-main w-100" style={{ maxWidth: '50%' }}></div>
+            </div>
+        </>
+        
     )
 }
 

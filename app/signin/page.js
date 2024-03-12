@@ -64,7 +64,7 @@ export default function SignIn() {
             <AlertContainer alerts={alerts} />
 
             <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
-                <div className="flex-shrink- px-5 mx-xl-5">
+                <div className="flex-shrink- px-5 mx-xl-5 w-100" >
                     <div className="pb-4">
                         <h1 className="display-4 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
                         <p className="d-none fs-5 d-sm-block lead">
