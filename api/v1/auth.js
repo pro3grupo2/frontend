@@ -1,6 +1,9 @@
 const {fetch_handler} = require('.')
 
-const SIGNIN_ROUTE = '/auth/signin', SIGNUP_ROUTE = '/auth/signup', ME_ROUTE = '/auth/me'
+const SIGNIN_ROUTE = '/auth/signin',
+    SIGNUP_ROUTE = '/auth/signup',
+    SIGNUP_ROUTE_VALIDATE = '/auth/signup/validate',
+    ME_ROUTE = '/auth/me'
 
 const signin = async (correo, password) => {
     const headers = {
@@ -13,14 +16,23 @@ const signin = async (correo, password) => {
     return datos ? datos.data.token : null
 }
 
-const signup = async (correo, nombre_completo, alias, password, frase_recuperacion, rol) => {
+const signup = async (correo, nombre_completo, alias, password, frase_recuperacion, rol, promocion) => {
     const headers = {
         'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        correo: correo, nombre_completo: nombre_completo, alias: alias, password: password, frase_recuperacion: frase_recuperacion, rol: rol
+        correo: correo, nombre_completo: nombre_completo, alias: alias, password: password, frase_recuperacion: frase_recuperacion, rol: rol, promocion: promocion
     })
 
     const datos = await fetch_handler(SIGNUP_ROUTE, headers, "POST", body)
+    return datos ? datos.data : null
+}
+
+const validate = async (token) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    const datos = await fetch_handler(SIGNUP_ROUTE_VALIDATE, headers, "GET")
     return datos ? datos.data : null
 }
 
@@ -34,5 +46,5 @@ const me = async (token) => {
 }
 
 module.exports = {
-    signin, signup, me
+    signin, signup, validate, me
 }
