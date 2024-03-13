@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { handleClientScriptLoad } from 'next/script';
 import { useState } from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
+import styles from '../app/globals.css';
 
 const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
     const [email, setEmailLocal] = useState('');
@@ -18,7 +20,7 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
 
     const handleNextClick = () => {
         const isValidEmail = email.includes('@');
-        setEmailError(!isValidEmail); 
+        setEmailError(!isValidEmail);
         if (isValidEmail) {
             setNextPaso();
         }
@@ -30,7 +32,7 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                 <div className="flex-shrink- px-5 mx-xl-5 w-100" style={{ height: '90%' }}>
                     <div className="d-flex flex-column justify-content-between h-100">
                         <div className="pb-4 mt-5">
-                            <h1 className="display-4 ms-extrabold">Crear cuenta</h1>
+                            <h1 className="display-5 custom-bold">Crear cuenta</h1>
                             <p className="d-none fs-5 d-sm-block lead">
                                 Indícanos cuál es tu correo asociado a la U-tad.
                             </p>
@@ -41,15 +43,15 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                                 className="form-control py-3 fs-5"
                                 onChange={handleEmailChange}
                                 onFocus={handleEmailFocus}
-                                placeholder="Correo Electrónico"
-                                style={{ border: emailError ? '3px solid var(--color-error)' : `3px solid #091229` }}
+                                placeholder=" Correo electrónico"
+                                style={{ border: emailError ? '3px solid var(--color-error)' : `3px solid var(--color-secundario-gris-claro)` }}
                                 required
                                 autoComplete="off"
                                 value={email}
                             />
-                            <div className="d-flex justify-content-between mt-5">
+                            <div className="d-flex justify-content-between aligns-items-center mt-5  m-0">
                                 <Link href="/signin">
-                                    <button className="btn btn-outline-primary" type="button" style={{width: '60px', height: '60px'}} >
+                                    <button className="btn btn-outline-primary" type="button" style={{ width: '48px', height: '48px' }} >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
                                             <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
                                         </svg>
@@ -59,12 +61,13 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                                 <button
                                     type="button"
                                     onClick={handleNextClick}
-                                    className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-3 fw-bold">
-                                    Siguiente
+                                    className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold">
+                                    SIGUIENTE
                                 </button>
+
                             </div>
                         </div>
-                        
+
                         <div className="col-12 text-center mb-5">
                             <span className="pe-1 fs-5">¿Ya tienes una cuenta?</span>
                             <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signin">Iniciar sesión</Link>
@@ -124,7 +127,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                     </p>
                 </div>
                 <form className='row row-gap m-0'>
-                    <div className="input-group mb-3 px-0" style={{ width: "65%" }}>
+                    <div className="input-group mb-3 px-0" style={{ width: "100%" }}>
                         <input
                             type={showPassword ? "text" : "password"}
                             id='password'
@@ -141,7 +144,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                             </svg>
                         </span>
                     </div>
-                    <div className='input-group mb-3 px-0' style={{ width: "65%" }}>
+                    <div className='input-group mb-3 px-0' style={{ width: "100%" }}>
                         <input
                             type={showConfirmPassword ? "text" : "password"}
                             id='confirmPassword'
@@ -161,7 +164,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                     {passwordError && (
                         <div className="text-danger mb-3">{passwordError}</div>
                     )}
-                    <div className="d-flex justify-content-between align-items-center mt-5">
+                    <div className="d-flex justify-content-between aligns-items-center mt-5  m-0">
                         <button
                             type="button"
                             onClick={setPreviousPaso}
@@ -171,14 +174,13 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                                 <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
                             </svg>
                         </button>
-                        <div className="d-flex justify-content-center" style={{ flexGrow: 1 }}>
-                            <button
-                                type="button"
-                                onClick={handleNextClick}
-                                className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold">
-                                SIGUIENTE
-                            </button>
-                        </div>
+                        <button
+                            type="button"
+                            onClick={handleNextClick}
+                            className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold">
+                            SIGUIENTE
+                        </button>
+
                     </div>
 
                 </form>
@@ -201,7 +203,7 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
             setRol(selectedType);
             setNextPaso();
         } else {
-            
+
             alert('Debes seleccionar un tipo de usuario');
         }
     };
@@ -265,48 +267,118 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
 
 
 
+
 const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion }) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        title: '',
+        specialty: '',
+        course: '',
+        terms: false,
+        lastName: '',
+        class: '',
+    });
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, terms: e.target.checked });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission here
+    };
+
     return (
-        <div className="input-group mb-3 px-0" style={{
-            width: "75%", borderRadius: '0.25rem',
-            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: '3px solid transparent'
-        }}>
-            <input
-                type="text"
-                className="form-control py-3 fs-5"
-                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
-                onChange={(e) => setNombreCompleto(e.target.value)}
-                placeholder="Nombre Completo"
-                required
-                autoComplete="off"
-            />
+        <div className="container d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '80vh' }}>
+            <h1 className="display-5 custom-bold text-center mb-4">Paso 3 de 3: Rellenar datos</h1>
+            <p className="fs-5 lead text-center mb-4">Por favor, completa los siguientes campos:</p>
 
-            <input
-                type="number"
-                className="form-control py-3 fs-5"
-                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
-                onChange={(e) => setTitulacion(e.target.value)}
-                placeholder="Titulación"
-                required
-                autoComplete="off"
-            />
+            <form onSubmit={handleSubmit} className="w-50">
+                <div className="d-flex justify-content-center w-100 mb-3">
+                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Nombre(Auto.)" className="form-control nombre-style" style={{width: '232px', height: '48px', padding: '16px 32px', borderRadius: '8px', border: '1px solid var(--Color-Secundario-Negro, #091229)'}} />
+                    
+                    
+                        <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} placeholder="Apellido(Auto.)" className="form-control apellido-style" style={{width: '232px', height: '48px', padding: '16px 32px', borderRadius: '8px', border: '1px solid var(--Color-Secundario-Negro, #091229)'}} />
+                    
+                </div>
 
-            <button
-                type="button"
-                onClick={setPreviousPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Volver
-            </button>
+                <div className="d-flex justify-content-center w-100 mb-3">
+                    <select name="title" value={formData.title} onChange={handleInputChange} className="form-select titulacion-style" style={{width: '480px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0}}>
+                        <option value="">Titulación</option>
+                        <option value="Grado">Grado</option>
+                        <option value="Postgrado">Postgrado</option>
+                        <option value="Ciclo Formativo">Ciclo Formativo</option>
+                        <option value="Titulos Propios">Titulos Propios</option>
+                        <option value="Otros Cursos">Otros Cursos</option>
+                    </select>
+                </div>
 
-            <button
-                type="button"
-                onClick={setNextPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Siguiente
-            </button>
+                <div className="d-flex justify-content-center w-100 mb-3">
+                    <select name="specialty" value={formData.specialty} onChange={handleInputChange} className="form-select especialidad-style" style={{width: '480px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0}}>
+                        <option value="">Especialidad</option>
+                        <option value="DIDI">DIDI</option>
+                        <option value="INSO">INSO</option>
+                        <option value="ANIM">ANIM</option>
+                        <option value="DIPI">DIPI</option>
+                        <option value="MAIS">MAIS</option>
+                        <option value="ANIM3D">ANIM3D</option>
+                        <option value="DAM">DAM</option>
+                    </select>
+                </div>
+
+                <div className="d-flex justify-content-center w-100 mb-3">
+                    <div className="me-2">
+                        <select name="course" value={formData.course} onChange={handleInputChange} className="form-select curso-style" style={{width: '320px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0}}>
+                            <option value="">Curso</option>
+                            <option value="1º">1º</option>
+                            <option value="2º">2º</option>
+                            <option value="3º">3º</option>
+                            <option value="4º">4º</option>
+                        </select>
+                    </div>
+                    <div className="ms-2">
+                        <select name="class" value={formData.class} onChange={handleInputChange} className="form-select clase-style" style={{width: '144px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0}}>
+                            <option value="">Clase</option>
+                            <option value="A">Grupo A</option>
+                            <option value="B">Grupo B</option>
+                            <option value="C">Grupo C</option>
+                            <option value="D">Grupo D</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="d-flex justify-content-center w-100 mb-3 custom-bold">
+                    <div className="form-check">
+                        <input type="checkbox" id="termsCheckbox" className="form-check-input" checked={formData.terms} onChange={handleCheckboxChange} />
+                        <label htmlFor="termsCheckbox" className="form-check-label underline fs-5 fw-bold">Aceptar términos y condiciones</label>
+                    </div>
+                </div>
+
+                <div className="d-flex justify-content-between w-100 mb-3">
+                    <button
+                        className="btn btn-outline-primary"
+                        onClick={setPreviousPaso}
+                        style={{ width: '48px', height: '48px' }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
+                        </svg>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={setNextPaso}
+                        className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold">
+                        CREAR CUENTA
+                    </button>
+                </div>
+            </form>
         </div>
-    )
-}
+    );
+};
 
 const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
     return (

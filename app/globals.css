@@ -120,3 +120,44 @@ body {
     line-height: 120%; /* 19.2px */
     margin-top: 10px;
 }
+.bold::placeholder {
+    font-weight: bold;
+  }
+  
+  .underline {
+    text-decoration: underline;
+  }
+  
+  /* estilos */
+.nombre-style,
+.apellido-style,
+.titulacion-style,
+.especialidad-style,
+.curso-style {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 16px; /* Ajusta el espacio entre cada fila */
+}
+
+.nombre-style,
+.apellido-style {
+    width: calc(50% - 8px); /* Ajusta el ancho de los campos de nombre y apellido */
+    margin-right: 16px; /* Ajusta el espacio entre los campos de nombre y apellido */
+}
+
+.titulacion-style,
+.especialidad-style,
+.curso-style {
+    width: calc(33.33% - 8px); /* Ajusta el ancho de los campos de titulación, especialidad y curso */
+    margin-right: 8px; /* Ajusta el espacio entre los campos de titulación, especialidad y curso */
+}
+
+.clase-style {
+    width: 144px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
