@@ -117,7 +117,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
     };
 
     return (
-        
+
         <div className="d-flex flex-row flex-grow-1 justify-content-evenly align-items-center">
             <div className="px-5 mx-xl-5 mt-0">
                 <div className="pb-5 ">
@@ -193,37 +193,80 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
 }
 
 const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
+    const [selectedType, setSelectedType] = useState('');
+
+    const handleTypeSelection = (type) => {
+        setSelectedType(type);
+    };
+
+    const handleNextClick = () => {
+        if (selectedType) {
+            setRol(selectedType);
+            setNextPaso();
+        } else {
+            
+            alert('Debes seleccionar un tipo de usuario');
+        }
+    };
     return (
-        <div className="input-group mb-3 px-0" style={{
-            width: "75%", borderRadius: '0.25rem',
-            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: '3px solid transparent'
-        }}>
-            <input
-                type="text"
-                className="form-control py-3 fs-5"
-                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
-                onChange={(e) => setRol(e.target.value)}
-                placeholder="Rol"
-                required
-                autoComplete="off"
-            />
+        <div className="container d-flex justify-content-center align-items-center mt-5">
+            <div className="col-12 col-md-5">
+                <h1 className="display-5 custom-bold text-center text-md-start mb-4">Reservorio U-tad <br></br> personalizado para ti!</h1>
+                <p className="fs-5 lead text-center text-md-start mb-4">
+                    Paso 2 de 3. ¿Quién eres?
+                </p>
 
-            <button
-                type="button"
-                onClick={setPreviousPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Volver
-            </button>
+                <div className="row justify-content-center justify-content-md-between mb-4">
+                    <div className="col-6 col-md-auto mb-3 mb-md-0">
+                        <button
+                            className={`custom-button w-100 ${selectedType === 'Tipo1' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Tipo1')}>
+                            <svg width="130" height="129" viewBox="0 0 130 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle id="Ellipse 9" cx="65" cy="64.1468" r="64.1468" fill={selectedType === 'Tipo1' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className="text-center">Tipo de usuario 1</h3>
+                        </button>
+                    </div>
+                    <div className="col-6 col-md-auto">
+                        <button
+                            className={`custom-button w-100 ${selectedType === 'Tipo2' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Tipo2')}>
+                            <svg width="130" height="129" viewBox="0 0 130 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle id="Ellipse 9" cx="65" cy="64.1468" r="64.1468" fill={selectedType === 'Tipo2' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className="text-center">Tipo de usuario 2</h3>
+                        </button>
+                    </div>
+                </div>
 
-            <button
-                type="button"
-                onClick={setNextPaso}
-                className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
-                Siguiente
-            </button>
+                <div className="d-flex justify-content-between align-items-center">
+                    <button
+                        type="button"
+                        onClick={setPreviousPaso}
+                        className="btn btn-outline-primary"
+                        style={{ width: '48px', height: '48px' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
+                        </svg>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleNextClick}
+                        className="btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold">
+                        SIGUIENTE
+                    </button>
+                </div>
+            </div>
         </div>
-    )
-}
+
+    );
+};
+
+
+
+
+
+
 
 const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion }) => {
     return (
