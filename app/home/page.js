@@ -19,12 +19,11 @@ export default function Home() {
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
-            console.log(data);
         });
     }, []);
 
     if (isLoading) {
-        return <div>Cargando...</div>;
+        return <div className="text-center">Cargando...</div>;
     }
 
     const handleChange = event => {
