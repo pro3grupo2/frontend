@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import { subir_ficheros, crear_proyecto } from '@/api/v1/proyectos';
+import { subir_ficheros, crear_proyecto, get_proyectos, validar_proyecto } from '@/api/v1/proyectos';
+import ProjectCard from '@/components/ProjectCard';
 
 export default function Home() {
     // TODO - Implementar tamaño máximo de fichero
@@ -13,15 +14,16 @@ export default function Home() {
 
     useEffect(() => {
         // TODO - Obtener proyectos del usuario
-        // const token = localStorage.getItem('token');
-        // const proyectos = obtener_proyectos(token).then(console.log);
+        const token = localStorage.getItem('token');
+        get_proyectos(token).then(data => {
+            setProjects(data);
+            console.log(data);
+        });
     }, []);
 
     if (isLoading) {
         return <div>Cargando...</div>;
     }
-
-    console.log(user);
 
     const handleChange = event => {
         if (event.target.files && event.target.files[0]) {
@@ -39,13 +41,15 @@ export default function Home() {
     };
 
     return (
-        <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
             <input type="file"
                 ref={hiddenFileInput}
                 onChange={handleChange}
                 multiple={true}
             />
-            <button className="btn btn-primary mt-3" onClick={handleClick}>Upload</button>
+            <div className="row g-4 card-group mt-5">
+                {projects.map(project => <ProjectCard key={project.id} project={project} />)}
+            </div>
         </div>
     );
 }

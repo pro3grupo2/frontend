@@ -69,7 +69,7 @@ const validar_proyecto = async (token, id) => {
         'Authorization': `Bearer ${token}`
     }
 
-    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id + '/validar', headers, "POST")
+    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id + '/validar', headers, "GET")
     return datos ? datos.data : null
 }
 

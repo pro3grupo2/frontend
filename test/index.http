@@ -15,11 +15,21 @@ POST https://proyectos3.sertor.es/api/v1/auth/signin
 Content-Type: application/json
 
 {
-  "correo": "adrian.toral@live.u-tad.com",
-  "password": "12345"
+  "correo": "oscar.viudez@live.u-tad.com",
+  "password": "oscar"
 }
 
 ###
 
 GET https://proyectos3.sertor.es/api/v1/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNzA5NDc3OTg2LCJleHAiOjE3MDk1NjQzODZ9.sMNJu1ZwNXDmwsm2C44CYK95Sj6NK6xIgR_hXULJruU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
+
+###
+
+GET https://proyectos3.sertor.es/api/v1/proyectos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
+
+###
+
+GET https://proyectos3.sertor.es/api/v1/proyectos/9/validar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
