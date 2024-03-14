@@ -21,7 +21,7 @@ export default function SignUp() {
         // signup(email, nombre_completo, email.split('@')[0], password, "recuperacion", rol)
     }} setPreviousPaso={() => setIs_pasofin(false)}/>
 
-    if (is_paso3) return <Paso3 setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion}/>
+    if (is_paso3) return <Paso3 setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
 
     if (is_paso2) return <Paso2 setNextPaso={() => setIs_paso3(true)} setPreviousPaso={() => setIs_paso2(false)} setRol={setRol}/>
 

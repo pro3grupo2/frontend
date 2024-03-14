@@ -1,19 +1,25 @@
 import Link from 'next/link';
 import { handleClientScriptLoad } from 'next/script';
-import { useState } from 'react';
 import styles from '../app/globals.css';
+import React, { useState, useEffect } from 'react';
 
-const PasoInicio = ({ setNextPaso, setEmail }) => { 
+
+
+
+const PasoInicio = ({ setNextPaso, setEmail }) => {
     const [email, setEmailLocal] = useState('');
     const [emailError, setEmailError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [alias, setAlias] = useState('');
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setEmailLocal(value);
         setEmail(value);
-        setEmailError(false); 
-        setErrorMessage(''); 
+        setEmailError(false);
+        setErrorMessage('');
     };
 
     const handleEmailFocus = () => {
@@ -28,37 +34,18 @@ const PasoInicio = ({ setNextPaso, setEmail }) => {
             setErrorMessage('Ingrese correctamente su correo de U-tad.');
             return;
         }
-    
-        const { nombre, apellido, alias } = procesarCorreo(email);
-        console.log('Nombre:', nombre);
-        console.log('Apellido:', apellido);
-        console.log('Alias:', alias);
-    
-        setNextPaso();
+        setNextPaso({ nombre, apellido });
     };
-    
+
     const validateEmailFormat = (email) => {
         // Expresión regular para validar el correo
         const pattern = /^\w+\.\w+@(?:\w+\.)*u-tad\.com$/;
-    
+
         // Verificar si el correo coincide con el patrón
         return pattern.test(email);
     };
-    
-    // La función de procesarCorreo puede ir dentro del componente ya que solo se utiliza aquí.
-    const procesarCorreo = (correo) => {
-        const partes = correo.split('@');
-        const alias = partes[0];
-        const nombreApellido = partes[0].split('.');
-        const nombre = nombreApellido[0];
-        const apellido = nombreApellido[1] ? nombreApellido[1] : '';
 
-        return {
-            nombre,
-            apellido,
-            alias
-        };
-    };
+
 
     return (
         <>
@@ -139,15 +126,15 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
             setPasswordError('Las contraseñas no coinciden');
             return;
         }
-    
+
         // Verificar si la contraseña cumple con los requisitos
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(password)) {
             setPasswordError('La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 número y 1 carácter especial');
             return;
         }
-    
-        setPassword(password); 
+
+        setPassword(password);
         setNextPaso();
     };
 
@@ -163,13 +150,13 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
         <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center'>
             <div className='px-5 mx-xl-5 mt-0'>
                 <div className='pb-5 '>
-                    <h1 className='display-5 custom-bold'>Termina de configurar<br></br> tu cuenta</h1>
+                    <h1 className='display-5 custom-bold'>Termina de configura tu cuenta</h1>
                     <p className='d-none fs-5 d-sm-block lead'>
                         Paso 1 de 3. Crea una contraseña para continuar
                     </p>
                 </div>
                 <form className='row row-gap m-0'>
-                    <div className='input-group mb-3 px-0' style={{ width: '80%' }}>
+                    <div className='input-group mb-3 px-0'>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             id='password'
@@ -180,36 +167,24 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                             required
                             autoComplete='off'
                         />
+                        
                         <span className='input-group-text' onClick={togglePasswordVisibility}>
                             <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                 <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
                             </svg>
                         </span>
-                    </div>
-                    <div className='input-group mb-3 px-0' style={{ width: '80%' }}>
-                        <input
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            id='confirmPassword'
-                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            placeholder='Repetir Contraseña'
-                            required
-                            autoComplete='off'
-                        />
-                        <span className='input-group-text' onClick={toggleConfirmPasswordVisibility}>
-                            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
-                            </svg>
-                        </span>
-                    </div>
-                    <svg
+
+                        {/*Me gustaria que el svg a continuacion no afectara al tamaño del div y que estuviiera a la derecha del svj del ojo y que fuera responsive, ademas que pusiera en rojo las letras de los requisitos que no se cumplen con la contraseña*/}
+                        <svg
+
                         xmlns='http://www.w3.org/2000/svg'
                         width='300'
                         height='200'
                         viewBox='0 0 300 200'
                         fill='none'
-                        style={{ borderColor: passwordError ? 'var(--color-error)' : 'initial' }}
+                        className='position-absolute'
+
+                        style={{ top: '0%', left: '520', zIndex: '-1' }}
                     >
                         <mask id='path-1-inside-1_32_432' fill='white'>
                             <path
@@ -236,6 +211,25 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                         <text x='30' y='120' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 número</text>
                         <text x='30' y='140' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 carácter especial</text>
                     </svg>
+                    </div>
+                    <div className='input-group mb-3 px-0'>
+                        <input
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            id='confirmPassword'
+                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            placeholder='Repetir Contraseña'
+                            required
+                            autoComplete='off'
+                        />
+                        <span className='input-group-text' onClick={toggleConfirmPasswordVisibility}>
+                            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
+                            </svg>
+                        </span>
+                    </div>
+                    
 
                     {passwordError && (
                         <div className='text-danger mb-3'>{passwordError}</div>
@@ -269,22 +263,26 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
     const [selectedType, setSelectedType] = useState('');
 
     const handleTypeSelection = (type) => {
+        if (type === 'Alumno') {
+            setRol('alumno');
+        } else if (type === 'Alumni') {
+            setRol('alumni');
+        }
         setSelectedType(type);
     };
 
     const handleNextClick = () => {
         if (selectedType) {
-            setRol(selectedType);
             setNextPaso();
         } else {
-
             alert('Debes seleccionar un tipo de usuario');
         }
     };
+
     return (
         <div className='container d-flex justify-content-center align-items-center mt-5'>
             <div className='col-12 col-md-5'>
-                <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad <br></br> personalizado para ti!</h1>
+                <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad <br /> personalizado para ti!</h1>
                 <p className='fs-5 lead text-center text-md-start mb-4'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
@@ -292,22 +290,22 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
                 <div className='row justify-content-center justify-content-md-between mb-4'>
                     <div className='col-6 col-md-auto mb-3 mb-md-0'>
                         <button
-                            className={`custom-button w-100 ${selectedType === 'Tipo1' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Tipo1')}>
+                            className={`custom-button w-100 ${selectedType === 'Alumno' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumno')}>
                             <svg width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Tipo1' ? 'var(--color-principal)' : '#D9D9D9'} />
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
                             </svg>
-                            <h3 className='text-center'>Tipo de usuario 1</h3>
+                            <h3 className='text-center'>Alumno</h3>
                         </button>
                     </div>
                     <div className='col-6 col-md-auto'>
                         <button
-                            className={`custom-button w-100 ${selectedType === 'Tipo2' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Tipo2')}>
+                            className={`custom-button w-100 ${selectedType === 'Alumni' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumni')}>
                             <svg width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Tipo2' ? 'var(--color-principal)' : '#D9D9D9'} />
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'} />
                             </svg>
-                            <h3 className='text-center'>Tipo de usuario 2</h3>
+                            <h3 className='text-center'>Alumni</h3>
                         </button>
                     </div>
                 </div>
@@ -331,21 +329,46 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
                 </div>
             </div>
         </div>
-
     );
 };
 
 
-const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        title: '',
-        specialty: '',
-        course: '',
-        terms: false,
-        lastName: '',
-        class: '',
-    });
+const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [formData, setFormData] = useState({});
+
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        let nombre = nombreApellido[0];
+        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        let apellido = nombreApellido[1];
+        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
+
+        setNombre(nombre);
+        setApellido(apellido);
+        setFormData({
+            name: nombre,
+            title: '',
+            specialty: '',
+            lastName: apellido,
+        })
+    };
+
+    useEffect(() => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            name: nombre,
+            lastName: apellido
+        }));
+    }, [nombre, apellido]);
+
+    useEffect(() => {
+        procesarCorreo(email);
+    }, [email]);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -357,95 +380,64 @@ const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission here
         setNombreCompleto(`${formData.name} ${formData.lastName}`);
     };
 
     return (
-        <div className='container d-flex flex-column align-items-center justify-content-center' style={{ minHeight: '80vh' }}>
-            <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-            <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+        <div className='container mt-5'>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <form onSubmit={handleSubmit} className='w-100'>
+                        <div className="row">
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='name' value={formData.name} placeholder='Nombre' className='form-control' disabled />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido' className='form-control' disabled />
+                                </div>
+                            </div>
+                        </div>
 
-            <form onSubmit={handleSubmit} className='w-50'>
-                <div className='d-flex justify-content-center w-100 mb-3'>
-                    <input type='text' name='name' value={formData.name} onChange={handleInputChange} placeholder='Nombre(Auto.)' className='form-control nombre-style' style={{ width: '232px', height: '48px', padding: '16px 32px', borderRadius: '8px', border: '1px solid var(--Color-Secundario-Negro, #091229)' }} />
-                    <input type='text' name='lastName' value={formData.lastName} onChange={handleInputChange} placeholder='Apellido(Auto.)' className='form-control apellido-style' style={{ width: '232px', height: '48px', padding: '16px 32px', borderRadius: '8px', border: '1px solid var(--Color-Secundario-Negro, #091229)', marginLeft: '16px' }} />
+                        <div className='mb-3'>
+                            <select name='title' value={formData.title} onChange={handleInputChange} className='form-select'>
+                                <option value=''>Titulación</option>
+                                <option value='Grado'>Grado</option>
+                                <option value='Postgrado'>Postgrado</option>
+                                <option value='Ciclo Formativo'>Ciclo Formativo</option>
+                                <option value='Titulos Propios'>Titulos Propios</option>
+                                <option value='Otros Cursos'>Otros Cursos</option>
+                            </select>
+                        </div>
+                        <div className='mb-3'>
+                            <select name='specialty' value={formData.specialty} onChange={handleInputChange} className='form-select'>
+                                <option value=''>Área</option>
+                                <option value='DIDI'>DIDI</option>
+                                <option value='INSO'>INSO</option>
+                                <option value='ANIM'>ANIM</option>
+                                <option value='DIPI'>DIPI</option>
+                                <option value='MAIS'>MAIS</option>
+                                <option value='ANIM3D'>ANIM3D</option>
+                                <option value='DAM'>DAM</option>
+                            </select>
+                        </div>
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
+                    </form>
                 </div>
-
-                <div className='d-flex justify-content-center w-100 mb-3'>
-                    <select name='title' value={formData.title} onChange={handleInputChange} className='form-select titulacion-style' style={{ width: '480px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                        <option value=''>Titulación</option>
-                        <option value='Grado'>Grado</option>
-                        <option value='Postgrado'>Postgrado</option>
-                        <option value='Ciclo Formativo'>Ciclo Formativo</option>
-                        <option value='Titulos Propios'>Titulos Propios</option>
-                        <option value='Otros Cursos'>Otros Cursos</option>
-                    </select>
-                </div>
-
-                <div className='d-flex justify-content-center w-100 mb-3'>
-                    <select name='specialty' value={formData.specialty} onChange={handleInputChange} className='form-select especialidad-style' style={{ width: '480px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                        <option value=''>Especialidad</option>
-                        <option value='DIDI'>DIDI</option>
-                        <option value='INSO'>INSO</option>
-                        <option value='ANIM'>ANIM</option>
-                        <option value='DIPI'>DIPI</option>
-                        <option value='MAIS'>MAIS</option>
-                        <option value='ANIM3D'>ANIM3D</option>
-                        <option value='DAM'>DAM</option>
-                    </select>
-                </div>
-
-                <div className='d-flex justify-content-center w-100 mb-3'>
-                    <div className='me-2 w-70'>
-                        <select name='course' value={formData.course} onChange={handleInputChange} className='form-select curso-style' style={{ width: '320px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                            <option value=''>Curso</option>
-                            <option value='1º'>1º</option>
-                            <option value='2º'>2º</option>
-                            <option value='3º'>3º</option>
-                            <option value='4º'>4º</option>
-                        </select>
-                    </div>
-                    <div className='ms-2 w-30'>
-                        <select name='class' value={formData.class} onChange={handleInputChange} className='form-select clase-style' style={{ width: '144px', height: '48px', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                            <option value=''>Clase</option>
-                            <option value='A'>Grupo A</option>
-                            <option value='B'>Grupo B</option>
-                            <option value='C'>Grupo C</option>
-                            <option value='D'>Grupo D</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className='d-flex px-5 w-100 mb-3 custom-bold'>
-                    <div className='form-check'>
-                        <input type='checkbox' id='termsCheckbox' className='form-check-input' checked={formData.terms} onChange={handleCheckboxChange} />
-                        <label htmlFor='termsCheckbox' className='form-check-label underline fs-5 fw-bold'>Aceptar términos y condiciones</label>
-                    </div>
-                </div>
-
-                <div className='d-flex justify-content-between w-100 mb-3 px-5'>
-                    <button
-                        className='btn btn-outline-primary'
-                        onClick={setPreviousPaso}
-                        style={{ width: '48px', height: '48px' }}
-                    >
-                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                            <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
-                        </svg>
-                    </button>
-                    <button
-                        type='button'
-                        onClick={setNextPaso}
-                        className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
-                        CREAR CUENTA
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };
-
 const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
     return (
         <div className='d-flex flex-column align-items-center justify-content-start text-center px-5' style={{ minHeight: '60vh', margin: '50px auto' }}>
