@@ -1,29 +1,63 @@
 import Link from 'next/link';
 import { handleClientScriptLoad } from 'next/script';
 import { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
 import styles from '../app/globals.css';
 
-const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
+const PasoInicio = ({ setNextPaso, setEmail }) => { 
     const [email, setEmailLocal] = useState('');
     const [emailError, setEmailError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setEmailLocal(value);
         setEmail(value);
+        setEmailError(false); 
+        setErrorMessage(''); 
     };
 
     const handleEmailFocus = () => {
         setEmailError(false);
+        setErrorMessage('');
     };
 
     const handleNextClick = () => {
-        const isValidEmail = email.includes('@');
-        setEmailError(!isValidEmail);
-        if (isValidEmail) {
-            setNextPaso();
+        const isValidEmailFormat = validateEmailFormat(email);
+        if (!isValidEmailFormat) {
+            setEmailError(true);
+            setErrorMessage('Ingrese correctamente su correo de U-tad.');
+            return;
         }
+    
+        const { nombre, apellido, alias } = procesarCorreo(email);
+        console.log('Nombre:', nombre);
+        console.log('Apellido:', apellido);
+        console.log('Alias:', alias);
+    
+        setNextPaso();
+    };
+    
+    const validateEmailFormat = (email) => {
+        // Expresión regular para validar el correo
+        const pattern = /^\w+\.\w+@(?:\w+\.)*u-tad\.com$/;
+    
+        // Verificar si el correo coincide con el patrón
+        return pattern.test(email);
+    };
+    
+    // La función de procesarCorreo puede ir dentro del componente ya que solo se utiliza aquí.
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        const nombre = nombreApellido[0];
+        const apellido = nombreApellido[1] ? nombreApellido[1] : '';
+
+        return {
+            nombre,
+            apellido,
+            alias
+        };
     };
 
     return (
@@ -49,6 +83,9 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                                 autoComplete='off'
                                 value={email}
                             />
+                            {emailError && (
+                                <div className='text-danger mt-2'>{errorMessage}</div>
+                            )}
                             <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
                                 <Link href='/signin'>
                                     <button className='btn btn-outline-primary' type='button' style={{ width: '48px', height: '48px' }} >
@@ -57,17 +94,15 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail }) => {
                                         </svg>
                                     </button>
                                 </Link>
-
                                 <button
                                     type='button'
                                     onClick={handleNextClick}
-                                    className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
+                                    className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'
+                                >
                                     SIGUIENTE
                                 </button>
-
                             </div>
                         </div>
-
                         <div className='col-12 text-center mb-5'>
                             <span className='pe-1 fs-5'>¿Ya tienes una cuenta?</span>
                             <Link className='link-underline-dark link-dark fw-bold fs-5 ps-1' href='/signin'>Iniciar sesión</Link>
@@ -104,7 +139,15 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
             setPasswordError('Las contraseñas no coinciden');
             return;
         }
-
+    
+        // Verificar si la contraseña cumple con los requisitos
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            setPasswordError('La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 número y 1 carácter especial');
+            return;
+        }
+    
+        setPassword(password); 
         setNextPaso();
     };
 
@@ -117,7 +160,6 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
     };
 
     return (
-
         <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center'>
             <div className='px-5 mx-xl-5 mt-0'>
                 <div className='pb-5 '>
@@ -127,11 +169,11 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                     </p>
                 </div>
                 <form className='row row-gap m-0'>
-                    <div className='input-group mb-3 px-0' style={{ width: '100%' }}>
+                    <div className='input-group mb-3 px-0' style={{ width: '80%' }}>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             id='password'
-                            className='form-control py-3 fs-5'
+                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
                             value={password}
                             onChange={handlePasswordChange}
                             placeholder='Contraseña'
@@ -144,11 +186,11 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                             </svg>
                         </span>
                     </div>
-                    <div className='input-group mb-3 px-0' style={{ width: '100%' }}>
+                    <div className='input-group mb-3 px-0' style={{ width: '80%' }}>
                         <input
                             type={showConfirmPassword ? 'text' : 'password'}
                             id='confirmPassword'
-                            className='form-control py-3 fs-5'
+                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                             placeholder='Repetir Contraseña'
@@ -161,6 +203,40 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                             </svg>
                         </span>
                     </div>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='300'
+                        height='200'
+                        viewBox='0 0 300 200'
+                        fill='none'
+                        style={{ borderColor: passwordError ? 'var(--color-error)' : 'initial' }}
+                    >
+                        <mask id='path-1-inside-1_32_432' fill='white'>
+                            <path
+                                fillRule='evenodd'
+                                clipRule='evenodd'
+                                d='M24.4069 0C19.9886 0 16.4069 3.58172 16.4069 8V88.3481L0.61786 94.8773C-0.205953 95.218 -0.205954 96.3848 0.61786 96.7255L16.4069 103.255V187C16.4069 191.418 19.9886 195 24.4069 195H230.383C234.801 195 238.383 191.418 238.383 187V8C238.383 3.58172 234.801 0 230.383 0H24.4069Z'
+                            />
+                        </mask>
+                        <path
+                            fillRule='evenodd'
+                            clipRule='evenodd'
+                            d='M24.4069 0C19.9886 0 16.4069 3.58172 16.4069 8V88.3481L0.61786 94.8773C-0.205953 95.218 -0.205954 96.3848 0.61786 96.7255L16.4069 103.255V187C16.4069 191.418 19.9886 195 24.4069 195H230.383C234.801 195 238.383 191.418 238.383 187V8C238.383 3.58172 234.801 0 230.383 0H24.4069Z'
+                            fill='white'
+                        />
+                        <path
+                            d='M16.4069 88.3481L16.789 89.2722L17.4069 89.0167V88.3481H16.4069ZM0.61786 94.8773L0.23572 93.9532H0.23572L0.61786 94.8773ZM0.61786 96.7255L0.235719 97.6496H0.235719L0.61786 96.7255ZM16.4069 103.255H17.4069V102.586L16.789 102.331L16.4069 103.255ZM17.4069 8C17.4069 4.13401 20.5409 1 24.4069 1V-1C19.4363 -1 15.4069 3.02944 15.4069 8H17.4069ZM17.4069 88.3481V8H15.4069V88.3481H17.4069ZM1 95.8014L16.789 89.2722L16.0247 87.424L0.23572 93.9532L1 95.8014ZM1 95.8014H1L0.23572 93.9532C-1.4119 94.6345 -1.41191 96.9683 0.235719 97.6496L1 95.8014ZM16.789 102.331L1 95.8014L0.235719 97.6496L16.0247 104.179L16.789 102.331ZM17.4069 187V103.255H15.4069V187H17.4069ZM24.4069 194C20.5409 194 17.4069 190.866 17.4069 187H15.4069C15.4069 191.971 19.4363 196 24.4069 196V194ZM230.383 194H24.4069V196H230.383V194ZM237.383 187C237.383 190.866 234.249 194 230.383 194V196C235.354 196 239.383 191.971 239.383 187H237.383ZM237.383 8V187H239.383V8H237.383ZM230.383 1C234.249 1 237.383 4.13401 237.383 8H239.383C239.383 3.02943 235.354 -1 230.383 -1V1ZM24.4069 1H230.383V-1H24.4069V1Z'
+                            fill='#091229'
+                            mask='url(#path-1-inside-1_32_432)'
+                        />
+                        <text x='30' y='30' fill='#000' fontFamily='Montserrat' fontSize='16' fontWeight='700'>Tu contraseña debe </text>
+                        <text x='35' y='50' fill='#000' fontFamily='Montserrat' fontSize='16' fontWeight='700'>tener al menos:</text>
+                        <text x='30' y='80' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 8 caracteres</text>
+                        <text x='30' y='100' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 Mayúscula</text>
+                        <text x='30' y='120' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 número</text>
+                        <text x='30' y='140' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 carácter especial</text>
+                    </svg>
+
                     {passwordError && (
                         <div className='text-danger mb-3'>{passwordError}</div>
                     )}
@@ -180,16 +256,14 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
                             className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
                             SIGUIENTE
                         </button>
-
                     </div>
-
                 </form>
             </div>
             <div className='d-none d-xl-block w-100' style={{ maxWidth: '5%' }}></div>
             <div className='d-none d-xl-block bg-image-main w-100' style={{ maxWidth: '50%' }}></div>
         </div>
     )
-}
+};
 
 const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
     const [selectedType, setSelectedType] = useState('');
@@ -262,12 +336,6 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
 };
 
 
-
-
-
-
-
-
 const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion }) => {
     const [formData, setFormData] = useState({
         name: '',
@@ -290,6 +358,7 @@ const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, setTitulacion 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission here
+        setNombreCompleto(`${formData.name} ${formData.lastName}`);
     };
 
     return (
