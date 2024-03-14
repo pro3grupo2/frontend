@@ -13,11 +13,16 @@ export default function Project({ params }) {
         get_proyecto(token, params.id).then(data => {
             setProyecto(data);
         });
-    }, []);
+    }, [params.id]);
+
+    if (isLoading) {
+        return <div>Cargando...</div>;
+    }
 
     return (
         <div className="container-fluid d-flex justify-content-center">
             <h1>{proyecto.titulo}</h1>
+            <h3></h3>
         </div>
     );
 }
