@@ -11,17 +11,16 @@ const useAuth = () => {
         const token = localStorage.getItem('token');
 
         if (!token) {
-            router.push('/signin');
-            return;
+            return router.push('/signin');
         }
 
         me(token)
             .then(data => {
+                if (!data){
+                    return router.push('/signin');
+                }
                 setUser(data);
                 setIsLoading(false);
-            })
-            .catch(() => {
-                router.push('/signin');
             });
     }, [router]);
 
