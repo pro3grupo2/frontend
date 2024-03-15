@@ -6,13 +6,17 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const PasoInicio = ({ setNextPaso, setEmail }) => {
-    const [email, setEmailLocal] = useState('');
+const PasoInicio = ({ setNextPaso, setEmail, mailEnviado }) => {
+    const [email, setEmailLocal] = useState(mailEnviado || '');
     const [emailError, setEmailError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [alias, setAlias] = useState('');
+
+    useEffect(() => {
+         if (mailEnviado) {
+            setEmailLocal(mailEnviado);
+            setEmail(mailEnviado);
+        }
+    }, [mailEnviado, setEmail]);
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
@@ -34,14 +38,12 @@ const PasoInicio = ({ setNextPaso, setEmail }) => {
             setErrorMessage('Ingrese correctamente su correo de U-tad.');
             return;
         }
-        setNextPaso({ nombre, apellido });
+        setNextPaso();
     };
 
     const validateEmailFormat = (email) => {
-        // Expresión regular para validar el correo
         const pattern = /^\w+\.\w+@(?:\w+\.)*u-tad\.com$/;
 
-        // Verificar si el correo coincide con el patrón
         return pattern.test(email);
     };
 
@@ -104,12 +106,19 @@ const PasoInicio = ({ setNextPaso, setEmail }) => {
 };
 
 
-const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
-    const [password, setPasswordValue] = useState('');
+const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) => {
+    const [password, setPasswordValue] = useState(passwordEnviado || '');
     const [confirmPassword, setConfirmPasswordValue] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    useEffect(() => {
+        if (passwordEnviado) {
+            setPasswordValue(passwordEnviado);
+            setPassword(passwordEnviado);
+       }
+   }, [passwordEnviado, setPassword]);
 
     const handlePasswordChange = (e) => {
         setPasswordValue(e.target.value);
@@ -259,7 +268,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword }) => {
     )
 };
 
-const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
+const Paso2_user = ({ setNextPaso, setPreviousPaso, setRol }) => {
     const [selectedType, setSelectedType] = useState('');
 
     const handleTypeSelection = (type) => {
@@ -332,8 +341,182 @@ const Paso2 = ({ setNextPaso, setPreviousPaso, setRol }) => {
     );
 };
 
+const Paso2_teacher = ({ setNextPaso, setPreviousPaso, setRol }) => {
+    const [selectedType, setSelectedType] = useState('');
 
-const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+    const handleTypeSelection = (type) => {
+        if (type === 'Profesor') {
+            setRol('profesor');
+        } else if (type === 'Coordinador') {
+            setRol('coordinador');
+        }
+        else if (type === 'Departamentos') {
+            setRol('departamentos');
+        }
+        setSelectedType(type);
+    };
+
+    const handleNextClick = () => {
+        if (selectedType) {
+            setNextPaso();
+        } else {
+            alert('Debes seleccionar un tipo de usuario');
+        }
+    };
+
+    return (
+        <div className='container d-flex justify-content-center align-items-center mt-5'>
+            <div className='col-12 col-md-5'>
+                <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad <br /> personalizado para ti!</h1>
+                <p className='fs-5 lead text-center text-md-start mb-4'>
+                    Paso 2 de 3. ¿Quién eres?
+                </p>
+
+                <div className='row justify-content-center justify-content-md-between mb-4'>
+                    <div className='col-6 col-md-auto mb-3 mb-md-0'>
+                        <button
+                            className={`custom-button w-100 ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Profesor')}>
+                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className='text-center'>Profesor</h3>
+                        </button>
+                    </div>
+                    <div className='col-6 col-md-auto'>
+                        <button
+                            className={`custom-button w-100 ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Coordinador')}>
+                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className='text-center'>Coordinador</h3>
+                        </button>
+                    </div>
+                    <div className='col-6 col-md-auto'>
+                        <button
+                            className={`custom-button w-100 ${selectedType === 'Departamentos' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Departamentos')}>
+                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className='text-center'>Departamentos</h3>
+                        </button>
+                    </div>
+                </div>
+
+                <div className='d-flex justify-content-between align-items-center'>
+                    <button
+                        type='button'
+                        onClick={setPreviousPaso}
+                        className='btn btn-outline-primary'
+                        style={{ width: '48px', height: '48px' }}>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                            <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                        </svg>
+                    </button>
+                    <button
+                        type='button'
+                        onClick={handleNextClick}
+                        className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
+                        SIGUIENTE
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Paso_coordinador = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+
+    const [codigo, setCodigo] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [formData, setFormData] = useState({});
+
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        let nombre = nombreApellido[0];
+        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        let apellido = nombreApellido[1];
+        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
+
+        setNombre(nombre);
+        setApellido(apellido);
+        setFormData({
+            name: nombre,
+            title: '',
+            specialty: '',
+            lastName: apellido,
+        })
+    };
+
+    useEffect(() => {
+        
+    }, []);
+
+ 
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, terms: e.target.checked });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNombreCompleto(`${formData.name} ${formData.lastName}`);
+    };
+
+    return (
+        <div className='container mt-5'>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <form onSubmit={handleSubmit} className='w-100'>
+                        <div className="row">
+                            <div className="col">
+                                <div className='mb-6'>
+                                    <input type='text' name='digit1' value={formData.name} placeholder='' className='form-control'  />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-6'>
+                                    <input type='text' name='digit2' value={formData.name} placeholder='' className='form-control'  />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-6'>
+                                    <input type='text' name='digit3' value={formData.name} placeholder='' className='form-control'  />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-6'>
+                                    <input type='text' name='digit4' value={formData.lastName} placeholder='' className='form-control'  />
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Paso3_user = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
 
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
@@ -438,6 +621,197 @@ const Paso3 = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
         </div>
     );
 };
+
+const Paso3_teacher = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [formData, setFormData] = useState({});
+
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        let nombre = nombreApellido[0];
+        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        let apellido = nombreApellido[1];
+        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
+
+        setNombre(nombre);
+        setApellido(apellido);
+        setFormData({
+            name: nombre,
+            title: '',
+            specialty: '',
+            lastName: apellido,
+        })
+    };
+
+    useEffect(() => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            name: nombre,
+            lastName: apellido
+        }));
+    }, [nombre, apellido]);
+
+    useEffect(() => {
+        procesarCorreo(email);
+    }, [email]);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, terms: e.target.checked });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNombreCompleto(`${formData.name} ${formData.lastName}`);
+    };
+
+    return (
+        <div className='container mt-5'>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <form onSubmit={handleSubmit} className='w-100'>
+                        <div className="row">
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='name' value={formData.name} placeholder='Nombre' className='form-control' disabled />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido' className='form-control' disabled />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='mb-3'>
+                            <select name='title' value={formData.title} onChange={handleInputChange} className='form-select'>
+                                <option value=''>Especialidad</option>
+                                <option value='Especialidad1'>Especialidad1</option>
+                                <option value='Especialidad2'>Especialidad2</option>
+                                <option value='Especialidad3'>Especialidad3</option>
+                                <option value='Especialidad4'>Especialidad4</option>
+                                <option value='Otros Especialidad'>Otros Especialidad</option>
+                            </select>
+                        </div>
+                        
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Paso3_departamento = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [formData, setFormData] = useState({});
+
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        let nombre = nombreApellido[0];
+        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        let apellido = nombreApellido[1];
+        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
+
+        setNombre(nombre);
+        setApellido(apellido);
+        setFormData({
+            name: nombre,
+            title: '',
+            specialty: '',
+            lastName: apellido,
+        })
+    };
+
+    useEffect(() => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            name: nombre,
+            lastName: apellido
+        }));
+    }, [nombre, apellido]);
+
+    useEffect(() => {
+        procesarCorreo(email);
+    }, [email]);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, terms: e.target.checked });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNombreCompleto(`${formData.name} ${formData.lastName}`);
+    };
+
+    return (
+        <div className='container mt-5'>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <form onSubmit={handleSubmit} className='w-100'>
+                        <div className="row">
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='name' value={formData.name} placeholder='Nombre' className='form-control' disabled />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido' className='form-control' disabled />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='mb-3'>
+                            <select name='title' value={formData.title} onChange={handleInputChange} className='form-select'>
+                                <option value=''>Departamento</option>
+                                <option value='Departamento1'>Departamento1</option>
+                                <option value='Departamento2'>Departamento2</option>
+                                <option value='Departamento3'>Departamento3</option>
+                                <option value='Departamento4'>Departamento4</option>
+                                <option value='Otros Departamento'>Otros Departamento</option>
+                            </select>
+                        </div>
+                        
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
     return (
         <div className='d-flex flex-column align-items-center justify-content-start text-center px-5' style={{ minHeight: '60vh', margin: '50px auto' }}>
@@ -473,7 +847,11 @@ const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
 module.exports = {
     PasoInicio,
     Paso1,
-    Paso2,
-    Paso3,
+    Paso2_user,
+    Paso2_teacher,
+    Paso_coordinador,
+    Paso3_user,
+    Paso3_teacher,
+    Paso3_departamento,
     PasoFin
 }
