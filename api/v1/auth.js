@@ -1,9 +1,11 @@
 const {fetch_handler} = require('.')
 
-const SIGNIN_ROUTE = '/auth/signin',
+const
+    SIGNIN_ROUTE = '/auth/signin',
     SIGNUP_ROUTE = '/auth/signup',
     SIGNUP_ROUTE_VALIDATE = '/auth/signup/validate',
-    ME_ROUTE = '/auth/me'
+    ME_ROUTE = '/auth/me',
+    RECOVER_ROUTE = '/auth/recover'
 
 const signin = async (correo, password) => {
     const headers = {
@@ -13,7 +15,7 @@ const signin = async (correo, password) => {
     })
 
     const datos = await fetch_handler(SIGNIN_ROUTE, headers, "POST", body)
-    return datos ? datos.data.token : null
+    return datos ? datos.data : null
 }
 
 const signup = async (correo, nombre_completo, alias, password, frase_recuperacion, rol, promocion) => {
@@ -36,6 +38,17 @@ const validate = async (token) => {
     return datos ? datos.data : null
 }
 
+const recover = async (correo) => {
+    const headers = {
+        'Content-Type': 'application/json'
+    }, body = JSON.stringify({
+        correo: correo
+    })
+
+    const datos = await fetch_handler(RECOVER_ROUTE, headers, "POST", body)
+    return datos ? datos.data : null
+}
+
 const me = async (token) => {
     const headers = {
         'Authorization': `Bearer ${token}`
@@ -46,5 +59,5 @@ const me = async (token) => {
 }
 
 module.exports = {
-    signin, signup, validate, me
+    signin, signup, validate, recover, me
 }

@@ -44,7 +44,7 @@ const crear_proyecto = async (token, titulo, ficha, url, portada, participantes,
     return datos ? datos.data : null
 }
 
-const editar_proyecto = async (token, id, titulo, ficha, url, portada, participantes, id_asignatura = null) => {
+const editar_proyecto = async (token, id, titulo = null, ficha = null, url = null, portada = null, participantes = null, id_asignatura = null) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({

@@ -20,22 +20,22 @@ const get_premio = async (token, id) => {
     return datos ? datos.data : null
 }
 
-const crear_premio = async (token, titulo) => {
+const crear_premio = async (token, titulo, anio = null, id_proyecto = null) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        titulo: titulo
+        titulo: titulo, anio: anio, id_proyecto: id_proyecto
     })
 
     const datos = await fetch_handler(PREMIOS_ROUTE, headers, "POST", body)
     return datos ? datos.data : null
 }
 
-const editar_premio = async (token, id, titulo) => {
+const editar_premio = async (token, id, titulo = null, anio = null, id_proyecto = null) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        titulo: titulo
+        titulo: titulo, anio: anio, id_proyecto: id_proyecto
     })
 
     const datos = await fetch_handler(PREMIOS_ROUTE + '/' + id, headers, "PUT", body)

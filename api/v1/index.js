@@ -1,4 +1,4 @@
-const API_HOST = 'https://proyectos3.sertor.es/api/v1'
+const API_HOST = 'https://api.reservorio-u-tad.com/api/v1'
 
 const fetch_handler = async (api_route, headers, method, body) => {
     const response = await fetch(API_HOST + api_route, body ? {
