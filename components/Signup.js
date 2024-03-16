@@ -622,6 +622,94 @@ const Paso3_user = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) 
     );
 };
 
+const Paso3_alumni = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
+
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
+    const [formData, setFormData] = useState({});
+
+    const procesarCorreo = (correo) => {
+        const partes = correo.split('@');
+        const alias = partes[0];
+        const nombreApellido = partes[0].split('.');
+        let nombre = nombreApellido[0];
+        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+        let apellido = nombreApellido[1];
+        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
+
+        setNombre(nombre);
+        setApellido(apellido);
+        setFormData({
+            name: nombre,
+            title: '',
+            specialty: '',
+            lastName: apellido,
+        })
+    };
+
+    useEffect(() => {
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            name: nombre,
+            lastName: apellido
+        }));
+    }, [nombre, apellido]);
+
+    useEffect(() => {
+        procesarCorreo(email);
+    }, [email]);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleCheckboxChange = (e) => {
+        setFormData({ ...formData, terms: e.target.checked });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNombreCompleto(`${formData.name} ${formData.lastName}`);
+    };
+
+    return (
+        <div className='container mt-5'>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <form onSubmit={handleSubmit} className='w-100'>
+                        <div className="row">
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='name' value={formData.name} placeholder='Nombre' className='form-control' disabled />
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className='mb-3'>
+                                    <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido' className='form-control' disabled />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='mb-3'>
+                            <input type='text' name='anio' value={formData.name} placeholder='Año Graduación' className='form-control'/>
+                        </div>
+                        
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Paso3_teacher = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
 
     const [nombre, setNombre] = useState('');
@@ -851,6 +939,7 @@ module.exports = {
     Paso2_teacher,
     Paso_coordinador,
     Paso3_user,
+    Paso3_alumni,
     Paso3_teacher,
     Paso3_departamento,
     PasoFin

@@ -1,7 +1,7 @@
 "use client";
 import "../globals.css";
 import {useState} from 'react';
-import {Paso1, Paso2_user, Paso2_teacher, Paso_coordinador, Paso3_user, Paso3_teacher, Paso3_departamento, PasoFin, PasoInicio} from "@/components/Signup";
+import {Paso1, Paso2_user, Paso2_teacher, Paso_coordinador, Paso3_user, Paso3_alumni, Paso3_teacher, Paso3_departamento, PasoFin, PasoInicio} from "@/components/Signup";
 
 export default function SignUp() {
     const
@@ -16,6 +16,7 @@ export default function SignUp() {
     const [is_paso2_teacher, setIs_paso2_teacher] = useState(false)
     const [is_paso_coordinador, setIs_paso_coordinador] = useState(false)
     const [is_paso3_user, setIs_paso3_user] = useState(false)
+    const [is_paso3_alumni, setIs_paso3_alumni] = useState(false)
     const [is_paso3_teacher, setIs_paso3_teacher] = useState(false)
     const [is_paso3_departamento, setIs_paso3_departamento] = useState(false)
     const [is_pasofin, setIs_pasofin] = useState(false)
@@ -26,6 +27,8 @@ export default function SignUp() {
     }} setPreviousPaso={() => setIs_pasofin(false)}/>
 
     if (is_paso3_user) return <Paso3_user setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_user(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
+
+    if (is_paso3_alumni) return <Paso3_alumni setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_alumni(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
 
     if (is_paso3_teacher) return <Paso3_teacher setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => {
         if (rol==="profesor") {
@@ -41,7 +44,13 @@ export default function SignUp() {
 
     if (is_paso_coordinador) return <Paso_coordinador setNextPaso={() => setIs_paso3_teacher(true)} setPreviousPaso={() => setIs_paso_coordinador(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
 
-    if (is_paso2_user) return <Paso2_user setNextPaso={() => setIs_paso3_user(true)} setPreviousPaso={() => setIs_paso2_user(false)} setRol={setRol}/>
+    if (is_paso2_user) return <Paso2_user setNextPaso={() => {
+        if (rol==="alumno") {
+            setIs_paso3_user(true)
+        } else if (rol==="alumni") {
+            setIs_paso3_alumni(true)
+        }
+    }} setPreviousPaso={() => setIs_paso2_user(false)} setRol={setRol}/>
 
     if (is_paso2_teacher) return <Paso2_teacher setNextPaso={() => {
         if (rol==="profesor") {
