@@ -30,15 +30,7 @@ export default function SignUp() {
 
     if (is_paso3_alumni) return <Paso3_alumni setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_alumni(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
 
-    if (is_paso3_teacher) return <Paso3_teacher setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => {
-        if (rol==="profesor") {
-            setIs_paso3_teacher(false)
-        } else if (rol==="coordinador") {
-            setIs_paso_coordinador(false)
-        } else if (rol==="departamentos") {
-            setIs_paso3_departamento(false)
-        }}
-    } setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
+    if (is_paso3_teacher) return <Paso3_teacher setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_teacher(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
     
     if (is_paso3_departamento) return <Paso3_departamento setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_departamento(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email} />
 

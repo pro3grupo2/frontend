@@ -72,8 +72,12 @@ const PasoInicio = ({ setNextPaso, setEmail, mailEnviado }) => {
                                 autoComplete='off'
                                 value={email}
                             />
-                            {emailError && (
+                            {/* Mensaje de error con espacio reservado */}
+                            {emailError ? (
                                 <div className='text-danger mt-2'>{errorMessage}</div>
+                            ) : (
+                                // Espacio reservado para el mensaje de error sin alterar el layout
+                                <div className='mt-2' style={{ height: '1.5em' }}></div>
                             )}
                             <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
                                 <Link href='/signin'>
@@ -155,76 +159,97 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
         setShowConfirmPassword(!showConfirmPassword);
     };
 
+    const handleFocus = () => {
+        setPasswordError(''); // O podría ser setPasswordError(false) dependiendo de cómo desees manejar el estado de error.
+    };    
+
     return (
         <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center'>
-            <div className='px-5 mx-xl-5 mt-0'>
-                <div className='pb-5 '>
-                    <h1 className='display-5 custom-bold'>Termina de configura tu cuenta</h1>
-                    <p className='d-none fs-5 d-sm-block lead'>
-                        Paso 1 de 3. Crea una contraseña para continuar
-                    </p>
+            <div className='flex-shrink- px-5 mx-xl-5 w-100' style={{ height: '90%' }}>
+                <div className='d-flex flex-column justify-content-between h-100'>
+                    <div className='pb-4 mt-5'>
+                        <h1 className='display-5 custom-bold'>Termina de configura tu cuenta</h1>
+                        <p className='d-none fs-5 d-sm-block lead'>
+                            Paso 1 de 3. Crea una contraseña para continuar
+                        </p>
+                    </div>
+                    <form className='row row-gap m-0'>
+                        <div>
+                            <div className='input-group mb-3 px-0'>
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    id='password'
+                                    className={`form-control py-3 fs-5 `}
+                                    value={password}
+                                    onChange={handlePasswordChange}
+                                    onFocus={handleFocus}
+                                    placeholder='Contraseña'
+                                    required
+                                    autoComplete='off'
+                                    style={{ border: passwordError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)' }}
+                                />
+                                
+                                <span className='input-group-text' onClick={togglePasswordVisibility}>
+                                    <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                        <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
+                                    </svg>
+                                </span>
+
+                                
+                            </div>
+                            <div className='input-group mb-3 px-0'>
+                                <input
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    id='confirmPassword'
+                                    className={`form-control py-3 fs-5 `}
+                                    value={confirmPassword}
+                                    onChange={handleConfirmPasswordChange}
+                                    onFocus={handleFocus}
+                                    placeholder='Repetir Contraseña'
+                                    required
+                                    autoComplete='off'
+                                    style={{ border: passwordError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)' }}
+                                />
+                                <span className='input-group-text' onClick={toggleConfirmPasswordVisibility}>
+                                    <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                        <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
+                                    </svg>
+                                </span>
+                            </div>
+                        
+                            {/* Mensaje de error con espacio reservado */}
+                            {passwordError ? (
+                                <div className='text-danger mt-2'>{passwordError}</div>
+                            ) : (
+                                // Espacio reservado para el mensaje de error sin alterar el layout
+                                <div className='mt-2' style={{ height: '1.5em' }}></div>
+                            )}
+
+                        </div>
+                        
+                        
+
+                        
+                        <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
+                            <button
+                                type='button'
+                                onClick={setPreviousPaso}
+                                className='btn btn-outline-primary'
+                                style={{ width: '48px', height: '48px' }}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                                </svg>
+                            </button>
+                            <button
+                                type='button'
+                                onClick={handleNextClick}
+                                className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
+                                SIGUIENTE
+                            </button>
+                        </div>
+                    </form>
+                    <div></div>
                 </div>
-                <form className='row row-gap m-0'>
-                    <div className='input-group mb-3 px-0'>
-                        <input
-                            type={showPassword ? 'text' : 'password'}
-                            id='password'
-                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
-                            value={password}
-                            onChange={handlePasswordChange}
-                            placeholder='Contraseña'
-                            required
-                            autoComplete='off'
-                        />
-                        
-                        <span className='input-group-text' onClick={togglePasswordVisibility}>
-                            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
-                            </svg>
-                        </span>
-
-                        
-                    </div>
-                    <div className='input-group mb-3 px-0'>
-                        <input
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            id='confirmPassword'
-                            className={`form-control py-3 fs-5 ${passwordError ? 'is-invalid' : ''}`}
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            placeholder='Repetir Contraseña'
-                            required
-                            autoComplete='off'
-                        />
-                        <span className='input-group-text' onClick={toggleConfirmPasswordVisibility}>
-                            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <path d='M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z' fill='black' />
-                            </svg>
-                        </span>
-                    </div>
-                    
-
-                    {passwordError && (
-                        <div className='text-danger mb-3'>{passwordError}</div>
-                    )}
-                    <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
-                        <button
-                            type='button'
-                            onClick={setPreviousPaso}
-                            className='btn btn-outline-primary'
-                            style={{ width: '48px', height: '48px' }}>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                                <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
-                            </svg>
-                        </button>
-                        <button
-                            type='button'
-                            onClick={handleNextClick}
-                            className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
-                            SIGUIENTE
-                        </button>
-                    </div>
-                </form>
             </div>
             <div className='d-none d-xl-block w-100' style={{ maxWidth: '5%' }}></div>
             <div className='d-none d-xl-block bg-image-main w-100' style={{ maxWidth: '50%' }}></div>
@@ -329,14 +354,15 @@ const Paso2_teacher = ({ setNextPaso, setPreviousPaso, setRol }) => {
     };
 
     return (
-        <div className='container d-flex justify-content-center align-items-center mt-5'>
-            <div className='col-12 col-md-5'>
-                <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad <br /> personalizado para ti!</h1>
-                <p className='fs-5 lead text-center text-md-start mb-4'>
-                    Paso 2 de 3. ¿Quién eres?
+        <div className='d-flex flex-grow-1 justify-content-evenly align-items-center'>
+            <div className="col-md-6 d-flex flex-column justify-content-around mx-" style={{ height: '100%' }}>
+                <div className='container'>
+                    <h1 className='display-5 custom-bold text-center mb-4'>Reservorio U-tad <br /> personalizado para ti!</h1>
+                    <p className='fs-5 lead text-center mb-4'>
+                        Paso 2 de 3. ¿Quién eres?
                 </p>
-
-                <div className='row justify-content-center justify-content-md-between mb-4'>
+                </div>
+                <div className='row justify-content-center  mx-2 mb-4'>
                     <div className='col-6 col-md-auto mb-3 mb-md-0'>
                         <button
                             className={`custom-button w-100 ${selectedType === 'Profesor' ? 'selected' : ''}`}
@@ -369,7 +395,7 @@ const Paso2_teacher = ({ setNextPaso, setPreviousPaso, setRol }) => {
                     </div>
                 </div>
 
-                <div className='d-flex justify-content-between align-items-center'>
+                <div className='d-flex justify-content-around align-items-center mb-5'>
                     <button
                         type='button'
                         onClick={setPreviousPaso}
@@ -393,87 +419,82 @@ const Paso2_teacher = ({ setNextPaso, setPreviousPaso, setRol }) => {
 
 const Paso_coordinador = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) => {
 
+    const [digit1, setDigit1] = useState('');
+    const [digit2, setDigit2] = useState('');
+    const [digit3, setDigit3] = useState('');
+    const [digit4, setDigit4] = useState('');
+
     const [codigo, setCodigo] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [formData, setFormData] = useState({});
 
-    const procesarCorreo = (correo) => {
-        const partes = correo.split('@');
-        const alias = partes[0];
-        const nombreApellido = partes[0].split('.');
-        let nombre = nombreApellido[0];
-        nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
-        let apellido = nombreApellido[1];
-        apellido = apellido.charAt(0).toUpperCase() + apellido.slice(1);
-
-        setNombre(nombre);
-        setApellido(apellido);
-        setFormData({
-            name: nombre,
-            title: '',
-            specialty: '',
-            lastName: apellido,
-        })
+    const handleDigitChange = (e) => {
+        const { name, value } = e.target;
+        const newVal = value.charAt(value.length - 1); 
+        switch(name) {
+            case 'digit1':
+                setDigit1(newVal);
+                break;
+            case 'digit2':
+                setDigit2(newVal);
+                break;
+            case 'digit3':
+                setDigit3(newVal);
+                break;
+            case 'digit4':
+                setDigit4(newVal);
+                break;
+            default:
+                break;
+        }
     };
 
     useEffect(() => {
-        
-    }, []);
-
- 
-
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleCheckboxChange = (e) => {
-        setFormData({ ...formData, terms: e.target.checked });
-    };
+        const completeCode = digit1 + digit2 + digit3 + digit4;
+        setCodigo(completeCode); 
+   }, [digit1, digit2, digit3, digit4]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setNombreCompleto(`${formData.name} ${formData.lastName}`);
+       
     };
 
     return (
-        <div className='container mt-5'>
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
-                    <form onSubmit={handleSubmit} className='w-100'>
-                        <div className="row">
-                            <div className="col">
-                                <div className='mb-6'>
-                                    <input type='text' name='digit1' value={formData.name} placeholder='' className='form-control'  />
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className='mb-6'>
-                                    <input type='text' name='digit2' value={formData.name} placeholder='' className='form-control'  />
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className='mb-6'>
-                                    <input type='text' name='digit3' value={formData.name} placeholder='' className='form-control'  />
-                                </div>
-                            </div>
-                            <div className="col">
-                                <div className='mb-6'>
-                                    <input type='text' name='digit4' value={formData.lastName} placeholder='' className='form-control'  />
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div className='d-flex justify-content-between'>
-                            <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
-                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
-                                </svg>
-                            </button>
-                            <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>CREAR CUENTA</button></div>
-                    </form>
+        <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center' >
+            <div className="col-md-6 d-flex flex-column justify-content-around" style={{ height: '90%' }}>
+                <div className='container'>
+                    <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Confirmación de rol</h1>
+                    <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha proporcionado previamente:</p>
+                </div>
+                <form onSubmit={handleSubmit} className='w-100'>
+                <div className="row justify-content-around">
+                    {[digit1, digit2, digit3, digit4].map((digit, index) => (
+                        <input
+                            key={`digit-${index+1}`}
+                            type='text'
+                            name={`digit${index+1}`}
+                            value={digit}
+                            onChange={handleDigitChange}
+                            maxLength={1} // Restringe la entrada a un solo carácter
+                            className='form-control'
+                            autoComplete="off" // Evita la autocompletación del navegador
+                            style={{
+                                height: '50px', // Establece la altura para que sea cuadrada
+                                width: '50px', // Establece el ancho igual a la altura para mantener la forma cuadrada
+                                margin: '5px', // Añade un poco de margen para separar los inputs
+                                textAlign: 'center', // Centra el texto horizontalmente
+                            }}
+                        />
+                    ))}
+                </div>
+   
+                </form>
+                <div className='d-flex justify-content-around'>
+                    <button className='btn btn-outline-primary' onClick={setPreviousPaso} style={{ minWidth: '0', width: '48px', height: '48px' }}>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                            <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
+                        </svg>
+                    </button>
+                    <button type='submit' onClick={setNextPaso} className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>SIGUIENTE</button>
                 </div>
             </div>
         </div>
