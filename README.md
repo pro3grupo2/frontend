@@ -1,44 +1,23 @@
-To run the project first clone the repository:
-`git clone https://github.com/pro3grupo2/frontend.git`
+# Proyectos 3 Frontend
 
-Then execute the following to install necessary dependencies:
-`npm install`
+Con el paso de los años y según nuestro centro va creciendo, los alumnos de U-Tad han creado infinidad de proyectos, trabajos y entregas a los que se intenta dar visibilidad desde diversos departamentos dentro de la universidad.
 
-------
+A día de hoy no existe un punto central que sirva como repositorio para consulta de estos proyectos que nos pueda servir para detectar a los trabajos más relevantes, conocer lo que están haciendo desde otras áreas, materias o asignaturas y que pueda servir de referencia a los propios alumnos para ver lo que han sido capaces de hacer los compañeros/as que les han precedido.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Por tanto, consideramos que existe una necesidad de centralizar toda esta información creciente, de forma que quede registrada, ordenada, accesible y dinámica, facilitando acciones futuras de promoción de los alumnos y alumni de U-Tad mediante sus trabajos.
 
-## Getting Started
+## Tecnologías utilizadas
 
-First, run the development server:
+- [Javascript](https://developer.mozilla.org/es/docs/Web/JavaScript) : Lenguaje de programación utilizado en el backend.
+- [Node.js](https://nodejs.org/en) : Entorno de ejecución para JavaScript construido con el motor de JavaScript V8 de Chrome.
+- [Next.js](https://nextjs.org/) : Framework de React que nos permite renderizar aplicaciones web del lado del servidor.
+- [Docker](https://www.docker.com/) : Plataforma de software que proporciona contenedores, capa de abstracción que permite la virtualización a nivel de sistema operativo.
+- [Docker Compose](https://docs.docker.com/compose/migrate/) : Herramienta para definir y ejecutar aplicaciones Docker de múltiples contenedores.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Autores
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Adrian Toral](https://github.com/adriantoral)
+- [Ivan Guio]()
+- [Oscar Viudez]()
+- [Oscar Simon]()
+- [Nicolas Montejano]()
