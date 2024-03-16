@@ -1,20 +1,9 @@
 # Docker compose file
-networks:
-  internalNetwork:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.20.0.0/24"
-
 services:
   nodejs:
     build: ./source
 
     ports:
       - "3001:3000"
-
-    networks:
-      internalNetwork:
-        ipv4_address: 172.20.0.2
 
     restart: always
