@@ -23,7 +23,7 @@ export default function SignUp() {
 
     if (is_pasofin) return <PasoFin setNextPaso={() => {
         // TODO: Funcion para enviar los datos al servidor
-        //signup(email, nombre_completo, email.split('@')[0], password, "recuperacion", rol)
+        //signup(email, nombre_completo, email.split('@')[0], [token], "recuperacion", rol)
     }} setPreviousPaso={() => setIs_pasofin(false)}/>
 
     if (is_paso3_user) return <Paso3_user setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_user(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
