@@ -1,17 +1,18 @@
-POST https://proyectos3.sertor.es/api/v1/auth/signup
+POST https://api.reservorio-u-tad.com/api/v1/auth/signup
 Content-Type: application/json
 
 {
-  "correo": "adrian.toral@live.u-tad.com",
-  "nombre_completo": "Adrian Toral",
-  "alias": "adriantoral1",
-  "password": "12345",
-  "frase_recuperacion": "adriantoral"
+  "correo": "oscar.viudez@live.u-tad.com",
+  "nombre_completo": "Oscar Viudez",
+  "alias": "oscar.viudez",
+  "rol": "coordinador",
+  "password": "Oscar@1234",
+  "frase_recuperacion": "oscarviudez"
 }
 
 ###
 
-POST https://proyectos3.sertor.es/api/v1/auth/signin
+POST https://api.reservorio-u-tad.com/api/v1/auth/signin
 Content-Type: application/json
 
 {
@@ -21,15 +22,25 @@ Content-Type: application/json
 
 ###
 
-GET https://proyectos3.sertor.es/api/v1/auth/me
+GET https://api.reservorio-u-tad.com/api/v1/auth/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
 
 ###
 
-GET https://proyectos3.sertor.es/api/v1/proyectos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
+GET https://api.reservorio-u-tad.com/api/v1/proyectos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA2MzA3NTQsImV4cCI6MTcxMDcxNzE1NH0.mV3xcIvmlk9QhIJkIn8AZSc6-Jettv4Reroz0of_1FI
 
 ###
 
-GET https://proyectos3.sertor.es/api/v1/proyectos/10/validar
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA2MzA3NTQsImV4cCI6MTcxMDcxNzE1NH0.mV3xcIvmlk9QhIJkIn8AZSc6-Jettv4Reroz0of_1FI
+
+###
+
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/1/validar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA2MzA3NTQsImV4cCI6MTcxMDcxNzE1NH0.mV3xcIvmlk9QhIJkIn8AZSc6-Jettv4Reroz0of_1FI
+
+###
+
+GET https://api.reservorio-u-tad.com/api/v1/auth/signup/validate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYWNoZV9rZXkiOiJwZW5kaW5nOm9zY2FyLnZpdWRlekBsaXZlLnUtdGFkLmNvbSIsImlhdCI6MTcxMDYzMDM4MSwiZXhwIjoxNzEwNjMyMTgxfQ.YGXrSZIjLR0jfFzwYD7qtWRt2sAEu6em2nOIuF0p9JE

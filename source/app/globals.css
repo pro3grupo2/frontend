@@ -52,6 +52,13 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.ms-regular {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400 !important;
+    font-style: normal;
+}
+
 .ms-light {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -162,4 +169,29 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+}
+
+.expand-button {
+    border-radius: 50px; /* More rounded corners */
+    border: 2px solid #000;
+    font-size: 1rem;
+    color: #000;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.2s;
+}
+
+.expand-button::after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the position of the plus sign */
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.expand-button:hover {
+    background-color: #f0f0f0;
 }

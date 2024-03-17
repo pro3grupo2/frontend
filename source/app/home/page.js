@@ -10,6 +10,7 @@ export default function Home() {
     // TODO - Implementar tamaño máximo de fichero
     const {user, isLoading} = useAuth();
     const [projects, setProjects] = useState([]);
+    const [proyectosLoaded, setProyectosLoaded] = useState(false);
     const router = useRouter();
 
     const hiddenFileInput = useRef(null);
@@ -19,11 +20,18 @@ export default function Home() {
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
+            setProyectosLoaded(true);
         });
     }, []);
 
-    if (isLoading) {
-        return <div className="text-center">Cargando...</div>;
+    if (isLoading || !proyectosLoaded) {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+                <div className="text-center">
+                    <h1 className="display-1 ms-black">Cargando...</h1>
+                </div>
+            </div>
+        );
     }
 
     const handleChange = event => {
@@ -45,16 +53,21 @@ export default function Home() {
         router.push(`/project/${id}`);
     };
 
-    return (
-        <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
-            <input type="file"
-                   ref={hiddenFileInput}
-                   onChange={handleChange}
-                   multiple={true}
-            />
-            <div className="row g-4 card-group mt-5">
-                {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+    if (projects.length === 0) {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+                <div className="text-center">
+                    <h1 className="display-1 ms-black">No hay proyectos</h1>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+                <div className="row g-4 card-group mt-5">
+                    {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                </div>
+            </div>
+        );
+    }
 }
