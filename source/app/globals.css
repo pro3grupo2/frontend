@@ -90,7 +90,7 @@ body {
 
 .btn-next {
     border-radius: 8px;
-    background: var(--Color-Principal, #0065F3);
+    background: var(--color-principal, #0065F3);
 
 
 }
@@ -102,8 +102,8 @@ body {
 
 .custom-button {
     border-radius: 13.945px;
-    border: 1px solid var(--Color-Secundario-Negro, #091229);
-    background: var(--Color-Secundario-Blanco, #FFF);
+    border: 1px solid var(--color-secundario-negro, #091229);
+    background: var(--color-secundario-blanco, #FFF);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +113,7 @@ body {
 }
 
 .custom-button h3 {
-    color: var(--Color-Secundario-Negro, #091229);
+    color: var(--color-secundario-negro, #091229);
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;

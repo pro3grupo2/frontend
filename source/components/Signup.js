@@ -5,7 +5,7 @@ import {EstructuraFormularios} from '@/components/Estructura';
 
 const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso}) => {
     return (
-        <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
+        <div className='d-flex justify-content-between aligns-items-center mt-5 m-0'>
             <button
                 type='button'
                 onClick={setPreviousPaso}
@@ -21,14 +21,14 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso}) => {
             <button
                 type='button'
                 onClick={setNextPaso}
-                className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
+                className='btn btn-primary btn-color-primary btn-outline-primary border-5 fs-5 fw-bold'>
                 SIGUIENTE
             </button>
         </div>
     )
 }
 
-const PasoInicio = ({setNextPaso, setEmail, mailEnviado}) => {
+const PasoInicio = ({setNextPaso, setPreviousPaso, setEmail, mailEnviado}) => {
     const [email, setEmailLocal] = useState(mailEnviado || '');
     const [emailError, setEmailError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -104,9 +104,7 @@ const PasoInicio = ({setNextPaso, setEmail, mailEnviado}) => {
                             )
                     }
 
-                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={() => {
-
-                    }}/>
+                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
                 </div>
 
                 <div className='text-center pt-5'>
@@ -276,12 +274,13 @@ const Paso2_user = ({setNextPaso, setPreviousPaso, setRol}) => {
                 Paso 2 de 3. ¿Quién eres?
             </p>
 
-            <div className='d-flex flex-column justify-content-center h-100'>
-                <div className="d-flex justify-content-between">
+            <div className='d-flex flex-column justify-content-center w-50 h-100'>
+                <div className="d-flex flex-row justify-content-between">
                     <button
                         className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
                         onClick={() => handleTypeSelection('Alumno')}>
-                        <svg width='130' height='129' viewBox='0 0 130 129' fill='none'
+                        <svg className="d-none d-md-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
                              xmlns='http://www.w3.org/2000/svg'>
                             <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
                                     fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
@@ -292,7 +291,8 @@ const Paso2_user = ({setNextPaso, setPreviousPaso, setRol}) => {
                     <button
                         className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
                         onClick={() => handleTypeSelection('Alumni')}>
-                        <svg width='130' height='129' viewBox='0 0 130 129' fill='none'
+                        <svg className="d-none d-md-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
                              xmlns='http://www.w3.org/2000/svg'>
                             <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
                                     fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
@@ -330,77 +330,54 @@ const Paso2_teacher = ({setNextPaso, setPreviousPaso, setRol}) => {
     };
 
     return (
-        <div className='d-flex flex-grow-1 justify-content-evenly align-items-center'>
-            <div className="col-md-6 d-flex flex-column justify-content-around mx-" style={{height: '100%'}}>
-                <div className='container'>
-                    <h1 className='display-5 custom-bold text-center mb-4'>Reservorio U-tad <br/> personalizado para ti!
-                    </h1>
-                    <p className='fs-5 lead text-center mb-4'>
-                        Paso 2 de 3. ¿Quién eres?
-                    </p>
-                </div>
-                <div className='row justify-content-center  mx-2 mb-4'>
-                    <div className='col-6 col-md-auto mb-3 mb-md-0'>
-                        <button
-                            className={`custom-button w-100 ${selectedType === 'Profesor' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Profesor')}>
-                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                            </svg>
-                            <h3 className='text-center'>Profesor</h3>
-                        </button>
-                    </div>
-                    <div className='col-6 col-md-auto'>
-                        <button
-                            className={`custom-button w-100 ${selectedType === 'Coordinador' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Coordinador')}>
-                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                            </svg>
-                            <h3 className='text-center'>Coordinador</h3>
-                        </button>
-                    </div>
-                    <div className='col-6 col-md-auto'>
-                        <button
-                            className={`custom-button w-100 ${selectedType === 'Departamentos' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Departamentos')}>
-                            <svg width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                            </svg>
-                            <h3 className='text-center'>Departamentos</h3>
-                        </button>
-                    </div>
+        <div className="container d-flex flex-column justify-content-center align-items-center mt-5">
+            <h1 className='display-5 custom-bold text-center mb-4'>Reservorio U-tad <br/> personalizado para ti! </h1>
+            <p className='fs-5 lead text-center mb-4'> Paso 2 de 3. ¿Quién eres? </p>
+
+            <div className="d-flex flex-column justify-content-center w-50 h-100">
+                <div className='d-flex flex-row flex-wrap flex-xl-nowrap justify-content-center justify-content-xl-between'>
+                    <button
+                        className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Profesor')}>
+                        <svg className="d-none d-md-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                    fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Profesor</h3>
+                    </button>
+
+                    <button
+                        className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Coordinador')}>
+                        <svg className="d-none d-md-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                    fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Coordinador</h3>
+                    </button>
+
+                    <button
+                        className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Departamentos')}>
+                        <svg className="d-none d-md-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                    fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Departamentos</h3>
+                    </button>
                 </div>
 
-                <div className='d-flex justify-content-around align-items-center mb-5'>
-                    <button
-                        type='button'
-                        onClick={setPreviousPaso}
-                        className='btn btn-outline-primary'
-                        style={{width: '48px', height: '48px'}}>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                            <path
-                                d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z'
-                                fill='#091229'/>
-                        </svg>
-                    </button>
-                    <button
-                        type='button'
-                        onClick={handleNextClick}
-                        className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>
-                        SIGUIENTE
-                    </button>
-                </div>
+                <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
             </div>
         </div>
-    );
-};
+    )
+}
 
 const Paso_coordinador = ({setNextPaso, setPreviousPaso, setNombreCompleto, email}) => {
 
@@ -408,7 +385,6 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setNombreCompleto, emai
     const [digit2, setDigit2] = useState('');
     const [digit3, setDigit3] = useState('');
     const [digit4, setDigit4] = useState('');
-
     const [codigo, setCodigo] = useState('');
 
     const handleDigitChange = (e) => {
@@ -444,53 +420,40 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setNombreCompleto, emai
     };
 
     return (
-        <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center'>
-            <div className="col-md-6 d-flex flex-column justify-content-around" style={{height: '90%'}}>
-                <div className='container'>
-                    <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Confirmación de rol</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha
-                        proporcionado previamente:</p>
-                </div>
-                <form onSubmit={handleSubmit} className='w-100'>
-                    <div className="row justify-content-around">
-                        {[digit1, digit2, digit3, digit4].map((digit, index) => (
-                            <input
-                                key={`digit-${index + 1}`}
-                                type='text'
-                                name={`digit${index + 1}`}
-                                value={digit}
-                                onChange={handleDigitChange}
-                                maxLength={1} // Restringe la entrada a un solo carácter
-                                className='form-control'
-                                autoComplete="off" // Evita la autocompletación del navegador
-                                style={{
-                                    height: '50px', // Establece la altura para que sea cuadrada
-                                    width: '50px', // Establece el ancho igual a la altura para mantener la forma cuadrada
-                                    margin: '5px', // Añade un poco de margen para separar los inputs
-                                    textAlign: 'center', // Centra el texto horizontalmente
-                                }}
-                            />
-                        ))}
-                    </div>
+        <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
+            <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Confirmación de rol</h1>
+            <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha
+                proporcionado previamente:</p>
 
-                </form>
-                <div className='d-flex justify-content-around'>
-                    <button className='btn btn-outline-primary' onClick={setPreviousPaso}
-                            style={{minWidth: '0', width: '48px', height: '48px'}}>
-                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                            <path
-                                d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z'
-                                fill='#091229'/>
-                        </svg>
-                    </button>
-                    <button type='submit' onClick={setNextPaso}
-                            className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'>SIGUIENTE
-                    </button>
+            <div className='d-flex flex-column justify-content-center w-50 h-100'>
+                <div className='d-flex flex-row justify-content-between'>
+                    {[digit1, digit2, digit3, digit4].map((digit, index) => (
+                        <input
+                            key={`digit-${index + 1}`}
+                            type='text'
+                            name={`digit${index + 1}`}
+                            value={digit}
+                            onChange={handleDigitChange}
+                            maxLength={1} // Restringe la entrada a un solo carácter
+                            className='form-control'
+                            autoComplete="off" // Evita la autocompletación del navegador
+                            style={{
+                                height: '50px', // Establece la altura para que sea cuadrada
+                                width: '50px', // Establece el ancho igual a la altura para mantener la forma cuadrada
+                                margin: '5px', // Añade un poco de margen para separar los inputs
+                                textAlign: 'center', // Centra el texto horizontalmente
+                            }}
+                        />
+                    ))}
                 </div>
+
+                <ControladorSiguienteAtras setNextPaso={handleSubmit} setPreviousPaso={setPreviousPaso}/>
             </div>
         </div>
-    );
-};
+    )
+}
+
+// CONTINUAR POR AQUI
 
 const Paso3_user = ({setNextPaso, setPreviousPaso, setNombreCompleto, email}) => {
 

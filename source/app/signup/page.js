@@ -1,6 +1,9 @@
 "use client";
+
 import "../globals.css";
 import {useState} from 'react';
+import {useRouter} from "next/navigation";
+
 import {Paso1, Paso2_teacher, Paso2_user, Paso3_alumni, Paso3_departamento, Paso3_teacher, Paso3_user, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup";
 
 export default function SignUp() {
@@ -9,7 +12,8 @@ export default function SignUp() {
         [password, setPassword] = useState(''),
         [rol, setRol] = useState(''),
         [nombre_completo, setNombreCompleto] = useState(''),
-        [titulacion, setTitulacion] = useState(0)
+        [titulacion, setTitulacion] = useState(0),
+        router = useRouter()
 
     const [is_paso1, setIs_paso1] = useState(false)
     const [is_paso2_user, setIs_paso2_user] = useState(false)
@@ -65,5 +69,7 @@ export default function SignUp() {
         }
     }} setPreviousPaso={() => setIs_paso1(false)} setPassword={setPassword} passwordEnviado={password}/>
 
-    return <PasoInicio setNextPaso={() => setIs_paso1(true)} setPreviousPaso={null} setEmail={setEmail} mailEnviado={email}/>
+    return <PasoInicio setNextPaso={() => setIs_paso1(true)} setPreviousPaso={() => {
+        router.push("/signin")
+    }} setEmail={setEmail} mailEnviado={email}/>
 }
