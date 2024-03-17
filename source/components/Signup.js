@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, {useEffect, useState} from 'react';
 
+import {EstructuraFormularios} from '@/components/Estructura';
 
 const PasoInicio = ({setNextPaso, setEmail, mailEnviado}) => {
     const [email, setEmailLocal] = useState(mailEnviado || '');
@@ -43,67 +44,61 @@ const PasoInicio = ({setNextPaso, setEmail, mailEnviado}) => {
         return pattern.test(email);
     };
 
-
     return (
-        <>
-            <div className='d-flex flex-row flex-grow-1 justify-content-evenly align-items-center'>
-                <div className='flex-shrink- px-5 mx-xl-5 w-100' style={{height: '90%'}}>
-                    <div className='d-flex flex-column justify-content-between h-100'>
-                        <div className='pb-4 mt-5'>
-                            <h1 className='display-5 custom-bold'>Crear cuenta</h1>
-                            <p className='d-none fs-5 d-sm-block lead'>
-                                Indícanos cuál es tu correo asociado a la U-tad.
-                            </p>
-                        </div>
-                        <div>
-                            <input
-                                type='email'
-                                className='form-control py-3 fs-5'
-                                onChange={handleEmailChange}
-                                onFocus={handleEmailFocus}
-                                placeholder=' Correo electrónico'
-                                style={{border: emailError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)'}}
-                                required
-                                autoComplete='off'
-                                value={email}
-                            />
-                            {/* Mensaje de error con espacio reservado */}
-                            {emailError ? (
-                                <div className='text-danger mt-2'>{errorMessage}</div>
-                            ) : (
-                                // Espacio reservado para el mensaje de error sin alterar el layout
-                                <div className='mt-2' style={{height: '1.5em'}}></div>
-                            )}
-                            <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
-                                <Link href='/signin'>
-                                    <button className='btn btn-outline-primary' type='button' style={{width: '48px', height: '48px'}}>
-                                        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                                            <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229'/>
-                                        </svg>
-                                    </button>
-                                </Link>
-                                <button
-                                    type='button'
-                                    onClick={handleNextClick}
-                                    className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'
-                                >
-                                    SIGUIENTE
-                                </button>
-                            </div>
-                        </div>
-                        <div className='col-12 text-center mb-5'>
-                            <span className='pe-1 fs-5'>¿Ya tienes una cuenta?</span>
-                            <Link className='link-underline-dark link-dark fw-bold fs-5 ps-1' href='/signin'>Iniciar sesión</Link>
-                        </div>
+        <EstructuraFormularios>
+            <div className='d-flex flex-column justify-content-evenly h-100'>
+                <div>
+                    <h1 className='display-5 custom-bold'>Crear cuenta</h1>
+                    <p className='d-none fs-5 d-sm-block lead'>
+                        Indícanos cuál es tu correo asociado a la U-tad.
+                    </p>
+                </div>
+
+                <div>
+                    <input
+                        type='email'
+                        className='form-control py-3 fs-5'
+                        onChange={handleEmailChange}
+                        onFocus={handleEmailFocus}
+                        placeholder=' Correo electrónico'
+                        style={{border: emailError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)'}}
+                        required
+                        autoComplete='off'
+                        value={email}
+                    />
+                    {/* Mensaje de error con espacio reservado */}
+                    {emailError ? (
+                        <div className='text-danger mt-2'>{errorMessage}</div>
+                    ) : (
+                        // Espacio reservado para el mensaje de error sin alterar el layout
+                        <div className='mt-2' style={{height: '1.5em'}}></div>
+                    )}
+                    <div className='d-flex justify-content-between aligns-items-center mt-5  m-0'>
+                        <Link href='/signin'>
+                            <button className='btn btn-outline-primary' type='button' style={{width: '48px', height: '48px'}}>
+                                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229'/>
+                                </svg>
+                            </button>
+                        </Link>
+                        <button
+                            type='button'
+                            onClick={handleNextClick}
+                            className='btn btn-primary btn-color-primary btn-outline-primary border-5 py-1 px-5 fs-5 fw-bold'
+                        >
+                            SIGUIENTE
+                        </button>
                     </div>
                 </div>
-                <div className='d-none d-xl-block w-100' style={{maxWidth: '5%'}}></div>
-                <div className='d-none d-xl-block bg-image-main w-100' style={{maxWidth: '50%'}}></div>
-            </div>
-        </>
-    );
-};
 
+                <div className='text-center pt-5'>
+                    <span className='pe-1 fs-5'>¿Ya tienes una cuenta?</span>
+                    <Link className='link-underline-dark link-dark fw-bold fs-5 ps-1' href='/signin'>Iniciar sesión</Link>
+                </div>
+            </div>
+        </EstructuraFormularios>
+    )
+}
 
 const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, passwordEnviado}) => {
     const [password, setPasswordValue] = useState(passwordEnviado || '');
