@@ -96,7 +96,6 @@ body {
     animation: bg 6s infinite; 
 }
 
-
 .btn-next {
     border-radius: 8px;
     background: var(--color-principal, #0065F3);

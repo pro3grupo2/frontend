@@ -9,7 +9,7 @@ const update = async (token, nombre_completo, password, frase_recuperacion, rol,
         nombre_completo: nombre_completo, password: password, frase_recuperacion: frase_recuperacion, rol: rol, promocion: promocion
     })
 
-    const datos = await fetch_handler(ACCOUNT_ROUTE, headers, "UPDATE", body)
+    const datos = await fetch_handler(ACCOUNT_ROUTE, headers, "PUT", body)
     return datos ? datos.data : null
 }
 

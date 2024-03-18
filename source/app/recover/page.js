@@ -1,27 +1,35 @@
 "use client"
-import {useState} from 'react';
-import {useRouter} from "next/navigation"; // Cambio en la importación
+import { useState } from 'react';
+import { useRouter } from "next/navigation"; // Cambio en la importación
 import Link from 'next/link';
+import { signin, validate, crear_codigo } from '../../api/v1/auth';
+import Image from 'next/image';
+import {recover} from "../../api/v1/auth";
+import {EstructuraFormularios} from "../../components/Estructura";
+import {ControladorSiguienteAtras} from "../../components/Signup";
 
 export default function RecoverPassword() {
     const [email, setEmail] = useState('');
-    const router = useRouter(); // Obtener el enrutador
+    const [step, setStep] = useState(1); // Add a state variable for the current step
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //  ninguna acción en la API
-        // Simplemente navega a la página de recuperación de contraseña
-        router.push('/recover/password');
+        // Perform any necessary actions before moving to the next step
+        // Then increment the step
+        setStep(step + 1);
+        await recover(email);
     }
+    if(step === 1) {
+        return (
 
-    return (
-        <div className="container-fluid">
-            <div className="row vh-100">
-                <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
+            <EstructuraFormularios>
+                <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className="display-3 ms-extrabold">¿Has olvidado tu contraseña?</h1>
                         <p className="lead py-2 mb-4">
-                            Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar tu contraseña.
+                            Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar
+                            tu contraseña.
                         </p>
                     </div>
 
@@ -42,9 +50,12 @@ export default function RecoverPassword() {
                         <div className="d-flex justify-content-between align-items-center mt-5">
                             {/* Botón "Atrás" */}
                             <Link href="/signin">
-                                <button className="btn btn-secondary" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-                                        <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229"/>
+                                <button className="btn var(--color-secundario-blanco)" type="button" style={{border: '2px solid var(--color-principal)'}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
+                                         fill="none">
+                                        <path
+                                            d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z"
+                                            fill="#091229"/>
                                     </svg>
                                 </button>
                             </Link>
@@ -64,11 +75,27 @@ export default function RecoverPassword() {
                         </p>
                     </form>
                 </div>
+            </EstructuraFormularios>
 
-                <div className="d-none d-xl-inline col-xl-8">
-                    <div className="bg-image-main"></div>
+    );
+    }
+
+    if(step === 2) {
+        return (
+            <div className="container-fluid d-flex justify-content-center">
+                <div className="row vh-100 justify-content-center">
+                    <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
+                        <h2 style={{textAlign: 'center'}}>
+                            Esperando la confirmacion del correo
+                        </h2>
+
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+
 }

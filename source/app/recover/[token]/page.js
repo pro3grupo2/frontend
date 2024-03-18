@@ -1,18 +1,20 @@
 "use client"
 import {useState} from 'react';
 import Link from 'next/link';
+import {update} from "@/api/v1/account";
 
-export default function RecoverPassword() {
+export default function RecoverPassword({params}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     // const router = useRouter(); // Obtener el enrutador
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // No hay necesidad de realizar ninguna acción en la API
         // Simplemente navega a la página de recuperación de contraseña
-        router.push('/recover/password');
+        await update(params.token, undefined, password, undefined, undefined, undefined);
     }
 
     return (
