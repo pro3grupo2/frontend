@@ -5,6 +5,7 @@ import {useState} from 'react';
 import {useRouter} from "next/navigation";
 
 import {Paso1, Paso2_teacher, Paso2_user, Paso3_alumni, Paso3_departamento, Paso3_teacher, Paso3_user, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup";
+import {signup} from "@/api/v1/auth";
 
 export default function SignUp() {
     const
@@ -26,11 +27,15 @@ export default function SignUp() {
     const [is_pasofin, setIs_pasofin] = useState(false)
 
     if (is_pasofin) return <PasoFin setNextPaso={() => {
-        // TODO: Funcion para enviar los datos al servidor
-        //signup(email, nombre_completo, email.split('@')[0], [token], "recuperacion", rol)
+        router.push("/signin")
     }} setPreviousPaso={() => setIs_pasofin(false)}/>
 
-    if (is_paso3_user) return <Paso3_user setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_user(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+    if (is_paso3_user) return <Paso3_user setNextPaso={() => {
+        signup(email, email.split('@')[0], email.split('@')[0], password, "recuperacion", rol)
+            .then((response) => {
+                if (response) setIs_pasofin(true)
+            })
+    }} setPreviousPaso={() => setIs_paso3_user(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
 
     if (is_paso3_alumni) return <Paso3_alumni setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_alumni(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
 
