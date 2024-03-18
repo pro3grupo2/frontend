@@ -1,12 +1,12 @@
 "use client";
 
-import {useState} from 'react';
-import {useRouter} from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import Link from 'next/link';
 
-import {signin} from '@/api/v1/auth';
-import {AlertContainer, create_alert} from "@/components/Alerts"
-import {EstructuraFormularios} from "@/components/Estructura";
+import { signin } from '@/api/v1/auth';
+import { AlertContainer, create_alert } from "@/components/Alerts"
+import { EstructuraFormularios } from "@/components/Estructura";
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -62,13 +62,13 @@ export default function SignIn() {
 
     return (
         <>
-            <AlertContainer alerts={alerts}/>
+            <AlertContainer alerts={alerts} />
 
             <EstructuraFormularios>
-                <div className="d-flex flex-column justify-content-evenly h-100">
+                <div className='d-flex flex-column justify-content-evenly h-100 w-75'>
                     <div>
-                        <h1 className="display-4 ms-extrabold">Iniciar sesión con el correo de la U-tad</h1>
-                        <p className="fs-5 lead">
+                        <h1 className='display-5 custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
+                        <p className='d-none fs-5 d-sm-block lead'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
@@ -77,17 +77,17 @@ export default function SignIn() {
                     <div>
                         <div className="input-group mb-3" style={{
                             borderRadius: '0.25rem',
-                            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '3px solid transparent'
+                            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '1px solid transparent'
                         }}>
                             <input
                                 type="email"
                                 id="email"
                                 className="form-control py-3 fs-5"
-                                style={{border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)"}}
+                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 onFocus={() => setEmailError(false)}
-                                placeholder="Correo Electrónico"
+                                placeholder="  Correo electrónico"
                                 required
                                 autoComplete="off"
                             />
@@ -101,15 +101,15 @@ export default function SignIn() {
                                 type={showPassword ? "text" : "password"}
                                 id="password"
                                 className="form-control py-3 fs-5"
-                                style={{backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent'}}
+                                style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '1px solid transparent' }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 onFocus={() => setPasswordError(false)}
-                                placeholder="Contraseña"
+                                placeholder="  Contraseña"
                                 autoComplete="off"
                             />
-                            <button type="button" className="input-group-text" onClick={togglePasswordVisibility} style={{background: 'none', border: 'none'}}>
-                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{height: '24px', width: '24px'}}/>
+                            <button type="button" className="input-group-text" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none' }}>
+                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña"/>
                             </button>
                         </div>
 
@@ -120,11 +120,12 @@ export default function SignIn() {
                         <button
                             type="button"
                             onClick={handleSubmit}
-                            className="w-100 btn btn-primary border-5 py-2 fs-1 fw-bold">
+                            className="   btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
+                              
                             INICIAR SESIÓN
                         </button>
 
-                        <div className="text-center">
+                        <div className="text-center mt-3">
                             <span className="pe-1 fs-5">¿Aún no tienes cuenta?</span>
                             <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>

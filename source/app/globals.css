@@ -88,12 +88,22 @@ body {
 }
 
 .bg-image-main {
-    background-image: url('../public/images/img_placeholder.png');
+    background-image: url('../public/images/fondo-utad.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
+    animation: bg 3s infinite; 
 }
+
+@keyframes bg {
+    100% {
+        filter: hue-rotate(360deg); 
+    }
+}
+
+
+
 
 .btn-next {
     border-radius: 8px;
