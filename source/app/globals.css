@@ -96,12 +96,13 @@ body {
     animation: bg 6s infinite; 
 }
 
+/*
 @keyframes bg {
     100% {
-        filter: hue-rotate(360deg); 
+        filter: hue-rotate(360deg);
     }
 }
-
+*/
 
 
 

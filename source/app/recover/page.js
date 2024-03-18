@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { signin, validate, crear_codigo } from '../../api/v1/auth';
 import Image from 'next/image';
 import {recover} from "../../api/v1/auth";
+import {EstructuraFormularios} from "../../components/Estructura";
+import {ControladorSiguienteAtras} from "../../components/Signup";
 
 export default function RecoverPassword() {
     const [email, setEmail] = useState('');
@@ -20,62 +22,62 @@ export default function RecoverPassword() {
     }
     if(step === 1) {
         return (
-            <div className="container-fluid">
-                <div className="row vh-100">
-                    <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
-                        <div>
-                            <h1 className="display-3 ms-extrabold">¿Has olvidado tu contraseña?</h1>
-                            <p className="lead py-2 mb-4">
-                                Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar tu contraseña.
-                            </p>
+
+            <EstructuraFormularios>
+                <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
+                    <div>
+                        <h1 className="display-3 ms-extrabold">¿Has olvidado tu contraseña?</h1>
+                        <p className="lead py-2 mb-4">
+                            Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar
+                            tu contraseña.
+                        </p>
+                    </div>
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="py-3 ">
+                            <input
+                                type="email"
+                                id="email"
+                                className="form-control py-3"
+                                style={{backgroundColor: "var(--secundario-gris-claro)"}}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Correo Electrónico"
+                                required
+                                autoComplete="off"
+                            />
                         </div>
-
-                        <form onSubmit={handleSubmit}>
-                            <div className="py-3 ">
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="form-control py-3"
-                                    style={{ backgroundColor: "var(--secundario-gris-claro)" }}
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Correo Electrónico"
-                                    required
-                                    autoComplete="off"
-                                />
-                            </div>
-                            <div className="d-flex justify-content-between align-items-center mt-5">
-                                {/* Botón "Atrás" */}
-                                <Link href="/signin">
-                                    <button className="btn btn-secondary" type="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-                                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#091229" />
-                                        </svg>
-                                    </button>
-                                </Link>
-
-                                {/* Botón "Siguiente" */}
-                                <button className="btn btn-primary w-40 btn-lg" type="submit">
-                                    SIGUIENTE
+                        <div className="d-flex justify-content-between align-items-center mt-5">
+                            {/* Botón "Atrás" */}
+                            <Link href="/signin">
+                                <button className="btn var(--color-secundario-blanco)" type="button" style={{border: '2px solid var(--color-principal)'}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
+                                         fill="none">
+                                        <path
+                                            d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z"
+                                            fill="#091229"/>
+                                    </svg>
                                 </button>
-                            </div>
-                            <p className="text-center mt-5">
+                            </Link>
+
+                            {/* Botón "Siguiente" */}
+                            <button className="btn btn-primary w-40 btn-lg" type="submit">
+                                SIGUIENTE
+                            </button>
+                        </div>
+                        <p className="text-center mt-5">
                             <span>
                                 ¿Recuerdas tu contraseña?{" "}
                                 <Link className="link-underline-dark link-dark fw-bold" href="/signin">
                                     <span>Iniciar sesión</span>
                                 </Link>
                             </span>
-                            </p>
-                        </form>
-                    </div>
-
-                    <div className="d-none d-xl-inline col-xl-8">
-                        <div className="bg-image-main"></div>
-                    </div>
+                        </p>
+                    </form>
                 </div>
-            </div>
-        );
+            </EstructuraFormularios>
+
+    );
     }
 
     if(step === 2) {
@@ -83,9 +85,11 @@ export default function RecoverPassword() {
             <div className="container-fluid d-flex justify-content-center">
                 <div className="row vh-100 justify-content-center">
                     <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
-                        <h2>
+                        <h2 style={{textAlign: 'center'}}>
                             Esperando la confirmacion del correo
                         </h2>
+
+
 
                     </div>
                 </div>
