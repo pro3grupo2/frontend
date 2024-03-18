@@ -77,7 +77,7 @@ export default function SignIn() {
                     <div>
                         <div className="input-group mb-3" style={{
                             borderRadius: '0.25rem',
-                            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '1px solid transparent'
+                            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '3px solid transparent'
                         }}>
                             <input
                                 type="email"

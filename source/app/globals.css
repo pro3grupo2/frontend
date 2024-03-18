@@ -96,16 +96,6 @@ body {
     animation: bg 6s infinite; 
 }
 
-/*
-@keyframes bg {
-    100% {
-        filter: hue-rotate(360deg);
-    }
-}
-*/
-
-
-
 .btn-next {
     border-radius: 8px;
     background: var(--color-principal, #0065F3);
