@@ -113,8 +113,11 @@ body {
 }
 
 .custom-bold {
-    font-weight: 700;
+    font-weight: 650 !important;
+}
 
+.title-bold{
+    font-weight: 650 !important;
 }
 
 .custom-button {

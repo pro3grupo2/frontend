@@ -68,7 +68,7 @@ export default function SignIn() {
                 <div className='d-flex flex-column justify-content-evenly h-100 w-75'>
                     <div>
                         <h1 className='display-5 custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
-                        <p className='d-none fs-5 d-sm-block lead'>
+                        <p className=' ms-light d-none fs-5 d-sm-block lead'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
@@ -93,22 +93,22 @@ export default function SignIn() {
                             />
                         </div>
 
-                        <div style={{ position: 'relative', display: 'flex' }}>
-    <input
-        type={showPassword ? "text" : "password"}
-        id="password"
-        className="form-control py-3 fs-5"
-        style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent', flex: '1' }}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        onFocus={() => setPasswordError(false)}
-        placeholder="Contraseña"
-        autoComplete="off"
-    />
-    <button type="button" className="btn btn-link" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none', padding: '0', position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
-        <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{ height: '24px', width: '24px' }} />
-    </button>
-</div>
+                        <div className="mb-3" style={{ position: 'relative', display: 'flex' }}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                className="form-control py-3 fs-5"
+                                style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent', flex: '1' }}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                onFocus={() => setPasswordError(false)}
+                                placeholder="Contraseña"
+                                autoComplete="off"
+                            />
+                            <button type="button" className="btn btn-link" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none', padding: '0', position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
+                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{ height: '24px', width: '24px' }} />
+                            </button>
+                        </div>
 
 
                         <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
@@ -119,7 +119,7 @@ export default function SignIn() {
                             type="button"
                             onClick={handleSubmit}
                             className="   btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
-                              
+
                             INICIAR SESIÓN
                         </button>
 
