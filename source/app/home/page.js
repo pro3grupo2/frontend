@@ -8,7 +8,6 @@ import ProjectCard from '@/components/ProjectCard';
 import { me } from '@/api/v1/auth';
 
 export default function Home() {
-    // TODO - Implementar tamaño máximo de fichero
     const { user, isLoading } = useAuth();
     const [projects, setProjects] = useState([]);
     const [proyectosLoaded, setProyectosLoaded] = useState(false);
@@ -17,7 +16,6 @@ export default function Home() {
     const hiddenFileInput = useRef(null);
 
     useEffect(() => {
-        // TODO - Obtener proyectos del usuario
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
@@ -64,6 +62,7 @@ export default function Home() {
         return (
             <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
                 <div className="text-center">
+                    <input type="file" ref={hiddenFileInput} onChange={handleChange} multiple />
                     <h1 className="display-1 ms-black">No hay proyectos</h1>
                 </div>
             </div>
@@ -71,7 +70,7 @@ export default function Home() {
     } else {
         return (
             <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
-                <div className="row border mb-4">
+                <div className="row d-flex align-items-center p-2 border border-black border-1 rounded mb-4">
                     <div className="col">
                         <span className="me-5">Filtro</span>
                         <svg className="ms-5" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -79,27 +78,27 @@ export default function Home() {
                         </svg>
                     </div>
                     <div className="col">
-                        <select className="form-select">
+                        <select className="form-select py-2 px-5 border border-black">
                             <option>Año</option>
                         </select>
                     </div>
                     <div className="col">
-                        <select className="form-select">
+                        <select className="form-select py-2 px-5 border border-black">
                             <option>Asignatura</option>
                         </select>
                     </div>
                     <div className="col">
-                        <select className="form-select">
+                        <select className="form-select py-2 px-5 border border-black">
                             <option>Clase</option>
                         </select>
                     </div>
                     <div className="col">
-                        <select className="form-select">
+                        <select className="form-select py-2 px-5 border border-black">
                             <option>Filtro</option>
                         </select>
                     </div>
                     <div className="col">
-                        <select className="form-select">
+                        <select className="form-select py-2 px-5 border border-black">
                             <option>Filtro</option>
                         </select>
                     </div>
@@ -107,30 +106,43 @@ export default function Home() {
 
                 <div className="row mb-4">
                     <div className="col">
-                        <div className="d-flex flex-wrap gap-2">
-                            <span className="btn btn-outline-secondary">
-                                Filtro <span aria-hidden="true">&times;</span>
-                            </span>
-                            <span className="btn btn-outline-secondary">
-                                Filtro <span aria-hidden="true">&times;</span>
-                            </span>
+                        <div className="container-fluid d-flex justify-content-center">
+                            <ul className="nav nav-underline">
+                                <li className="nav-item me-5">
+                                    <button className="nav-link text-dark">TODO</button>
+                                </li>
+                                <li className="nav-item me-5">
+                                    <button className="nav-link text-dark active">ANIMACION</button>
+                                </li>
+                                <li className="nav-item me-5">
+                                    <button className="nav-link text-dark">DISEÑO DIGITAL</button>
+                                </li>
+                                <li className="nav-item me-5">
+                                    <button className="nav-link text-dark">INGENIERIA Y CIENCIAS</button>
+                                </li>
+                                <li className="nav-item me-5">
+                                    <button className="nav-link text-dark">VIDEOJUEGOS</button>
+                                </li>
+                            </ul>
                         </div>
+                        <hr className="m-0"></hr>
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row mb-4">
                     <div className="col">
-                        <ul className="nav nav-tabs">
-                            <li className="nav-item">
-                                <a className="nav-link active" href="#">TODO</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">ANIMACIÓN</a>
-                            </li>
-                            <button onClick={killBot} className="btn btn-primary">Matar bot</button>
-                        </ul>
+                        <div className="d-flex flex-wrap gap-2">
+                            <span className="btn btn-outline-dark rounded-pill me-2">
+                                Filtro <span className="ms-3" aria-hidden="true">&times;</span>
+                            </span>
+                            <span className="btn btn-outline-dark rounded-pill me-2">
+                                Filtro <span className="ms-3" aria-hidden="true">&times;</span>
+                            </span>
+                        </div>
                     </div>
+                    <hr className="m-3"></hr>
                 </div>
+
                 <div className="row g-4 card-group mt-5">
                     {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
                 </div>
