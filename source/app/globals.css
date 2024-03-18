@@ -55,7 +55,7 @@ body {
 .ms-regular {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400 !important;
+    font-weight: 650 !important;
     font-style: normal;
 }
 
@@ -93,7 +93,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
-    animation: bg 3s infinite; 
+    animation: bg 6s infinite; 
 }
 
 @keyframes bg {
