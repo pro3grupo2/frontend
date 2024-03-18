@@ -5,7 +5,7 @@ import { EstructuraFormularios } from '@/components/Estructura';
 
 const ControladorSiguienteAtras = ({ setNextPaso, setPreviousPaso }) => {
     return (
-        <div className='d-flex justify-content-between aligns-items-center mt-5 m-0'>
+        <div className='d-flex justify-content-between aligns-items-center mt-1 m-0'>
             <button
                 type='button'
                 onClick={setPreviousPaso}
@@ -73,13 +73,15 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail, mailEnviado }) => 
         <EstructuraFormularios>
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
-                    <h1 className='display-5 custom-bold'>Crear cuenta</h1>
+                    <h1 className=' custom-bold'>Crear cuenta</h1>
                     <p className='ms-light d-none fs-5 d-sm-block lead'>
                         Indícanos cuál es tu correo asociado a la U-tad.
                     </p>
                 </div>
+                <div className='mb-3'> 
+                </div>
 
-                <div>
+                <div >
                     <input
                         type='email'
                         className='form-control py-3 fs-5 ms-light'
@@ -107,9 +109,9 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail, mailEnviado }) => 
                     <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso} />
                 </div>
 
-                <div className='text-center pt-5'>
-                    <span className='pe-1 fs-5'>¿Ya tienes una cuenta?</span>
-                    <Link className='link-underline-dark link-dark fw-bold fs-5 ps-1' href='/signin'>Iniciar
+                <div className='text-center'>
+                    <span className='pe-1 '>¿Ya tienes una cuenta?</span>
+                    <Link className='link-underline-dark link-dark fw-bold ps-1' href='/signin'>Iniciar
                         sesión</Link>
                 </div>
             </div>
@@ -174,7 +176,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
         <EstructuraFormularios>
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
-                    <h1 className='display-5 custom-bold'>Termina de configura tu cuenta</h1>
+                    <h1 className='custom-bold'>Termina de configura tu cuenta</h1>
                     <p className=' ms-light d-none fs-5 d-sm-block lead'>
                         Paso 1 de 3. Crea una contraseña para continuar
                     </p>

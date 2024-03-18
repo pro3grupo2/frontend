@@ -67,7 +67,7 @@ export default function SignIn() {
             <EstructuraFormularios>
                 <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
-                        <h1 className='display-5 custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
+                        <h1 className='custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className=' ms-light d-none fs-5 d-sm-block lead'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
@@ -111,7 +111,7 @@ export default function SignIn() {
                         </div>
 
 
-                        <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="link-underline-dark link-dark fw-bold custom-bold" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
                     <div className="">
@@ -124,8 +124,8 @@ export default function SignIn() {
                         </button>
 
                         <div className="text-center mt-3">
-                            <span className="pe-1 fs-5">¿Aún no tienes cuenta?</span>
-                            <Link className="link-underline-dark link-dark fw-bold fs-5 ps-1" href="/signup">¡Inscríbete ahora!</Link>
+                            <span className="pe-1 ">¿Aún no tienes cuenta?</span>
+                            <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>
                     </div>
                 </div>
