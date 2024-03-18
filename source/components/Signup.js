@@ -71,7 +71,7 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail, mailEnviado }) => 
 
     return (
         <EstructuraFormularios>
-            <div className='d-flex flex-column justify-content-evenly h-100 w-75'>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
                     <h1 className='display-5 custom-bold'>Crear cuenta</h1>
                     <p className='ms-light d-none fs-5 d-sm-block lead'>
@@ -172,7 +172,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
 
     return (
         <EstructuraFormularios>
-            <div className='d-flex flex-column justify-content-evenly h-100 w-75'>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
                     <h1 className='display-5 custom-bold'>Termina de configura tu cuenta</h1>
                     <p className=' ms-light d-none fs-5 d-sm-block lead'>

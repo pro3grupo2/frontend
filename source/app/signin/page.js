@@ -65,7 +65,7 @@ export default function SignIn() {
             <AlertContainer alerts={alerts} />
 
             <EstructuraFormularios>
-                <div className='d-flex flex-column justify-content-evenly h-100 w-75'>
+                <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className='display-5 custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className=' ms-light d-none fs-5 d-sm-block lead'>
