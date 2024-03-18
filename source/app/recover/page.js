@@ -26,23 +26,23 @@ export default function RecoverPassword() {
             <EstructuraFormularios>
                 <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
-                        <h1 className="display-3 ms-extrabold">¿Has olvidado tu contraseña?</h1>
-                        <p className="lead py-2 mb-4">
+                        <h1 className="custom-bold">¿Has olvidado tu contraseña?</h1>
+                        <p className='ms-light d-none d-sm-block lead'>
                             Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar
                             tu contraseña.
                         </p>
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="py-3 ">
+                        <div className="mb-3-3 ">
                             <input
                                 type="email"
                                 id="email"
-                                className="form-control py-3"
+                                className="form-control py-3 fs-5 ms-light"
                                 style={{backgroundColor: "var(--secundario-gris-claro)"}}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Correo Electrónico"
+                                placeholder="Correo electrónico"
                                 required
                                 autoComplete="off"
                             />
@@ -50,7 +50,10 @@ export default function RecoverPassword() {
                         <div className="d-flex justify-content-between align-items-center mt-5">
                             {/* Botón "Atrás" */}
                             <Link href="/signin">
-                                <button className="btn var(--color-secundario-blanco)" type="button" style={{border: '2px solid var(--color-principal)'}}>
+                                <button
+                                className='btn btn-outline-primary'
+                                type="button"
+                                style={{ width: '48px', height: '48px' }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
                                          fill="none">
                                         <path
@@ -61,7 +64,9 @@ export default function RecoverPassword() {
                             </Link>
 
                             {/* Botón "Siguiente" */}
-                            <button className="btn btn-primary w-40 btn-lg" type="submit">
+                            <button
+                            className='btn btn-primary btn-color-primary  border-5 fs-5 fw-bold'
+                            type="submit">
                                 SIGUIENTE
                             </button>
                         </div>
