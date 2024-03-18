@@ -5,6 +5,7 @@ import useAuth from '@/hooks/useAuth';
 import {get_proyecto, get_proyectos} from "@/api/v1/proyectos";
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
+import Loading from '@/components/Loading';
 
 export default function Project({params}) {
     const {user, isLoading} = useAuth();
@@ -32,13 +33,7 @@ export default function Project({params}) {
     }, [user]);
 
     if (isLoading || !proyectoLoaded) {
-        return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
-                <div className="text-center">
-                    <h1 className="display-1 ms-black">Cargando...</h1>
-                </div>
-            </div>
-        );
+        return <Loading/>
     }
 
     if (!proyecto) {

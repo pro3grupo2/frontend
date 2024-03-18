@@ -37,7 +37,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvI
 
 ###
 
-GET https://api.reservorio-u-tad.com/api/v1/proyectos/3/validar
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/8/validar
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA3ODUwMjEsImV4cCI6MTcxMDg3MTQyMX0.YwyKyJ2pWo8cuuY9UoRXAIELTDtza8dXZCRfuFtxAgU
 
 ###
@@ -47,5 +47,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYWNoZV9rZXkiOiJwZ
 
 ###
 
-DELETE https://api.reservorio-u-tad.com/api/v1/proyectos/2
+DELETE https://api.reservorio-u-tad.com/api/v1/proyectos/8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA3ODUwMjEsImV4cCI6MTcxMDg3MTQyMX0.YwyKyJ2pWo8cuuY9UoRXAIELTDtza8dXZCRfuFtxAgU

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { crear_proyecto, get_proyectos, subir_ficheros } from '@/api/v1/proyectos';
 import ProjectCard from '@/components/ProjectCard';
 import { me } from '@/api/v1/auth';
+import Loading from '@/components/Loading';
 
 export default function Home() {
     const { user, isLoading } = useAuth();
@@ -19,33 +20,24 @@ export default function Home() {
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
-            setProyectosLoaded(true);
+            setTimeout(() => {
+                setProyectosLoaded(true);
+            } , 1000);
         });
     }, []);
 
     if (isLoading || !proyectosLoaded) {
-        return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
-                <div className="text-center">
-                    <h1 className="display-1 ms-black">Cargando...</h1>
-                </div>
-            </div>
-        );
+        return <Loading />
     }
 
-    const handleChange = event => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const portada = event.target.files[1];
-            const token = localStorage.getItem('token');
-            const data = subir_ficheros(token, file, portada).then(data => {
-                const proyecto = crear_proyecto(token, `Titulo ${Date.now()}`, "Ficha", data.url, data.portada, [2]).then(console.log);
-            });
-        }
-    };
-
-    const handleClick = event => {
-        hiddenFileInput.current.click();
+    const handleClick = () => {
+        const portadaFile = document.getElementById('portada').files[0];
+        const ficheroFile = document.getElementById('fichero').files[0];
+        
+        const token = localStorage.getItem('token');
+        const data = subir_ficheros(token, ficheroFile, portadaFile).then(data => {
+            const proyecto = crear_proyecto(token, `Titulo ${Date.now()}`, "Ficha", data.url, data.portada, [2]).then(console.log);
+        });
     };
 
     const handleCardClick = (id) => {
@@ -62,14 +54,20 @@ export default function Home() {
         return (
             <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
                 <div className="text-center">
-                    <input type="file" ref={hiddenFileInput} onChange={handleChange} multiple />
+                    <label htmlFor="portada">Portada: </label>
+                    <input id="portada" type="file" ref={hiddenFileInput} accept='image/*' title="Select File"/>
+                    <br />
+                    <label htmlFor="fichero">Proyecto: </label>
+                    <input id="fichero" type="file" ref={hiddenFileInput} title="Select File"/>
+                    <br />
+                    <button className="btn btn-primary" onClick={handleClick}>Subir</button>
                     <h1 className="display-1 ms-black">No hay proyectos</h1>
                 </div>
             </div>
         );
     } else {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center mt-5" style={{ height: '800vh' }}>
                 <div className="row d-flex align-items-center p-2 border border-black border-1 rounded mb-4">
                     <div className="col">
                         <span className="me-5">Filtro</span>
