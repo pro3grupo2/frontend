@@ -93,25 +93,23 @@ export default function SignIn() {
                             />
                         </div>
 
-                        <div className="input-group mb-3 px-0" style={{
-                            borderRadius: '0.25rem',
-                            backgroundColor: "var(--color-secundario-gris-claro-extra)"
-                        }}>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                className="form-control py-3 fs-5"
-                                style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '1px solid transparent' }}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                onFocus={() => setPasswordError(false)}
-                                placeholder="  Contraseña"
-                                autoComplete="off"
-                            />
-                            <button type="button" className="input-group-text" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none' }}>
-                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña"/>
-                            </button>
-                        </div>
+                        <div style={{ position: 'relative', display: 'flex' }}>
+    <input
+        type={showPassword ? "text" : "password"}
+        id="password"
+        className="form-control py-3 fs-5"
+        style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent', flex: '1' }}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        onFocus={() => setPasswordError(false)}
+        placeholder="Contraseña"
+        autoComplete="off"
+    />
+    <button type="button" className="btn btn-link" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none', padding: '0', position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
+        <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{ height: '24px', width: '24px' }} />
+    </button>
+</div>
+
 
                         <Link className="link-underline-dark link-dark fs-5 fw-bold" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
