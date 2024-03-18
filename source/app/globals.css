@@ -52,6 +52,13 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.ms-regular {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 650 !important;
+    font-style: normal;
+}
+
 .ms-light {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -81,29 +88,42 @@ body {
 }
 
 .bg-image-main {
-    background-image: url('../public/images/img_placeholder.png');
+    background-image: url('../public/images/fondo-utad.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
+    animation: bg 6s infinite; 
 }
+
+@keyframes bg {
+    100% {
+        filter: hue-rotate(360deg); 
+    }
+}
+
+
+
 
 .btn-next {
     border-radius: 8px;
-    background: var(--Color-Principal, #0065F3);
+    background: var(--color-principal, #0065F3);
 
 
 }
 
 .custom-bold {
-    font-weight: 700;
+    font-weight: 650 !important;
+}
 
+.title-bold{
+    font-weight: 650 !important;
 }
 
 .custom-button {
     border-radius: 13.945px;
-    border: 1px solid var(--Color-Secundario-Negro, #091229);
-    background: var(--Color-Secundario-Blanco, #FFF);
+    border: 1px solid var(--color-secundario-negro, #091229);
+    background: var(--color-secundario-blanco, #FFF);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +133,7 @@ body {
 }
 
 .custom-button h3 {
-    color: var(--Color-Secundario-Negro, #091229);
+    color: var(--color-secundario-negro, #091229);
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
@@ -162,4 +182,29 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+}
+
+.expand-button {
+    border-radius: 50px; /* More rounded corners */
+    border: 2px solid #000;
+    font-size: 1rem;
+    color: #000;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.2s;
+}
+
+.expand-button::after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the position of the plus sign */
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.expand-button:hover {
+    background-color: #f0f0f0;
 }

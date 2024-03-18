@@ -1,15 +1,17 @@
 "use client"
 
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import {useRouter} from 'next/navigation';
-import {crear_proyecto, get_proyectos, subir_ficheros} from '@/api/v1/proyectos';
+import { useRouter } from 'next/navigation';
+import { crear_proyecto, get_proyectos, subir_ficheros } from '@/api/v1/proyectos';
 import ProjectCard from '@/components/ProjectCard';
+import { me } from '@/api/v1/auth';
 
 export default function Home() {
     // TODO - Implementar tamaño máximo de fichero
-    const {user, isLoading} = useAuth();
+    const { user, isLoading } = useAuth();
     const [projects, setProjects] = useState([]);
+    const [proyectosLoaded, setProyectosLoaded] = useState(false);
     const router = useRouter();
 
     const hiddenFileInput = useRef(null);
@@ -19,11 +21,18 @@ export default function Home() {
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
+            setProyectosLoaded(true);
         });
     }, []);
 
-    if (isLoading) {
-        return <div className="text-center">Cargando...</div>;
+    if (isLoading || !proyectosLoaded) {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+                <div className="text-center">
+                    <h1 className="display-1 ms-black">Cargando...</h1>
+                </div>
+            </div>
+        );
     }
 
     const handleChange = event => {
@@ -45,16 +54,87 @@ export default function Home() {
         router.push(`/project/${id}`);
     };
 
-    return (
-        <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
-            <input type="file"
-                   ref={hiddenFileInput}
-                   onChange={handleChange}
-                   multiple={true}
-            />
-            <div className="row g-4 card-group mt-5">
-                {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+    const killBot = async () => {
+        for (let i = 0; i < 100; i++) {
+            const data = await me("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4");
+        }
+    }
+
+    if (projects.length === 0) {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+                <div className="text-center">
+                    <h1 className="display-1 ms-black">No hay proyectos</h1>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+                <div className="row border mb-4">
+                    <div className="col">
+                        <span className="me-5">Filtro</span>
+                        <svg className="ms-5" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                            <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black" />
+                        </svg>
+                    </div>
+                    <div className="col">
+                        <select className="form-select">
+                            <option>Año</option>
+                        </select>
+                    </div>
+                    <div className="col">
+                        <select className="form-select">
+                            <option>Asignatura</option>
+                        </select>
+                    </div>
+                    <div className="col">
+                        <select className="form-select">
+                            <option>Clase</option>
+                        </select>
+                    </div>
+                    <div className="col">
+                        <select className="form-select">
+                            <option>Filtro</option>
+                        </select>
+                    </div>
+                    <div className="col">
+                        <select className="form-select">
+                            <option>Filtro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="row mb-4">
+                    <div className="col">
+                        <div className="d-flex flex-wrap gap-2">
+                            <span className="btn btn-outline-secondary">
+                                Filtro <span aria-hidden="true">&times;</span>
+                            </span>
+                            <span className="btn btn-outline-secondary">
+                                Filtro <span aria-hidden="true">&times;</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col">
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <a className="nav-link active" href="#">TODO</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">ANIMACIÓN</a>
+                            </li>
+                            <button onClick={killBot} className="btn btn-primary">Matar bot</button>
+                        </ul>
+                    </div>
+                </div>
+                <div className="row g-4 card-group mt-5">
+                    {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
+                </div>
+            </div>
+        );
+    }
 }
