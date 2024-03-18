@@ -269,7 +269,7 @@ const Paso2_user = ({ setNextPaso, setPreviousPaso, setRol }) => {
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
             <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad personalizado para ti!</h1>
-            <p className='fs-5 lead text-center text-md-start mb-4'>
+            <p className='ms-light fs-5 lead text-center text-md-start mb-4'>
                 Paso 2 de 3. ¿Quién eres?
             </p>
 
@@ -284,7 +284,7 @@ const Paso2_user = ({ setNextPaso, setPreviousPaso, setRol }) => {
                             <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
                                 fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
                         </svg>
-                        <h3 className='text-center'>Alumno</h3>
+                        <h3 className='text-center '>Alumno</h3>
                     </button>
 
                     <button
@@ -509,24 +509,24 @@ const Paso3_user = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) 
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <p className='ms-light fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
                     <form onSubmit={handleSubmit} className='w-100'>
                         <div className="row">
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='name' value={formData.name} placeholder='Nombre'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb-3 ms-light'>
                             <select name='title' value={formData.title} onChange={handleInputChange}
                                 className='form-select'>
                                 <option value=''>Titulación</option>
@@ -537,7 +537,7 @@ const Paso3_user = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }) 
                                 <option value='Otros Cursos'>Otros Cursos</option>
                             </select>
                         </div>
-                        <div className='mb-3'>
+                        <div className='mb-3 ms-light'>
                             <select name='specialty' value={formData.specialty} onChange={handleInputChange}
                                 className='form-select'>
                                 <option value=''>Área</option>
@@ -627,24 +627,24 @@ const Paso3_alumni = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email }
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <p className='ms-light fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
                     <form onSubmit={handleSubmit} className='w-100'>
                         <div className="row">
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='name' value={formData.name} placeholder='Nombre'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb-3 ms-light'>
                             <input type='text' name='anio' value={formData.name} placeholder='Año Graduación'
                                 className='form-control' />
                         </div>
@@ -726,24 +726,24 @@ const Paso3_teacher = ({ setNextPaso, setPreviousPaso, setNombreCompleto, email 
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <p className='ms-light fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
                     <form onSubmit={handleSubmit} className='w-100'>
                         <div className="row">
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='name' value={formData.name} placeholder='Nombre'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb-3 ms-light'>
                             <select name='title' value={formData.title} onChange={handleInputChange}
                                 className='form-select'>
                                 <option value=''>Especialidad</option>
@@ -832,24 +832,24 @@ const Paso3_departamento = ({ setNextPaso, setPreviousPaso, setNombreCompleto, e
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h1 className='display-5 custom-bold text-center mb-4'>Paso 3 de 3: Rellenar datos</h1>
-                    <p className='fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
+                    <p className='ms-light fs-5 lead text-center mb-4'>Por favor, completa los siguientes campos:</p>
                     <form onSubmit={handleSubmit} className='w-100'>
                         <div className="row">
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='name' value={formData.name} placeholder='Nombre'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                             <div className="col">
-                                <div className='mb-3'>
+                                <div className='mb-3 ms-light'>
                                     <input type='text' name='lastName' value={formData.lastName} placeholder='Apellido'
                                         className='form-control' disabled />
                                 </div>
                             </div>
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb-3ms-light'>
                             <select name='title' value={formData.title} onChange={handleInputChange}
                                 className='form-select'>
                                 <option value=''>Departamento</option>
@@ -899,7 +899,7 @@ const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
             </button>
             <div className="container">
                 <h1 className='display-5 custom-bold text-center mb-3'>¡Proceso de inscripción finalizado!</h1>
-                <p className='fs-5 lead text-center mb-4'>
+                <p className=' ms-light fs-5 lead text-center mb-4'>
                     El desarrollo de proyectos es una parte fundamental de la <br></br>formación nuestros alumnos y
                     alumnas, y es también una <br></br> carta de presentación de tus conocimientos, experiencia
                     y <br></br> capacidad de trabajo en equipo.
