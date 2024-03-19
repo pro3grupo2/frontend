@@ -104,6 +104,16 @@ body {
     height: 100%;
     animation: bg 6s infinite; 
 }
+.bg-image-signin {
+    background-image: url('../public/images/bg-signin.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    animation: bg 6s infinite; 
+}
+
+
 
 .btn-next {
     border-radius: 8px;

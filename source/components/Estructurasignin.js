@@ -5,7 +5,7 @@ const EstructuraFormulariossignin = ({children}) => {
                 {children}
             </div>
 
-            <div className="d-none d-xl-block bg-image-main w-100 h-100" style={{maxWidth: '50%'}}></div>
+            <div className="d-none d-xl-block bg-image-signin w-100 h-100" style={{maxWidth: '50%'}}></div>
         </div>
     )
 }
