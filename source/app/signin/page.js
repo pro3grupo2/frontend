@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { signin } from '@/api/v1/auth';
 import { AlertContainer, create_alert } from "@/components/Alerts"
-import { EstructuraFormularios } from "@/components/Estructura";
+import { EstructuraFormulariossignin } from "@/components/Estructurasignin";
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -64,7 +64,7 @@ export default function SignIn() {
         <>
             <AlertContainer alerts={alerts} />
 
-            <EstructuraFormularios>
+            <EstructuraFormulariossignin>
                 <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className='custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
@@ -102,7 +102,7 @@ export default function SignIn() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 onFocus={() => setPasswordError(false)}
-                                placeholder="Contraseña"
+                                placeholder="  Contraseña"
                                 autoComplete="off"
                             />
                             <button type="button" className="btn btn-link" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none', padding: '0', position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
@@ -129,7 +129,7 @@ export default function SignIn() {
                         </div>
                     </div>
                 </div>
-            </EstructuraFormularios>
+            </EstructuraFormulariossignin>
         </>
     )
 }

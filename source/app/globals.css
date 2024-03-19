@@ -96,6 +96,15 @@ body {
     animation: bg 6s infinite; 
 }
 
+.bg-image-signup {
+    background-image: url('../public/images/bd-signup.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    animation: bg 6s infinite; 
+}
+
 .btn-next {
     border-radius: 8px;
     background: var(--color-principal, #0065F3);

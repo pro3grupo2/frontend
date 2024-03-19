@@ -191,7 +191,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
                             value={password}
                             onChange={handlePasswordChange}
                             onFocus={handleFocus}
-                            placeholder='Contraseña'
+                            placeholder='  Contraseña'
                             required
                             autoComplete='off'
                             style={{ border: passwordError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)', flex: '1' }}
@@ -206,7 +206,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
                     </div>
 
 
-                    <div className="mb-3" style={{ position: 'relative', display: 'flex' }}>
+                    <div className="mb-3n" style={{ position: 'relative', display: 'flex' }}>
                         <input
                             type={showConfirmPassword ? 'text' : 'password'}
                             id='confirmPassword'
@@ -214,7 +214,7 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                             onFocus={handleFocus}
-                            placeholder='Repetir Contraseña'
+                            placeholder='  Confirmar la contraseña'
                             required
                             autoComplete='off'
                             style={{ border: passwordError ? '3px solid var(--color-error)' : '3px solid var(--color-secundario-gris-claro)', flex: '1' }}
