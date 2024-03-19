@@ -6,7 +6,7 @@ WORKDIR /proyectos3
 COPY . .
 
 # Instalar las dependencias de la aplicacion
-RUN npm install
+RUN npm install --loglevel verbose
 RUN npm run build
 
 # Comando para iniciar la aplicacion
