@@ -1,8 +1,8 @@
 "use client"
-import { useState } from 'react';
-import { useRouter } from "next/navigation"; // Cambio en la importación
+import {useState} from 'react';
+import {useRouter} from "next/navigation"; // Cambio en la importación
 import Link from 'next/link';
-import { signin, validate, crear_codigo } from '../../api/v1/auth';
+import {signin, validate, crear_codigo} from '../../api/v1/auth';
 import Image from 'next/image';
 import {recover} from "../../api/v1/auth";
 import {EstructuraFormularios} from "../../components/Estructura";
@@ -20,7 +20,7 @@ export default function RecoverPassword() {
         setStep(step + 1);
         await recover(email);
     }
-    if(step === 1) {
+    if (step === 2) {
         return (
 
             <EstructuraFormularios>
@@ -51,9 +51,9 @@ export default function RecoverPassword() {
                             {/* Botón "Atrás" */}
                             <Link href="/signin">
                                 <button
-                                className='btn btn-outline-primary'
-                                type="button"
-                                style={{ width: '48px', height: '48px' }}>
+                                    className='btn btn-outline-primary'
+                                    type="button"
+                                    style={{width: '48px', height: '48px'}}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
                                          fill="none">
                                         <path
@@ -65,8 +65,8 @@ export default function RecoverPassword() {
 
                             {/* Botón "Siguiente" */}
                             <button
-                            className='btn btn-primary btn-color-primary  border-5 fs-5 fw-bold'
-                            type="submit">
+                                className='btn btn-primary btn-color-primary  border-5 fs-5 fw-bold'
+                                type="submit">
                                 SIGUIENTE
                             </button>
                         </div>
@@ -82,22 +82,16 @@ export default function RecoverPassword() {
                 </div>
             </EstructuraFormularios>
 
-    );
+        );
     }
 
-    if(step === 2) {
+    if (step === 1) {
         return (
-            <div className="container-fluid d-flex justify-content-center">
-                <div className="row vh-100 justify-content-center">
-                    <div className="form-container col-12 col-xl-4 align-self-center px-3 ">
-                        <h2 style={{textAlign: 'center'}}>
-                            Esperando la confirmacion del correo
-                        </h2>
-
-
-
-                    </div>
-                </div>
+            <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
+                <h2 style={{textAlign: 'center'}}>
+                    Esperando confirmación del correo
+                </h2>
+                <Image src="/images/ilustración_mail.png" alt="Buzon" width="372" height="361"/>
             </div>
         );
     }
