@@ -20,7 +20,7 @@ export default function RecoverPassword() {
         setStep(step + 1);
         await recover(email);
     }
-    if (step === 2) {
+    if (step === 1) {
         return (
 
             <EstructuraFormularios>
@@ -85,7 +85,7 @@ export default function RecoverPassword() {
         );
     }
 
-    if (step === 1) {
+    if (step === 2) {
         return (
             <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
                 <h2 style={{textAlign: 'center'}}>
