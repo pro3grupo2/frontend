@@ -42,15 +42,6 @@ const editar_titulacion = async (token, id, titulo, id_area) => {
     return datos ? datos.data : null
 }
 
-const eliminar_titulacion = async (token, id) => {
-    const headers = {
-        'Authorization': `Bearer ${token}`
-    }
-
-    const datos = await fetch_handler(TITULACIONES_ROUTE + '/' + id, headers, "DELETE")
-    return datos ? datos.data : null
-}
-
 module.exports = {
-    get_titulaciones, get_titulacion, crear_titulacion, editar_titulacion, eliminar_titulacion
+    get_titulaciones, get_titulacion, crear_titulacion, editar_titulacion
 }

@@ -14,7 +14,9 @@ const get_codigos = async (token) => {
 const crear_codigo = async (token, usos = 1) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
-    }, body = JSON.stringify({usos: usos})
+    }, body = JSON.stringify({
+        usos: usos
+    })
 
     const datos = await fetch_handler(CODIGOS_ROUTE, headers, "POST", body)
     return datos ? datos.data : null

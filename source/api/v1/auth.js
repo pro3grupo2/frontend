@@ -1,11 +1,6 @@
 const {fetch_handler} = require('.')
 
-const
-    SIGNIN_ROUTE = '/auth/signin',
-    SIGNUP_ROUTE = '/auth/signup',
-    SIGNUP_ROUTE_VALIDATE = '/auth/signup/validate',
-    ME_ROUTE = '/auth/me',
-    RECOVER_ROUTE = '/auth/recover'
+const SIGNIN_ROUTE = '/auth/signin', SIGNUP_ROUTE = '/auth/signup', SIGNUP_ROUTE_VALIDATE = '/auth/signup/validate', ME_ROUTE = '/auth/me', RECOVER_ROUTE = '/auth/recover'
 
 const signin = async (correo, password) => {
     const headers = {
@@ -18,11 +13,11 @@ const signin = async (correo, password) => {
     return datos ? datos.data : null
 }
 
-const signup = async (correo, nombre_completo, alias, password, frase_recuperacion, rol, promocion) => {
+const signup = async (correo, nombre_completo, alias, password, descripcion, portfolio, foto, rol, promocion, codigo) => {
     const headers = {
         'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        correo: correo, nombre_completo: nombre_completo, alias: alias, password: password, frase_recuperacion: frase_recuperacion, rol: rol, promocion: promocion
+        correo: correo, nombre_completo: nombre_completo, alias: alias, password: password, descripcion: descripcion, portfolio: portfolio, foto: foto, rol: rol, promocion: promocion, codigo: codigo
     })
 
     const datos = await fetch_handler(SIGNUP_ROUTE, headers, "POST", body)

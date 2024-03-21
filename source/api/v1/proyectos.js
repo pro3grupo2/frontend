@@ -33,25 +33,14 @@ const subir_ficheros = async (token, fichero = null, portada = null) => {
     return datos ? datos.data : null
 }
 
-const crear_proyecto = async (token, titulo, ficha, url, portada, participantes, id_asignatura = null) => {
+const crear_proyecto = async (token, titulo, ficha, url, portada, participantes, proyectos_asignaturas, premios, id_asignatura) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        "id_asignatura": id_asignatura, "titulo": titulo, "ficha": ficha, "url": url, "portada": portada, "participantes": participantes
+        id_asignatura: id_asignatura, titulo: titulo, ficha: ficha, url: url, portada: portada, participantes: participantes, proyectos_asignaturas: proyectos_asignaturas, premios: premios
     })
 
     const datos = await fetch_handler(PROYECTOS_ROUTE, headers, "POST", body)
-    return datos ? datos.data : null
-}
-
-const editar_proyecto = async (token, id, titulo = null, ficha = null, url = null, portada = null, participantes = null, id_asignatura = null) => {
-    const headers = {
-        'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
-    }, body = JSON.stringify({
-        "id_asignatura": id_asignatura, "titulo": titulo, "ficha": ficha, "url": url, "portada": portada, "participantes": participantes
-    })
-
-    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id, headers, "PUT", body)
     return datos ? datos.data : null
 }
 
@@ -64,15 +53,24 @@ const eliminar_proyecto = async (token, id) => {
     return datos ? datos.data : null
 }
 
-const validar_proyecto = async (token, id) => {
+const aceptar_proyecto = async (token, id) => {
     const headers = {
         'Authorization': `Bearer ${token}`
     }
 
-    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id + '/validar', headers, "GET")
+    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id + '/aceptar', headers, "GET")
+    return datos ? datos.data : null
+}
+
+const rechazar_proyecto = async (token, id) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id + '/rechazar', headers, "GET")
     return datos ? datos.data : null
 }
 
 module.exports = {
-    get_proyectos, get_proyecto, subir_ficheros, crear_proyecto, editar_proyecto, eliminar_proyecto, validar_proyecto
+    get_proyectos, get_proyecto, subir_ficheros, crear_proyecto, eliminar_proyecto, aceptar_proyecto, rechazar_proyecto
 }

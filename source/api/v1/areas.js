@@ -42,15 +42,6 @@ const editar_area = async (token, id, titulo) => {
     return datos ? datos.data : null
 }
 
-const eliminar_area = async (token, id) => {
-    const headers = {
-        'Authorization': `Bearer ${token}`
-    }
-
-    const datos = await fetch_handler(AREAS_ROUTE + '/' + id, headers, "DELETE")
-    return datos ? datos.data : null
-}
-
 module.exports = {
-    get_areas, get_area, crear_area, editar_area, eliminar_area
+    get_areas, get_area, crear_area, editar_area
 }
