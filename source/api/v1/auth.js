@@ -13,7 +13,7 @@ const signin = async (correo, password) => {
     return datos ? datos.data : null
 }
 
-const signup = async (correo, nombre_completo, alias, password, descripcion, portfolio, foto, rol, promocion, codigo) => {
+const signup = async (correo, nombre_completo, alias, password, descripcion, portfolio, foto, rol, promocion, codigo = undefined) => {
     const headers = {
         'Content-Type': 'application/json'
     }, body = JSON.stringify({
