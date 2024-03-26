@@ -78,7 +78,7 @@ const PasoInicio = ({ setNextPaso, setPreviousPaso, setEmail, mailEnviado }) => 
                         Indícanos cuál es tu correo asociado a la U-tad.
                     </p>
                 </div>
-                <div className='mb-3'> 
+                <div className='mb-3'>
                 </div>
 
                 <div >
@@ -150,11 +150,13 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, passwordEnviado }) =
         }
 
         // Verificar si la contraseña cumple con los requisitos
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_\-^`[\]{}¿?=)(/·"!|@#~€¬'.,])[A-Za-z\d@$!%*?&_\-^`[\]{}¿?=)(/·"!|@#~€¬'.,]{8,}$/;
+
         if (!passwordRegex.test(password)) {
             setPasswordError('La contraseña debe tener al menos 8 caracteres, 1 mayúscula, 1 número y 1 carácter especial');
             return;
         }
+
 
         setPassword(password);
         setNextPaso();
