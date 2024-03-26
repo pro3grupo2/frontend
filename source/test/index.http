@@ -1,3 +1,4 @@
+# correo, nombre_completo, alias, password, descripcion, portfolio, foto, rol, promocion, codigo
 POST https://api.reservorio-u-tad.com/api/v1/auth/signup
 Content-Type: application/json
 
@@ -5,9 +6,12 @@ Content-Type: application/json
   "correo": "oscar.viudez@live.u-tad.com",
   "nombre_completo": "Oscar Viudez",
   "alias": "oscar.viudez",
+  "password": "Oscar@12345",
+  "descripcion": "Estudiante de U-Tad",
+  "portfolio": "portfolio",
+  "foto": "foto",
   "rol": "coordinador",
-  "password": "Oscar@1234",
-  "frase_recuperacion": "oscarviudez"
+  "promocion": 2025
 }
 
 ###
@@ -17,7 +21,7 @@ Content-Type: application/json
 
 {
   "correo": "oscar.viudez@live.u-tad.com",
-  "password": "oscar"
+  "password": "Oscar@12345"
 }
 
 ###
@@ -28,7 +32,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY
 ###
 
 GET https://api.reservorio-u-tad.com/api/v1/proyectos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA3ODUwMjEsImV4cCI6MTcxMDg3MTQyMX0.YwyKyJ2pWo8cuuY9UoRXAIELTDtza8dXZCRfuFtxAgU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTE0NjczOTQsImV4cCI6MTcxMTU1Mzc5NH0.699v4mayndc5nSeGT3hhybtOk_Ucs5c3Q7i31Zl7YaA
 
 ###
 
@@ -37,8 +41,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvI
 
 ###
 
-GET https://api.reservorio-u-tad.com/api/v1/proyectos/8/validar
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA3ODUwMjEsImV4cCI6MTcxMDg3MTQyMX0.YwyKyJ2pWo8cuuY9UoRXAIELTDtza8dXZCRfuFtxAgU
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/1/aceptar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTE0Njk3ODIsImV4cCI6MTcxMTU1NjE4Mn0.mrdf-gG1LydZYZyVKxUX3oqgULZowxwmGBdkPu00oKc
 
 ###
 
@@ -49,3 +53,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYWNoZV9rZXkiOiJwZ
 
 DELETE https://api.reservorio-u-tad.com/api/v1/proyectos/8
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTA3ODUwMjEsImV4cCI6MTcxMDg3MTQyMX0.YwyKyJ2pWo8cuuY9UoRXAIELTDtza8dXZCRfuFtxAgU
+
+###
+
+GET https://api.reservorio-u-tad.com/api/v1/asignaturas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTE0NjczOTQsImV4cCI6MTcxMTU1Mzc5NH0.699v4mayndc5nSeGT3hhybtOk_Ucs5c3Q7i31Zl7YaA
+
+###

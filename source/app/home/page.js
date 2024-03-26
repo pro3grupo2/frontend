@@ -36,7 +36,8 @@ export default function Home() {
         
         const token = localStorage.getItem('token');
         const data = subir_ficheros(token, ficheroFile, portadaFile).then(data => {
-            const proyecto = crear_proyecto(token, `Titulo ${Date.now()}`, "Ficha", data.url, data.portada, [2]).then(console.log);
+            // token, titulo, ficha, url, portada, anio, participantes, proyectos_asignaturas, premios, premiado = false
+            const proyecto = crear_proyecto(token, `Titulo ${Date.now()}`, "Ficha de descripcion del proyecto comentando de que va", data.url, data.portada, 2024, ["oscar.viudez@live.u-tad.com"], [6], ["Premio 1"], true).then(console.log);
         });
     };
 
