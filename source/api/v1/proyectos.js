@@ -2,12 +2,12 @@ const {fetch_handler} = require('.')
 
 const PROYECTOS_ROUTE = '/proyectos'
 
-const get_proyectos = async (token) => {
+const get_proyectos = async (token, page = 0) => {
     const headers = {
         'Authorization': `Bearer ${token}`
     }
 
-    const datos = await fetch_handler(PROYECTOS_ROUTE, headers, "GET")
+    const datos = await fetch_handler(PROYECTOS_ROUTE + `?page=${page}`, headers, "GET")
     return datos ? datos.data : null
 }
 
