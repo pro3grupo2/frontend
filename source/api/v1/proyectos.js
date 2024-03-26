@@ -33,11 +33,11 @@ const subir_ficheros = async (token, fichero = null, portada = null) => {
     return datos ? datos.data : null
 }
 
-const crear_proyecto = async (token, titulo, ficha, url, portada, anio, participantes, proyectos_asignaturas, premios) => {
+const crear_proyecto = async (token, titulo, ficha, url, portada, anio, participantes, proyectos_asignaturas, premios, premiado = false) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        titulo: titulo, ficha: ficha, url: url, portada: portada, anio: anio, participantes: participantes, proyectos_asignaturas: proyectos_asignaturas, premios: premios
+        titulo: titulo, ficha: ficha, url: url, portada: portada, anio: anio, participantes: participantes, proyectos_asignaturas: proyectos_asignaturas, premiado: premiado, premios: premios
     })
 
     const datos = await fetch_handler(PROYECTOS_ROUTE, headers, "POST", body)
