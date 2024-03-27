@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
-import "../globals.css";
-import {useState} from 'react';
-import {useRouter} from "next/navigation";
+import "../globals.css"
+import {useState} from 'react'
+import {useRouter} from "next/navigation"
 
-import {Paso1, Paso2_teacher, Paso2_user, Paso3_alumni, Paso3_departamento, Paso3_teacher, Paso3_user, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup";
+import {Paso1, Paso2_live_utad_com, Paso2_utad_com, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup"
+import Loading from "@/components/Loading";
 import {signup} from "@/api/v1/auth";
 
 export default function SignUp() {
@@ -12,69 +13,86 @@ export default function SignUp() {
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
         [rol, setRol] = useState(''),
-        [nombre_completo, setNombreCompleto] = useState(''),
-        [titulacion, setTitulacion] = useState(0),
+        [codigo, setCodigo] = useState(undefined),
+        [loading, setLoading] = useState(false),
         router = useRouter()
 
-    const [is_paso1, setIs_paso1] = useState(false)
-    const [is_paso2_user, setIs_paso2_user] = useState(false)
-    const [is_paso2_teacher, setIs_paso2_teacher] = useState(false)
-    const [is_paso_coordinador, setIs_paso_coordinador] = useState(false)
-    const [is_paso3_user, setIs_paso3_user] = useState(false)
-    const [is_paso3_alumni, setIs_paso3_alumni] = useState(false)
-    const [is_paso3_teacher, setIs_paso3_teacher] = useState(false)
-    const [is_paso3_departamento, setIs_paso3_departamento] = useState(false)
-    const [is_pasofin, setIs_pasofin] = useState(false)
+    const
+        [paso_password, setPaso_password] = useState(false),
+        [paso_rol_alumnos, setPaso_rol_alumnos] = useState(false),
+        [paso_rol_admins, setPaso_rol_admins] = useState(false),
+        [paso_verificacion_coordinador, setPaso_verificacion_coordinador] = useState(false),
+        [paso_final, setPaso_final] = useState(false)
 
-    if (is_pasofin) return <PasoFin setNextPaso={() => {
-        router.push("/signin")
-    }} setPreviousPaso={() => setIs_pasofin(false)}/>
+    const handleSignup = async () => {
+        setLoading(true)
+        const alias = email.split("@")[0]
+        const data = await signup(
+            email,
+            alias.replace(".", " "),
+            alias,
+            password,
+            `Soy ${alias}`,
+            "https://u-tad.com",
+            "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+            rol,
+            2024,
+            codigo
+        )
 
-    if (is_paso3_user) return <Paso3_user setNextPaso={() => {
-        signup(email, email.split('@')[0], email.split('@')[0], password, "recuperacion", rol)
-            .then((response) => {
-                if (response) setIs_pasofin(true)
-            })
-    }} setPreviousPaso={() => setIs_paso3_user(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+        if (!data)
+            alert("Error al registrarse. Revisar la consola.")
 
-    if (is_paso3_alumni) return <Paso3_alumni setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_alumni(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+        setLoading(false)
+        setPaso_final(true)
+    }
 
-    if (is_paso3_teacher) return <Paso3_teacher setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_teacher(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+    if (loading) return <Loading/>
 
-    if (is_paso3_departamento) return <Paso3_departamento setNextPaso={() => setIs_pasofin(true)} setPreviousPaso={() => setIs_paso3_departamento(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+    if (paso_final) return <PasoFin
+        setNextPaso={() => {
+            router.push("/signin")
+        }}
+        setPreviousPaso={() => setPaso_final(false)}
+    />
 
-    if (is_paso_coordinador) return <Paso_coordinador setNextPaso={() => setIs_paso3_teacher(true)} setPreviousPaso={() => setIs_paso_coordinador(false)} setNombreCompleto={setNombreCompleto} setTitulacion={setTitulacion} email={email}/>
+    if (paso_verificacion_coordinador) return <Paso_coordinador
+        setNextPaso={handleSignup}
+        setPreviousPaso={() => setPaso_verificacion_coordinador(false)}
+        setRol={setRol}
+    />
 
-    if (is_paso2_user) return <Paso2_user setNextPaso={() => {
-        if (rol === "alumno") {
-            setIs_paso3_user(true)
-        } else if (rol === "alumni") {
-            setIs_paso3_alumni(true)
-        }
-    }} setPreviousPaso={() => setIs_paso2_user(false)} setRol={setRol}/>
+    if (paso_rol_alumnos) return <Paso2_live_utad_com
+        setNextPaso={handleSignup}
+        setPreviousPaso={() => setPaso_rol_alumnos(false)}
+        setRol={setRol}
+    />
 
-    if (is_paso2_teacher) return <Paso2_teacher setNextPaso={() => {
-        if (rol === "profesor") {
-            setIs_paso3_teacher(true)
-        } else if (rol === "coordinador") {
-            setIs_paso_coordinador(true)
-        } else if (rol === "departamentos") {
-            setIs_paso3_departamento(true)
-        }
-    }} setPreviousPaso={() => setIs_paso2_teacher(false)} setRol={setRol}/>
+    if (paso_rol_admins) return <Paso2_utad_com
+        setNextPaso={() => {
+            rol === "coordinador"
+                ? setPaso_verificacion_coordinador(true)
+                : handleSignup()
+        }}
+        setPreviousPaso={() => setPaso_rol_admins(false)}
+        setRol={setRol}
+    />
 
-    if (is_paso1) return <Paso1 setNextPaso={() => {
-        if (email.endsWith("@u-tad.com")) {
-            setIs_paso2_teacher(true)
-        } else if (email.endsWith("@live.u-tad.com")) {
-            setIs_paso2_user(true)
-        } else if (email.endsWith("@ext.live.u-tad.com")) {
+    if (paso_password) return <Paso1
+        setNextPaso={() => {
+            if (email.endsWith("@u-tad.com")) setPaso_rol_admins(true)
+            else if (email.endsWith("@live.u-tad.com")) setPaso_rol_alumnos(true)
+            else if (email.endsWith("@ext.live.u-tad.com")) console.log("Acciones para @ext.live.u-tad.com")
+        }}
+        setPreviousPaso={() => setPaso_password(false)}
+        setPassword={setPassword}
+        password={password}
+    />
 
-            console.log("Acciones para @ext.live.u-tad.com");
-        }
-    }} setPreviousPaso={() => setIs_paso1(false)} setPassword={setPassword} passwordEnviado={password}/>
-
-    return <PasoInicio setNextPaso={() => setIs_paso1(true)} setPreviousPaso={() => {
-        router.push("/signin")
-    }} setEmail={setEmail} mailEnviado={email}/>
+    return <PasoInicio
+        setNextPaso={() => setPaso_password(true)}
+        setPreviousPaso={() => router.push("/signin")}
+        setEmail={setEmail}
+        email={email}
+    />
 }

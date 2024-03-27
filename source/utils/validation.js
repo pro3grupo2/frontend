@@ -36,11 +36,14 @@ const check_password = (password, callback = undefined) => {
 }
 
 const check_email = (email, callback = undefined) => {
+    if (!email) {
+        if (callback) callback('El correo no puede estar vacío')
+        return false
+    }
+
     let
         check = true,
         [username, domain] = email.split('@')
-
-    console.log(username)
 
     if (!EMAIL_TERMINATIONS.includes(domain)) {
         check = false
