@@ -1,71 +1,77 @@
-"use client";
+"use client"
 
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
-import Link from 'next/link';
+import {useRef, useState} from 'react'
 
-import { signin } from '@/api/v1/auth';
-import { AlertContainer, create_alert } from "@/components/Alerts"
-import { EstructuraFormulariossignin } from "@/components/Estructurasignin";
+import Link from 'next/link'
+import Image from "next/image"
+import {useRouter} from "next/navigation"
+
+import {AlertContainer, create_alert} from "@/components/Alerts"
+import {EstructuraFormularios} from "@/components/Estructura"
+import Loading from "@/components/Loading"
+
+import {check_email, check_password} from "@/utils/validation"
+import {signin} from "@/api/v1/auth"
+
+import "../../styles/signin.css"
 
 export default function SignIn() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
-    const [alerts, setAlerts] = useState([])
+    const
+        email_ref = useRef(null),
+        password_ref = useRef(null),
+        [email, setEmail] = useState(''),
+        [password, setPassword] = useState(''),
+        [email_checks, setEmailChecks] = useState([]),
+        [password_checks, setPasswordChecks] = useState([]),
+        [alerts, setAlerts] = useState([]),
+        [loading, setLoading] = useState(false),
+        router = useRouter()
 
-    const validateInput = () => {
-        let isValid = true;
-        if (!email.includes('@')) {
-            setEmailError(true);
-            isValid = false;
-            create_alert(setAlerts, "El correo no tiene @", "danger")
-        } else {
-            setEmailError(false);
-        }
-
-        if (password.length < 1) {
-            setPasswordError(true);
-            isValid = false;
-            create_alert(setAlerts, "Longitud de contraseña incorrecta", "danger")
-        } else {
-            setPasswordError(false);
-        }
-
-        return isValid;
+    const togglePasswordVisibility = () => {
+        password_ref.current.type = password_ref.current.type === 'password' ? 'text' : 'password'
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        if (!validateInput()) {
-            return;
-        }
+        setEmailChecks([])
+        setPasswordChecks([])
 
+        if (!check_email(
+            email,
+            (error) => {
+                setEmailChecks((previous) => [...previous, error])
+            }
+        )) return email_ref.current.classList.add('border-error')
+
+        if (!check_password(
+            password,
+            (error) => {
+                setPasswordChecks((previous) => [...previous, error])
+            }
+        )) return password_ref.current.classList.add('border-error')
+
+        setLoading(true)
         const token = await signin(email, password)
+        setLoading(false)
+
         if (!token) {
-            setPasswordError(true);
-            setEmailError(true);
-            return create_alert(setAlerts, "Correo o contraseña incorrectos", "danger")
+            create_alert(setAlerts, 'Correo o contraseña incorrectos', 'danger')
+            return
         }
 
         localStorage.setItem('token', token)
-        router.push("/home")
+        router.push('/home')
     }
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    }
+    if (loading) return <Loading/>
 
     return (
         <>
-            <AlertContainer alerts={alerts} />
+            <AlertContainer alerts={alerts}/>
 
-            <EstructuraFormulariossignin>
-                <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
+            <EstructuraFormularios>
+                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className='custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className=' ms-light d-none fs-5 d-sm-block lead'>
@@ -75,51 +81,62 @@ export default function SignIn() {
                     </div>
 
                     <div>
-                        <div className="input-group mb-3" style={{
-                            borderRadius: '0.25rem',
-                            backgroundColor: "var(--color-secundario-gris-claro-extra)", border: emailError ? `3px solid var(--color-error)` : '3px solid transparent'
-                        }}>
-                            <input
-                                type="email"
-                                id="email"
-                                className="form-control py-3 fs-5"
-                                style={{ border: 'none', backgroundColor: "var(--color-secundario-gris-claro-extra)" }}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                onFocus={() => setEmailError(false)}
-                                placeholder="  Correo electrónico"
-                                required
-                                autoComplete="off"
-                            />
+                        <input
+                            ref={email_ref}
+                            type="email"
+                            id="email"
+                            value={email}
+                            className="form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                            onChange={(e) => setEmail(e.target.value)}
+                            onFocus={() => email_ref.current.classList.remove('border-error')}
+                            placeholder="Correo electrónico"
+                            autoComplete="off"
+                        />
+
+                        <div className="">
+                            {
+                                email_checks.map((check, index) => (
+                                    <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                ))
+                            }
                         </div>
 
-                        <div className="mb-3" style={{ position: 'relative', display: 'flex' }}>
+                        <div className="position-relative d-flex mt-3">
                             <input
-                                type={showPassword ? "text" : "password"}
+                                ref={password_ref}
+                                type="text"
                                 id="password"
-                                className="form-control py-3 fs-5"
-                                style={{ backgroundColor: "var(--color-secundario-gris-claro-extra)", border: passwordError ? `3px solid var(--color-error)` : '3px solid transparent', flex: '1' }}
                                 value={password}
+                                className="flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
-                                onFocus={() => setPasswordError(false)}
-                                placeholder="  Contraseña"
+                                onFocus={() => password_ref.current.classList.remove('border-error')}
+                                placeholder="Contraseña"
                                 autoComplete="off"
                             />
-                            <button type="button" className="btn btn-link" onClick={togglePasswordVisibility} style={{ background: 'none', border: 'none', padding: '0', position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)' }}>
-                                <img src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" style={{ height: '24px', width: '24px' }} />
+
+                            <button
+                                type="button"
+                                className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
+                                onClick={togglePasswordVisibility}>
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
                         </div>
 
+                        <div className="">
+                            {
+                                password_checks.map((check, index) => (
+                                    <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                ))
+                            }
+                        </div>
 
                         <Link className="link-underline-dark link-dark fw-bold custom-bold" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
                     <div className="">
                         <button
-                            type="button"
-                            onClick={handleSubmit}
-                            className="   btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
-
+                            type="submit"
+                            className="btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
                             INICIAR SESIÓN
                         </button>
 
@@ -128,8 +145,8 @@ export default function SignIn() {
                             <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>
                     </div>
-                </div>
-            </EstructuraFormulariossignin>
+                </form>
+            </EstructuraFormularios>
         </>
     )
 }

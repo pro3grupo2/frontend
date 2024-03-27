@@ -1,0 +1,11 @@
+.border-normal {
+    border: 3px solid transparent !important;
+}
+
+.border-normal:focus {
+    border: 3px solid var(--color-principal) !important;
+}
+
+.border-error {
+    border: 3px solid var(--color-error) !important;
+}
