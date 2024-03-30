@@ -1,39 +1,58 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import useAuth from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import { crear_proyecto, get_proyectos, subir_ficheros } from '@/api/v1/proyectos';
+import {useRouter} from 'next/navigation';
+import {crear_proyecto, get_proyectos, subir_ficheros} from '@/api/v1/proyectos';
 import ProjectCard from '@/components/ProjectCard';
-import { me } from '@/api/v1/auth';
+import {me} from '@/api/v1/auth';
 import Loading from '@/components/Loading';
 
 export default function Home() {
-    const { user, isLoading } = useAuth();
+    const {user, isLoading} = useAuth();
     const [projects, setProjects] = useState([]);
     const [proyectosLoaded, setProyectosLoaded] = useState(false);
     const router = useRouter();
 
     const hiddenFileInput = useRef(null);
 
+    //
+    // Filtros aceptados en get_proyectos:
+    //  - premiado: 'Type: Bool'
+    //  - anio: 'Type: Year (YYYY)
+    //  - titulaciones: 'Type: Int, Int, ..., Int'
+    //  - busqueda: 'Type: String, Max-Length: 100'
+    //
+    // Los filtros se pasarán como un diccionario:
+    //  {
+    //    premiado: true,
+    //    anio: 2021,
+    //    titulaciones: '1,2,3',
+    //    busqueda: 'busqueda'
+    //  }
+    // Si no se quiere aplicar un filtro, simplemente no se pasa en el diccionario.
+    //
+    // La llamada a la funcion quedara asi:
+    //  get_proyectos(token, 0, {premiado: true, anio: 2021, titulaciones: '1,2,3', busqueda: 'busqueda'})
+    //
     useEffect(() => {
         const token = localStorage.getItem('token');
         get_proyectos(token).then(data => {
             setProjects(data);
             setTimeout(() => {
                 setProyectosLoaded(true);
-            } , 1000);
+            }, 1000);
         });
     }, []);
 
     if (isLoading || !proyectosLoaded) {
-        return <Loading />
+        return <Loading/>
     }
 
     const handleClick = () => {
         const portadaFile = document.getElementById('portada').files[0];
         const ficheroFile = document.getElementById('fichero').files[0];
-        
+
         const token = localStorage.getItem('token');
         const data = subir_ficheros(token, ficheroFile, portadaFile).then(data => {
             // token, titulo, ficha, url, portada, anio, participantes, proyectos_asignaturas, premios, premiado = false
@@ -53,14 +72,14 @@ export default function Home() {
 
     if (projects.length === 0) {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
                 <div className="text-center">
                     <label htmlFor="portada">Portada: </label>
                     <input id="portada" type="file" ref={hiddenFileInput} accept='image/*' title="Select File"/>
-                    <br />
+                    <br/>
                     <label htmlFor="fichero">Proyecto: </label>
                     <input id="fichero" type="file" ref={hiddenFileInput} title="Select File"/>
-                    <br />
+                    <br/>
                     <button className="btn btn-primary" onClick={handleClick}>Subir</button>
                     <h1 className="display-1 ms-black">No hay proyectos</h1>
                 </div>
@@ -68,12 +87,12 @@ export default function Home() {
         );
     } else {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center mt-5" style={{ height: '800vh' }}>
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center mt-5" style={{height: '800vh'}}>
                 <div className="row d-flex align-items-center p-2 border border-black border-1 rounded mb-4">
                     <div className="col">
                         <span className="me-5">Filtro</span>
                         <svg className="ms-5" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-                            <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black" />
+                            <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black"/>
                         </svg>
                     </div>
                     <div className="col">
@@ -143,7 +162,7 @@ export default function Home() {
                 </div>
 
                 <div className="row g-4 card-group mt-5">
-                    {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
+                    {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                 </div>
             </div>
         );

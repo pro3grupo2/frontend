@@ -2,12 +2,15 @@ const {fetch_handler} = require('.')
 
 const PROYECTOS_ROUTE = '/proyectos'
 
-const get_proyectos = async (token, page = 0) => {
+const get_proyectos = async (token, page = 0, filters = undefined) => {
     const headers = {
         'Authorization': `Bearer ${token}`
     }
 
-    const datos = await fetch_handler(PROYECTOS_ROUTE + `?page=${page}`, headers, "GET")
+    let filters_query = 'ignore=true'
+    if (filters) filters_query = Object.keys(filters).map(key => key + '=' + filters[key]).join('&')
+
+    const datos = await fetch_handler(PROYECTOS_ROUTE + `?page=${page}&` + filters_query, headers, "GET")
     return datos ? datos.data : null
 }
 
