@@ -13,7 +13,7 @@ export default function SignUp() {
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
         [rol, setRol] = useState(''),
-        [codigo, setCodigo] = useState(undefined),
+        [codigo, setCodigo] = useState([]),
         [loading, setLoading] = useState(false),
         router = useRouter()
 
@@ -37,13 +37,13 @@ export default function SignUp() {
             "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             rol,
             2024,
-            codigo
+            codigo.length ? codigo.join('') : undefined
         )
+        setLoading(false)
 
         if (!data)
-            alert("Error al registrarse. Revisar la consola.")
+            return alert("Error al registrarse. Revisar la consola.")
 
-        setLoading(false)
         setPaso_final(true)
     }
 
@@ -59,7 +59,7 @@ export default function SignUp() {
     if (paso_verificacion_coordinador) return <Paso_coordinador
         setNextPaso={handleSignup}
         setPreviousPaso={() => setPaso_verificacion_coordinador(false)}
-        setRol={setRol}
+        setCodigo={setCodigo}
     />
 
     if (paso_rol_alumnos) return <Paso2_live_utad_com

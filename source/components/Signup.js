@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {createRef, useRef, useState} from 'react'
 
 import Link from 'next/link'
 
@@ -9,10 +9,11 @@ import {check_email, check_password} from "@/utils/validation"
 import "../styles/signup.css"
 import Image from "next/image"
 
-const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso}) => {
+const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
     return (
         <div className='d-flex justify-content-between aligns-items-center mt-1 m-0'>
             <button
+                ref={setPreviousPasoRef}
                 type='button'
                 onClick={setPreviousPaso}
                 className='btn btn-outline-primary'
@@ -25,6 +26,7 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso}) => {
                 </svg>
             </button>
             <button
+                ref={setNextPasoRef}
                 type='button'
                 onClick={setNextPaso}
                 className='btn btn-primary btn-color-primary btn-outline-primary border-5 fs-5 fw-bold'>
@@ -328,76 +330,49 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     )
 }
 
-const Paso_coordinador = ({setNextPaso, setPreviousPaso, setNombreCompleto, email}) => {
+const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
+    const
+        refs = useRef([]),
+        next_ref = useRef(null)
 
-    const [digit1, setDigit1] = useState('')
-    const [digit2, setDigit2] = useState('')
-    const [digit3, setDigit3] = useState('')
-    const [digit4, setDigit4] = useState('')
-    const [codigo, setCodigo] = useState('')
-
-    const handleDigitChange = (e) => {
-        const {name, value} = e.target
-        const newVal = value.charAt(value.length - 1)
-        switch (name) {
-            case 'digit1':
-                setDigit1(newVal)
-                break
-            case 'digit2':
-                setDigit2(newVal)
-                break
-            case 'digit3':
-                setDigit3(newVal)
-                break
-            case 'digit4':
-                setDigit4(newVal)
-                break
-            default:
-                break
-        }
-    }
-
-    useEffect(() => {
-        const completeCode = digit1 + digit2 + digit3 + digit4
-        setCodigo(completeCode)
-    }, [digit1, digit2, digit3, digit4])
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setNombreCompleto(`${formData.name} ${formData.lastName}`)
-
-    }
+    refs.current = [0, 1, 2, 3, 4, 5].map((ref, index) => refs.current[index] ?? createRef())
 
     return (
-        <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-            <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Confirmación de rol</h1>
-            <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha
-                proporcionado previamente:</p>
-
-            <div className='d-flex flex-column justify-content-center w-50 h-100'>
-                <div className='d-flex flex-row justify-content-between'>
-                    {[digit1, digit2, digit3, digit4].map((digit, index) => (
-                        <input
-                            key={`digit-${index + 1}`}
-                            type='text'
-                            name={`digit${index + 1}`}
-                            value={digit}
-                            onChange={handleDigitChange}
-                            maxLength={1} // Restringe la entrada a un solo carácter
-                            className='form-control'
-                            autoComplete="off" // Evita la autocompletación del navegador
-                            style={{
-                                height: '50px', // Establece la altura para que sea cuadrada
-                                width: '50px', // Establece el ancho igual a la altura para mantener la forma cuadrada
-                                margin: '5px', // Añade un poco de margen para separar los inputs
-                                textAlign: 'center', // Centra el texto horizontalmente
-                            }}
-                        />
-                    ))}
-                </div>
-
-                <ControladorSiguienteAtras setNextPaso={handleSubmit} setPreviousPaso={setPreviousPaso}/>
+        <div className='container d-flex flex-column justify-content-evenly mt-5 h-100'>
+            <div>
+                <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Verificación</h1>
+                <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha proporcionado previamente</p>
             </div>
+
+            <div className='d-flex flex-row gap-1'>
+                {
+                    [0, 1, 2, 3, 4, 5].map((index) => (
+                        <input
+                            key={index}
+                            type='text'
+                            name={`${index}`}
+                            ref={refs.current[index]}
+                            onFocus={(e) => {
+                                e.target.value = ''
+                            }}
+                            onChange={(e) => {
+                                setCodigo((c) => {
+                                    c[index] = e.target.value
+                                    return c
+                                })
+
+                                return (refs.current[index + 1] ?? next_ref).current.focus()
+                            }}
+                            maxLength={1} // Restringe la entrada a un solo carácter
+                            className='form-control text-center'
+                            autoComplete="off" // Evita la autocompletación del navegador
+                            style={{height: '50px'}}
+                        />
+                    ))
+                }
+            </div>
+
+            <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref}/>
         </div>
     )
 }
@@ -406,12 +381,7 @@ const PasoFin = ({setNextPaso, setPreviousPaso}) => {
     return (
         <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
             <h1 className="display-5 custom-bold mb-3">¡Proceso de inscripción finalizado!</h1>
-            <p className='ms-font fs-5 lead w-50'>
-                El desarrollo de proyectos es una parte fundamental de la formación nuestros alumnos y
-                alumnas, y es también una carta de presentación de tus conocimientos, experiencia
-                y capacidad de trabajo en equipo.
-                ¡Descubre aquí el talento U-tad!
-            </p>
+            <p className='ms-font fs-5 lead w-50'>Revisa tu correo para empezar a navegar en la plataforma</p>
 
             <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
 
