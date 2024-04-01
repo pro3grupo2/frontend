@@ -21,15 +21,12 @@ export default function SignIn() {
         password_ref = useRef(null),
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
+        [tipo_password, setTipoPassword] = useState('password'),
         [email_checks, setEmailChecks] = useState([]),
         [password_checks, setPasswordChecks] = useState([]),
         [alerts, setAlerts] = useState([]),
         [loading, setLoading] = useState(false),
         router = useRouter()
-
-    const togglePasswordVisibility = () => {
-        password_ref.current.type = password_ref.current.type === 'password' ? 'text' : 'password'
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -104,7 +101,7 @@ export default function SignIn() {
                         <div className="position-relative d-flex mt-3">
                             <input
                                 ref={password_ref}
-                                type="text"
+                                type={tipo_password}
                                 id="password"
                                 value={password}
                                 className="flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
@@ -117,7 +114,7 @@ export default function SignIn() {
                             <button
                                 type="button"
                                 className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
-                                onClick={togglePasswordVisibility}>
+                                onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                                 <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
                         </div>

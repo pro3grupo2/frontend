@@ -1,88 +1,131 @@
 "use client"
-import {useState} from 'react';
-import Link from 'next/link';
-import {update} from "@/api/v1/account";
-import { useRouter } from 'next/router';
-import {EstructuraFormularios} from "@/components/Estructura";
+
+import React, {useRef, useState} from 'react'
+
+import Image from "next/image"
+import {useRouter} from "next/navigation"
+
+import {EstructuraFormularios} from "@/components/Estructura"
+import {ControladorSiguienteAtras} from "@/components/Signup"
+import {AlertContainer, create_alert} from "@/components/Alerts"
+import Loading from "@/components/Loading"
+
+import {update} from '@/api/v1/account'
+import {check_password} from "@/utils/validation"
 
 export default function RecoverPassword({params}) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const router = useRouter(); // Obtener el enrutador
+    const
+        [password, setPassword] = useState(''),
+        [tipo_password, setTipoPassword] = useState('password'),
+        [tipo_password2, setTipoPassword2] = useState('password'),
+        password_ref = useRef(null),
+        password2_ref = useRef(null),
+        [password2, setPassword2] = useState(''),
+        [password_checks, setPasswordChecks] = useState([]),
+        [alerts, setAlerts] = useState([]),
+        [loading, setLoading] = useState(false),
+        router = useRouter()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        // No hay necesidad de realizar ninguna acción en la API
-        // Simplemente navega a la página de recuperación de contraseña
-        await update(params.token, undefined, password, undefined, undefined, undefined);
-        router.push('/signin');
+        e.preventDefault()
+
+        setPasswordChecks([])
+
+        if (!check_password(
+            password,
+            (error) => {
+                setPasswordChecks((previous) => [...previous, error])
+            }
+        )) return password_ref.current.classList.add('border-error')
+
+        if (password !== password2) {
+            setPasswordChecks((previous) => [...previous, 'Las contraseñas no coinciden'])
+            return password2_ref.current.classList.add('border-error')
+        }
+
+        setLoading(true)
+        const data = await update(params.token, undefined, password, undefined, undefined, undefined)
+        setLoading(false)
+
+        if (!data) {
+            create_alert(setAlerts, 'Error al actualizar la contraseña', 'danger')
+            return
+        }
+
+        router.push('/signin')
     }
 
+    if (loading) return <Loading/>
+
     return (
-        <EstructuraFormularios>
-            <div>
-                <h1 className="display-3 ms-extrabold">Recupera tu contraseña</h1>
-            </div>
-            <p>
-                Crea una nueva contraseña
-            </p>
+        <>
+            <AlertContainer alerts={alerts}/>
+            <EstructuraFormularios>
+                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
+                    <div>
+                        <h1 className='custom-bold'>Recupera tu contraseña</h1>
+                        <p className=' ms-light d-none fs-5 d-sm-block lead'>Crea una nueva contraseña</p>
+                    </div>
 
-            <form onSubmit={handleSubmit}>
-                <div className="py-3 ">
-                    <input
-                        type="password"
-                        id="password"
-                        className="form-control py-3"
-                        style={{backgroundColor: "var(--secundario-gris-claro)"}}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Nueva Contraseña"
-                        required
-                        autoComplete="new-password"
-                    />
-                </div>
-                <div className="py-3 ">
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        className="form-control py-3"
-                        style={{backgroundColor: "var(--secundario-gris-claro)"}}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="Confirmar Nueva Contraseña"
-                        required
-                        autoComplete="new-password"
-                    />
-                </div>
-                <div className="d-flex justify-content-between align-items-center mt-5">
-                    {/* Botón "Atrás" */}
-                    <Link href="/signin">
-                        <button className="btn var(--color-secundario-blanco)" type="button" style={{border: '2px solid var(--color-principal)'}}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
-                                 fill="none">
-                                <path
-                                    d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z"
-                                    fill="#091229"/>
-                            </svg>
+                    <div>
+                        <div className="position-relative d-flex mt-3">
+                            <input
+                                ref={password_ref}
+                                type={tipo_password}
+                                id="password"
+                                value={password}
+                                className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                                onChange={(e) => setPassword(e.target.value)}
+                                onFocus={() => password_ref.current.classList.remove('border-error')}
+                                placeholder="Contraseña"
+                                autoComplete="off"
+                            />
+
+                            <button
+                                type="button"
+                                className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
+                                onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
+                            </button>
+                        </div>
+
+                        <div className="position-relative d-flex mt-3">
+                            <input
+                                ref={password2_ref}
+                                type={tipo_password2}
+                                id="password"
+                                value={password2}
+                                className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                                onChange={(e) => setPassword2(e.target.value)}
+                                onFocus={() => password2_ref.current.classList.remove('border-error')}
+                                placeholder="Confirmar contraseña"
+                                autoComplete="off"
+                            />
+
+                            <button
+                                type="button"
+                                className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
+                                onClick={() => setTipoPassword2(tipo_password2 === 'password' ? 'text' : 'password')}>
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
+                            </button>
+                        </div>
+
+                        <div className="">
+                            {
+                                password_checks.map((check, index) => (
+                                    <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                ))
+                            }
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-color-primary border-5 mt-3 fs-5 fw-bold w-100 btn-lg">
+                            RECUPERAR CONTRASEÑA
                         </button>
-                    </Link>
-
-                    {/* Botón "Siguiente" */}
-                    <button className="btn btn-primary w-40 btn-lg" type="submit" href="/home">
-                        SIGUIENTE
-                    </button>
-                </div>
-                <p className="text-center mt-5">
-                            <span>
-                                ¿Recuerdas tu contraseña?{" "}
-                                <Link className="link-underline-dark link-dark fw-bold" href="/signin">
-                                    <span>Iniciar sesión</span>
-                                </Link>
-                            </span>
-                </p>
-            </form>
-        </EstructuraFormularios>
-
-    );
+                    </div>
+                </form>
+            </EstructuraFormularios>
+        </>
+    )
 }

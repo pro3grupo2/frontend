@@ -107,7 +107,9 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
         password_ref = useRef(null),
         password2_ref = useRef(null),
         [password2, setPassword2] = useState(''),
-        [password_checks, setPasswordChecks] = useState([])
+        [password_checks, setPasswordChecks] = useState([]),
+        [tipo_password, setTipoPassword] = useState('password'),
+        [tipo_password2, setTipoPassword2] = useState('password')
 
     const handleNextClick = () => {
         setPasswordChecks([])
@@ -141,7 +143,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                     <div className="position-relative d-flex mt-3">
                         <input
                             ref={password_ref}
-                            type="text"
+                            type={tipo_password}
                             id="password"
                             value={password}
                             className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
@@ -154,7 +156,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                         <button
                             type="button"
                             className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
-                            onClick={() => password_ref.current.type = password_ref.current.type === 'password' ? 'text' : 'password'}>
+                            onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                             <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                         </button>
                     </div>
@@ -162,7 +164,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                     <div className="position-relative d-flex mt-3">
                         <input
                             ref={password2_ref}
-                            type="text"
+                            type={tipo_password2}
                             id="password"
                             value={password2}
                             className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
@@ -175,7 +177,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                         <button
                             type="button"
                             className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
-                            onClick={() => password2_ref.current.type = password2_ref.current.type === 'password' ? 'text' : 'password'}>
+                            onClick={() => setTipoPassword2(tipo_password2 === 'password' ? 'text' : 'password')}>
                             <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                         </button>
                     </div>
