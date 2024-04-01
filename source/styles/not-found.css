@@ -1,0 +1,47 @@
+.notfound-title {
+    color: var(--color-secundario-negro, #091229);
+    font-family: Montserrat, serif;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 105%;
+}
+
+.notfound-subtitle {
+    color: var(--color-secundario-negro, #091229);
+    font-family: Montserrat, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.notfound-footer {
+    color: var(--color-secundario-gris, #6E7377);
+    font-family: Montserrat, serif;
+    text-align: center;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 120%;
+}
+
+.notfound-footer-detail {
+    color: var(--color-secundario-gris, #6E7377);
+    font-family: Montserrat, serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.notfound-boton {
+    color: var(--color-secundario-negro, #091229);
+    text-align: center;
+    font-family: Montserrat, serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    font-variant: all-small-caps;
+}
