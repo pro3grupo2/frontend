@@ -27,7 +27,7 @@ const check_password = (password, callback = undefined) => {
         if (callback) callback('La contraseña debe tener al menos un número')
     }
 
-    if (!/[!@#$%^&*]/.test(password)) {
+    if (!/[!@#,?.-_|¿%&$/*()[{@"<>"']/.test(password)) {
         check = false
         if (callback) callback('La contraseña debe tener al menos un caracter especial')
     }

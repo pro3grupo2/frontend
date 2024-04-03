@@ -11,7 +11,7 @@ import Image from "next/image"
 
 const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
     return (
-        <div className='d-flex justify-content-between aligns-items-center mt-1 m-0'>
+        <div className='d-flex justify-content-between aligns-items-center mt-5 m-0'>
             <button
                 ref={setPreviousPasoRef}
                 type='button'
@@ -222,39 +222,43 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
 
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-            <h1 className='display-5 custom-bold text-center text-md-start mb-4'>Reservorio U-tad personalizado para ti!</h1>
-            <p className='ms-light fs-5 lead text-center text-md-start mb-4'>
-                Paso 2 de 3. ¿Quién eres?
-            </p>
-
-            <div className='d-flex flex-column justify-content-center w-50 h-100'>
-                <div className="d-flex flex-row justify-content-between">
-                    <button
-                        className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Alumno')}>
-                        <svg className="d-none d-md-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center '>Alumno</h3>
-                    </button>
-
-                    <button
-                        className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Alumni')}>
-                        <svg className="d-none d-md-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Alumni</h3>
-                    </button>
-                </div>
-
+            <div className='col-12 col-md-5'>
+                <h1 className='display-5 custom-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-light fs-5 lead text-center text-md-start'>
+                    Paso 2 de 3. ¿Quién eres?
+                </p>
+                <div className='row justify-content-center justify-content-md-between mb-4 mt-5'>
+                    <div className='col-6 col-md-auto mb-3 mb-md-0'>
+                        <button
+                            className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumno')}
+                            style={{ border: selectedType === 'Alumno' ? '2px solid var(--color-principal)' : '2px solid #808080' }}>
+                            <svg className="d-none d-md-block"
+                                width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                    fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className='text-center'>Alumno</h3>
+                        </button>
+                    </div>
+                    <div className='col-6 col-md-auto'>
+                        <button
+                            className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumni')}
+                            style={{ border: selectedType === 'Alumni' ? '2px solid var(--color-principal)' : '2px solid #808080' }}>
+                            <svg className="d-none d-md-block"
+                                width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                    fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'} />
+                            </svg>
+                            <h3 className='text-center'>Alumni</h3>
+                        </button>
+                    </div>
+             
                 <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+            </div>
             </div>
         </div>
     )
@@ -283,54 +287,66 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     }
 
     return (
-        <div className="container d-flex flex-column justify-content-center align-items-center mt-5">
-            <h1 className='display-5 custom-bold text-center mb-4'>Reservorio U-tad <br/> personalizado para ti! </h1>
-            <p className='fs-5 lead text-center mb-4'> Paso 2 de 3. ¿Quién eres? </p>
-
-            <div className="d-flex flex-column justify-content-center w-50 h-100">
-                <div className='d-flex flex-row flex-wrap flex-xl-nowrap justify-content-center justify-content-xl-between'>
-                    <button
-                        className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Profesor')}>
-                        <svg className="d-none d-md-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Profesor</h3>
-                    </button>
-
-                    <button
-                        className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Coordinador')}>
-                        <svg className="d-none d-md-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Coordinador</h3>
-                    </button>
-
-                    <button
-                        className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Departamentos')}>
-                        <svg className="d-none d-md-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Departamentos</h3>
-                    </button>
+        <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
+        <div className='col-12 col-md-5'>
+            <h1 className='display-5 custom-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+            <p className='ms-light fs-5 lead text-center text-md-start'>
+                Paso 2 de 3. ¿Quién eres?
+            </p>
+                <div className="d-flex flex-column justify-content-center w-100 mt-5">
+                    <div className='d-flex flex-row flex-wrap justify-content-center justify-content-lg-between'>
+                        <div className="col-6 col-lg-4 mb-3">
+                            <button
+                                className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                                onClick={() => handleTypeSelection('Profesor')}
+                                style={{ border: `3px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}` }}>
+                                <svg className="d-none d-md-block"
+                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'>
+                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                        fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                </svg>
+                                <h3 className='text-center'>Profesor</h3>
+                            </button>
+                        </div>
+        
+                        <div className="col-6 col-lg-4 mb-3">
+                            <button
+                                className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                                onClick={() => handleTypeSelection('Coordinador')}
+                                style={{ border: `3px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}` }}>
+                                <svg className="d-none d-md-block"
+                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'>
+                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                        fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                </svg>
+                                <h3 className='text-center'>Coordinador</h3>
+                            </button>
+                        </div>
+        
+                        <div className="col-6 col-lg-4 mb-3">
+                            <button
+                                className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
+                                onClick={() => handleTypeSelection('Departamentos')}
+                                style={{ border: `3px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}` }}>
+                                <svg className="d-none d-md-block"
+                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'>
+                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
+                                        fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                </svg>
+                                <h3 className='text-center'>Departamentos</h3>
+                            </button>
+                    </div>
                 </div>
-
+    
                 <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+            </div>
             </div>
         </div>
     )
-}
+}    
 
 const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
     const
