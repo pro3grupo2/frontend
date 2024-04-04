@@ -83,7 +83,7 @@ export default function SignIn() {
                             type="email"
                             id="email"
                             value={email}
-                            className="ms-regular form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                            className="ms-regular form-control  background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                             onChange={(e) => setEmail(e.target.value)}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
                             placeholder="Correo electrónico"
@@ -104,7 +104,7 @@ export default function SignIn() {
                                 type={tipo_password}
                                 id="password"
                                 value={password}
-                                className="ms-regular flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
                                 onFocus={() => password_ref.current.classList.remove('border-error')}
                                 placeholder="Contraseña"
@@ -119,7 +119,7 @@ export default function SignIn() {
                             </button>
                         </div>
 
-                        <div className="mt-1">
+                        <div className="mb-4">
                             {
                                 password_checks.map((check, index) => (
                                     <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
@@ -127,18 +127,18 @@ export default function SignIn() {
                             }
                         </div>
 
-                        <Link className="ms-link" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="ms-link " href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
                     <div className="">
                         <button
                             type="submit"
-                            className="btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
+                            className="ms-button btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
                             INICIAR SESIÓN
                         </button>
 
                         <div className="text-center mt-3">
-                            <span className="pe-1 ">¿Aún no tienes cuenta?</span>
+                            <span className="pe-1 ">¿Aún no estas registrado?</span>
                             <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>
                     </div>

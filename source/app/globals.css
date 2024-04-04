@@ -188,13 +188,13 @@ body {
 .ms-bold,
 .ms-regular,
 .custom-bold,
+.ms-button,
 .title-bold {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+    font-family: Montserrat   !important;
+    font-optical-sizing: auto !important;
+    font-style: normal !important;
 }
 
-.custom-bold,
 
 .title-bold {
     font-weight: 700 !important;
@@ -216,14 +216,16 @@ line-height: 105% !important; /* 64.05px */
 .ms-bold{
     color: #000;
 /*TITULO DEL CONTENIDO*/
+color: var(--color-secundario-negro, #091229);
 /* H1/Montserrat/Bold */
-font-size: 40px !important;
-font-weight: 600 !important;
-line-height: 100% !important; /* 40px */
+font-family: Montserrat;
+font-size: 40px;
+font-weight: 700;
+line-height: 100%; /* 40px */
 }
 
 .ms-semibold{
-    color: #000;
+    color: var(--color-secundario-negro, #091229);
 /*SUBTITULO*/
 /* H2/Montserrat/SemiBold */
 font-size: 24px !important;
@@ -233,7 +235,7 @@ line-height: 100% !important; /* 24px */
 
 .ms-extra-semibold{
     /*SUBTITULO en Negrita*/
-    color: #000;
+    color: var(--color-secundario-negro, #091229);
 
 font-size: 24px !important;
 font-weight: 800 !important;
@@ -241,14 +243,14 @@ line-height: 100% !important; /* 24px */
 
 }
 .ms-regular{
-    color: #000;
+    color: var(--color-secundario-negro, #091229);
 font-size: 16px !important;
 font-weight: 400 !important;
 line-height: 120% !important;   /* 19.2px */
 }
 
 .ms-link{
-    color: #000;
+    color: var(--color-secundario-negro, #091229);
 /* H3/Montserrat/Link/Pequeño */
 font-size: 14px !important;
 font-weight: 700 !important;
@@ -256,8 +258,7 @@ line-height: 100% !important; /* 14px */
 text-decoration-line: underline !important;
 }
 .ms-regular-black{
-    color: #000;
-
+    color: var(--color-secundario-negro, #091229);
 /* H3/Montserrat/Bold */
 font-size: 16px !important;
 font-weight: 700 !important;
@@ -268,9 +269,18 @@ line-height: 120% !important; /* 19.2px */
     font-weight: 900 !important;
 }
 
-.ms-button {
-    font-weight: 600 !important;
+.ms-button {color: var(--Color-Secundario-Blanco, #FFF);
+text-align: center;
+
+/* Boton/Montserrat/Versalitas */
+font-family: Montserrat !important;
+font-size: 36px !important;
+font-style: normal !important;
+font-weight: 600 !important;
+line-height: 100% !important; /* 36px */
+font-variant: all-small-caps !important;
 }
+
 
 .bg-image-main,
 .bg-image-signup,

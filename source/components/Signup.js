@@ -358,8 +358,8 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
     return (
         <div className='container d-flex flex-column justify-content-evenly mt-5 h-100'>
             <div>
-                <h1 className='display-5 custom-bold text-center mb-4'>Paso intermedio: Verificación</h1>
-                <p className='fs-5 lead text-center mb-4'>Por favor, introduzca el código que un administrador le ha proporcionado previamente</p>
+                <h1 className='display-5 ms-bold text-center mb-4'>Verifícate</h1>
+                <p className='fs-5 lead text-center mb-4'>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
             </div>
 
             <div className='d-flex flex-row gap-1'>
@@ -398,7 +398,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
 const PasoFin = ({setNextPaso, setPreviousPaso}) => {
     return (
         <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
-            <h1 className="display-5 custom-bold mb-3">¡Proceso de inscripción finalizado!</h1>
+            <h1 className="display-5 ms-bold mb-3">¡Proceso de inscripción finalizado!</h1>
             <p className='ms-font fs-5 lead w-50'>Revisa tu correo para empezar a navegar en la plataforma</p>
 
             <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
