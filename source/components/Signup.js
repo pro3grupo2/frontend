@@ -30,7 +30,8 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 ref={setNextPasoRef}
                 type='button'
                 onClick={setNextPaso}
-                className='btn btn-primary btn-color-primary btn-outline-primary border-5 fs-5 fw-bold'>
+                className='btn btn-primary btn-color-primary btn-outline-primary border-5 fs-5 fw-bold'
+                style={{ minWidth: '12em' }}> 
                 SIGUIENTE
             </button>
         </div>
