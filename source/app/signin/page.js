@@ -130,14 +130,14 @@ export default function SignIn() {
                         <Link className="ms-link " href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
-                    <div className="">
+                    <div className="mt-4">
                         <button
                             type="submit"
                             className="ms-button btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
                             INICIAR SESIÓN
                         </button>
 
-                        <div className="text-center mt-3">
+                        <div className="text-center mt-4">
                             <span className="pe-1 ">¿Aún no estas registrado?</span>
                             <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <div className="container-fluid py-3">
                 <div className="navbar-brand" style={{maxWidth: '20vw', minWidth: '50px'}}>
                     <Link className="mx-2" href="/home">

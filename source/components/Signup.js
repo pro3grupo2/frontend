@@ -224,13 +224,13 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+            <div className='container d-flex flex-column justify-content-between mt-5 col-4'>
+                <h1 className='ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='ms-regular fs-5 lead text-center text-md-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
-                <div className='w-50'>
+                <div className=''>
                     <div className='d-flex flex-column flex-lg-row gap-5 gap-lg-0 justify-content-between mb-4 mt-5'>
                         <button
                             className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}

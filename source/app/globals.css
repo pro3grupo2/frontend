@@ -190,9 +190,9 @@ body {
 .custom-bold,
 .ms-button,
 .title-bold {
-    font-family: Montserrat   !important;
-    font-optical-sizing: auto !important;
-    font-style: normal !important;
+    font-family: Montserrat;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 
@@ -208,8 +208,9 @@ body {
     color: #000;
 /* GRAN TITULO*/
 /* H1/Montserrat/ExtraBold */
+font-family: Montserrat ;
 font-size: 61px !important;
-font-weight: 800 !important;
+font-weight: 800 !important; 
 line-height: 105% !important; /* 64.05px */
 }
 
