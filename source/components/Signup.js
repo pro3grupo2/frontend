@@ -12,26 +12,24 @@ import Image from "next/image"
 
 const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
     return (
-        <div className='d-flex justify-content-between aligns-items-center mt-5 m-0'>
+        <div className='d-flex gap-5 justify-content-between aligns-items-center mt-5 m-0'>
             <button
                 ref={setPreviousPasoRef}
                 type='button'
                 onClick={setPreviousPaso}
                 className='btn btn-outline-primary'
                 style={{width: '48px', height: '48px'}}>
-                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16'
-                     fill='none'>
-                    <path
-                        d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z'
-                        fill='#091229'/>
+                <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
+                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229'/>
                 </svg>
             </button>
+
             <button
                 ref={setNextPasoRef}
                 type='button'
                 onClick={setNextPaso}
-                className='btn btn-primary btn-color-primary btn-outline-primary border-5 fs-5 fw-bold'
-                style={{ minWidth: '12em' }}> 
+                className='btn btn-primary btn-color-primary btn-outline-primary fs-5 fw-bold'
+                style={{minWidth: '12em'}}>
                 SIGUIENTE
             </button>
         </div>
@@ -57,7 +55,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
     }
 
     return (
-        <EstructuraFormularios>
+        <EstructuraFormularios clase_imagen="bg-image-signup">
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
                     <h1 className='ms-bold'>Crear cuenta</h1>
@@ -132,7 +130,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
     }
 
     return (
-        <EstructuraFormularios>
+        <EstructuraFormularios clase_imagen="bg-image-signup">
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
                     <h1 className='ms-bold'>Termina de configura tu cuenta</h1>
@@ -225,14 +223,14 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column justify-content-between mt-5 col-4'>
-                <h1 className='ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='ms-regular fs-5 lead text-center text-md-start'>
+            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
+                <h1 className='ms-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular fs-5 lead text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
-                <div className=''>
-                    <div className='d-flex flex-column flex-lg-row gap-5 gap-lg-0 justify-content-between mb-4 mt-5'>
+                <div>
+                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-center mb-4 mt-5'>
                         <button
                             className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Alumno')}
@@ -242,7 +240,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
                             </svg>
-                            <h3 className='ms-regular-black text-center'>Alumno</h3>
+                            <h3 className='text-center'>Alumno</h3>
                         </button>
 
                         <button
@@ -254,7 +252,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
                             </svg>
-                            <h3 className='ms-regular-black text-center'>Alumni</h3>
+                            <h3 className='text-center'>Alumni</h3>
                         </button>
                     </div>
 
@@ -291,18 +289,18 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
             <AlertContainer alerts={alerts}/>
 
             <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='ms-regular fs-5 lead text-center text-md-start'>
+                <h1 className='display-5 ms-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular fs-5 lead text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
-                <div className='w-50'>
-                    <div className='d-flex flex-column flex-xl-row gap-5 gap-xl-0 justify-content-between mb-4 mt-5'>
+                <div>
+                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-center mb-4 mt-5'>
                         <button
                             className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Profesor')}
                             style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-xl-block"
+                            <svg className="d-none d-lg-block"
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
@@ -314,7 +312,7 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                             className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Coordinador')}
                             style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-xl-block"
+                            <svg className="d-none d-lg-block"
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
@@ -326,7 +324,7 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                             className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Departamentos')}
                             style={{border: `2px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-xl-block"
+                            <svg className="d-none d-lg-block"
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>

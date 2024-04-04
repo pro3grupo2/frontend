@@ -67,7 +67,7 @@ export default function SignIn() {
         <>
             <AlertContainer alerts={alerts}/>
 
-            <EstructuraFormularios>
+            <EstructuraFormularios clase_imagen="bg-image-signin">
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className='ms-bold'>Iniciar sesión con el correo de la U-tad</h1>

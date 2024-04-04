@@ -60,6 +60,7 @@ export default function RecoverPassword({ params }) {
     return (
         <>
             <AlertContainer alerts={alerts} />
+
             <EstructuraFormularios>
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>

@@ -174,6 +174,7 @@ body {
 .form-control:focus {
     box-shadow: 0 0 0 0.2rem var(--color-principal);
 }
+
 /* TIPOGRAFIA FIGMA*/
 .ms-font,
 .ms-regular,
@@ -206,83 +207,86 @@ body {
 
 .ms-extrabold {
     color: #000;
-/* GRAN TITULO*/
-/* H1/Montserrat/ExtraBold */
-font-family: Montserrat ;
-font-size: 61px !important;
-font-weight: 800 !important; 
-line-height: 105% !important; /* 64.05px */
+    /* GRAN TITULO*/
+    /* H1/Montserrat/ExtraBold */
+    font-family: Montserrat;
+    font-size: 61px !important;
+    font-weight: 800 !important;
+    line-height: 105% !important; /* 64.05px */
 }
 
-.ms-bold{
+.ms-bold {
     color: #000;
-/*TITULO DEL CONTENIDO*/
-color: var(--color-secundario-negro, #091229);
-/* H1/Montserrat/Bold */
-font-family: Montserrat;
-font-size: 40px;
-font-weight: 700;
-line-height: 100%; /* 40px */
-}
-
-.ms-semibold{
+    /*TITULO DEL CONTENIDO*/
     color: var(--color-secundario-negro, #091229);
-/*SUBTITULO*/
-/* H2/Montserrat/SemiBold */
-font-size: 24px !important;
-font-weight: 600 !important;
-line-height: 100% !important; /* 24px */
+    /* H1/Montserrat/Bold */
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 100%; /* 40px */
 }
 
-.ms-extra-semibold{
+.ms-semibold {
+    color: var(--color-secundario-negro, #091229);
+    /*SUBTITULO*/
+    /* H2/Montserrat/SemiBold */
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    line-height: 100% !important; /* 24px */
+}
+
+.ms-extra-semibold {
     /*SUBTITULO en Negrita*/
     color: var(--color-secundario-negro, #091229);
 
-font-size: 24px !important;
-font-weight: 800 !important;
-line-height: 100% !important; /* 24px */
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    line-height: 100% !important; /* 24px */
 
 }
-.ms-regular{
+
+.ms-regular {
     color: var(--color-secundario-negro, #091229);
-font-size: 16px !important;
-font-weight: 400 !important;
-line-height: 120% !important;   /* 19.2px */
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 120% !important; /* 19.2px */
 }
 
-.ms-link{
+.ms-link {
     color: var(--color-secundario-negro, #091229);
-/* H3/Montserrat/Link/Pequeño */
-font-size: 14px !important;
-font-weight: 700 !important;
-line-height: 100% !important; /* 14px */
-text-decoration-line: underline !important;
+    /* H3/Montserrat/Link/Pequeño */
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 100% !important; /* 14px */
+    text-decoration-line: underline !important;
 }
-.ms-regular-black{
+
+.ms-regular-black {
     color: var(--color-secundario-negro, #091229);
-/* H3/Montserrat/Bold */
-font-size: 16px !important;
-font-weight: 700 !important;
-line-height: 120% !important; /* 19.2px */
+    /* H3/Montserrat/Bold */
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 120% !important; /* 19.2px */
 }
 
 .ms-black {
     font-weight: 900 !important;
 }
 
-.ms-button {color: var(--Color-Secundario-Blanco, #FFF);
-text-align: center;
+.ms-button {
+    color: var(--Color-Secundario-Blanco, #FFF);
+    text-align: center;
 
-/* Boton/Montserrat/Versalitas */
-font-family: Montserrat !important;
-font-size: 36px !important;
-font-style: normal !important;
-font-weight: 600 !important;
-line-height: 100% !important; /* 36px */
-font-variant: all-small-caps !important;
+    /* Boton/Montserrat/Versalitas */
+    font-family: Montserrat, serif !important;
+    font-size: 36px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 100% !important; /* 36px */
+    font-variant: all-small-caps !important;
 }
 
-
+.bg-placeholder,
 .bg-image-main,
 .bg-image-signup,
 .bg-image-signin {
@@ -293,16 +297,20 @@ font-variant: all-small-caps !important;
     animation: bg 6s infinite;
 }
 
+.bg-placeholder {
+    background-image: url('../public/images/background/placeholder.png');
+}
+
 .bg-image-main {
-    background-image: url('../public/images/fondo-utad.svg');
+    background-image: url('../public/images/background/home.svg');
 }
 
 .bg-image-signup {
-    background-image: url('../public/images/bd-signup.svg');
+    background-image: url('../public/images/background/signup.svg');
 }
 
 .bg-image-signin {
-    background-image: url('../public/images/bg-signin.svg');
+    background-image: url('../public/images/background/signin.svg');
 }
 
 .btn-next,
