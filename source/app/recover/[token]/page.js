@@ -63,8 +63,8 @@ export default function RecoverPassword({params}) {
             <EstructuraFormularios>
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
-                        <h1 className='custom-bold'>Recupera tu contraseña</h1>
-                        <p className=' ms-light d-none fs-5 d-sm-block lead'>Crea una nueva contraseña</p>
+                        <h1 className='ms-bold'>Recupera tu contraseña</h1>
+                        <p className=' ms-regular d-none fs-5 d-sm-block lead'>Crea una nueva contraseña</p>
                     </div>
 
                     <div>
@@ -74,10 +74,10 @@ export default function RecoverPassword({params}) {
                                 type={tipo_password}
                                 id="password"
                                 value={password}
-                                className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
                                 onFocus={() => password_ref.current.classList.remove('border-error')}
-                                placeholder="Contraseña"
+                                placeholder="Nueva contraseña"
                                 autoComplete="off"
                             />
 
@@ -95,10 +95,10 @@ export default function RecoverPassword({params}) {
                                 type={tipo_password2}
                                 id="password"
                                 value={password2}
-                                className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword2(e.target.value)}
                                 onFocus={() => password2_ref.current.classList.remove('border-error')}
-                                placeholder="Confirmar contraseña"
+                                placeholder="Repetir nueva contraseña"
                                 autoComplete="off"
                             />
 

@@ -70,8 +70,8 @@ export default function SignIn() {
             <EstructuraFormularios>
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
-                        <h1 className='custom-bold'>Iniciar sesión con el correo de la U-tad</h1>
-                        <p className=' ms-light d-none fs-5 d-sm-block lead'>
+                        <h1 className='ms-bold'>Iniciar sesión con el correo de la U-tad</h1>
+                        <p className='ms-regular d-none fs-5 d-sm-block lead'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
@@ -83,7 +83,7 @@ export default function SignIn() {
                             type="email"
                             id="email"
                             value={email}
-                            className="form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                            className="ms-regular form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                             onChange={(e) => setEmail(e.target.value)}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
                             placeholder="Correo electrónico"
@@ -104,7 +104,7 @@ export default function SignIn() {
                                 type={tipo_password}
                                 id="password"
                                 value={password}
-                                className="flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control border-normal background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
                                 onFocus={() => password_ref.current.classList.remove('border-error')}
                                 placeholder="Contraseña"
@@ -119,7 +119,7 @@ export default function SignIn() {
                             </button>
                         </div>
 
-                        <div className="">
+                        <div className="mt-1">
                             {
                                 password_checks.map((check, index) => (
                                     <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
@@ -127,7 +127,7 @@ export default function SignIn() {
                             }
                         </div>
 
-                        <Link className="link-underline-dark link-dark fw-bold custom-bold" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="ms-link" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
                     <div className="">

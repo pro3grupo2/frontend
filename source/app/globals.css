@@ -174,13 +174,19 @@ body {
 .form-control:focus {
     box-shadow: 0 0 0 0.2rem var(--color-principal);
 }
-
+/* TIPOGRAFIA FIGMA*/
 .ms-font,
 .ms-regular,
 .ms-light,
 .ms-extrabold,
 .ms-black,
 .ms-button,
+.ms-link,
+.ms-regular-black,
+.ms-semibold,
+.ms-extra-semibold,
+.ms-bold,
+.ms-regular,
 .custom-bold,
 .title-bold {
     font-family: "Montserrat", sans-serif;
@@ -188,10 +194,10 @@ body {
     font-style: normal;
 }
 
-.ms-regular,
 .custom-bold,
+
 .title-bold {
-    font-weight: 650 !important;
+    font-weight: 700 !important;
 }
 
 .ms-light {
@@ -199,7 +205,63 @@ body {
 }
 
 .ms-extrabold {
-    font-weight: 800 !important;
+    color: #000;
+/* GRAN TITULO*/
+/* H1/Montserrat/ExtraBold */
+font-size: 61px !important;
+font-weight: 800 !important;
+line-height: 105% !important; /* 64.05px */
+}
+
+.ms-bold{
+    color: #000;
+/*TITULO DEL CONTENIDO*/
+/* H1/Montserrat/Bold */
+font-size: 40px !important;
+font-weight: 600 !important;
+line-height: 100% !important; /* 40px */
+}
+
+.ms-semibold{
+    color: #000;
+/*SUBTITULO*/
+/* H2/Montserrat/SemiBold */
+font-size: 24px !important;
+font-weight: 600 !important;
+line-height: 100% !important; /* 24px */
+}
+
+.ms-extra-semibold{
+    /*SUBTITULO en Negrita*/
+    color: #000;
+
+font-size: 24px !important;
+font-weight: 800 !important;
+line-height: 100% !important; /* 24px */
+
+}
+.ms-regular{
+    color: #000;
+font-size: 16px !important;
+font-weight: 400 !important;
+line-height: 120% !important;   /* 19.2px */
+}
+
+.ms-link{
+    color: #000;
+/* H3/Montserrat/Link/Pequeño */
+font-size: 14px !important;
+font-weight: 700 !important;
+line-height: 100% !important; /* 14px */
+text-decoration-line: underline !important;
+}
+.ms-regular-black{
+    color: #000;
+
+/* H3/Montserrat/Bold */
+font-size: 16px !important;
+font-weight: 700 !important;
+line-height: 120% !important; /* 19.2px */
 }
 
 .ms-black {

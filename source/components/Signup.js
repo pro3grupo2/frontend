@@ -58,8 +58,8 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
         <EstructuraFormularios>
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
-                    <h1 className=' custom-bold'>Crear cuenta</h1>
-                    <p className='ms-light d-none fs-5 d-sm-block lead'>
+                    <h1 className='ms-bold'>Crear cuenta</h1>
+                    <p className='ms-regular d-none fs-5 d-sm-block lead'>
                         Indícanos cuál es tu correo asociado a la U-tad.
                     </p>
                 </div>
@@ -72,7 +72,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                         type="email"
                         id="email"
                         value={email}
-                        className="form-control border-normal py-3 ps-4 fs-5"
+                        className="ms-regular form-control border-normal py-3 ps-4 fs-5"
                         onChange={(e) => setEmail(e.target.value)}
                         onFocus={() => email_ref.current.classList.remove('border-error')}
                         placeholder="Correo electrónico"
@@ -133,8 +133,8 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
         <EstructuraFormularios>
             <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                 <div>
-                    <h1 className='custom-bold'>Termina de configura tu cuenta</h1>
-                    <p className=' ms-light d-none fs-5 d-sm-block lead'>
+                    <h1 className='ms-bold'>Termina de configura tu cuenta</h1>
+                    <p className=' ms-regular d-none fs-5 d-sm-block lead'>
                         Paso 1 de 3. Crea una contraseña para continuar
                     </p>
                 </div>
@@ -146,7 +146,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type={tipo_password}
                             id="password"
                             value={password}
-                            className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                            className=" ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword(e.target.value)}
                             onFocus={() => password_ref.current.classList.remove('border-error')}
                             placeholder="Contraseña"
@@ -167,7 +167,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type={tipo_password2}
                             id="password"
                             value={password2}
-                            className="flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                            className=" ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword2(e.target.value)}
                             onFocus={() => password2_ref.current.classList.remove('border-error')}
                             placeholder="Confirmar contraseña"
@@ -223,8 +223,8 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
             <div className='col-12 col-md-5'>
-                <h1 className='display-5 custom-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='ms-light fs-5 lead text-center text-md-start'>
+                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular fs-5 lead text-center text-md-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
                 <div className='row justify-content-center justify-content-md-between mb-4 mt-5'>
@@ -239,7 +239,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
                                     fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
                             </svg>
-                            <h3 className='text-center'>Alumno</h3>
+                            <h3 className='ms-regular-black text-center'>Alumno</h3>
                         </button>
                     </div>
                     <div className='col-6 col-md-auto'>
@@ -253,7 +253,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
                                     fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'} />
                             </svg>
-                            <h3 className='text-center'>Alumni</h3>
+                            <h3 className='ms-regular-black text-center'>Alumni</h3>
                         </button>
                     </div>
              
@@ -289,8 +289,8 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
         <div className='col-12 col-md-5'>
-            <h1 className='display-5 custom-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-            <p className='ms-light fs-5 lead text-center text-md-start'>
+            <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+            <p className='ms-regular fs-5 lead text-center text-md-start'>
                 Paso 2 de 3. ¿Quién eres?
             </p>
                 <div className="d-flex flex-column justify-content-center w-100 mt-5">
