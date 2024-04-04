@@ -222,43 +222,39 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
 
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-            <div className='col-12 col-md-5'>
-                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='ms-regular fs-5 lead text-center text-md-start'>
-                    Paso 2 de 3. ¿Quién eres?
-                </p>
-                <div className='row justify-content-center justify-content-md-between mb-4 mt-5'>
-                    <div className='col-6 col-md-auto mb-3 mb-md-0'>
-                        <button
-                            className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Alumno')}
-                            style={{ border: selectedType === 'Alumno' ? '2px solid var(--color-principal)' : '2px solid #808080' }}>
-                            <svg className="d-none d-md-block"
-                                width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
-                            </svg>
-                            <h3 className='ms-regular-black text-center'>Alumno</h3>
-                        </button>
-                    </div>
-                    <div className='col-6 col-md-auto'>
-                        <button
-                            className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Alumni')}
-                            style={{ border: selectedType === 'Alumni' ? '2px solid var(--color-principal)' : '2px solid #808080' }}>
-                            <svg className="d-none d-md-block"
-                                width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                    fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'} />
-                            </svg>
-                            <h3 className='ms-regular-black text-center'>Alumni</h3>
-                        </button>
-                    </div>
-             
+            <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+            <p className='ms-regular fs-5 lead text-center text-md-start'>
+                Paso 2 de 3. ¿Quién eres?
+            </p>
+
+            <div className='w-50'>
+                <div className='d-flex flex-column flex-lg-row gap-5 gap-lg-0 justify-content-between mb-4 mt-5'>
+                    <button
+                        className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Alumno')}
+                        style={{border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}`}}>
+                        <svg className="d-none d-lg-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='ms-regular-black text-center'>Alumno</h3>
+                    </button>
+
+                    <button
+                        className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Alumni')}
+                        style={{border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}`}}>
+                        <svg className="d-none d-lg-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='ms-regular-black text-center'>Alumni</h3>
+                    </button>
+                </div>
+
                 <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
-            </div>
             </div>
         </div>
     )
@@ -288,65 +284,55 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
 
     return (
         <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-        <div className='col-12 col-md-5'>
             <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
             <p className='ms-regular fs-5 lead text-center text-md-start'>
                 Paso 2 de 3. ¿Quién eres?
             </p>
-                <div className="d-flex flex-column justify-content-center w-100 mt-5">
-                    <div className='d-flex flex-row flex-wrap justify-content-center justify-content-lg-between'>
-                        <div className="col-6 col-lg-4 mb-3">
-                            <button
-                                className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
-                                onClick={() => handleTypeSelection('Profesor')}
-                                style={{ border: `3px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}` }}>
-                                <svg className="d-none d-md-block"
-                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                    xmlns='http://www.w3.org/2000/svg'>
-                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                                </svg>
-                                <h3 className='text-center'>Profesor</h3>
-                            </button>
-                        </div>
-        
-                        <div className="col-6 col-lg-4 mb-3">
-                            <button
-                                className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
-                                onClick={() => handleTypeSelection('Coordinador')}
-                                style={{ border: `3px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}` }}>
-                                <svg className="d-none d-md-block"
-                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                    xmlns='http://www.w3.org/2000/svg'>
-                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                                </svg>
-                                <h3 className='text-center'>Coordinador</h3>
-                            </button>
-                        </div>
-        
-                        <div className="col-6 col-lg-4 mb-3">
-                            <button
-                                className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
-                                onClick={() => handleTypeSelection('Departamentos')}
-                                style={{ border: `3px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}` }}>
-                                <svg className="d-none d-md-block"
-                                    width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                    xmlns='http://www.w3.org/2000/svg'>
-                                    <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468'
-                                        fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                                </svg>
-                                <h3 className='text-center'>Departamentos</h3>
-                            </button>
-                    </div>
+
+            <div className='w-50'>
+                <div className='d-flex flex-column flex-xl-row gap-5 gap-xl-0 justify-content-between mb-4 mt-5'>
+                    <button
+                        className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Profesor')}
+                        style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
+                        <svg className="d-none d-xl-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Profesor</h3>
+                    </button>
+
+                    <button
+                        className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Coordinador')}
+                        style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
+                        <svg className="d-none d-xl-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Coordinador</h3>
+                    </button>
+
+                    <button
+                        className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
+                        onClick={() => handleTypeSelection('Departamentos')}
+                        style={{border: `2px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}`}}>
+                        <svg className="d-none d-xl-block"
+                             width='130' height='129' viewBox='0 0 130 129' fill='none'
+                             xmlns='http://www.w3.org/2000/svg'>
+                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                        </svg>
+                        <h3 className='text-center'>Departamentos</h3>
+                    </button>
                 </div>
-    
+
                 <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
-            </div>
             </div>
         </div>
     )
-}    
+}
 
 const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
     const
@@ -384,7 +370,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
                             maxLength={1} // Restringe la entrada a un solo carácter
                             className='form-control text-center'
                             autoComplete="off" // Evita la autocompletación del navegador
-                            style={{height: '50px'}}
+                            style={{height: '50px', border: "2px solid #808080"}}
                         />
                     ))
                 }
