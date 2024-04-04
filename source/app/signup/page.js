@@ -5,8 +5,10 @@ import {useState} from 'react'
 import {useRouter} from "next/navigation"
 
 import {Paso1, Paso2_live_utad_com, Paso2_utad_com, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup"
-import Loading from "@/components/Loading";
-import {signup} from "@/api/v1/auth";
+import Loading from "@/components/Loading"
+
+import {signup} from "@/api/v1/auth"
+import {create_alert} from "@/components/Alerts"
 
 export default function SignUp() {
     const
@@ -15,6 +17,7 @@ export default function SignUp() {
         [rol, setRol] = useState(''),
         [codigo, setCodigo] = useState([]),
         [loading, setLoading] = useState(false),
+        [alerts, setAlerts] = useState([]),
         router = useRouter()
 
     const
@@ -37,12 +40,14 @@ export default function SignUp() {
             "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             rol,
             2024,
-            codigo.length ? codigo.join('') : undefined
+            codigo.length ? codigo.join('') : undefined,
+            (response) => {
+                create_alert(setAlerts, `${response.path}: ${response.msg}`, 'danger')
+            }
         )
         setLoading(false)
 
-        if (!data)
-            return alert("Error al registrarse. Revisar la consola.")
+        if (!data) return
 
         setPaso_final(true)
     }
@@ -60,12 +65,16 @@ export default function SignUp() {
         setNextPaso={handleSignup}
         setPreviousPaso={() => setPaso_verificacion_coordinador(false)}
         setCodigo={setCodigo}
+        alerts={alerts}
+        setAlerts={setAlerts}
     />
 
     if (paso_rol_alumnos) return <Paso2_live_utad_com
         setNextPaso={handleSignup}
         setPreviousPaso={() => setPaso_rol_alumnos(false)}
         setRol={setRol}
+        alerts={alerts}
+        setAlerts={setAlerts}
     />
 
     if (paso_rol_admins) return <Paso2_utad_com
@@ -76,6 +85,8 @@ export default function SignUp() {
         }}
         setPreviousPaso={() => setPaso_rol_admins(false)}
         setRol={setRol}
+        alerts={alerts}
+        setAlerts={setAlerts}
     />
 
     if (paso_password) return <Paso1

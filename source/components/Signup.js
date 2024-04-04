@@ -3,6 +3,7 @@ import React, {createRef, useRef, useState} from 'react'
 import Link from 'next/link'
 
 import {EstructuraFormularios} from '@/components/Estructura'
+import {AlertContainer, create_alert} from "@/components/Alerts"
 
 import {check_email, check_password} from "@/utils/validation"
 
@@ -200,7 +201,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
     )
 }
 
-const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
+const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
@@ -213,54 +214,57 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     }
 
     const handleNextClick = () => {
-        if (selectedType) {
-            setNextPaso()
-        } else {
-            alert('Debes seleccionar un tipo de usuario')
-        }
+        if (!selectedType)
+            return create_alert(setAlerts, 'Debes seleccionar un tipo de usuario', 'danger')
+
+        setNextPaso()
     }
 
     return (
-        <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-            <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-            <p className='ms-regular fs-5 lead text-center text-md-start'>
-                Paso 2 de 3. ¿Quién eres?
-            </p>
+        <>
+            <AlertContainer alerts={alerts}/>
 
-            <div className='w-50'>
-                <div className='d-flex flex-column flex-lg-row gap-5 gap-lg-0 justify-content-between mb-4 mt-5'>
-                    <button
-                        className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Alumno')}
-                        style={{border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}`}}>
-                        <svg className="d-none d-lg-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='ms-regular-black text-center'>Alumno</h3>
-                    </button>
+            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
+                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular fs-5 lead text-center text-md-start'>
+                    Paso 2 de 3. ¿Quién eres?
+                </p>
 
-                    <button
-                        className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Alumni')}
-                        style={{border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}`}}>
-                        <svg className="d-none d-lg-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='ms-regular-black text-center'>Alumni</h3>
-                    </button>
+                <div className='w-50'>
+                    <div className='d-flex flex-column flex-lg-row gap-5 gap-lg-0 justify-content-between mb-4 mt-5'>
+                        <button
+                            className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumno')}
+                            style={{border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}`}}>
+                            <svg className="d-none d-lg-block"
+                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                 xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            </svg>
+                            <h3 className='ms-regular-black text-center'>Alumno</h3>
+                        </button>
+
+                        <button
+                            className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Alumni')}
+                            style={{border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}`}}>
+                            <svg className="d-none d-lg-block"
+                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                 xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            </svg>
+                            <h3 className='ms-regular-black text-center'>Alumni</h3>
+                        </button>
+                    </div>
+
+                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
                 </div>
-
-                <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
             </div>
-        </div>
+        </>
     )
 }
 
-const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
+const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
@@ -275,66 +279,69 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol}) => {
     }
 
     const handleNextClick = () => {
-        if (selectedType) {
-            setNextPaso()
-        } else {
-            alert('Debes seleccionar un tipo de usuario')
-        }
+        if (!selectedType)
+            return create_alert(setAlerts, 'Debes seleccionar un tipo de usuario', 'danger')
+
+        setNextPaso()
     }
 
     return (
-        <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-            <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
-            <p className='ms-regular fs-5 lead text-center text-md-start'>
-                Paso 2 de 3. ¿Quién eres?
-            </p>
+        <>
+            <AlertContainer alerts={alerts}/>
 
-            <div className='w-50'>
-                <div className='d-flex flex-column flex-xl-row gap-5 gap-xl-0 justify-content-between mb-4 mt-5'>
-                    <button
-                        className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Profesor')}
-                        style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
-                        <svg className="d-none d-xl-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Profesor</h3>
-                    </button>
+            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
+                <h1 className='display-5 ms-bold text-center text-md-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular fs-5 lead text-center text-md-start'>
+                    Paso 2 de 3. ¿Quién eres?
+                </p>
 
-                    <button
-                        className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Coordinador')}
-                        style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
-                        <svg className="d-none d-xl-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Coordinador</h3>
-                    </button>
+                <div className='w-50'>
+                    <div className='d-flex flex-column flex-xl-row gap-5 gap-xl-0 justify-content-between mb-4 mt-5'>
+                        <button
+                            className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Profesor')}
+                            style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
+                            <svg className="d-none d-xl-block"
+                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                 xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            </svg>
+                            <h3 className='text-center'>Profesor</h3>
+                        </button>
 
-                    <button
-                        className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
-                        onClick={() => handleTypeSelection('Departamentos')}
-                        style={{border: `2px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}`}}>
-                        <svg className="d-none d-xl-block"
-                             width='130' height='129' viewBox='0 0 130 129' fill='none'
-                             xmlns='http://www.w3.org/2000/svg'>
-                            <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                        </svg>
-                        <h3 className='text-center'>Departamentos</h3>
-                    </button>
+                        <button
+                            className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Coordinador')}
+                            style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
+                            <svg className="d-none d-xl-block"
+                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                 xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            </svg>
+                            <h3 className='text-center'>Coordinador</h3>
+                        </button>
+
+                        <button
+                            className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
+                            onClick={() => handleTypeSelection('Departamentos')}
+                            style={{border: `2px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}`}}>
+                            <svg className="d-none d-xl-block"
+                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                 xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            </svg>
+                            <h3 className='text-center'>Departamentos</h3>
+                        </button>
+                    </div>
+
+                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
                 </div>
-
-                <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
             </div>
-        </div>
+        </>
     )
 }
 
-const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
+const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setAlerts}) => {
     const
         refs = useRef([]),
         next_ref = useRef(null)
@@ -342,42 +349,46 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo}) => {
     refs.current = [0, 1, 2, 3, 4, 5].map((ref, index) => refs.current[index] ?? createRef())
 
     return (
-        <div className='container d-flex flex-column justify-content-evenly mt-5 h-100'>
-            <div>
-                <h1 className='display-5 ms-bold text-center mb-4'>Verifícate</h1>
-                <p className='fs-5 lead text-center mb-4'>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
+        <>
+            <AlertContainer alerts={alerts}/>
+
+            <div className='container d-flex flex-column justify-content-evenly mt-5 h-100'>
+                <div>
+                    <h1 className='display-5 ms-bold text-center mb-4'>Verifícate</h1>
+                    <p className='fs-5 lead text-center mb-4'>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
+                </div>
+
+                <div className='d-flex flex-row gap-1'>
+                    {
+                        [0, 1, 2, 3, 4, 5].map((index) => (
+                            <input
+                                key={index}
+                                type='text'
+                                name={`${index}`}
+                                ref={refs.current[index]}
+                                onFocus={(e) => {
+                                    e.target.value = ''
+                                }}
+                                onChange={(e) => {
+                                    setCodigo((c) => {
+                                        c[index] = e.target.value
+                                        return c
+                                    })
+
+                                    return (refs.current[index + 1] ?? next_ref).current.focus()
+                                }}
+                                maxLength={1} // Restringe la entrada a un solo carácter
+                                className='form-control text-center'
+                                autoComplete="off" // Evita la autocompletación del navegador
+                                style={{height: '50px', border: "2px solid #808080"}}
+                            />
+                        ))
+                    }
+                </div>
+
+                <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref}/>
             </div>
-
-            <div className='d-flex flex-row gap-1'>
-                {
-                    [0, 1, 2, 3, 4, 5].map((index) => (
-                        <input
-                            key={index}
-                            type='text'
-                            name={`${index}`}
-                            ref={refs.current[index]}
-                            onFocus={(e) => {
-                                e.target.value = ''
-                            }}
-                            onChange={(e) => {
-                                setCodigo((c) => {
-                                    c[index] = e.target.value
-                                    return c
-                                })
-
-                                return (refs.current[index + 1] ?? next_ref).current.focus()
-                            }}
-                            maxLength={1} // Restringe la entrada a un solo carácter
-                            className='form-control text-center'
-                            autoComplete="off" // Evita la autocompletación del navegador
-                            style={{height: '50px', border: "2px solid #808080"}}
-                        />
-                    ))
-                }
-            </div>
-
-            <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref}/>
-        </div>
+        </>
     )
 }
 
