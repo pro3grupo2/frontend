@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 export default function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-            <div className="container-fluid py-3">
-                <div className="navbar-brand" style={{maxWidth: '20vw', minWidth: '50px'}}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <div className="container-fluid py-1">
+                <div className="navbar-brand" style={{maxWidth: '20vw', minWidth: '50px',}}>
                     <Link className="mx-2" href="/home">
-                        <Image className="img-fluid" src="/images/logos/utad.svg" alt="Logo de U-tad" width={180} height={100}/>
+                        <Image className="img-fluid" src="/images/logos/utad.svg" alt="Logo de U-tad" width={194} height={61}/>
                     </Link>
                 </div>
 
