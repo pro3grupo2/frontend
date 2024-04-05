@@ -175,7 +175,9 @@ body {
     box-shadow: 0 0 0 0.2rem var(--color-principal);
 }
 
+
 /* TIPOGRAFIA FIGMA*/
+
 .ms-font,
 .ms-regular,
 .ms-light,
@@ -196,7 +198,6 @@ body {
     font-style: normal;
 }
 
-
 .title-bold {
     font-weight: 700 !important;
 }
@@ -212,7 +213,8 @@ body {
     font-family: Montserrat;
     font-size: 61px !important;
     font-weight: 800 !important;
-    line-height: 105% !important; /* 64.05px */
+    line-height: 105% !important;
+    /* 64.05px */
 }
 
 .ms-bold {
@@ -223,7 +225,8 @@ body {
     font-family: Montserrat;
     font-size: 40px;
     font-weight: 700;
-    line-height: 100%; /* 40px */
+    line-height: 100%;
+    /* 40px */
 }
 
 .ms-semibold {
@@ -232,24 +235,25 @@ body {
     /* H2/Montserrat/SemiBold */
     font-size: 24px !important;
     font-weight: 600 !important;
-    line-height: 100% !important; /* 24px */
+    line-height: 100% !important;
+    /* 24px */
 }
 
 .ms-extra-semibold {
     /*SUBTITULO en Negrita*/
     color: var(--color-secundario-negro, #091229);
-
     font-size: 24px !important;
     font-weight: 800 !important;
-    line-height: 100% !important; /* 24px */
-
+    line-height: 100% !important;
+    /* 24px */
 }
 
 .ms-regular {
     color: var(--color-secundario-negro, #091229);
     font-size: 16px !important;
     font-weight: 400 !important;
-    line-height: 120% !important; /* 19.2px */
+    line-height: 120% !important;
+    /* 19.2px */
 }
 
 .ms-link {
@@ -257,7 +261,8 @@ body {
     /* H3/Montserrat/Link/Pequeño */
     font-size: 14px !important;
     font-weight: 700 !important;
-    line-height: 100% !important; /* 14px */
+    line-height: 100% !important;
+    /* 14px */
     text-decoration-line: underline !important;
 }
 
@@ -266,7 +271,8 @@ body {
     /* H3/Montserrat/Bold */
     font-size: 16px !important;
     font-weight: 700 !important;
-    line-height: 120% !important; /* 19.2px */
+    line-height: 120% !important;
+    /* 19.2px */
 }
 
 .ms-black {
@@ -276,13 +282,13 @@ body {
 .ms-button {
     color: var(--Color-Secundario-Blanco, #FFF);
     text-align: center;
-
     /* Boton/Montserrat/Versalitas */
     font-family: Montserrat, serif !important;
     font-size: 36px !important;
     font-style: normal !important;
     font-weight: 600 !important;
-    line-height: 100% !important; /* 36px */
+    line-height: 100% !important;
+    /* 36px */
     font-variant: all-small-caps !important;
 }
 
@@ -336,7 +342,8 @@ body {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%; /* 19.2px */
+    line-height: 120%;
+    /* 19.2px */
     margin-top: 10px;
 }
 
@@ -357,20 +364,25 @@ body {
     height: 48px;
     align-items: center;
     flex-shrink: 0;
-    margin-bottom: 16px; /* Ajusta el espacio entre cada fila */
+    margin-bottom: 16px;
+    /* Ajusta el espacio entre cada fila */
 }
 
 .nombre-style,
 .apellido-style {
-    width: calc(50% - 8px); /* Ajusta el ancho de los campos de nombre y apellido */
-    margin-right: 16px; /* Ajusta el espacio entre los campos de nombre y apellido */
+    width: calc(50% - 8px);
+    /* Ajusta el ancho de los campos de nombre y apellido */
+    margin-right: 16px;
+    /* Ajusta el espacio entre los campos de nombre y apellido */
 }
 
 .titulacion-style,
 .especialidad-style,
 .curso-style {
-    width: calc(33.33% - 8px); /* Ajusta el ancho de los campos de titulación, especialidad y curso */
-    margin-right: 8px; /* Ajusta el espacio entre los campos de titulación, especialidad y curso */
+    width: calc(33.33% - 8px);
+    /* Ajusta el ancho de los campos de titulación, especialidad y curso */
+    margin-right: 8px;
+    /* Ajusta el espacio entre los campos de titulación, especialidad y curso */
 }
 
 .clase-style {
@@ -382,7 +394,8 @@ body {
 }
 
 .expand-button {
-    border-radius: 50px; /* More rounded corners */
+    border-radius: 50px;
+    /* More rounded corners */
     border: 2px solid #000;
     font-size: 1rem;
     color: #000;
@@ -396,7 +409,8 @@ body {
     content: '+';
     position: absolute;
     top: 50%;
-    right: 10px; /* Adjust the position of the plus sign */
+    right: 10px;
+    /* Adjust the position of the plus sign */
     transform: translateY(-50%);
     font-size: 1.5rem;
     color: #000;
@@ -408,8 +422,9 @@ body {
 
 .input-no-border-focus {
     outline: none !important;
-}   
+}
 
-.input-no-border-focus:focus {
+#searchbar,
+#searchbar:focus {
     outline: none !important;
-}   
+}
