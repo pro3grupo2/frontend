@@ -29,7 +29,7 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 type='button'
                 onClick={setNextPaso}
                 className='btn btn-primary btn-color-primary btn-outline-primary fs-5 fw-bold'
-                style={{minWidth: '12em'}}>
+                style={{width: '184px', height: '48px'}}>
                 SIGUIENTE
             </button>
         </div>
@@ -223,14 +223,14 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-                <h1 className='ms-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='ms-regular fs-5 lead text-center text-lg-start'>
+            <div className='container d-flex flex-column mt-5'style={{maxWidth:480, maxHeight:464}}>
+                <h1 className='ms-bold mt-5'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='ms-regular'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
                 <div>
-                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-center mb-4 mt-5'>
+                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
                             className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Alumno')}
@@ -288,14 +288,14 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column justify-content-center align-items-center mt-5'>
-                <h1 className='display-5 ms-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
+            <div className='container d-flex flex-column mt-5'style={{maxWidth:640}}>
+                <h1 className='ms-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='ms-regular fs-5 lead text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
                 <div>
-                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-center mb-4 mt-5'>
+                    <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
                             className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Profesor')}
@@ -351,13 +351,12 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column justify-content-evenly mt-5 h-100'>
-                <div>
-                    <h1 className='display-5 ms-bold text-center mb-4'>Verifícate</h1>
-                    <p className='fs-5 lead text-center mb-4'>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
-                </div>
+            <div className='container d-flex flex-column mt-5'style={{maxWidth:480, maxHeight:305}}>
+                    <h1 className='ms-bold mt-5'>Verifícate</h1>
+                    <p className='ms-regular  '>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
 
-                <div className='d-flex flex-row gap-1'>
+
+                <div className='d-flex flex-row gap-4 mt-5'>
                     {
                         [0, 1, 2, 3, 4, 5].map((index) => (
                             <input
@@ -379,7 +378,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
                                 maxLength={1} // Restringe la entrada a un solo carácter
                                 className='form-control text-center'
                                 autoComplete="off" // Evita la autocompletación del navegador
-                                style={{height: '50px', border: "2px solid #808080"}}
+                                style={{height: '48px', border: "2px solid #808080"}}
                             />
                         ))
                     }

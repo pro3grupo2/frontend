@@ -67,7 +67,7 @@ export default function SignIn() {
         <>
             <AlertContainer alerts={alerts}/>
 
-            <EstructuraFormularios clase_imagen="bg-image-signin">
+            <EstructuraFormularios>
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
                         <h1 className='ms-bold'>Iniciar sesión con el correo de la U-tad</h1>
@@ -130,14 +130,14 @@ export default function SignIn() {
                         <Link className="ms-link " href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
-                    <div className="mt-4">
+                    <div className="">
                         <button
                             type="submit"
                             className="ms-button btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
                             INICIAR SESIÓN
                         </button>
 
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-3">
                             <span className="pe-1 ">¿Aún no estas registrado?</span>
                             <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
                         </div>
