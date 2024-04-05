@@ -424,7 +424,10 @@ body {
     outline: none !important;
 }
 
-#searchbar,
 #searchbar:focus {
     outline: none !important;
+}
+
+#searchbar {
+    --bs-focus-ring-color: rgba(var(--bs-success-rgb), 0) !important;
 }
