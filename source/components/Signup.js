@@ -224,7 +224,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
             <AlertContainer alerts={alerts}/>
 
             <div className='container d-flex flex-column mt-5'style={{maxWidth:480, maxHeight:464}}>
-                <h1 className='ms-bold mt-5'>Reservorio U-tad personalizado para ti!</h1>
+                <h1 className='ms-bold'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='ms-regular'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
