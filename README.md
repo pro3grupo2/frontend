@@ -18,6 +18,6 @@ Por tanto, consideramos que existe una necesidad de centralizar toda esta inform
 
 - [Adrian Toral](https://github.com/adriantoral)
 - [Ivan Guio]()
-- [Oscar Viudez]()
+- [Oscar Viudez](https://github.com/0SC4R24)
 - [Oscar Simon]()
 - [Nicolas Montejano]()

@@ -405,3 +405,11 @@ body {
 .expand-button:hover {
     background-color: #f0f0f0;
 }
+
+.input-no-border-focus {
+    outline: none !important;
+}   
+
+.input-no-border-focus:focus {
+    outline: none !important;
+}   

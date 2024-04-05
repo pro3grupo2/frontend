@@ -41,8 +41,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvI
 
 ###
 
-GET https://api.reservorio-u-tad.com/api/v1/proyectos/1/aceptar
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTE0Njk3ODIsImV4cCI6MTcxMTU1NjE4Mn0.mrdf-gG1LydZYZyVKxUX3oqgULZowxwmGBdkPu00oKc
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/3/aceptar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzExNzM5NzgzLCJleHAiOjE3MTE4MjYxODN9.BaD7XyXNd8lN-TO7gYAG7hXTYKtvtQyBXZ4WMTSQ8ko
 
 ###
 
