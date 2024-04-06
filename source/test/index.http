@@ -3,14 +3,14 @@ POST https://api.reservorio-u-tad.com/api/v1/auth/signup
 Content-Type: application/json
 
 {
-  "correo": "oscar.viudez@live.u-tad.com",
-  "nombre_completo": "Oscar Viudez",
-  "alias": "oscar.viudez",
-  "password": "Oscar@12345",
+  "correo": "oscar.simon@live.u-tad.com",
+  "nombre_completo": "Oscar Simon",
+  "alias": "oscar.s",
+  "password": "@Oscar12345",
   "descripcion": "Estudiante de U-Tad",
   "portfolio": "portfolio",
   "foto": "foto",
-  "rol": "coordinador",
+  "rol": "alumno",
   "promocion": 2025
 }
 
@@ -22,6 +22,16 @@ Content-Type: application/json
 {
   "correo": "oscar.viudez@live.u-tad.com",
   "password": "Oscar@12345"
+}
+
+###
+
+POST https://api.reservorio-u-tad.com/api/v1/auth/signin
+Content-Type: application/json
+
+{
+  "correo": "oscar.simon@live.u-tad.com",
+  "password": "@Oscar12345"
 }
 
 ###
