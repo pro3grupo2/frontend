@@ -1,78 +1,129 @@
 "use client"
 
-import React, {useRef, useState} from 'react'
-import Link from 'next/link'
+import React, {useEffect, useRef, useState} from 'react'
+
 import Image from "next/image"
-import '../globals.css';
+import Link from "next/link"
 import {useRouter} from "next/navigation"
 
-import {AlertContainer, create_alert} from "@/components/Alerts"
-import {EstructuraFormularios} from "@/components/Estructura"
+import '../globals.css'
+import '../../styles/profile.css'
+
+import ProjectCard from "@/components/ProjectCard"
+import {get_me_proyectos} from "@/api/v1/proyectos"
+import {me} from "@/api/v1/auth"
 import Loading from "@/components/Loading"
-
-import {check_email, check_password} from "@/utils/validation"
-import {signin} from "@/api/v1/auth"
-
+import EditProfileModal from "@/components/EditProfileModal"
+import NewProjectModal from "@/components/NewProjectModal"
 
 export default function Profile() {
+    const
+        [user, setUser] = useState({}),
+        [projectsValidados, setProjectsValidados] = useState([]),
+        projectsValidados_ref = useRef(),
+        projectsNoValidados_ref = useRef(),
+        projectsValidados_btn_ref = useRef(),
+        projectsNoValidados_btn_ref = useRef(),
+        [projectsNoValidados, setProjectsNoValidados] = useState([]),
+        [loading, setLoading] = useState(true),
+        router = useRouter()
+
+    const
+        [modal_show_edit_profile, setModalShowEditProfile] = useState(false),
+        [modal_show_new_project, setModalShowNewProject] = useState(false)
+
+    useEffect(() => {
+        if (!localStorage.getItem('token'))
+            return router.push('/signin')
+
+        setLoading(true)
+        me(localStorage.getItem('token'))
+            .then(data => {
+                console.log("mne", data)
+                if (!data) return router.push('/signin')
+                setUser(data)
+            })
+
+        get_me_proyectos(localStorage.getItem('token'))
+            .then(data => {
+                setProjectsValidados([])
+                setProjectsNoValidados([])
+
+                if (data) {
+                    for (let project of data)
+                        project.estado === 'aceptado'
+                            ? setProjectsValidados(prev => [...prev, project])
+                            : setProjectsNoValidados(prev => [...prev, project])
+                }
+            })
+        setLoading(false)
+    }, [])
+
+    if (loading) return <Loading/>
+
     return (
-        <div className="container-fluid p-5 d-flex flex-column" style={{height: '100vh'}}>
-            <div className="row d-flex align-items-center p-2 mb-4">
-                {/* Columna principal */}
-                <div className="col-md-6">
-                    <h1 className="display-3 ms-extrabold">Enrique Trigo</h1>
-                    <p className="ms-button fs-3">enrique.trigo@live.u-tad.com</p>
-                    <p className="ms-regular fs-5 mt-1">
-                        Breve descripción del alumno (no más de 280 caracteres)
-                        It is a long established fact that a reader will be distracted by the
-                        readable content of a page when looking at its layout. The point of
-                        using Lorem Ipsum is that it has a more-or-less normal distribution.
-                    </p>
+        <div className={`container-fluid ${modal_show_edit_profile || modal_show_new_project ? "overflow-y-hidden" : "overflow-y-scroll"}`}>
+            <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
+            <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
 
-                    <div>
-                        <Image src="/icons/enlace.svg" alt="enlace.svg" width={0} height={0}
-                               className="d-start w-auto h-auto"/>
-                        <Link href="google.com" rel="stylesheet">URL(portfolio, linkedin, insta)</Link>
+            <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
+                <div className="">
+                    <h1 className="ms-extrabold">{user.nombre_completo}</h1>
+                    <b className="ms-semibold">{user.correo}</b>
+                    <p className="ms-link color-principal"><Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                    <p className="ms-regular text-break w-50">{user.descripcion}</p>
+                    <div className="d-flex flex-row gap-3">
+                        <button className="btn btn-primary btn-font color-secundario-blanco background-color-principal p-2" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
+                        <button className="btn btn-primary btn-font color-secundario-negro background-color-secundario-blanco p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                     </div>
-
-                    <button
-                        type="button"
-                        className="btn btn-primary  ms-button mt-3 px-3"
-                        onClick={() => {/*crerProyecto()*/
-                        }}>
-                        NUEVO PROYECTO
-                    </button>
-
-                    <button
-                        type="button"
-                        className="btn border-black border-1 ms-button mt-3 ms-3 px-4"
-                        onClick={() => {/*editarProyecto()*/
-                        }}>
-                        EDITAR PERFIL
-                    </button>
-
                 </div>
 
-                {/* Columna secundaria */}
-                <div className="col-md-6 d-flex justify-content-end">
-                    <Image src="/images/perfil.png" alt="profile" width={350} height={300}/>
-                </div>
+                <Image className="rounded" src={user.foto} alt="perfil" width={192} height={192}/>
             </div>
 
-            <div className="row p-2 mb-4">
-                <Link href="/proyectos-subidos">
-                    <button className="col-md-2 style-none">Proyectos Subidos</button>
-                </Link>
-                <Link href="/solicitudes-pendientes">
-                    <button className="col-md-2 ms-4">Solicitudes pendientes</button>
-                </Link>
-                <hr/>
+            <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">
+                <button ref={projectsValidados_btn_ref} className="btn btn-custom btn-active" onClick={(e) => {
+                    projectsValidados_ref.current.classList.remove('d-none')
+                    projectsNoValidados_ref.current.classList.add('d-none')
+
+                    projectsValidados_btn_ref.current.classList.add('btn-active')
+                    projectsNoValidados_btn_ref.current.classList.remove('btn-active')
+                }}>Proyectos subidos
+                </button>
+
+                <button ref={projectsNoValidados_btn_ref} className="btn btn-custom" onClick={() => {
+                    projectsValidados_ref.current.classList.add('d-none')
+                    projectsNoValidados_ref.current.classList.remove('d-none')
+
+                    projectsValidados_btn_ref.current.classList.remove('btn-active')
+                    projectsNoValidados_btn_ref.current.classList.add('btn-active')
+                }}>Solicitudes pendientes
+                </button>
             </div>
 
+            <div ref={projectsValidados_ref} className="row card-group mt-5 px-3">
+                {
+                    projectsValidados.length
+                        ? projectsValidados.map(project => <ProjectCard key={project.id} project={project}/>)
+                        :
+                        <div className="text-center mt-5">
+                            <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
+                            <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
+                        </div>
+                }
+            </div>
+
+            <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
+                {
+                    projectsNoValidados.length
+                        ? projectsNoValidados.map(project => <ProjectCard key={project.id} project={project}/>)
+                        :
+                        <div className="text-center mt-5">
+                            <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
+                            <p className="lead">Parece que no hay solicitudes que mostrar en este momento</p>
+                        </div>
+                }
+            </div>
         </div>
-
-
-    );
-
-
+    )
 }
