@@ -1,7 +1,53 @@
+:root {
+    --color-secundario-gris: #6E7377;
+}
+
+/* styles.css */
+
+/* styles.css */
+
+/* styles.css */
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo gris semi-transparente */
+    z-index: 999; /* Asegura que esté por encima de los demás elementos */
+}
+
+.modal-container {
+    position: relative;
+    z-index: 1000; /* Asegura que los modales estén por encima del fondo gris */
+}
+
+
 .border-normal {
-    border: 1px solid var(--color-secundario-negro) !important;
+    border: 1px solid #091229 !important;
 }
 
 .border-error {
     border: 3px solid var(--color-error) !important;
 }
+/* styles/CustomHr.css */
+.linea {
+    flex-grow: 1;
+    border-top: 1px solid #999;
+    margin: 0 20px;
+  }
+  
+  .leyenda {
+    padding: 0 10px;
+    font-weight: normal;
+    background-color: white; /* Asegúrate de que el color de fondo coincida con el de tu sitio */
+    position: relative;
+    top: -0.5em; /* Ajusta esto según el tamaño de tu fuente */
+  }
+  .form-control{
+    border: var(--color-secundario-negro);
+    
+    
+
+  }

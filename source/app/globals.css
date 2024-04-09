@@ -257,7 +257,7 @@ body {
 }
 
 .ms-link {
-    color: var(--color-secundario-negro, #091229);
+    color: var(--color-secundario-negro, #091229) !important;
     /* H3/Montserrat/Link/Pequeño */
     font-size: 14px !important;
     font-weight: 700 !important;
