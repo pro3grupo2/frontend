@@ -68,10 +68,10 @@ export default function SignIn() {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-signin">
-                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:720}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:680}}>
                     <div>
                         <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
-                        <p className='ms-regular d-none fs-5 d-sm-block lead'>
+                        <p className='pe-1'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
                         </p>
@@ -133,7 +133,7 @@ export default function SignIn() {
                     <div className="mt-4">
                         <button
                             type="submit"
-                            className="ms-button btn btn-primary btn-color-primary border-5 fs-5 fw-bold w-100 btn-lg">
+                            className="btn btn-primary btn-color-primary  fs-3 fw-bold w-100">
                             INICIAR SESIÓN
                         </button>
 

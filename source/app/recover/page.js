@@ -54,10 +54,10 @@ export default function RecoverPassword() {
                 <AlertContainer alerts={alerts}/>
 
                 <EstructuraFormularios>
-                    <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
+                    <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:680}}>
                         <div>
                             <h1 className="fw-bold">¿Has olvidado tu contraseña?</h1>
-                            <p className='ms-regular d-none fs-5 d-sm-block lead mt-3'>
+                            <p className='pe-1 mt-3'>
                                 Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar
                                 tu contraseña.
                             </p>
@@ -68,7 +68,7 @@ export default function RecoverPassword() {
                                 ref={email_ref}
                                 type="email"
                                 id="email"
-                                className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="pe-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 style={{backgroundColor: "var(--secundario-gris-claro)"}}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
