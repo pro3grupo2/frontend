@@ -64,7 +64,7 @@ export default function RecoverPassword({ params }) {
             <EstructuraFormularios>
                 <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
                     <div>
-                        <h1 className='ms-bold'>Recupera tu contraseña</h1>
+                        <h1 className='fw-bold'>Recupera tu contraseña</h1>
                         <p className=' ms-regular d-none fs-5 d-sm-block lead'>Crea una nueva contraseña</p>
                     </div>
 

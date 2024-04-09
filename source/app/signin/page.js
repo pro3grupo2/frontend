@@ -68,9 +68,9 @@ export default function SignIn() {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-signin">
-                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'>
+                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:720}}>
                     <div>
-                        <h1 className='ms-bold'>Iniciar sesión con el correo de la U-tad</h1>
+                        <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className='ms-regular d-none fs-5 d-sm-block lead'>
                             El desarrollo de proyectos es una carta de presentación de los
                             conocimientos, experiencia y capacidad de trabajo en equipo.
@@ -127,7 +127,7 @@ export default function SignIn() {
                             }
                         </div>
 
-                        <Link className="ms-link " href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="fw-bold ps-1 link-dark" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
 
                     <div className="mt-4">
