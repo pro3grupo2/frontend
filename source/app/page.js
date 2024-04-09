@@ -14,9 +14,9 @@ export default function HomePage() {
     return (
         <div className="container-fluid bg-image-main d-flex flex-column justify-content-center align-items-center p-0">
             <div className='container text-center'>
-                <h1 className="ms-extrabold">Trabajos de alumnos/is</h1>
-                <p className="ms-semibold mt-4">¡Descubre aquí el talento U-tad!</p>
-                <p className="ms-regular mt-3">Bienvenido al repositorio de proyectos oficial de la U-tad.<br />
+                <h1 className="fw-bold display-3">Trabajos de alumnos/is</h1>
+                <p className="fw-bold  mt-4">¡Descubre aquí el talento U-tad!</p>
+                <p className="pe-1 mt-3">Bienvenido al repositorio de proyectos oficial de la U-tad.<br />
                     Aquí podrás encontrar todo tipo de trabajos de los alumnos que se han formado aquí!
                 </p>
 

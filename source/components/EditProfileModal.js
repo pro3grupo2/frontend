@@ -27,13 +27,15 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
     }
 
     const handleClose = () => {
-        setShow(false); // Cerrar modal
+        setShow(false); 
     };
 
     
     if (loading) return <Loading />
 
     return (
+
+        //Editar imagen responsive pendiente
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
 
