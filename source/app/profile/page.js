@@ -80,7 +80,7 @@ export default function Profile() {
                 <div className="modal-container">
                     <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
                     <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
-               </div>
+                </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
@@ -92,6 +92,7 @@ export default function Profile() {
                             <button className="btn btn-primary btn-font color-secundario-negro background-color-secundario-blanco p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                         </div>
                     </div>
+
 
                     <div className="image-container" style={{ width: '208px', height: '208px', position: 'relative', overflow: 'hidden' }}>
                         <Image

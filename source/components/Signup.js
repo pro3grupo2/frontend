@@ -72,7 +72,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                         type="email"
                         id="email"
                         value={email}
-                        className="pe-1 form-control border-normal py-3 ps-4 fs-5"
+                        className=" ms-regular form-control border-normal py-3 ps-4 fs-5"
                         onChange={(e) => setEmail(e.target.value)}
                         onFocus={() => email_ref.current.classList.remove('border-error')}
                         placeholder="Correo electrónico"
@@ -146,7 +146,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type={tipo_password}
                             id="password"
                             value={password}
-                            className=" pe-1 flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                            className="ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword(e.target.value)}
                             onFocus={() => password_ref.current.classList.remove('border-error')}
                             placeholder="Contraseña"
@@ -167,7 +167,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type={tipo_password2}
                             id="password"
                             value={password2}
-                            className=" pe-1 flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
+                            className=" ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword2(e.target.value)}
                             onFocus={() => password2_ref.current.classList.remove('border-error')}
                             placeholder="Confirmar contraseña"
@@ -223,9 +223,9 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column mt-5'style={{maxWidth:480, maxHeight:464}}>
-                <h1 className='fw-bold'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='pe-1'>
+            <div className='container d-flex flex-column mt-5'style={{maxWidth:640}}>
+                <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
+                <p className='pe-1 text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
@@ -288,9 +288,9 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column mt-5'style={{maxWidth:640}}>
+            <div className='container d-flex flex-column mt-5 'style={{maxWidth:640}}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='pe-1 '>
+                <p className='pe-1 text-center text-lg-start '>
                     Paso 2 de 3. ¿Quién eres?
                 </p>
 
