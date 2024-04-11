@@ -18,6 +18,8 @@ export default function Home() {
     const [search, setSearch] = useState('');
     const router = useRouter();
 
+    const hiddenFileInput = useRef(null);
+
     //
     // Filtros aceptados en get_proyectos:
     //  - premiado: 'Type: Bool'
@@ -101,23 +103,27 @@ export default function Home() {
 
     if (projects.length === 0) {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+            <div className="container-fluid p-5">
                 <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick}/>
 
                 <div className="text-center mt-5">
                     <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
                     <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
                 </div>
+
+                <button className="position-absolute bottom-0 end-0 me-5 mb-5 fw-bold fs-5 btn btn-primary rounded-circle">+</button>
             </div>
         );
     } else {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+            <div className="container-fluid p-5">
                 <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick}/>
 
                 <div className="row g-4 card-group mt-3">
                     {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                 </div>
+
+                <button className="position-absolute bottom-0 end-0 me-5 mb-5 fw-bold fs-5 btn btn-primary rounded-pill">+</button>
             </div>
         );
     }

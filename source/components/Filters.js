@@ -11,8 +11,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
 
     function onFiltersClicked() {
         let filter = document.getElementById("filters");
-        // filters.classList.replace("col", "col-6") || filters.classList.replace("col-6", "col");
         filter.classList.replace("col", "col-1") || filter.classList.replace("col-1", "col");
+        
         let filters = document.getElementsByClassName("filterButtons");
         for (let i = 0; i < filters.length; i++) {
             filters[i].classList.toggle("visually-hidden");
@@ -35,7 +35,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
                         <div className="col filterButtons me-3 visually-hidden">
                             <div className="dropdown border border-black border-2 rounded w-100 h-100">
                                 <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Filtro 1
+                                    Premio
                                 </button>
                                 <ul className="dropdown-menu">
                                     <li><button className="dropdown-item">Action</button></li>
@@ -47,7 +47,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
                         <div className="col filterButtons me-3 visually-hidden">
                             <div className="dropdown border border-black border-2 rounded w-100 h-100">
                                 <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Filtro 2
+                                    Titulacion
                                 </button>
                                 <ul className="dropdown-menu">
                                     <li><button className="dropdown-item">Action</button></li>
@@ -59,7 +59,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
                         <div className="col filterButtons me-3 visually-hidden">
                             <div className="dropdown border border-black border-2 rounded w-100 h-100">
                                 <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Filtro 3
+                                    Año
                                 </button>
                                 <ul className="dropdown-menu">
                                     <li><button className="dropdown-item">Action</button></li>

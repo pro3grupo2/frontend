@@ -6,6 +6,7 @@ import {get_proyecto, get_proyectos} from "@/api/v1/proyectos";
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 import Loading from '@/components/Loading';
+import Image from 'next/image';
 
 export default function Project({params}) {
     const {user, isLoading} = useAuth();
@@ -64,7 +65,7 @@ export default function Project({params}) {
                     </div>
                 </div>
                 <p className="fs-3 ms-extrabold mt-3 mb-4">{proyecto.usuarios.nombre_completo}</p>
-                <img src={`https://api.reservorio-u-tad.com${proyecto.portada}`} className="object-fit-fill" alt="Project Image" style={{width: "100%", height: "500px"}}/>
+                <Image src={`https://api.reservorio-u-tad.com${proyecto.portada}`} width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }} alt="Project Image"/>
                 <p className="fs-5 ms-regular my-4">{proyecto.ficha}</p>
                 <div className="row g-4 card-group mt-5">
                     {userProjects.length > 0 && (
