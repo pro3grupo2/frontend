@@ -424,10 +424,20 @@ body {
     outline: none !important;
 }
 
-#searchbar:focus {
-    outline: none !important;
-}
-
 #searchbar {
     --bs-focus-ring-color: rgba(var(--bs-success-rgb), 0) !important;
+}
+
+#searchbar:focus {
+    outline: none;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.no-border,
+.no-border:focus {
+    outline: none !important;
+    border-color: transparent !important;
 }
