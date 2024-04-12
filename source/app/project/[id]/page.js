@@ -66,8 +66,8 @@ export default function Project({ params }) {
                                     </svg>
                                 </button>
                                 <button className="btn btn-outline-dark rounded-circle me-3 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20" fill="none">
-                                        <path d="M15.2917 1.66667H11.6458L10.6042 0.625H5.39583L4.35417 1.66667H0.708334V3.75H15.2917M1.75 17.2917C1.75 17.8442 1.96949 18.3741 2.36019 18.7648C2.7509 19.1555 3.2808 19.375 3.83333 19.375H12.1667C12.7192 19.375 13.2491 19.1555 13.6398 18.7648C14.0305 18.3741 14.25 17.8442 14.25 17.2917V4.79167H1.75V17.2917Z" fill="#6E7377" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 20" fill="none">
+                                        <path d="M15.2917 1.66667H11.6458L10.6042 0.625H5.39583L4.35417 1.66667H0.708334V3.75H15.2917M1.75 17.2917C1.75 17.8442 1.96949 18.3741 2.36019 18.7648C2.7509 19.1555 3.2808 19.375 3.83333 19.375H12.1667C12.7192 19.375 13.2491 19.1555 13.6398 18.7648C14.0305 18.3741 14.25 17.8442 14.25 17.2917V4.79167H1.75V17.2917Z" fill="#6E7377"/>
                                     </svg>
                                 </button>
                             </>
@@ -84,7 +84,7 @@ export default function Project({ params }) {
                     </div>
                 </div>
                 <div className="row">
-                    <Image className="col" src={`https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit="cover" width={0} height={0} sizes="100vw" style={{ width: '65%', height: 'auto' }} alt="Project Image" />
+                    <Image className="col" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit="cover" width={0} height={0} sizes="100vw" style={{ width: '65%', height: 'auto' }} alt="Project Image" />
                     <p className="col fs-5 ms-regular">{proyecto.ficha}</p>
                 </div>
                 <div className="row g-4 card-group mt-5">

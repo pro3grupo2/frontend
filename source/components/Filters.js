@@ -1,4 +1,18 @@
-export default function Filters({ onSearchChange, handleSearch, handleAreaClick }) {
+import { get_areas } from "@/api/v1/areas";
+import { useEffect, useState } from "react";
+
+export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio }) {
+    const [areas, setAreas] = useState([]);
+    const [premiado, setPremiado] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        get_areas(token).then(data => {
+            setAreas(data);
+        });
+    }, []);
+
     function changeFocus(focused) {
         let changeBorder = document.getElementById("changeBorder");
 
@@ -9,13 +23,37 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
         changeBorder.classList.add(classBorder);
     }
 
-    function onFiltersClicked() {
-        let filter = document.getElementById("filters");
-        filter.classList.replace("col", "col-1") || filter.classList.replace("col-1", "col");
+    function handlePremiado(premio) {
+        setPremiado(premio);
+        handlePremio(premio);
 
-        let filters = document.getElementsByClassName("filterButtons");
-        for (let i = 0; i < filters.length; i++) {
-            filters[i].classList.toggle("visually-hidden");
+        let filter = document.getElementById("premiadoFilter");
+        if (premio === "true") {
+            if (!filter) {
+                let filtersList = document.getElementById("filtersList");
+                let filterButton = document.createElement("span");
+                filterButton.id = "premiadoFilter";
+                filterButton.className = "btn btn-primary rounded-pill me-2 px-4";
+                filterButton.innerHTML = "Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
+                filterButton.onclick = () => {handlePremiado("null")};
+                filtersList.appendChild(filterButton);
+            } else {
+                filter.innerHTML = "Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
+            }
+        } else if (premio === "false") {
+            if (filter) { 
+                filter.innerHTML = "No Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
+            } else {
+                let filtersList = document.getElementById("filtersList");
+                let filterButton = document.createElement("span");
+                filterButton.id = "premiadoFilter";
+                filterButton.className = "btn btn-primary rounded-pill me-2 px-4";
+                filterButton.innerHTML = "No Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
+                filterButton.onclick = () => {handlePremiado("null")};
+                filtersList.appendChild(filterButton);
+            }
+        } else if (premio === "null") {
+            if (filter) filter.remove();
         }
     }
 
@@ -34,8 +72,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
                             Premio
                         </button>
                         <ul className="dropdown-menu">
-                            <li><button className="dropdown-item">Si</button></li>
-                            <li><button className="dropdown-item">No</button></li>
+                            <li><button onClick={() => {handlePremiado("true")}} className="dropdown-item">Si</button></li>
+                            <li><button onClick={() => {handlePremiado("false")}} className="dropdown-item">No</button></li>
                         </ul>
                     </div>
                 </div>
@@ -73,35 +111,21 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
 
             <div className="row mb-4">
                 <div className="col">
-                    <div className="d-flex flex-wrap gap-2">
-                        <span className="btn btn-primary rounded-pill me-2 px-4">
-                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
-                        </span>
-                        <span className="btn btn-primary rounded-pill me-2 px-4">
-                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
-                        </span>
-                    </div>
+                    <div id="filtersList" className="d-flex flex-wrap gap-2"></div>
                 </div>
                 <hr className="m-0 mt-2"></hr>
             </div>
 
             <div className="row">
                 <ul className="nav nav-underline d-flex flex-inline justify-content-center">
-                    <li className="nav-item me-5">
-                        <button id="area-todo" onClick={() => handleAreaClick("area-todo")} className="nav-link text-dark active">TODO</button>
+                    <li key="0" className="nav-item me-5">
+                        <button id="0" onClick={() => handleAreaClick("0")} className="nav-link text-dark active">Todo</button>
                     </li>
-                    <li className="nav-item me-5">
-                        <button id="area-anim" onClick={() => handleAreaClick("area-anim")} className="nav-link text-dark">ANIMACION</button>
-                    </li>
-                    <li className="nav-item me-5">
-                        <button id="area-didi" onClick={() => handleAreaClick("area-didi")} className="nav-link text-dark">DISEÑO DIGITAL</button>
-                    </li>
-                    <li className="nav-item me-5">
-                        <button id="area-ing" onClick={() => handleAreaClick("area-ing")} className="nav-link text-dark">INGENIERIA Y CIENCIAS</button>
-                    </li>
-                    <li className="nav-item me-5">
-                        <button id="area-vid" onClick={() => handleAreaClick("area-vid")} className="nav-link text-dark">VIDEOJUEGOS</button>
-                    </li>
+                    {areas.map(area => 
+                        <li key={area.id} className="nav-item me-5">
+                            <button id={area.id} onClick={() => handleAreaClick(area.id)} className="nav-link text-dark">{area.titulo}</button>
+                        </li>
+                    )}
                 </ul>
                 <hr className="m-0"></hr>
             </div>

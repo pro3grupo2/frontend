@@ -13,7 +13,7 @@ export default function Home() {
     const {user, isLoading} = useAuth();
     const [projects, setProjects] = useState([]);
     const [proyectosLoaded, setProyectosLoaded] = useState(false);
-    const [area, setArea] = useState('area-todo');
+    const [area, setArea] = useState('0');
     const [filters, setFilters] = useState({});
     const [search, setSearch] = useState('');
     const router = useRouter();
@@ -82,6 +82,18 @@ export default function Home() {
         setFilters({...filters, busqueda: event.target.value});
     };
 
+    const handlePremio = (premiado) => {
+        setFilters({...filters, premiado: premiado});
+        if (premiado == "null") delete filters.premiado;
+
+        console.log(premiado);
+        console.log(JSON.stringify(filters));
+        const token = localStorage.getItem('token');
+        get_proyectos(token, 0, filters).then(data => {
+            setProjects(data);
+        });
+    }
+
     const handleSearch = (event) => {
         if (event.key === 'Enter') {           
             if (filters.busqueda === '') {
@@ -95,16 +107,10 @@ export default function Home() {
         }
     };
 
-    const killBot = async () => {
-        for (let i = 0; i < 100; i++) {
-            const data = await me("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4");
-        }
-    };
-
     if (projects.length === 0) {
         return (
             <div className="container-fluid p-5">
-                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick}/>
+                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio}/>
 
                 <div className="text-center mt-5">
                     <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -115,7 +121,7 @@ export default function Home() {
     } else {
         return (
             <div className="container-fluid p-5">
-                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick}/>
+                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio}/>
 
                 <div className="row g-4 card-group mt-3">
                     {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
