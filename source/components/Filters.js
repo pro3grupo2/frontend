@@ -12,7 +12,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
     function onFiltersClicked() {
         let filter = document.getElementById("filters");
         filter.classList.replace("col", "col-1") || filter.classList.replace("col-1", "col");
-        
+
         let filters = document.getElementsByClassName("filterButtons");
         for (let i = 0; i < filters.length; i++) {
             filters[i].classList.toggle("visually-hidden");
@@ -22,52 +22,45 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
     return (
         <>
             <div className="row mb-5">
-                <div id="filters" className="col-1 py-2 border border-black border-2 rounded me-3">
-                    <div className="row d-flex justify-content-around align-items-center h-100">
-                        <div onClick={onFiltersClicked} className="col">
-                            <div className="row d-flex justify-content-around align-items-center">
-                                <span className="col">Filtro</span>
-                                <svg className="col" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-                                    <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div className="col filterButtons me-3 visually-hidden">
-                            <div className="dropdown border border-black border-2 rounded w-100 h-100">
-                                <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Premio
-                                </button>
-                                <ul className="dropdown-menu">
-                                    <li><button className="dropdown-item">Action</button></li>
-                                    <li><button className="dropdown-item">Another action</button></li>
-                                    <li><button className="dropdown-item">Something else here</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col filterButtons me-3 visually-hidden">
-                            <div className="dropdown border border-black border-2 rounded w-100 h-100">
-                                <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Titulacion
-                                </button>
-                                <ul className="dropdown-menu">
-                                    <li><button className="dropdown-item">Action</button></li>
-                                    <li><button className="dropdown-item">Another action</button></li>
-                                    <li><button className="dropdown-item">Something else here</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="col filterButtons me-3 visually-hidden">
-                            <div className="dropdown border border-black border-2 rounded w-100 h-100">
-                                <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Año
-                                </button>
-                                <ul className="dropdown-menu">
-                                    <li><button className="dropdown-item">Action</button></li>
-                                    <li><button className="dropdown-item">Another action</button></li>
-                                    <li><button className="dropdown-item">Something else here</button></li>
-                                </ul>
-                            </div>
-                        </div>
+                <div id="filters" className="col-1 py-2 d-flex justify-content-around align-items-center border border-black border-2 rounded me-3">
+                    <span className="">Filtro</span>
+                    <svg className="" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                        <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black" />
+                    </svg>
+                </div>
+                <div className="col-1 filterButtons d-flex align-items-center me-3">
+                    <div className="dropdown border border-black border-2 rounded w-100 h-75">
+                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Premio
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><button className="dropdown-item">Si</button></li>
+                            <li><button className="dropdown-item">No</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-1 filterButtons d-flex align-items-center me-3">
+                    <div className="dropdown border border-black border-2 rounded w-100 h-75">
+                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Titulacion
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><button className="dropdown-item">Action</button></li>
+                            <li><button className="dropdown-item">Another action</button></li>
+                            <li><button className="dropdown-item">Something else here</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-1 filterButtons d-flex align-items-center me-3">
+                    <div className="dropdown border border-black border-2 rounded w-100 h-75">
+                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Año
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><button className="dropdown-item">Action</button></li>
+                            <li><button className="dropdown-item">Another action</button></li>
+                            <li><button className="dropdown-item">Something else here</button></li>
+                        </ul>
                     </div>
                 </div>
                 <div id="changeBorder" className="col py-2 border border-black border-2 rounded d-flex align-items-center input-group input-group-lg">
@@ -79,6 +72,20 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
             </div>
 
             <div className="row mb-4">
+                <div className="col">
+                    <div className="d-flex flex-wrap gap-2">
+                        <span className="btn btn-primary rounded-pill me-2 px-4">
+                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
+                        </span>
+                        <span className="btn btn-primary rounded-pill me-2 px-4">
+                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
+                        </span>
+                    </div>
+                </div>
+                <hr className="m-0 mt-2"></hr>
+            </div>
+
+            <div className="row">
                 <ul className="nav nav-underline d-flex flex-inline justify-content-center">
                     <li className="nav-item me-5">
                         <button id="area-todo" onClick={() => handleAreaClick("area-todo")} className="nav-link text-dark active">TODO</button>
@@ -97,20 +104,6 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick 
                     </li>
                 </ul>
                 <hr className="m-0"></hr>
-            </div>
-
-            <div className="row">
-                <div className="col">
-                    <div className="d-flex flex-wrap gap-2">
-                        {/* <span className="btn btn-outline-dark rounded-pill me-2">
-                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
-                        </span>
-                        <span className="btn btn-outline-dark rounded-pill me-2">
-                            Filtro <span className="ms-3" aria-hidden="true">&times;</span>
-                        </span> */}
-                    </div>
-                </div>
-                {/* <hr className="m-3"></hr> */}
             </div>
         </>
     );

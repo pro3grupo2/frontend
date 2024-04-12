@@ -110,8 +110,6 @@ export default function Home() {
                     <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
                     <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
                 </div>
-
-                <button className="position-absolute bottom-0 end-0 me-5 mb-5 fw-bold fs-5 btn btn-primary rounded-circle">+</button>
             </div>
         );
     } else {
@@ -122,8 +120,6 @@ export default function Home() {
                 <div className="row g-4 card-group mt-3">
                     {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                 </div>
-
-                <button className="position-absolute bottom-0 end-0 me-5 mb-5 fw-bold fs-5 btn btn-primary rounded-pill">+</button>
             </div>
         );
     }
