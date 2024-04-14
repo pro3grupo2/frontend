@@ -49,6 +49,13 @@ export default function Home() {
         });
     }, []);
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        get_proyectos(token, 0, filters).then(data => {
+            setProjects(data);
+        });
+    }, [filters]);
+
     if (isLoading || !proyectosLoaded) {
         return <Loading/>
     }
@@ -79,31 +86,29 @@ export default function Home() {
 
     const onSearchChange = (event) => {
         setSearch(event.target.value);
-        setFilters({...filters, busqueda: event.target.value});
     };
 
     const handlePremio = (premiado) => {
-        setFilters({...filters, premiado: premiado});
-        if (premiado == "null") delete filters.premiado;
-
-        console.log(premiado);
-        console.log(JSON.stringify(filters));
-        const token = localStorage.getItem('token');
-        get_proyectos(token, 0, filters).then(data => {
-            setProjects(data);
-        });
+        if (premiado === "null") {
+            setFilters(prevFilters => {
+                const { premiado, ...restFilters } = prevFilters;
+                return { ...restFilters };
+            });
+            return;
+        }
+    
+        setFilters({...filters, premiado: premiado == "true"});
     }
 
     const handleSearch = (event) => {
-        if (event.key === 'Enter') {           
-            if (filters.busqueda === '') {
+        if (event.key === 'Enter') {
+            if (search === '') {
                 delete filters.busqueda;
+                setFilters({...filters});
+                return;
             }
 
-            const token = localStorage.getItem('token');
-            get_proyectos(token, 0, filters).then(data => {
-                setProjects(data);
-            });
+            setFilters({...filters, busqueda: search});   
         }
     };
 

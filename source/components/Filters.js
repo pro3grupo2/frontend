@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio }) {
     const [areas, setAreas] = useState([]);
-    const [premiado, setPremiado] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -23,8 +22,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         changeBorder.classList.add(classBorder);
     }
 
-    function handlePremiado(premio) {
-        setPremiado(premio);
+    const handlePremiado = (premio) => {
         handlePremio(premio);
 
         let filter = document.getElementById("premiadoFilter");

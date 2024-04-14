@@ -8,7 +8,7 @@ export default function NavBar() {
             <div className="container-fluid py-1">
                 <div className="navbar-brand" style={{maxWidth: '20vw', minWidth: '50px',}}>
                     <Link className="mx-2" href="/home">
-                        <Image className="img-fluid" src="/images/logos/utad.svg" alt="Logo de U-tad" width={194} height={61}/>
+                        <Image className="img-fluid" src="/images/logos/utad.svg" alt="Logo de U-tad" width={83} height={26}/>
                     </Link>
                 </div>
 
