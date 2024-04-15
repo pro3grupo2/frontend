@@ -14,6 +14,30 @@ const get_proyectos = async (token, page = 0, filters = undefined, callback = un
     return datos ? datos.data : null
 }
 
+const get_proyectos_pendientes = async (token, page = 0, filters = undefined, callback = undefined) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    let filters_query = 'ignore=true'
+    if (filters) filters_query = Object.keys(filters).map(key => key + '=' + filters[key]).join('&')
+
+    const datos = await fetch_handler(PROYECTOS_ROUTE + `/pendientes?page=${page}&` + filters_query, headers, "GET", undefined, callback)
+    return datos ? datos.data : null
+}
+
+const get_proyectos_rechazados = async (token, page = 0, filters = undefined, callback = undefined) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    let filters_query = 'ignore=true'
+    if (filters) filters_query = Object.keys(filters).map(key => key + '=' + filters[key]).join('&')
+
+    const datos = await fetch_handler(PROYECTOS_ROUTE + `/rechazados?page=${page}&` + filters_query, headers, "GET", undefined, callback)
+    return datos ? datos.data : null
+}
+
 const get_me_proyectos = async (token, callback = undefined) => {
     const headers = {
         'Authorization': `Bearer ${token}`
@@ -85,5 +109,14 @@ const rechazar_proyecto = async (token, id, callback = undefined) => {
 }
 
 module.exports = {
-    get_proyectos, get_me_proyectos, get_proyecto, subir_ficheros, crear_proyecto, eliminar_proyecto, aceptar_proyecto, rechazar_proyecto
+    get_proyectos,
+    get_proyectos_pendientes,
+    get_proyectos_rechazados,
+    get_me_proyectos,
+    get_proyecto,
+    subir_ficheros,
+    crear_proyecto,
+    eliminar_proyecto,
+    aceptar_proyecto,
+    rechazar_proyecto
 }
