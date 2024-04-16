@@ -46,7 +46,7 @@ export default function NewProjectModal({ show, setShow }) {
             }
         }
 
-        const data = await crear_proyecto(token, titulo, ficha, url_local ?? url, portada_local ?? portada, anio, participantes.split(';'), proyectos_asignaturas.split(';').map(parseInt), undefined, !!premiado)
+        const data = await crear_proyecto(token, titulo, ficha, url_local ?? url, portada_local ?? portada, parseInt(anio), participantes.split(';'), proyectos_asignaturas.split(';').map(parseInt), undefined, !!premiado)
         setLoading(false)
         if (data) window.location.reload()
     }
@@ -119,7 +119,7 @@ export default function NewProjectModal({ show, setShow }) {
 
                         <div class="mb-3">
                             <label className="form-label ms-regular-black">¿Año? <span className="color-error">*</span></label>
-                            <input type="number" min={1900} max={2024} step={1} className="form-control border-normal" value={anio} onChange={(e) => setAnio(e.target.value)} />
+                            <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" value={anio} onChange={(e) => setAnio(e.target.value)} />
                         </div>
 
                         <div class="mb-3">

@@ -1,8 +1,9 @@
 import { get_areas } from "@/api/v1/areas";
 import { useEffect, useState } from "react";
 
-export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio }) {
+export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio, handleAnio }) {
     const [areas, setAreas] = useState([]);
+    const [anio, setAnio] = useState(2024);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -12,7 +13,17 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         });
     }, []);
 
-    function changeFocus(focused) {
+    const createFilterButton = (id, title, onClick) => {
+        let filtersList = document.getElementById("filtersList");
+        let filterButton = document.createElement("span");
+        filterButton.id = id;
+        filterButton.className = "btn btn-primary rounded-pill me-2 px-4 mb-3";
+        filterButton.innerHTML = title + " <span class='ms-3' aria-hidden='true'>&times;</span>";
+        filterButton.onclick = onClick;
+        filtersList.appendChild(filterButton);
+    }
+
+    const changeFocus = (focused) => {
         let changeBorder = document.getElementById("changeBorder");
 
         let removeClass = (!focused) ? "border-primary" : "border-black";
@@ -22,19 +33,33 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         changeBorder.classList.add(classBorder);
     }
 
+    const handleYear = (year) => {
+        handleAnio(year);
+
+        let filter = document.getElementById("anioFilter");
+        
+        if (year === "null") {
+            setAnio(2024);
+            if (filter) filter.remove();
+            return;
+        }
+
+        setAnio(year);
+
+        if (filter) {
+            filter.innerHTML = year + " <span class='ms-3' aria-hidden='true'>&times;</span>";
+        } else {
+            createFilterButton("anioFilter", year, () => handleYear("null"));
+        }
+    }
+
     const handlePremiado = (premio) => {
         handlePremio(premio);
 
         let filter = document.getElementById("premiadoFilter");
         if (premio === "true") {
             if (!filter) {
-                let filtersList = document.getElementById("filtersList");
-                let filterButton = document.createElement("span");
-                filterButton.id = "premiadoFilter";
-                filterButton.className = "btn btn-primary rounded-pill me-2 px-4";
-                filterButton.innerHTML = "Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
-                filterButton.onclick = () => {handlePremiado("null")};
-                filtersList.appendChild(filterButton);
+                createFilterButton("premiadoFilter", "Premiados", () => handlePremiado("null"));
             } else {
                 filter.innerHTML = "Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
             }
@@ -42,13 +67,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
             if (filter) { 
                 filter.innerHTML = "No Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
             } else {
-                let filtersList = document.getElementById("filtersList");
-                let filterButton = document.createElement("span");
-                filterButton.id = "premiadoFilter";
-                filterButton.className = "btn btn-primary rounded-pill me-2 px-4";
-                filterButton.innerHTML = "No Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
-                filterButton.onclick = () => {handlePremiado("null")};
-                filtersList.appendChild(filterButton);
+                createFilterButton("premiadoFilter", "No Premiados", () => handlePremiado("null"));
             }
         } else if (premio === "null") {
             if (filter) filter.remove();
@@ -57,7 +76,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
 
     return (
         <>
-            <div className="row mb-5">
+            <div className="row mb-4">
                 <div id="filters" className="col-1 py-2 d-flex justify-content-around align-items-center border border-black border-2 rounded me-3">
                     <span className="">Filtro</span>
                     <svg className="" xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -88,15 +107,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                     </div>
                 </div>
                 <div className="col-1 filterButtons d-flex align-items-center me-3">
-                    <div className="dropdown border border-black border-2 rounded w-100 h-75">
-                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Año
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li><button className="dropdown-item">Action</button></li>
-                            <li><button className="dropdown-item">Another action</button></li>
-                            <li><button className="dropdown-item">Something else here</button></li>
-                        </ul>
+                    <div className="dropdown w-100 h-75">
+                        <input id="yearButton" type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-black border-2 h-100" value={anio} onChange={(e) => handleYear(e.target.value)} />
                     </div>
                 </div>
                 <div id="changeBorder" className="col py-2 border border-black border-2 rounded d-flex align-items-center input-group input-group-lg">
@@ -107,11 +119,11 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                 </div>
             </div>
 
-            <div className="row mb-4">
+            <div className="row mb-2">
                 <div className="col">
                     <div id="filtersList" className="d-flex flex-wrap gap-2"></div>
                 </div>
-                <hr className="m-0 mt-2"></hr>
+                <hr className="m-0"></hr>
             </div>
 
             <div className="row">
@@ -121,7 +133,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                     </li>
                     {areas.map(area => 
                         <li key={area.id} className="nav-item me-5">
-                            <button id={area.id} onClick={() => handleAreaClick(area.id)} className="nav-link text-dark">{area.titulo}</button>
+                            <button id={area.id} onClick={() => handleAreaClick(area.id.toString())} className="nav-link text-dark">{area.titulo}</button>
                         </li>
                     )}
                 </ul>
