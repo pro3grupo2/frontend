@@ -16,6 +16,7 @@ export default function Home() {
     const [area, setArea] = useState('0');
     const [filters, setFilters] = useState({});
     const [search, setSearch] = useState('');
+    const [asignatura, setAsignatura] = useState("-1");
     const router = useRouter();
 
     const hiddenFileInput = useRef(null);
@@ -50,7 +51,6 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        console.log(filters);
         const token = localStorage.getItem('token');
         get_proyectos(token, 0, filters).then(data => {
             setProjects(data);
@@ -109,6 +109,20 @@ export default function Home() {
         setSearch(event.target.value);
     };
 
+    const handleAsignatura = (clase) => {
+        let asignatura = clase.toString();
+        
+        if (asignatura === "-1") {
+            setFilters(prevFilters => {
+                const { asignaturas, ...restFilters } = prevFilters;
+                return { ...restFilters };
+            });
+            return;
+        }
+        
+        setFilters({...filters, asignaturas: asignatura});
+    }
+    
     const handlePremio = (premiado) => {
         if (premiado === "null") {
             setFilters(prevFilters => {
@@ -136,7 +150,7 @@ export default function Home() {
     if (projects.length === 0) {
         return (
             <div className="container-fluid p-5">
-                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio}/>
+                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura}/>
 
                 <div className="text-center mt-5">
                     <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -148,7 +162,7 @@ export default function Home() {
         return (
             <>
                 <div className="container-fluid p-5">
-                    <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio}/>
+                    <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura}/>
 
                     <div className="row g-4 card-group mt-3">
                         {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}

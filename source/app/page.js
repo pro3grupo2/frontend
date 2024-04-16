@@ -20,7 +20,6 @@ export default function HomePage() {
                     Aquí podrás encontrar todo tipo de trabajos de los alumnos que se han formado aquí!
                 </p>
 
-
                 <div className="d-grid gap-2 col-4 mx-auto">
                     <button onClick={handleAccess} className="btn btn-primary ms-button mt-5 border-5 btn-lg ">Acceder</button>
                 </div>
