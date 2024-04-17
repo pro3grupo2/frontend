@@ -56,7 +56,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:680}}>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:560}}>
                 <div>
                     <h1 className='fw-bold'>Crear cuenta</h1>
                     <p className='pe-1 '>
@@ -131,7 +131,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth:680}}>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth:560}}>
                 <div>
                     <h1 className='fw-bold'>Termina de configura tu cuenta</h1>
                     <p className=' pe-1 '>

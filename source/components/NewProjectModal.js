@@ -57,9 +57,9 @@ export default function NewProjectModal({ show, setShow }) {
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{maxWidth:1176}}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{maxWidth:1176,minHeight:677}}>
 
-                <div className="d-flex flex-column justify-content-between w-100" style={{maxWidth:488}}>
+                <div className="d-flex flex-column justify-content-between w-100" style={{maxWidth:488, }}>
                     <div>
                         <div class="mb-3">
                             <label className="form-label ms-regular-black">Titulo <span className="color-error">*</span></label>
@@ -68,7 +68,7 @@ export default function NewProjectModal({ show, setShow }) {
 
                         <div class="mb-3">
                             <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
-                            <textarea className="form-control border-normal" placeholder=" Descripción del proyecto" value={ficha} rows={8} onChange={(e) => setFicha(e.target.value)}></textarea>
+                            <textarea className="form-control border-normal" placeholder=" Descripción del proyecto" value={ficha} rows={8} onChange={(e) => setFicha(e.target.value)}style={{maxHeight:147}}></textarea>
                         </div>
 
                         <div>
@@ -117,18 +117,20 @@ export default function NewProjectModal({ show, setShow }) {
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label className="form-label ms-regular-black">¿Año? <span className="color-error">*</span></label>
-                            <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" value={anio} onChange={(e) => setAnio(e.target.value)} />
+                        <div className="mb-3 d-flex align-items-start">
+                            <div className="me-3 ">
+                                <label className="form-label ms-regular-black">¿Año? <span className="color-error">*</span></label>
+                                <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" value={anio} onChange={(e) => setAnio(e.target.value)} />
+                            </div>
+                            <div>
+                                <label className="form-label ms-regular-black mx-md-3 ">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
+                                <select className="form-select border-normal mx-md-3" onChange={(e) => setPremiado(e.target.value)}>
+                                    <option selected value={0}>No</option>
+                                    <option value={1}>Sí</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label className="form-label ms-regular-black">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
-                            <select className="form-select border-normal" onChange={(e) => setPremiado(e.target.value)}>
-                                <option selected value={0}>No</option>
-                                <option value={1}>Si</option>
-                            </select>
-                        </div>
 
                         <div>
                             <div class="mb-3">

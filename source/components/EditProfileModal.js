@@ -43,7 +43,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
                 <div className="d-flex flex-column justify-content-between w-100 mt-3" style={{ maxWidth: 488 }}>
                     <div className="image-container" style={{ width: '100%', height: '0', paddingBottom: '100%', position: 'relative', overflow: 'hidden' }}>
                         <Image
-                            className="rounded img-fluid"
+                            className="rounded-lg rounded-3 img-fluid border-bord "
                             src={default_user_data.foto}
                             alt=''
                             style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover' }}
