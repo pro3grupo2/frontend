@@ -152,9 +152,9 @@ export default function Home() {
             <div className="container-fluid p-5">
                 <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura}/>
 
-                <div className="text-center mt-5">
-                    <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
-                    <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
+                <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center mt-5">
+                    <h1 className="display-5 fw-bold w-50">Ups! No hemos encontrado resultados para su búsqueda.</h1>
+                    <p className="lead mt-3">Comprueba el nombre del proyecto o el correo de los autores.</p>
                 </div>
             </div>
         );
@@ -166,11 +166,6 @@ export default function Home() {
 
                     <div className="row g-4 card-group mt-3">
                         {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
-                        {/* {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)} */}
                     </div>
                 </div>
 
