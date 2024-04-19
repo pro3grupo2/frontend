@@ -223,7 +223,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column mt-5'style={{maxWidth:640}}>
+            <div className='container d-flex flex-column mt-5'style={{maxWidth:480}}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
@@ -234,11 +234,24 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                         <button
                             className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Alumno')}
-                            style={{border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-lg-block"
-                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            style={{ border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}` }}>
+                            <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
+                                    
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
+                                    <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="41" y="45" width="45" height="44" viewBox="0 0 45 44" fill="none">
+                                    <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
+                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
+                                    <path d="M66.7042 17.2005C56.6683 23.2885 45.082 26.3348 33.3495 25.9701C21.6171 25.6054 10.2423 21.8455 0.603821 15.1459C2.62516 10.8936 5.81008 7.301 9.78951 4.78458C13.7689 2.26815 18.38 0.930891 23.0883 0.927734H43.3552C48.4445 0.927269 53.4117 2.48727 57.5869 5.39744C61.7621 8.3076 64.9447 12.428 66.7055 17.2031L66.7042 17.2005Z" fill="#0065F3" />
+                                </svg>
+
+
                             </svg>
                             <h3 className='text-center'>Alumno</h3>
                         </button>
@@ -251,6 +264,21 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
+                                    <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="41" y="45" width="45" height="44" viewBox="0 0 45 44" fill="none">
+                                    <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
+                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
+                                    <path d="M66.7042 17.2005C56.6683 23.2885 45.082 26.3348 33.3495 25.9701C21.6171 25.6054 10.2423 21.8455 0.603821 15.1459C2.62516 10.8936 5.81008 7.301 9.78951 4.78458C13.7689 2.26815 18.38 0.930891 23.0883 0.927734H43.3552C48.4445 0.927269 53.4117 2.48727 57.5869 5.39744C61.7621 8.3076 64.9447 12.428 66.7055 17.2031L66.7042 17.2005Z" fill="#0065F3" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg"  x="25" y="25" width="79" height="43" viewBox="0 0 79 43" fill="none">
+                                    <path d="M40.3575 0.719482L0.372253 13.9082L40.3575 24.6557L73.0726 17.8716V42.9975H78.8363V13.9082" fill="#0065F3" />
+                                </svg>
                             </svg>
                             <h3 className='text-center'>Alumni</h3>
                         </button>
@@ -288,7 +316,7 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
         <>
             <AlertContainer alerts={alerts}/>
 
-            <div className='container d-flex flex-column mt-5 'style={{maxWidth:640}}>
+            <div className='container d-flex flex-column mt-5 'style={{maxWidth:480}}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start '>
                     Paso 2 de 3. ¿Quién eres?
@@ -304,8 +332,22 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
+                                    <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="41" y="45" width="45" height="44" viewBox="0 0 45 44" fill="none">
+                                    <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
+                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
+                                    <path d="M66.7042 17.2006C56.6683 23.2886 45.082 26.3349 33.3495 25.9702C21.6171 25.6056 10.2423 21.8456 0.603821 15.1461C2.62516 10.8937 5.81008 7.30112 9.78951 4.7847C13.7689 2.26827 18.38 0.931013 23.0883 0.927857H43.3552C48.4445 0.927391 53.4117 2.48739 57.5869 5.39756C61.7621 8.30773 64.9447 12.4281 66.7055 17.2032L66.7042 17.2006Z" fill="#091229" />
+                                </svg>
+                            
+                            
                             </svg>
-                            <h3 className='text-center'>Profesor</h3>
+                            <h3 className='text-center ms-bold'>Profesor / Ext.</h3>
                         </button>
 
                         <button
@@ -316,20 +358,23 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
+                                    <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="41" y="45" width="45" height="44" viewBox="0 0 45 44" fill="none">
+                                    <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
+                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                    </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
+                                    <path d="M66.7042 17.2006C56.6683 23.2886 45.082 26.3349 33.3495 25.9702C21.6171 25.6056 10.2423 21.8456 0.603821 15.1461C2.62516 10.8937 5.81008 7.30112 9.78951 4.7847C13.7689 2.26827 18.38 0.931013 23.0883 0.927857H43.3552C48.4445 0.927391 53.4117 2.48739 57.5869 5.39756C61.7621 8.30773 64.9447 12.4281 66.7055 17.2032L66.7042 17.2006Z" fill="#091229" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" x="70" y="105" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                                    <path d="M10.0205 2.43462H7.51636V4.10459H10.0205V17.4643H1.67329V4.10459H4.17746V2.43462H1.67329C1.23053 2.43462 0.805897 2.61056 0.492815 2.92374C0.179733 3.23692 0.00384521 3.66168 0.00384521 4.10459V17.4643C0.00384521 17.9072 0.179733 18.332 0.492815 18.6452C0.805897 18.9584 1.23053 19.1343 1.67329 19.1343H10.0205C10.4633 19.1343 10.8879 18.9584 11.201 18.6452C11.5141 18.332 11.69 17.9072 11.69 17.4643V4.10459C11.69 3.66168 11.5141 3.23692 11.201 2.92374C10.8879 2.61056 10.4633 2.43462 10.0205 2.43462ZM5.84691 5.77455C6.28968 5.77455 6.71431 5.9505 7.02739 6.26368C7.34047 6.57686 7.51636 7.00162 7.51636 7.44452C7.51636 7.88742 7.34047 8.31219 7.02739 8.62537C6.71431 8.93855 6.28968 9.11449 5.84691 9.11449C5.40415 9.11449 4.97952 8.93855 4.66643 8.62537C4.35335 8.31219 4.17746 7.88742 4.17746 7.44452C4.17746 7.00162 4.35335 6.57686 4.66643 6.26368C4.97952 5.9505 5.40415 5.77455 5.84691 5.77455ZM9.18581 12.4544H2.50802V11.6194C2.50802 10.5089 4.73673 9.94947 5.84691 9.94947C6.9571 9.94947 9.18581 10.5089 9.18581 11.6194V12.4544ZM9.18581 14.9594H2.50802V14.1244H9.18581V14.9594ZM5.84691 16.6293H2.50802V15.7944H5.84691V16.6293ZM6.68164 4.10459H5.01219V0.764648H6.68164V4.10459Z" fill="white" />
+                                </svg>
                             </svg>
-                            <h3 className='text-center'>Coordinador</h3>
-                        </button>
-
-                        <button
-                            className={`custom-button ${selectedType === 'Departamentos' ? 'selected' : ''}`}
-                            onClick={() => handleTypeSelection('Departamentos')}
-                            style={{border: `2px solid ${selectedType === 'Departamentos' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-lg-block"
-                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Departamentos' ? 'var(--color-principal)' : '#D9D9D9'}/>
-                            </svg>
-                            <h3 className='text-center'>Departamentos</h3>
+                            <h3 className='text-center '>Coord. / Depto.</h3>
                         </button>
                     </div>
 

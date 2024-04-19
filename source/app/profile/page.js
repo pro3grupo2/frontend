@@ -88,7 +88,7 @@ export default function Profile() {
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal mt-2"> <Image src="/icons/enlace.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal "> <Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
@@ -200,7 +200,7 @@ export default function Profile() {
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal mt-2"> <Image src="/icons/enlace.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal mt-2"> <Image src="/icons/enlace.svg" alt="enlace.svg" className="d-start w-auto h-auto" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
