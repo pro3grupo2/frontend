@@ -18,6 +18,17 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
             setAsignaturas(data);
         });
     }, []);
+    
+    const changeFilterSvg = () => {
+        let filtersDiv = document.getElementById("filtersList");
+        let svgColor = document.getElementById("changeColor");
+        
+        if (filtersDiv.children.length === 0) {
+            svgColor.setAttribute("fill", "#091229");
+        } else if (filtersDiv.children.length > 0) {
+            svgColor.setAttribute("fill", "#0065F3");
+        }
+    }
 
     const createFilterButton = (id, title, onClick) => {
         let filtersList = document.getElementById("filtersList");
@@ -46,6 +57,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         
         if (asignatura === -1) {
             if (filter) filter.remove();
+            changeFilterSvg();
             return;
         }
         
@@ -54,6 +66,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         } else {
             createFilterButton("asignaturaFilter", asignaturas.find(a => a.id === parseInt(asignatura)).titulo, () => handleClass(-1));
         }
+        
+        changeFilterSvg();
     }
     
     const handleYear = (year) => {
@@ -64,6 +78,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         if (year === "null") {
             setAnio(2024);
             if (filter) filter.remove();
+            changeFilterSvg();
             return;
         }
 
@@ -74,6 +89,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         } else {
             createFilterButton("anioFilter", year, () => handleYear("null"));
         }
+        
+        changeFilterSvg();
     }
 
     const handlePremiado = (premio) => {
@@ -95,6 +112,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         } else if (premio === "null") {
             if (filter) filter.remove();
         }
+        
+        changeFilterSvg();
     }
     
     const handleFilters = () => {
@@ -110,14 +129,16 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         if (premioButton.classList.contains("visually-hidden")) {
             filters.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-                    <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="#091229"/>
+                    <path id="changeColor" d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="#091229"/>
                 </svg>`
         } else {
             filters.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="18" viewBox="0 0 12 18" fill="none">
-                    <path d="M7 15L7 3L5 3L5 15M0 18L2 18L2 -8.74228e-08L-7.86805e-07 0M12 11L12 7L10 7L10 11L12 11Z" fill="#091229"/>
+                    <path id="changeColor" d="M7 15L7 3L5 3L5 15M0 18L2 18L2 -8.74228e-08L-7.86805e-07 0M12 11L12 7L10 7L10 11L12 11Z" fill="#091229"/>
                 </svg>`
         }
+        
+        changeFilterSvg();
     }
 
     return (

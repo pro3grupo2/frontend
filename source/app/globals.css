@@ -164,7 +164,6 @@ body {
 .btn-outline-primary,
 .form-control:focus {
     border-color: var(--color-principal);
-    height: 48px!important;
 }
 
 .btn-color-primary {
@@ -175,7 +174,6 @@ body {
 .form-control:focus {
     box-shadow: 0 0 0 0.2rem var(--color-principal);
 }
-
 
 /* TIPOGRAFIA FIGMA*/
 
