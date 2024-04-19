@@ -1,16 +1,16 @@
-import React, {createRef, useRef, useState} from 'react'
+import React, { createRef, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
-import {EstructuraFormularios} from '@/components/Estructura'
-import {AlertContainer, create_alert} from "@/components/Alerts"
+import { EstructuraFormularios } from '@/components/Estructura'
+import { AlertContainer, create_alert } from "@/components/Alerts"
 
-import {check_email, check_password} from "@/utils/validation"
+import { check_email, check_password } from "@/utils/validation"
 
 import "../styles/signup.css"
 import Image from "next/image"
 
-const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
+const ControladorSiguienteAtras = ({ setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null }) => {
     return (
         <div className='d-flex gap-5 justify-content-between aligns-items-center mt-5 m-0'>
             <button
@@ -18,9 +18,9 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 type='button'
                 onClick={setPreviousPaso}
                 className='btn btn-outline-primary'
-                style={{width: '48px', height: '48px'}}>
+                style={{ width: '48px', height: '48px' }}>
                 <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
-                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229'/>
+                    <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229' />
                 </svg>
             </button>
 
@@ -29,14 +29,14 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 type='button'
                 onClick={setNextPaso}
                 className='btn btn-primary btn-color-primary btn-outline-primary fs-5 fw-bold'
-                style={{width: '184px', height: '48px'}}>
+                style={{ width: '184px', height: '48px' }}>
                 SIGUIENTE
             </button>
         </div>
     )
 }
 
-const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
+const PasoInicio = ({ setNextPaso, setPreviousPaso, email, setEmail }) => {
     const
         email_ref = useRef(null),
         [email_checks, setEmailChecks] = useState([])
@@ -56,7 +56,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5'style={{maxWidth:560}}>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{ maxWidth: 560 }}>
                 <div>
                     <h1 className='fw-bold'>Crear cuenta</h1>
                     <p className='pe-1 '>
@@ -102,7 +102,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
     )
 }
 
-const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
+const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, password }) => {
     const
         password_ref = useRef(null),
         password2_ref = useRef(null),
@@ -131,7 +131,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth:560}}>
+            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{ maxWidth: 560 }}>
                 <div>
                     <h1 className='fw-bold'>Termina de configura tu cuenta</h1>
                     <p className=' pe-1 '>
@@ -157,7 +157,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type="button"
                             className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
                             onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
-                            <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
+                            <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
                         </button>
                     </div>
 
@@ -178,7 +178,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             type="button"
                             className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
                             onClick={() => setTipoPassword2(tipo_password2 === 'password' ? 'text' : 'password')}>
-                            <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
+                            <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
                         </button>
                     </div>
 
@@ -200,7 +200,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
     )
 }
 
-const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
+const Paso2_live_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, setAlerts }) => {
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
@@ -221,9 +221,9 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
 
     return (
         <>
-            <AlertContainer alerts={alerts}/>
+            <AlertContainer alerts={alerts} />
 
-            <div className='container d-flex flex-column mt-5'style={{maxWidth:480}}>
+            <div className='container d-flex flex-column mt-5' style={{ maxWidth: 480 }}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start'>
                     Paso 2 de 3. ¿Quién eres?
@@ -236,8 +236,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                             onClick={() => handleTypeSelection('Alumno')}
                             style={{ border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumno' ? 'var(--color-principal)' : '#D9D9D9'} />
-                                    
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9' />
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
                                     <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
                                 </svg>
@@ -245,8 +244,8 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                     <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
-                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
-                                    </svg>
+                                    <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
                                     <path d="M66.7042 17.2005C56.6683 23.2885 45.082 26.3348 33.3495 25.9701C21.6171 25.6054 10.2423 21.8455 0.603821 15.1459C2.62516 10.8936 5.81008 7.301 9.78951 4.78458C13.7689 2.26815 18.38 0.930891 23.0883 0.927734H43.3552C48.4445 0.927269 53.4117 2.48727 57.5869 5.39744C61.7621 8.3076 64.9447 12.428 66.7055 17.2031L66.7042 17.2005Z" fill="#0065F3" />
                                 </svg>
@@ -259,11 +258,11 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                         <button
                             className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Alumni')}
-                            style={{border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}`}}>
+                            style={{ border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block"
-                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Alumni' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9' />
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
                                     <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
                                 </svg>
@@ -271,12 +270,12 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                     <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
-                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
-                                    </svg>
+                                    <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
                                     <path d="M66.7042 17.2005C56.6683 23.2885 45.082 26.3348 33.3495 25.9701C21.6171 25.6054 10.2423 21.8455 0.603821 15.1459C2.62516 10.8936 5.81008 7.301 9.78951 4.78458C13.7689 2.26815 18.38 0.930891 23.0883 0.927734H43.3552C48.4445 0.927269 53.4117 2.48727 57.5869 5.39744C61.7621 8.3076 64.9447 12.428 66.7055 17.2031L66.7042 17.2005Z" fill="#0065F3" />
                                 </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg"  x="25" y="25" width="79" height="43" viewBox="0 0 79 43" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="25" y="25" width="79" height="43" viewBox="0 0 79 43" fill="none">
                                     <path d="M40.3575 0.719482L0.372253 13.9082L40.3575 24.6557L73.0726 17.8716V42.9975H78.8363V13.9082" fill="#0065F3" />
                                 </svg>
                             </svg>
@@ -284,14 +283,14 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                         </button>
                     </div>
 
-                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso} />
                 </div>
             </div>
         </>
     )
 }
 
-const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
+const Paso2_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, setAlerts }) => {
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
@@ -314,9 +313,9 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
 
     return (
         <>
-            <AlertContainer alerts={alerts}/>
+            <AlertContainer alerts={alerts} />
 
-            <div className='container d-flex flex-column mt-5 'style={{maxWidth:480}}>
+            <div className='container d-flex flex-column mt-5 ' style={{ maxWidth: 480 }}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start '>
                     Paso 2 de 3. ¿Quién eres?
@@ -327,11 +326,11 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                         <button
                             className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Profesor')}
-                            style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
+                            style={{ border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block"
-                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Profesor' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                                width='130' height='129' viewBox='0 0 130 129' fill='none'
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9' />
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
                                     <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
                                 </svg>
@@ -339,13 +338,13 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                                     <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
-                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
-                                    </svg>
+                                    <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
                                     <path d="M66.7042 17.2006C56.6683 23.2886 45.082 26.3349 33.3495 25.9702C21.6171 25.6056 10.2423 21.8456 0.603821 15.1461C2.62516 10.8937 5.81008 7.30112 9.78951 4.7847C13.7689 2.26827 18.38 0.931013 23.0883 0.927857H43.3552C48.4445 0.927391 53.4117 2.48739 57.5869 5.39756C61.7621 8.30773 64.9447 12.4281 66.7055 17.2032L66.7042 17.2006Z" fill="#091229" />
                                 </svg>
-                            
-                            
+
+
                             </svg>
                             <h3 className='text-center ms-bold'>Profesor / Ext.</h3>
                         </button>
@@ -353,11 +352,9 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                         <button
                             className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
                             onClick={() => handleTypeSelection('Coordinador')}
-                            style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
-                            <svg className="d-none d-lg-block"
-                                 width='130' height='129' viewBox='0 0 130 129' fill='none'
-                                 xmlns='http://www.w3.org/2000/svg'>
-                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill={selectedType === 'Coordinador' ? 'var(--color-principal)' : '#D9D9D9'}/>
+                            style={{ border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}` }}>
+                            <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' xmlns='http://www.w3.org/2000/svg'>
+                                <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9' />
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
                                     <path d="M1.44959 22.5623C4.51495 12.7934 3.95376 6.85377 19.8252 1.41224C29.4652 -1.89283 46.2835 1.1964 50.8299 10.3636C57.3814 23.5755 51.844 36.8469 48.3702 51.1914C46.5585 51.0954 44.7302 51.0201 42.894 50.9518V45.2143V53.7746C28.5819 53.332 22.3816 53.8126 7.47356 54.0993C6.13999 43.9458 -1.61576 32.3312 1.44959 22.5623Z" fill="#091229" />
                                 </svg>
@@ -365,8 +362,8 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                                     <path d="M22.9282 43.8922C35.0496 43.8922 44.876 34.0657 44.876 21.9442C44.876 9.82258 35.0496 -0.00390625 22.9282 -0.00390625C10.8068 -0.00390625 0.980408 9.82258 0.980408 21.9442C0.980408 34.0657 10.8068 43.8922 22.9282 43.8922Z" fill="#FEB8B8" />
                                 </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="53" height="28" viewBox="0 0 53 28" fill="none">
-                                        <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
-                                    </svg>
+                                    <path d="M12.6122 4.5004C16.5849 2.0784 21.1353 0.768213 25.7876 0.706849C30.44 0.645485 35.0233 1.83519 39.0585 4.15157C43.0936 6.46795 46.4324 9.8259 48.7255 13.8743C51.0187 17.9227 52.1821 22.5129 52.094 27.1649C40.5368 27.6964 28.3965 27.8349 16.0867 27.8587L13.1753 20.7377L11.4603 27.8633C7.70949 27.8633 3.95134 27.8583 0.185865 27.8484C0.0325214 23.2096 1.09951 18.6117 3.28016 14.5144C5.46081 10.4172 8.67874 6.96412 12.6122 4.5004Z" fill="#091229" />
+                                </svg>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="31" y="102" width="67" height="26" viewBox="0 0 67 26" fill="none">
                                     <path d="M66.7042 17.2006C56.6683 23.2886 45.082 26.3349 33.3495 25.9702C21.6171 25.6056 10.2423 21.8456 0.603821 15.1461C2.62516 10.8937 5.81008 7.30112 9.78951 4.7847C13.7689 2.26827 18.38 0.931013 23.0883 0.927857H43.3552C48.4445 0.927391 53.4117 2.48739 57.5869 5.39756C61.7621 8.30773 64.9447 12.4281 66.7055 17.2032L66.7042 17.2006Z" fill="#091229" />
                                 </svg>
@@ -378,14 +375,14 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                         </button>
                     </div>
 
-                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso} />
                 </div>
             </div>
         </>
     )
 }
 
-const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setAlerts}) => {
+const Paso_coordinador = ({ setNextPaso, setPreviousPaso, setCodigo, alerts, setAlerts }) => {
     const
         refs = useRef([]),
         next_ref = useRef(null)
@@ -394,11 +391,11 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
 
     return (
         <>
-            <AlertContainer alerts={alerts}/>
+            <AlertContainer alerts={alerts} />
 
-            <div className='container d-flex flex-column mt-5'style={{maxWidth:480, maxHeight:305}}>
-                    <h1 className='fw-bold mt-5'>Verifícate</h1>
-                    <p className='pe-1  '>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
+            <div className='container d-flex flex-column mt-5' style={{ maxWidth: 480, maxHeight: 305 }}>
+                <h1 className='fw-bold mt-5'>Verifícate</h1>
+                <p className='pe-1  '>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
 
 
                 <div className='d-flex flex-row gap-4 mt-5'>
@@ -423,30 +420,30 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
                                 maxLength={1} // Restringe la entrada a un solo carácter
                                 className='form-control text-center'
                                 autoComplete="off" // Evita la autocompletación del navegador
-                                style={{height: '48px', border: "2px solid #808080"}}
+                                style={{ height: '48px', border: "2px solid #808080" }}
                             />
                         ))
                     }
                 </div>
 
-                <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref}/>
+                <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref} />
             </div>
         </>
     )
 }
 
-const PasoFin = ({setNextPaso, setPreviousPaso}) => {
+const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
     return (
-        <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
+        <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{ minHeight: '60vh' }}>
             <h1 className="display-5 fw-bold mb-3">¡Proceso de inscripción finalizado!</h1>
             <p className='ms-font fs-5 lead w-50'>Revisa tu correo para empezar a navegar en la plataforma</p>
 
-            <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
+            <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto" />
 
             <button
                 type='button'
                 onClick={setNextPaso}
-                className='btn btn-primary border-5 ms-button p-3 w-50' style={{minWidth: "fit-content"}}>
+                className='btn btn-primary border-5 ms-button p-3 w-50' style={{ minWidth: "fit-content" }}>
                 REVISAR CORREO
             </button>
         </div>
