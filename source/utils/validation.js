@@ -9,27 +9,27 @@ const check_password = (password, callback = undefined) => {
 
     if (password.length < 8) {
         check = false
-        if (callback) callback('La contraseña debe tener al menos 8 caracteres')
+        if (callback) callback('La contraseña no tiene al menos 8 caracteres')
     }
 
     if (!/[a-z]/.test(password)) {
         check = false
-        if (callback) callback('La contraseña debe tener al menos una letra minúscula')
+        if (callback) callback('La contraseña no tiene al menos una letra minúscula')
     }
 
     if (!/[A-Z]/.test(password)) {
         check = false
-        if (callback) callback('La contraseña debe tener al menos una letra mayúscula')
+        if (callback) callback('La contraseña no tiene al menos una letra mayúscula')
     }
 
     if (!/[0-9]/.test(password)) {
         check = false
-        if (callback) callback('La contraseña debe tener al menos un número')
+        if (callback) callback('La contraseña no tiene al menos un número')
     }
 
     if (!/[!"#$%&'()*+,-./:;<=>?@[^_`{|}~]/.test(password)) {
         check = false
-        if (callback) callback('La contraseña debe tener al menos un caracter especial')
+        if (callback) callback('La contraseña no tiene al menos un caracter especial')
     }
 
     return check

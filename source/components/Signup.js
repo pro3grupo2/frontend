@@ -28,7 +28,7 @@ const ControladorSiguienteAtras = ({ setNextPaso, setPreviousPaso, setNextPasoRe
                 ref={setNextPasoRef}
                 type='button'
                 onClick={setNextPaso}
-                className='btn btn-primary btn-color-primary btn-outline-primary fs-5 fw-bold'
+                className='btn btn-primary btn-color-primary  border-5 fs-5 fw-bold'
                 style={{ width: '184px', height: '48px' }}>
                 SIGUIENTE
             </button>
@@ -135,12 +135,13 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, password }) => {
                 <div>
                     <h1 className='fw-bold'>Termina de configura tu cuenta</h1>
                     <p className=' pe-1 '>
-                        Paso 1 de 3. Crea una contraseña para continuar
+                        Paso 1 de 4. Crea una contraseña para continuar
                     </p>
                 </div>
 
                 <div>
-                    <div className="position-relative d-flex mt-3">
+                    
+                    <div className="position-relative d-flex mt-3 w-100">
                         <input
                             ref={password_ref}
                             type={tipo_password}
@@ -151,6 +152,8 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, password }) => {
                             onFocus={() => password_ref.current.classList.remove('border-error')}
                             placeholder="Contraseña"
                             autoComplete="off"
+
+                            
                         />
 
                         <button
@@ -159,6 +162,43 @@ const Paso1 = ({ setNextPaso, setPreviousPaso, setPassword, password }) => {
                             onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                             <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
                         </button>
+                        <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='300'
+                                height='200'
+                                viewBox='0 0 300 200'
+                                fill='none'
+                                style={{ borderColor: password_ref ? 'var(--color-error)' : 'initial' }}
+                                className='position-absolute top-50 start-100 translate-middle-y d-none d-xl-block flex-shrink-1  mx-xl-1 '
+                            >
+                                <mask id='path-1-inside-1_32_432' fill='white'>
+                                    <path
+                                        fillRule='evenodd'
+                                        clipRule='evenodd'
+                                        d='M24.4069 0C19.9886 0 16.4069 3.58172 16.4069 8V88.3481L0.61786 94.8773C-0.205953 95.218 -0.205954 96.3848 0.61786 96.7255L16.4069 103.255V187C16.4069 191.418 19.9886 195 24.4069 195H230.383C234.801 195 238.383 191.418 238.383 187V8C238.383 3.58172 234.801 0 230.383 0H24.4069Z'
+                                    />
+                                </mask>
+                                <path
+                                    fillRule='evenodd'
+                                    clipRule='evenodd'
+                                    d='M24.4069 0C19.9886 0 16.4069 3.58172 16.4069 8V88.3481L0.61786 94.8773C-0.205953 95.218 -0.205954 96.3848 0.61786 96.7255L16.4069 103.255V187C16.4069 191.418 19.9886 195 24.4069 195H230.383C234.801 195 238.383 191.418 238.383 187V8C238.383 3.58172 234.801 0 230.383 0H24.4069Z'
+                                    fill='white'
+                                />
+                                <path
+                                    d='M16.4069 88.3481L16.789 89.2722L17.4069 89.0167V88.3481H16.4069ZM0.61786 94.8773L0.23572 93.9532H0.23572L0.61786 94.8773ZM0.61786 96.7255L0.235719 97.6496H0.235719L0.61786 96.7255ZM16.4069 103.255H17.4069V102.586L16.789 102.331L16.4069 103.255ZM17.4069 8C17.4069 4.13401 20.5409 1 24.4069 1V-1C19.4363 -1 15.4069 3.02944 15.4069 8H17.4069ZM17.4069 88.3481V8H15.4069V88.3481H17.4069ZM1 95.8014L16.789 89.2722L16.0247 87.424L0.23572 93.9532L1 95.8014ZM1 95.8014H1L0.23572 93.9532C-1.4119 94.6345 -1.41191 96.9683 0.235719 97.6496L1 95.8014ZM16.789 102.331L1 95.8014L0.235719 97.6496L16.0247 104.179L16.789 102.331ZM17.4069 187V103.255H15.4069V187H17.4069ZM24.4069 194C20.5409 194 17.4069 190.866 17.4069 187H15.4069C15.4069 191.971 19.4363 196 24.4069 196V194ZM230.383 194H24.4069V196H230.383V194ZM237.383 187C237.383 190.866 234.249 194 230.383 194V196C235.354 196 239.383 191.971 239.383 187H237.383ZM237.383 8V187H239.383V8H237.383ZM230.383 1C234.249 1 237.383 4.13401 237.383 8H239.383C239.383 3.02943 235.354 -1 230.383 -1V1ZM24.4069 1H230.383V-1H24.4069V1Z'
+                                    fill='#091229'
+                                    mask='url(#path-1-inside-1_32_432)'
+                                />
+                                <text x='30' y='30' fill='#000' fontFamily='Montserrat' fontSize='16' fontWeight='700'>Tu contraseña debe </text>
+                                <text x='35' y='50' fill='#000' fontFamily='Montserrat' fontSize='16' fontWeight='700'>tener al menos:</text>
+                                <text x='30' y='80' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 8 caracteres</text>
+                                <text x='30' y='100' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 Mayúscula</text>
+                                <text x='30' y='120' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 número</text>
+                                <text x='30' y='140' fill='#000' fontFamily='Montserrat' fontSize='14' fontWeight='400'>- Mínimo 1 carácter especial</text>
+                            </svg>
+
+                        
+                        
                     </div>
 
                     <div className="position-relative d-flex mt-3">
@@ -226,13 +266,13 @@ const Paso2_live_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, set
             <div className='container d-flex flex-column mt-5' style={{ maxWidth: 480 }}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start'>
-                    Paso 2 de 3. ¿Quién eres?
+                    Paso 2 de 4. ¿Quién eres?
                 </p>
 
                 <div>
                     <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
-                            className={`custom-button ${selectedType === 'Alumno' ? 'selected' : ''}`}
+                            className={`custom-button ${selectedType === 'Alumno' ? 'selected shadow-lg' : ''} `}
                             onClick={() => handleTypeSelection('Alumno')}
                             style={{ border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -256,7 +296,7 @@ const Paso2_live_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, set
                         </button>
 
                         <button
-                            className={`custom-button ${selectedType === 'Alumni' ? 'selected' : ''}`}
+                            className={`custom-button ${selectedType === 'Alumni' ? 'selected shadow-lg' : ''}`}
                             onClick={() => handleTypeSelection('Alumni')}
                             style={{ border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block"
@@ -318,13 +358,13 @@ const Paso2_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, setAlert
             <div className='container d-flex flex-column mt-5 ' style={{ maxWidth: 480 }}>
                 <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
                 <p className='pe-1 text-center text-lg-start '>
-                    Paso 2 de 3. ¿Quién eres?
+                    Paso 2 de 4. ¿Quién eres?
                 </p>
 
                 <div>
                     <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
-                            className={`custom-button ${selectedType === 'Profesor' ? 'selected' : ''}`}
+                            className={`custom-button ${selectedType === 'Profesor' ? 'selected shadow-lg' : ''}`}
                             onClick={() => handleTypeSelection('Profesor')}
                             style={{ border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block"
@@ -350,7 +390,7 @@ const Paso2_utad_com = ({ setNextPaso, setPreviousPaso, setRol, alerts, setAlert
                         </button>
 
                         <button
-                            className={`custom-button ${selectedType === 'Coordinador' ? 'selected' : ''}`}
+                            className={`custom-button ${selectedType === 'Coordinador' ? 'selected shadow-lg' : ''}`}
                             onClick={() => handleTypeSelection('Coordinador')}
                             style={{ border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}` }}>
                             <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' xmlns='http://www.w3.org/2000/svg'>
@@ -395,7 +435,7 @@ const Paso_coordinador = ({ setNextPaso, setPreviousPaso, setCodigo, alerts, set
 
             <div className='container d-flex flex-column mt-5' style={{ maxWidth: 480, maxHeight: 305 }}>
                 <h1 className='fw-bold mt-5'>Verifícate</h1>
-                <p className='pe-1  '>Paso 3 de 3. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
+                <p className='pe-1  '>Paso 2 de 4. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
 
 
                 <div className='d-flex flex-row gap-4 mt-5'>
@@ -420,7 +460,7 @@ const Paso_coordinador = ({ setNextPaso, setPreviousPaso, setCodigo, alerts, set
                                 maxLength={1} // Restringe la entrada a un solo carácter
                                 className='form-control text-center'
                                 autoComplete="off" // Evita la autocompletación del navegador
-                                style={{ height: '48px', border: "2px solid #808080" }}
+                                style={{ height: '48px', border: "2px solid #808080",maxWidth:48 }}
                             />
                         ))
                     }
@@ -445,6 +485,24 @@ const PasoFin = ({ setNextPaso, setPreviousPaso }) => {
                 onClick={setNextPaso}
                 className='btn btn-primary border-5 ms-button p-3 w-50' style={{ minWidth: "fit-content" }}>
                 REVISAR CORREO
+            </button>
+        </div>
+    )
+}
+
+const PasoFinFin = ({ setNextPaso, setPreviousPaso }) => {
+    return (
+        <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{ minHeight: '60vh' }}>
+            <h1 className="display-5 fw-bold mb-3">Finalizar inscripción</h1>
+            <p className='ms-font fs-5 lead w-50'>Paso 4 de 4. Para completar el proceso, haga clic en el siguiente botón para acceder a Reservorio U-tad.</p>
+
+            <Image src="/images/fin.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto" />
+
+            <button
+                type='button'
+                onClick={setNextPaso}
+                className='btn btn-primary border-5 ms-button p-3 w-50' style={{ minWidth: "fit-content" }}>
+                Reservorio U-tad
             </button>
         </div>
     )
