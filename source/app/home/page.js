@@ -110,17 +110,17 @@ export default function Home() {
     };
 
     const handleAsignatura = (clase) => {
-        let asignatura = clase.toString();
+        let titulacion = clase.toString();
         
-        if (asignatura === "-1") {
+        if (titulacion === "-1") {
             setFilters(prevFilters => {
-                const { asignaturas, ...restFilters } = prevFilters;
+                const { titulaciones, ...restFilters } = prevFilters;
                 return { ...restFilters };
             });
             return;
         }
         
-        setFilters({...filters, asignaturas: asignatura});
+        setFilters({...filters, titulaciones: titulacion});
     }
     
     const handlePremio = (premiado) => {
