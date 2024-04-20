@@ -7,6 +7,7 @@ import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 import Loading from '@/components/Loading';
 import Image from 'next/image';
+import {useRouter} from "next/navigation";
 
 export default function Project({ params }) {
     const { user, isLoading } = useAuth();
@@ -14,6 +15,7 @@ export default function Project({ params }) {
     const [userProjects, setUserProjects] = useState([]);
     const [otherProjects, setOtherProjects] = useState([]);
     const [proyectoLoaded, setProyectoLoaded] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -36,6 +38,10 @@ export default function Project({ params }) {
     if (isLoading || !proyectoLoaded) {
         return <Loading />
     }
+
+    const handleCardClick = (id) => {
+        router.push(`/project/${id}`);
+    };
 
     if (!proyecto) {
         return (
@@ -92,7 +98,7 @@ export default function Project({ params }) {
                         <div className="col-12">
                             <h2 className="ms-black">Tus proyectos</h2>
                             <div className="row g-4">
-                                {userProjects.map(project => <ProjectCard key={project.id} project={project} />)}
+                                {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                             </div>
                         </div>
                     )}
@@ -107,7 +113,7 @@ export default function Project({ params }) {
                         <div className="col-12">
                             <h2 className="ms-black">Otros proyectos</h2>
                             <div className="row g-4">
-                                {otherProjects.map(project => <ProjectCard key={project.id} project={project} />)}
+                                {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                             </div>
                         </div>
                     )}

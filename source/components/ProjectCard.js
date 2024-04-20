@@ -1,9 +1,14 @@
 import Image from 'next/image';
-
+import "@/styles/project-card.css";
 export default function ProjectCard({ project, onClick }) {
+    const handleHover = () => {
+        // Change authors if more than 3 authors
+        
+    }
+    
     return (
-        <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4">
-            <div className="position-relative shadow card border-0 rounded h-100" onClick={() => onClick(project.id)}>
+        <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
+            <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={handleHover} onClick={() => onClick(project.id)}>
                 {project.premiado &&
                     <div className="bg-primary rounded position-absolute top-0 end-0 z-3 p-2">
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 17 20" fill="none">
@@ -11,7 +16,7 @@ export default function ProjectCard({ project, onClick }) {
                         </svg>
                     </div>
                 }
-                <div className="h-75 position-relative">
+                <div id="imageSize" className="position-relative">
                     <Image
                         src={project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`}
                         className="card-image-top w-100 h-100 position-relative object-fit-cover border rounded-top"
@@ -19,7 +24,7 @@ export default function ProjectCard({ project, onClick }) {
                         alt="Project Image"
                     />
                 </div>
-                <div className="card-body d-flex flex-column justify-content-end">
+                <div className="card-body d-flex flex-column justify-content-start">
                     <h5 className="card-title fw-bold">{project.titulo}</h5>
                     <p className="card-text text-secondary-emphasis">{project.usuarios.nombre_completo}</p>
                     {

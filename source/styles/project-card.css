@@ -1,0 +1,8 @@
+﻿.project-card > #imageSize {
+    height: 65%;
+    transition: height 0.5s;
+}
+
+.project-card:hover > #imageSize {
+    height: 30%;
+}
