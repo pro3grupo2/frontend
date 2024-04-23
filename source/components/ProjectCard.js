@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import "@/styles/project-card.css";
-import {useState} from "react";
+import { useState } from "react";
 
 export default function ProjectCard({ project, onClick }) {
     const [isHovered, setIsHovered] = useState(false);
-    
+
     const handleHover = (hover) => {
         setIsHovered(hover);
     }
-    
+
     return (
-        <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
+        <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{ height: 340 }}>
             <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} onClick={() => onClick(project.id)}>
                 {project.premiado &&
                     <div className="bg-primary rounded position-absolute top-0 end-0 z-3 p-2">

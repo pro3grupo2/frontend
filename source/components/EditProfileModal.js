@@ -27,10 +27,10 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
     }
 
     const handleClose = () => {
-        setShow(false); 
+        setShow(false);
     };
 
-    
+
     if (loading) return <Loading />
 
     return (
@@ -39,7 +39,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{ maxWidth: 1176,maxHeight:618 }}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{ maxWidth: 1176, maxHeight: 618 }}>
                 <div className="d-flex flex-column justify-content-between w-100 mt-3" style={{ maxWidth: 488 }}>
                     <div className="image-container" style={{ width: '100%', height: '0', paddingBottom: '100%', position: 'relative', overflow: 'hidden' }}>
                         <Image
@@ -53,32 +53,32 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
                         />
                     </div>
                 </div>
-            
 
 
 
-            <div className="d-flex flex-column justify-content-between w-100" style={{ maxWidth: 488 }}>
-                <div className="w-100 ">
-                    <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)} />
+
+                <div className="d-flex flex-column justify-content-between w-100" style={{ maxWidth: 488 }}>
+                    <div className="w-100 ">
+                        <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)} />
 
 
-                    <label className=" ms-regular-black">Link <span className="color-error">*</span></label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text border-normal fw-semibold">Enlace URL</span>
-                        <input type="text" className="form-control border-normal " placeholder="Pega tu link aqui." value={portfolio} onChange={(e) => setPortfolio(e.target.value)} />
+                        <label className=" ms-regular-black">Link <span className="color-error">*</span></label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text border-normal fw-semibold">Enlace URL</span>
+                            <input type="text" className="form-control border-normal " placeholder="Pega tu link aqui." value={portfolio} onChange={(e) => setPortfolio(e.target.value)} />
+                        </div>
+                        <div class="mb-3">
+                            <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
+                            <textarea className="form-control border-normal" placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
-                        <textarea className="form-control border-normal" placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
+
+                    <div className="d-flex flex-row justify-content-end gap-3">
+                        <button className="btn btn-primary btn-font color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>Editar perfil</button>
                     </div>
                 </div>
+            </div >
 
-                <div className="d-flex flex-row justify-content-end gap-3">
-                    <button className="btn btn-primary btn-font color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>Editar perfil</button>
-                </div>
-            </div>
-        </div >
-            
         </>
     )
 }

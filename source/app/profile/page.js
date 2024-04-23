@@ -79,7 +79,7 @@ export default function Profile() {
             .join(' ')
         : "";
 
-    if (user.rol=="coordinador") return (
+    if (user.rol == "coordinador") return (
         <>
             {modal_show_edit_profile || modal_show_new_project ? (
                 <div className="backdrop"></div>
@@ -191,7 +191,7 @@ export default function Profile() {
         </>
     )
 
-    if (user.rol=="alumno") return (
+    if (user.rol == "alumno") return (
         <>
             {modal_show_edit_profile || modal_show_new_project ? (
                 <div className="backdrop"></div>
@@ -214,7 +214,7 @@ export default function Profile() {
                     </div>
 
 
-                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208}/>
+                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208} />
                 </div>
 
                 <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">

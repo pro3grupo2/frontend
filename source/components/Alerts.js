@@ -1,4 +1,4 @@
-const AlertContainer = ({alerts}) => {
+const AlertContainer = ({ alerts }) => {
     return (
         <div className="position-fixed top-0 end-0 mt-3 me-3 z-3">
             {alerts}

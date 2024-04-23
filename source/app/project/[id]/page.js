@@ -7,7 +7,7 @@ import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 import Loading from '@/components/Loading';
 import Image from 'next/image';
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Project({ params }) {
     const { user, isLoading } = useAuth();
@@ -31,11 +31,11 @@ export default function Project({ params }) {
             let filters = {
                 busqueda: proyecto.usuarios.correo
             };
-            
+
             get_proyectos(token, 0, filters).then(data => {
                 setUserProjects(data.filter(project => project.id !== proyecto.id));
             });
-            
+
             get_proyectos(token).then(data => {
                 setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id));
             });
@@ -64,7 +64,7 @@ export default function Project({ params }) {
                 <p className="fs-6 fw-bolder">
                     <button className="border border-0 bg-transparent me-5" onClick={() => history.back()}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
+                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3" />
                         </svg>
                     </button>
                     {proyecto.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.titulo + '/ ' + proyecto.proyectos_asignaturas[0].asignaturas.titulo + '/ ' + proyecto.anio}
@@ -79,7 +79,7 @@ export default function Project({ params }) {
                         }
                     </p>
                     <div className="d-flex justify-content-end mb-3">
-                        {user.rol === "coordinador" && 
+                        {user.rol === "coordinador" &&
                             <>
                                 <button className="btn btn-outline-dark rounded-circle me-3 p-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -93,12 +93,12 @@ export default function Project({ params }) {
                                 </button>
                                 <button className="btn btn-outline-dark rounded-circle me-3 p-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 20" fill="none">
-                                        <path d="M15.2917 1.66667H11.6458L10.6042 0.625H5.39583L4.35417 1.66667H0.708334V3.75H15.2917M1.75 17.2917C1.75 17.8442 1.96949 18.3741 2.36019 18.7648C2.7509 19.1555 3.2808 19.375 3.83333 19.375H12.1667C12.7192 19.375 13.2491 19.1555 13.6398 18.7648C14.0305 18.3741 14.25 17.8442 14.25 17.2917V4.79167H1.75V17.2917Z" fill="#6E7377"/>
+                                        <path d="M15.2917 1.66667H11.6458L10.6042 0.625H5.39583L4.35417 1.66667H0.708334V3.75H15.2917M1.75 17.2917C1.75 17.8442 1.96949 18.3741 2.36019 18.7648C2.7509 19.1555 3.2808 19.375 3.83333 19.375H12.1667C12.7192 19.375 13.2491 19.1555 13.6398 18.7648C14.0305 18.3741 14.25 17.8442 14.25 17.2917V4.79167H1.75V17.2917Z" fill="#6E7377" />
                                     </svg>
                                 </button>
                             </>
                         }
-                        {user.rol === "profesor" && 
+                        {user.rol === "profesor" &&
                             <>
                                 <button className="btn btn-outline-dark rounded-circle me-3 p-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -117,7 +117,7 @@ export default function Project({ params }) {
                     {userProjects.length > 0 && (
                         <div className="col-12">
                             <div className="row g-4">
-                                {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                                {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
                             </div>
                         </div>
                     )}
@@ -131,7 +131,7 @@ export default function Project({ params }) {
                     {otherProjects.length > 0 && (
                         <div className="col-12">
                             <div className="row g-4">
-                                {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                                {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
                             </div>
                         </div>
                     )}

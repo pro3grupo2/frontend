@@ -10,7 +10,7 @@ export default function Notfound() {
 
             <div className="d-flex flex-column justify-content-between gap-5 w-50 h-50 mt-5">
                 <div className="d-flex flex-column gap-3">
-                    <h1 className=" fw-bold display-4">Ups! Parece que <br/>esta página no <br/> existe</h1>
+                    <h1 className=" fw-bold display-4">Ups! Parece que <br />esta página no <br /> existe</h1>
                     <p className="notfound-subtitle">Puede que la URL esté mal escrita o que el enlace ya no exista. <br />Prueba alguna de estas opciones:</p>
 
                     <div className="d-flex flex-column flex-sm-row gap-3">

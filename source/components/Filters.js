@@ -1,7 +1,7 @@
 import { get_areas } from "@/api/v1/areas";
 import { get_asignaturas } from "@/api/v1/asignaturas";
 import { useEffect, useState } from "react";
-import {get_titulaciones} from "@/api/v1/titulaciones";
+import { get_titulaciones } from "@/api/v1/titulaciones";
 
 export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio, handleAnio, handleAsignatura }) {
     const [areas, setAreas] = useState([]);
@@ -14,16 +14,16 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         get_areas(token).then(data => {
             setAreas(data);
         });
-        
+
         get_titulaciones(token).then(data => {
             setAsignaturas(data);
         });
     }, []);
-    
+
     const changeFilterSvg = () => {
         let filtersDiv = document.getElementById("filtersList");
         let svgColor = document.getElementById("changeColor");
-        
+
         if (filtersDiv.children.length === 0) {
             svgColor.setAttribute("fill", "#091229");
         } else if (filtersDiv.children.length > 0) {
@@ -53,29 +53,29 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
 
     const handleClass = (asignatura) => {
         handleAsignatura(asignatura);
-        
+
         let filter = document.getElementById("asignaturaFilter");
-        
+
         if (asignatura === -1) {
             if (filter) filter.remove();
             changeFilterSvg();
             return;
         }
-        
+
         if (filter) {
             filter.innerHTML = asignaturas.find(a => a.id === parseInt(asignatura)).titulo + " <span class='ms-3' aria-hidden='true'>&times;</span>";
         } else {
             createFilterButton("asignaturaFilter", asignaturas.find(a => a.id === parseInt(asignatura)).titulo, () => handleClass(-1));
         }
-        
+
         changeFilterSvg();
     }
-    
+
     const handleYear = (year) => {
         handleAnio(year);
 
         let filter = document.getElementById("anioFilter");
-        
+
         if (year === "null") {
             setAnio(2024);
             if (filter) filter.remove();
@@ -90,7 +90,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         } else {
             createFilterButton("anioFilter", year, () => handleYear("null"));
         }
-        
+
         changeFilterSvg();
     }
 
@@ -105,7 +105,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                 filter.innerHTML = "Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
             }
         } else if (premio === "false") {
-            if (filter) { 
+            if (filter) {
                 filter.innerHTML = "No Premiados <span class='ms-3' aria-hidden='true'>&times;</span>";
             } else {
                 createFilterButton("premiadoFilter", "No Premiados", () => handlePremiado("null"));
@@ -113,20 +113,20 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         } else if (premio === "null") {
             if (filter) filter.remove();
         }
-        
+
         changeFilterSvg();
     }
-    
+
     const handleFilters = () => {
         let filters = document.getElementById("svgFilter");
         let premioButton = document.getElementById("premioButton");
         let asignaturasButton = document.getElementById("asignaturasButton");
         let yearButton = document.getElementById("yearButton");
-        
+
         premioButton.classList.toggle("visually-hidden");
         asignaturasButton.classList.toggle("visually-hidden");
         yearButton.classList.toggle("visually-hidden");
-        
+
         if (premioButton.classList.contains("visually-hidden")) {
             filters.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
@@ -138,7 +138,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                     <path id="changeColor" d="M7 15L7 3L5 3L5 15M0 18L2 18L2 -8.74228e-08L-7.86805e-07 0M12 11L12 7L10 7L10 11L12 11Z" fill="#091229"/>
                 </svg>`
         }
-        
+
         changeFilterSvg();
     }
 
@@ -146,26 +146,26 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
         <>
             <div className="row mb-4 align-items-center mx-sm-1 mx-md-1">
                 <div id="filters" onClick={handleFilters}
-                     className="col-md-12 col-4 d-flex justify-content-around align-items-center border border-black border-2 rounded mx-sm-2 mx-md-3 mt-1"style={{height:40, maxWidth: 158}}>
+                    className="col-md-12 col-4 d-flex justify-content-around align-items-center border border-black border-2 rounded mx-sm-2 mx-md-3 mt-1" style={{ height: 40, maxWidth: 158 }}>
                     <span className="d-none d-xl-block flex-shrink-1">Filtro</span>
                     <span id="svgFilter">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-                            <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black"/>
+                            <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="black" />
                         </svg>
                     </span>
                 </div>
-                <div id="premioButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1"style={{height:40, minWidth:149}}>
+                <div id="premioButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1" style={{ height: 40, minWidth: 149 }}>
                     <div className="dropdown border border-black border-2 rounded w-100 h-100" >
-                    <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Premio
                         </button>
                         <ul className="dropdown-menu">
-                            <li><button onClick={() => {handlePremiado("true")}} className="dropdown-item">Si</button></li>
-                            <li><button onClick={() => {handlePremiado("false")}} className="dropdown-item">No</button></li>
+                            <li><button onClick={() => { handlePremiado("true") }} className="dropdown-item">Si</button></li>
+                            <li><button onClick={() => { handlePremiado("false") }} className="dropdown-item">No</button></li>
                         </ul>
                     </div>
                 </div>
-                <div id="asignaturasButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1"style={{height:40, minWidth:172}}>
+                <div id="asignaturasButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1" style={{ height: 40, minWidth: 172 }}>
                     <div className="border border-black border-2 rounded w-100 h-100">
                         <select className="form-select border-0 h-100" defaultValue={"Asignatura"} onChange={(e) => handleClass(e.target.value)}>
                             <option key={-1} id="defaultAsignatura" disabled>Titulación</option>
@@ -177,12 +177,12 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                         </select>
                     </div>
                 </div>
-                <div id="yearButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-1 visually-hidden mt-1"style={{height:40, minWidth:172}}>
+                <div id="yearButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-1 visually-hidden mt-1" style={{ height: 40, minWidth: 172 }}>
                     <div className="dropdown w-100 h-100">
-                        <input id="yearButton" type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-black border-2 h-100" value={anio} onChange={(e) => handleYear(e.target.value)}/>
+                        <input id="yearButton" type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-black border-2 h-100" value={anio} onChange={(e) => handleYear(e.target.value)} />
                     </div>
                 </div>
-                <div id="changeBorder" className="col mt-1 border border-black border-2 rounded d-flex align-items-center input-group" style={{height: 40,minWidth:198}}>
+                <div id="changeBorder" className="col mt-1 border border-black border-2 rounded d-flex align-items-center input-group" style={{ height: 40, minWidth: 198 }}>
                     <svg className="ms-4 me-3" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                         <path d="M12.1401 0.034686C5.4457 0.034686 0 5.48038 0 12.1748C0 18.8692 5.4457 24.3149 12.1401 24.3149C14.1866 24.3149 16.1984 23.8293 17.898 22.8927C18.0341 23.0566 18.185 23.2075 18.3489 23.3437L21.8175 26.8123C22.1378 27.1726 22.5283 27.4638 22.9652 27.6678C23.4021 27.8717 23.876 27.9843 24.3579 27.9985C24.8399 28.0127 25.3196 27.9282 25.7677 27.7503C26.2158 27.5723 26.6228 27.3047 26.9638 26.9638C27.3047 26.6228 27.5723 26.2158 27.7503 25.7677C27.9282 25.3196 28.0127 24.8399 27.9985 24.3579C27.9843 23.876 27.8717 23.4021 27.6678 22.9652C27.4638 22.5283 27.1727 22.1378 26.8123 21.8175L23.3437 18.3489C23.1747 18.1799 22.9887 18.0287 22.7887 17.898C23.7252 16.1984 24.3149 14.2213 24.3149 12.1401C24.3149 5.4457 18.8692 0 12.1748 0L12.1401 0.034686ZM12.1401 3.50328C16.9614 3.50328 20.8116 7.35343 20.8116 12.1748C20.8116 14.4641 19.9791 16.5799 18.5223 18.1408C18.4876 18.1755 18.4529 18.2101 18.4183 18.2448C18.2544 18.381 18.1035 18.5319 17.9673 18.6957C16.4412 20.0832 14.36 20.881 12.1054 20.881C7.28406 20.881 3.43391 17.0308 3.43391 12.2095C3.43391 7.38811 7.28406 3.53797 12.1054 3.53797L12.1401 3.50328Z" fill="#6E7377" />
                     </svg>
@@ -205,7 +205,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                     {areas.map(area =>
                         <li key={area.id} className="nav-item me-lg-5">
                             <button id={area.id} onClick={() => handleAreaClick(area.id.toString())}
-                                    className="nav-link text-dark">{area.titulo}</button>
+                                className="nav-link text-dark">{area.titulo}</button>
                         </li>
                     )}
                 </ul>

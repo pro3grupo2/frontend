@@ -1,16 +1,16 @@
 "use client"
 
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import {useRouter} from 'next/navigation';
-import {crear_proyecto, get_proyectos, subir_ficheros} from '@/api/v1/proyectos';
+import { useRouter } from 'next/navigation';
+import { crear_proyecto, get_proyectos, subir_ficheros } from '@/api/v1/proyectos';
 import ProjectCard from '@/components/ProjectCard';
-import {me} from '@/api/v1/auth';
+import { me } from '@/api/v1/auth';
 import Loading from '@/components/Loading';
 import Filters from '@/components/Filters';
 
 export default function Home() {
-    const {user, isLoading} = useAuth();
+    const { user, isLoading } = useAuth();
     const [projects, setProjects] = useState([]);
     const [proyectosLoaded, setProyectosLoaded] = useState(false);
     const [area, setArea] = useState('0');
@@ -56,7 +56,7 @@ export default function Home() {
     }, [filters]);
 
     if (isLoading || !proyectosLoaded) {
-        return <Loading/>
+        return <Loading />
     }
 
     const handleClick = () => {
@@ -78,7 +78,7 @@ export default function Home() {
             return;
         }
 
-        setFilters({...filters, anio: anio});
+        setFilters({ ...filters, anio: anio });
     }
 
     const handleAreaClick = (id) => {
@@ -96,7 +96,7 @@ export default function Home() {
             });
             return;
         }
-        setFilters({...filters, area: id.toString()});
+        setFilters({ ...filters, area: id.toString() });
     };
 
     const handleCardClick = (id) => {
@@ -109,7 +109,7 @@ export default function Home() {
 
     const handleAsignatura = (clase) => {
         let titulacion = clase.toString();
-        
+
         if (titulacion === "-1") {
             setFilters(prevFilters => {
                 const { titulaciones, ...restFilters } = prevFilters;
@@ -117,10 +117,10 @@ export default function Home() {
             });
             return;
         }
-        
-        setFilters({...filters, titulaciones: titulacion});
+
+        setFilters({ ...filters, titulaciones: titulacion });
     }
-    
+
     const handlePremio = (premiado) => {
         if (premiado === "null") {
             setFilters(prevFilters => {
@@ -129,26 +129,26 @@ export default function Home() {
             });
             return;
         }
-    
-        setFilters({...filters, premiado: premiado == "true"});
+
+        setFilters({ ...filters, premiado: premiado == "true" });
     }
 
     const handleSearch = (event) => {
         if (event.key === 'Enter') {
             if (search === '') {
                 delete filters.busqueda;
-                setFilters({...filters});
+                setFilters({ ...filters });
                 return;
             }
 
-            setFilters({...filters, busqueda: search});   
+            setFilters({ ...filters, busqueda: search });
         }
     };
 
     if (projects.length === 0) {
         return (
             <div className="container-fluid p-5">
-                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura}/>
+                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura} />
 
                 <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center mt-5">
                     <h1 className="display-5 fw-bold w-50">Ups! No hemos encontrado resultados para su búsqueda.</h1>
@@ -160,16 +160,16 @@ export default function Home() {
         return (
             <>
                 <div className="container-fluid p-5">
-                    <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura}/>
+                    <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura} />
 
                     <div className="row g-4 card-group mt-3">
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
                     </div>
                 </div>
 
-                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3" style={{width: 50 + 'px', height: 50 + 'px'}}>
+                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3" style={{ width: 50 + 'px', height: 50 + 'px' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-100 h-100" width="40" height="40" viewBox="0 0 32 32" fill="none">
-                        <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
+                        <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white" />
                     </svg>
                 </div>
             </>
