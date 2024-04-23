@@ -27,13 +27,20 @@ export default function Project({ params }) {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (user) {
+        if (proyecto.usuarios) {
+            let filters = {
+                busqueda: proyecto.usuarios.correo
+            };
+            
+            get_proyectos(token, 0, filters).then(data => {
+                setUserProjects(data.filter(project => project.id !== proyecto.id));
+            });
+            
             get_proyectos(token).then(data => {
-                setUserProjects(data.filter(project => project.usuarios.id === user.id));
-                setOtherProjects(data.filter(project => project.usuarios.id !== user.id));
+                setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id));
             });
         }
-    }, [user]);
+    }, [proyecto]);
 
     if (isLoading || !proyectoLoaded) {
         return <Loading />
@@ -54,10 +61,23 @@ export default function Project({ params }) {
     } else {
         return (
             <div className="container-fluid p-5">
-                <p className="fs-6 fw-bolder">Carrera/ Nombre_Proyecto/ Año</p>
+                <p className="fs-6 fw-bolder">
+                    <button className="border border-0 bg-transparent me-5" onClick={() => history.back()}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
+                        </svg>
+                    </button>
+                    {proyecto.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.titulo + '/ ' + proyecto.proyectos_asignaturas[0].asignaturas.titulo + '/ ' + proyecto.anio}
+                </p>
                 <h1 className="display-3 fw-bold">{proyecto.titulo}</h1>
                 <div className="d-flex flex-wrap justify-content-between align-items-center">
-                    <p className="fs-4 fw-light ms-font mt-3 mb-4">{proyecto.usuarios.nombre_completo}</p>
+                    <p className="fs-4 fw-light ms-font mt-3 mb-4">
+                        {proyecto.participantes && (proyecto.participantes.length > 0) ?
+                            proyecto.participantes.map(participante => participante.correo).join(', ')
+                            :
+                            proyecto.usuarios.nombre_completo
+                        }
+                    </p>
                     <div className="d-flex justify-content-end mb-3">
                         {user.rol === "coordinador" && 
                             <>
@@ -96,7 +116,6 @@ export default function Project({ params }) {
                 <div className="row g-4 card-group mt-5">
                     {userProjects.length > 0 && (
                         <div className="col-12">
-                            <h2 className="ms-black">Tus proyectos</h2>
                             <div className="row g-4">
                                 {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                             </div>
@@ -111,7 +130,6 @@ export default function Project({ params }) {
                 <div className="row g-4 card-group mt-5">
                     {otherProjects.length > 0 && (
                         <div className="col-12">
-                            <h2 className="ms-black">Otros proyectos</h2>
                             <div className="row g-4">
                                 {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                             </div>

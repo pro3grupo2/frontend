@@ -44,9 +44,7 @@ export default function Home() {
         const token = localStorage.getItem('token');
         get_proyectos(token, 0, filters).then(data => {
             setProjects(data);
-            setTimeout(() => {
-                setProyectosLoaded(true);
-            }, 1000);
+            setProyectosLoaded(true);
         });
     }, []);
 

@@ -1,14 +1,17 @@
 import Image from 'next/image';
 import "@/styles/project-card.css";
+import {useState} from "react";
+
 export default function ProjectCard({ project, onClick }) {
-    const handleHover = () => {
-        // Change authors if more than 3 authors
-        
+    const [isHovered, setIsHovered] = useState(false);
+    
+    const handleHover = (hover) => {
+        setIsHovered(hover);
     }
     
     return (
         <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
-            <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={handleHover} onClick={() => onClick(project.id)}>
+            <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} onClick={() => onClick(project.id)}>
                 {project.premiado &&
                     <div className="bg-primary rounded position-absolute top-0 end-0 z-3 p-2">
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 17 20" fill="none">
@@ -26,7 +29,12 @@ export default function ProjectCard({ project, onClick }) {
                 </div>
                 <div className="card-body d-flex flex-column justify-content-start">
                     <h5 className="card-title fw-bold">{project.titulo}</h5>
-                    <p className="card-text text-secondary-emphasis">{project.usuarios.nombre_completo}</p>
+                    <p className="card-text text-secondary-emphasis">
+                        {isHovered && project.participantes.length > 0
+                            ? project.participantes.map(participante => participante.correo).join(', ')
+                            : project.usuarios.nombre_completo
+                        }
+                    </p>
                     {
                         project.estado === 'rechazado'
                             ? <span className="badge bg-danger">Denegado</span>

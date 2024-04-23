@@ -66,6 +66,11 @@ export default function Profile() {
 
     if (loading) return <Loading />
 
+    // Redirigir a la página del proyecto al hacer click en una tarjeta
+    const handleCardClick = (id) => {
+        router.push(`/project/${id}`);
+    };
+
     // Convertir la primera letra del nombre y del apellido a mayúscula
     const nombreCompletoCapitalizado = user.nombre_completo && typeof user.nombre_completo === 'string'
         ? user.nombre_completo
@@ -146,7 +151,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row card-group mt-5 px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} project={project} />)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -158,7 +163,7 @@ export default function Profile() {
                 <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
                     {
                         projectsNoValidados.length
-                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} project={project} />)
+                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
@@ -235,7 +240,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row card-group mt-5 px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} project={project} />)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -247,7 +252,7 @@ export default function Profile() {
                 <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
                     {
                         projectsNoValidados.length
-                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} project={project} />)
+                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
