@@ -13,6 +13,7 @@ import ProjectCard from "@/components/ProjectCard"
 import { get_me_proyectos } from "@/api/v1/proyectos"
 import { me } from "@/api/v1/auth"
 import Loading from "@/components/Loading"
+import {get_codigos, crear_codigo} from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
 
@@ -30,13 +31,20 @@ export default function Profile() {
         projectsNoValidados_btn_ref = useRef(),
         [projectsNoValidados, setProjectsNoValidados] = useState([]),
         [loading, setLoading] = useState(true),
+        [codigos, setCodigos] = useState([]),
+        [numUsos, setNumUsos] = useState(1),
         router = useRouter()
 
     const
         [modal_show_edit_profile, setModalShowEditProfile] = useState(false),
         [modal_show_new_project, setModalShowNewProject] = useState(false)
 
-
+    const crearCodigo = async () => {
+        await crear_codigo(localStorage.getItem('token'), numUsos);
+        get_codigos(localStorage.getItem('token')).then(data => {
+            setCodigos(data)
+        });
+    };
     useEffect(() => {
         if (!localStorage.getItem('token'))
             return router.push('/signin')
@@ -61,6 +69,10 @@ export default function Profile() {
                             : setProjectsNoValidados(prev => [...prev, project])
                 }
             })
+         get_codigos(localStorage.getItem('token')).then(data => {
+                setCodigos(data)
+         });
+
         setLoading(false)
     }, [])
 
@@ -182,8 +194,27 @@ export default function Profile() {
                 <div ref={codigosAdmin_ref} className="d-none row card-group mt-5 px-3">
                     {
                         <div className="text-center mt-5">
-                            <h1 className="display-5 fw-bold">No hay CODIGOOOS</h1>
-                            <p className="lead">Parece que no hay codigos que mostrar en este momento</p>
+                            <div>
+                                <input
+                                    type="number"
+                                    placeholder="Número de usos"
+                                    value={numUsos}
+                                    onChange={e => setNumUsos(e.target.value)}
+                                />
+                                <button onClick={crearCodigo}>Crear Código</button>
+                            </div>
+                            <div>
+                                <h3>Códigos existentes:</h3>
+                                {codigos.length > 0 ? (
+                                    <ul>
+                                        {codigos.map((codigo, index) => (
+                                            <li key={index}>{`Código: ${codigo.codigo}, Usos: ${codigo.usos}`}</li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>No hay códigos disponibles.</p>
+                                )}
+                            </div>
                         </div>
                     }
                 </div>
