@@ -10,17 +10,19 @@ import '../globals.css'
 import '../../styles/profile.css'
 
 import ProjectCard from "@/components/ProjectCard"
-import { get_me_proyectos } from "@/api/v1/proyectos"
+import { get_me_proyectos, aceptar_proyecto, rechazar_proyecto, get_proyectos_pendientes } from "@/api/v1/proyectos"
 import { me } from "@/api/v1/auth"
 import Loading from "@/components/Loading"
 import {get_codigos, crear_codigo} from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
+import ProjectSolicitud1 from "@/components/ProjectSolicitud1"
 
 export default function Profile() {
     const
         [user, setUser] = useState({}),
         [projectsValidados, setProjectsValidados] = useState([]),
+        [projectsSolicitudes, setProjectsSolicitudes] = useState([]),
         projectsValidados_ref = useRef(),
         projectsNoValidados_ref = useRef(),
         projectsSolicitudes_ref = useRef(),
@@ -45,6 +47,15 @@ export default function Profile() {
             setCodigos(data)
         });
     };
+
+    const handleAceptar = async (id) => {
+        await aceptar_proyecto(localStorage.getItem('token'), id)
+    };
+
+    const handleRechazar = async (id) => {
+        await rechazar_proyecto(localStorage.getItem('token'), id)
+    };
+
     useEffect(() => {
         if (!localStorage.getItem('token'))
             return router.push('/signin')
@@ -55,6 +66,16 @@ export default function Profile() {
                 console.log("mne", data)
                 if (!data) return router.push('/signin')
                 setUser(data)
+                if (data.rol=== "coordinador"){
+                    get_codigos(localStorage.getItem('token')).then(data => {
+                        setCodigos(data)
+                    });
+
+                    get_proyectos_pendientes(localStorage.getItem('token'))
+                        .then(data => {
+                            setProjectsSolicitudes(data)
+                    })
+                }
             })
 
         get_me_proyectos(localStorage.getItem('token'))
@@ -69,13 +90,10 @@ export default function Profile() {
                             : setProjectsNoValidados(prev => [...prev, project])
                 }
             })
-         get_codigos(localStorage.getItem('token')).then(data => {
-                setCodigos(data)
-         });
-
+        
         setLoading(false)
     }, [])
-
+    
     if (loading) return <Loading />
 
     // Redirigir a la página del proyecto al hacer click en una tarjeta
@@ -172,22 +190,14 @@ export default function Profile() {
                     }
                 </div>
 
-                <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
-                    {
-                        projectsNoValidados.length
-                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project} />)
-                            :
-                            <div className="text-center mt-5">
-                                <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
-                                <p className="lead">Parece que no hay solicitudes que mostrar en este momento</p>
-                            </div>
-                    }
-                </div>
                 <div ref={projectsSolicitudes_ref} className="d-none row card-group mt-5 px-3">
                     {
+                        projectsSolicitudes.length
+                        ? projectsSolicitudes.map(project => <ProjectSolicitud1 key={project.id} handleAceptar={handleAceptar} handleRechazar={handleAceptar} project={project} />)
+                        :
                         <div className="text-center mt-5">
-                            <h1 className="display-5 fw-bold">No hay solicitudes</h1>
-                            <p className="lead">Parece que no hay solicitudes que mostrar en este momento</p>
+                            <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
+                            <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
                         </div>
                     }
                 </div>
