@@ -1,6 +1,7 @@
 import { get_areas } from "@/api/v1/areas";
 import { get_asignaturas } from "@/api/v1/asignaturas";
 import { useEffect, useState } from "react";
+import {get_titulaciones} from "@/api/v1/titulaciones";
 
 export default function Filters({ onSearchChange, handleSearch, handleAreaClick, handlePremio, handleAnio, handleAsignatura }) {
     const [areas, setAreas] = useState([]);
@@ -14,7 +15,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
             setAreas(data);
         });
         
-        get_asignaturas(token).then(data => {
+        get_titulaciones(token).then(data => {
             setAsignaturas(data);
         });
     }, []);
@@ -167,7 +168,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                 <div id="asignaturasButton" className="col-1 filterButtons d-flex align-items-center me-3 visually-hidden">
                     <div className="border border-black border-2 rounded w-100 h-100">
                         <select className="form-select border-0 h-100" defaultValue={"Asignatura"} onChange={(e) => handleClass(e.target.value)}>
-                            <option key={-1} id="defaultAsignatura" disabled>Asignatura</option>
+                            <option key={-1} id="defaultAsignatura" disabled>Titulación</option>
                             {
                                 asignaturas.map(
                                     asignatura => <option key={asignatura.id} value={asignatura.id}>{asignatura.titulo}</option>
@@ -197,13 +198,14 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
             </div>
 
             <div className="row">
-                <ul className="nav nav-underline d-flex flex-inline justify-content-center">
-                    <li key="0" className="nav-item me-5">
+                <ul className="nav nav-underline d-flex flex-row justify-content-center align-items-center">
+                    <li key="0" className="nav-item me-lg-5">
                         <button id="0" onClick={() => handleAreaClick("0")} className="nav-link text-dark active">Todo</button>
                     </li>
-                    {areas.map(area => 
-                        <li key={area.id} className="nav-item me-5">
-                            <button id={area.id} onClick={() => handleAreaClick(area.id.toString())} className="nav-link text-dark">{area.titulo}</button>
+                    {areas.map(area =>
+                        <li key={area.id} className="nav-item me-lg-5">
+                            <button id={area.id} onClick={() => handleAreaClick(area.id.toString())}
+                                    className="nav-link text-dark">{area.titulo}</button>
                         </li>
                     )}
                 </ul>
