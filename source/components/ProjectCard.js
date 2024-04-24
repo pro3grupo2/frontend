@@ -2,11 +2,20 @@ import Image from 'next/image';
 import "@/styles/project-card.css";
 import { useState } from "react";
 
-export default function ProjectCard({ project, onClick }) {
+export default function ProjectCard({ project, onClick, isHome = false }) {
     const [isHovered, setIsHovered] = useState(false);
-
+    const [isShown, setIsShown] = useState(false);
+    
     const handleHover = (hover) => {
-        setIsHovered(hover);
+        setIsHovered(hover && isHome);
+        setTimeout(() => {
+            setIsShown(hover && isHome);
+        }, 100);
+    }
+    
+    const processMail = (mail) => {
+        const mailParts = mail.split('@');
+        return mailParts[1] === "live.u-tad.com" || mailParts[1] === "u-tad.com" || mailParts[1] === "ext.u-tad.com" ? mailParts[0].split('.').map(text => [text[0].toUpperCase(), text.slice(1)].join("")).join(" ") : mail;
     }
 
     return (
@@ -30,11 +39,16 @@ export default function ProjectCard({ project, onClick }) {
                 <div className="card-body d-flex flex-column justify-content-start">
                     <h5 className="card-title fw-bold">{project.titulo}</h5>
                     <p className="card-text text-secondary-emphasis">
-                        {isHovered && project.participantes.length > 0
-                            ? project.participantes.map(participante => participante.correo).join(', ')
+                        {isHovered && isHome && project.participantes.length > 0
+                            ? project.participantes.map(participante => processMail(participante.correo)).join(', ')
                             : project.usuarios.nombre_completo
                         }
                     </p>
+                    {isHovered && isShown && isHome &&
+                        <p className="card-text text-secondary-emphasis">
+                            {project.ficha.slice(0, 100) + (project.ficha.length > 100 ? "..." : "")}
+                        </p>
+                    }
                     {
                         project.estado === 'rechazado'
                             ? <span className="badge bg-danger">Denegado</span>

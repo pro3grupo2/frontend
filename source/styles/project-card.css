@@ -6,3 +6,8 @@
 .project-card:hover > #imageSize {
     height: 30%;
 }
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s;
+}

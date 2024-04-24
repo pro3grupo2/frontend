@@ -163,7 +163,7 @@ export default function Home() {
                     <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} handlePremio={handlePremio} handleAnio={handleAnio} handleAsignatura={handleAsignatura} />
 
                     <div className="row g-4 card-group mt-3">
-                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
+                        {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} isHome={true}/>)}
                     </div>
                 </div>
 

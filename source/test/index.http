@@ -37,12 +37,12 @@ Content-Type: application/json
 ###
 
 GET https://api.reservorio-u-tad.com/api/v1/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoiY29vcmRpbmFkb3IiLCJpYXQiOjE3MTAzNTE5NzMsImV4cCI6MTcxMDQzODM3M30.ppUCX18l3a6NFnym0SK4i0kaniu3eeo-M6V-cISfND4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzOTEyNDAyLCJleHAiOjE3MTM5OTg4MDJ9.QIOwxKd8RWxmAqOPH-oWKazH5mWPSZ_eKJvsemLT5lY
 
 ###
 
-GET https://api.reservorio-u-tad.com/api/v1/proyectos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzNTU0NDE0LCJleHAiOjE3MTM2NDA4MTR9.LqbDRYo9EdlAVUggDHD5b6mrAA3YQU1xdSKgXaSqrYY
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/pendientes?page=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoiYWRtaW4uYWRtaW5AdS10YWQuY29tIiwiaWF0IjoxNzEzODk5MTkwLCJleHAiOjE3MTM5ODU1OTB9.-jUA8K_2JCkXerntGYP3KNRef8bB_6baEE_Jp2DX1hg
 
 ###
 
@@ -51,8 +51,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvI
 
 ###
 
-GET https://api.reservorio-u-tad.com/api/v1/proyectos/9/aceptar
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoib3NjYXIudml1ZGV6QGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMTc0NTc0LCJleHAiOjE3MTMyNjA5NzR9.LLyxOI6ntxNKpT7xHGt6vEhtuaN3EiTHJ-aipia06uw
+GET https://api.reservorio-u-tad.com/api/v1/proyectos/23/aceptar
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiY29ycmVvIjoiYWRtaW4uYWRtaW5AdS10YWQuY29tIiwiaWF0IjoxNzEzODk5MTkwLCJleHAiOjE3MTM5ODU1OTB9.-jUA8K_2JCkXerntGYP3KNRef8bB_6baEE_Jp2DX1hg
 
 ###
 
