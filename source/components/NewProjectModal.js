@@ -57,7 +57,7 @@ export default function NewProjectModal({ show, setShow }) {
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{ maxWidth: 1176, minHeight: 677 }}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-auto`} style={{ maxWidth: 1176, minHeight: 677 }}>
 
                 <div className="d-flex flex-column justify-content-between w-100" style={{ maxWidth: 488, }}>
                     <div>

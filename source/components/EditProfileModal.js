@@ -39,7 +39,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-scroll `} style={{ maxWidth: 1176, maxHeight: 618 }}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-auto`} style={{ maxWidth: 1176, maxHeight: 618 }}>
                 <div className="d-flex flex-column justify-content-between w-100 mt-3" style={{ maxWidth: 488 }}>
                     <div className="image-container" style={{ width: '100%', height: '0', paddingBottom: '100%', position: 'relative', overflow: 'hidden' }}>
                         <Image
