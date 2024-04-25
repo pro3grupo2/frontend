@@ -56,6 +56,31 @@ export default function Profile() {
         await rechazar_proyecto(localStorage.getItem('token'), id)
     };
 
+    const copiarAlPortapapeles = (codigo) => {
+        navigator.clipboard.writeText(codigo)
+          .then(() => {
+            alert('¡Código copiado al portapapeles!');
+          })
+          .catch(err => {
+            alert('Error al copiar el código: ' + err);
+          });
+      }
+      
+      const eliminarCodigo = (indice) => {
+        //Falta implementar lo de eliminar el código en la base de datos
+        const nuevosCodigos = codigos.filter((_, index) => index !== indice);
+        setCodigos(nuevosCodigos);
+        
+       /* 
+        try{
+            //await eliminar_codigo(localStorage.getItem('token'), indice);
+
+        }catch(e){
+            console.log(e);
+        }
+*/
+      }
+
     useEffect(() => {
         if (!localStorage.getItem('token'))
             return router.push('/signin')
@@ -90,6 +115,7 @@ export default function Profile() {
                             : setProjectsNoValidados(prev => [...prev, project])
                 }
             })
+           
 
         setLoading(false)
     }, [])
@@ -243,12 +269,13 @@ export default function Profile() {
                                             {codigos.map((codigo, index) => (
                                                 <div key={index} className="list-group-item d-flex align-items-center justify-content-between">
                                                     <div className="d-flex align-items-center">
-                                                        <img src="icons/copiar.svg" alt="Copiar" className="me-2" />
-                                                        <span>{codigo.codigo.replaceAll("", "-")}</span>
+                                                    <img src="icons/copiar.svg" alt="Copiar" className="me-4" onClick={() => copiarAlPortapapeles(codigo.codigo)} />
+
+                                                        <span className='ms-semibold'>{codigo.codigo.split('').join(' - ')}</span>
                                                     </div>
                                                     <div className="d-flex align-items-center">
-                                                        <span className="me-2">{codigo.usos}</span>
-                                                        <img src="icons/eliminar.svg" alt="Eliminar" />
+                                                        <span className="me-4 ms-semibold">{codigo.usos}</span>
+                                                        <img src="icons/eliminar.svg" alt="Eliminar" onClick={() => eliminarCodigo(index)} />
                                                     </div>
                                                 </div>
                                             ))}
