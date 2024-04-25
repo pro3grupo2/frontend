@@ -112,6 +112,7 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
             }
         } else if (premio === "null") {
             if (filter) filter.remove();
+            
         }
 
         changeFilterSvg();
@@ -155,16 +156,17 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                     </span>
                 </div>
                 <div id="premioButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1" style={{ height: 40, minWidth: 149 }}>
-                    <div className="dropdown border border-black border-2 rounded w-100 h-100" >
-                        <button className="btn dropdown-toggle w-100 h-100 no-border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Premio
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li><button onClick={() => { handlePremiado("true") }} className="dropdown-item">Si</button></li>
-                            <li><button onClick={() => { handlePremiado("false") }} className="dropdown-item">No</button></li>
-                        </ul>
+                    <div className="border border-black border-2 rounded w-100 h-100">
+                        <select className="form-select w-100 h-100" onChange={(e) => handlePremiado(e.target.value)}>
+                            
+                            <option value="" disabled selected>Premio</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                        </select>
                     </div>
                 </div>
+
+
                 <div id="asignaturasButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1" style={{ height: 40, minWidth: 172 }}>
                     <div className="border border-black border-2 rounded w-100 h-100">
                         <select className="form-select border-0 h-100" defaultValue={"Asignatura"} onChange={(e) => handleClass(e.target.value)}>
@@ -177,8 +179,8 @@ export default function Filters({ onSearchChange, handleSearch, handleAreaClick,
                         </select>
                     </div>
                 </div>
-                <div id="yearButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-1 visually-hidden mt-1" style={{ height: 40, minWidth: 172 }}>
-                    <div className="dropdown w-100 h-100">
+                <div id="yearButton" className="col-md-2 col-4 filterButtons d-flex align-items-center mx-sm-2 mx-md-3 visually-hidden mt-1" style={{ height: 40, minWidth: 172 }}>
+                    <div className="border border-black border-2 rounded w-100 h-100 w-100 h-100">
                         <input id="yearButton" type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-black border-2 h-100" value={anio} onChange={(e) => handleYear(e.target.value)} />
                     </div>
                 </div>
