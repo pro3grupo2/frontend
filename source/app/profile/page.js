@@ -1,22 +1,22 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Image from "next/image"
 import Link from "next/link"
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 
 import '../globals.css'
 import '../../styles/profile.css'
 
 import ProjectCard from "@/components/ProjectCard"
-import {aceptar_proyecto, get_me_proyectos, get_proyectos_pendientes, rechazar_proyecto} from "@/api/v1/proyectos"
-import {me} from "@/api/v1/auth"
+import { aceptar_proyecto, get_me_proyectos, get_proyectos_pendientes, rechazar_proyecto } from "@/api/v1/proyectos"
+import { me } from "@/api/v1/auth"
 import Loading from "@/components/Loading"
-import {crear_codigo, get_codigos} from "@/api/v1/codigos"
+import { crear_codigo, get_codigos } from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
-import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
+import { ProjectSolicitudLista } from "@/components/ProjectSolicitudLista"
 
 export default function Profile() {
     const
@@ -94,7 +94,7 @@ export default function Profile() {
         setLoading(false)
     }, [])
 
-    if (loading) return <Loading/>
+    if (loading) return <Loading />
 
     // Redirigir a la página del proyecto al hacer click en una tarjeta
     const handleCardClick = (id) => {
@@ -116,14 +116,14 @@ export default function Profile() {
             ) : null}
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
-                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
+                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
                 </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
@@ -132,12 +132,12 @@ export default function Profile() {
                     </div>
 
 
-                    <div className="image-container" style={{width: '208px', height: '208px', position: 'relative', overflow: 'hidden'}}>
+                    <div className="image-container" style={{ width: '208px', height: '208px', position: 'relative', overflow: 'hidden' }}>
                         <Image
                             className="rounded img-fluid"
                             src={user.foto}
                             alt="perfil"
-                            style={{position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover'}}
+                            style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover' }}
                             layout="responsive"
                             width={208}
                             height={208}
@@ -181,7 +181,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -197,9 +197,9 @@ export default function Profile() {
                             ? projectsSolicitudes
                                 .map((project, index) => (
                                     <>
-                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index}/>
+                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index} />
                                         {
-                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"}/>
+                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"} />
                                         }
                                     </>
                                 ))
@@ -210,32 +210,58 @@ export default function Profile() {
                     }
                 </div>
 
-                <div ref={codigosAdmin_ref} className="d-none row card-group mt-5 px-3">
-                    {
-                        <div className="text-center mt-5">
-                            <div>
-                                <input
-                                    type="number"
-                                    placeholder="Número de usos"
-                                    value={numUsos}
-                                    onChange={e => setNumUsos(e.target.value)}
-                                />
-                                <button onClick={crearCodigo}>Crear Código</button>
+                <div ref={codigosAdmin_ref} className="d-none row card-group px-3">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-6 mx-auto text-center mt-5">
+                                <p className='fw-bold mt-5'>¿Cuántos usos tendrá este código?</p>
+                                <div className="form-group">
+                                    <input
+                                        type="number"
+                                        className="rounded border-normal p-2 text-center mt-3"
+                                        placeholder="Número"
+                                        style={{ maxWidth: 165, height: 48 }}
+                                        value={numUsos}
+                                        onChange={e => setNumUsos(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group mt-3">
+                                    <button className="btn btn-secondary mt-3" style={{ maxWidth: 262, height: 48 }} onClick={crearCodigo}>GENERAR CÓDIGO</button>
+                                </div>
                             </div>
-                            <div>
-                                <h3>Códigos existentes:</h3>
-                                {codigos.length > 0 ? (
-                                    <ul>
-                                        {codigos.map((codigo, index) => (
-                                            <li key={index}>{`Código: ${codigo.codigo}, Usos: ${codigo.usos}`}</li>
-                                        ))}
-                                    </ul>
-                                ) : (
-                                    <p>No hay códigos disponibles.</p>
-                                )}
+
+
+
+                            <div className="col-md-6 justify-content-center mt-4">
+                                <div className="w-100">
+                                    <div className="d-flex justify-content-between align-items-center border-bottom border-2">
+                                        <p className="m-3 fw-bold">Código</p>
+                                        <p className="m-3 fw-bold">Usos restantes</p>
+                                    </div>
+                                    {codigos.length > 0 ? (
+                                        <div className="list-group">
+                                            {codigos.map((codigo, index) => (
+                                                <div key={index} className="list-group-item d-flex align-items-center justify-content-between">
+                                                    <div className="d-flex align-items-center">
+                                                        <img src="icons/copiar.svg" alt="Copiar" className="me-2" />
+                                                        <span>{codigo.codigo.replaceAll("", "-")}</span>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <span className="me-2">{codigo.usos}</span>
+                                                        <img src="icons/eliminar.svg" alt="Eliminar" />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="text-center">No hay códigos disponibles.</p>
+                                    )}
+
+                                </div>
                             </div>
+
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </>
@@ -248,14 +274,14 @@ export default function Profile() {
             ) : null}
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
-                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
+                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
                 </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal mt-2"><Image src="/icons/enlace.svg" alt="enlace.svg" className="d-start w-auto h-auto" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal mt-2"><Image src="/icons/enlace.svg" alt="enlace.svg" className="d-start w-auto h-auto" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-column flex-sm-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
@@ -264,7 +290,7 @@ export default function Profile() {
                     </div>
 
 
-                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208}/>
+                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208} />
                 </div>
 
                 <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">
@@ -290,7 +316,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row card-group mt-5 px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -302,7 +328,7 @@ export default function Profile() {
                 <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
                     {
                         projectsNoValidados.length
-                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project}/>)
+                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
