@@ -206,14 +206,14 @@ body {
 }
 
 .ms-extrabold {
-    color: #000;
-    /* GRAN TITULO*/
+    color: var(--color-secundario-negro, #091229);
+
     /* H1/Montserrat/ExtraBold */
     font-family: Montserrat;
-    font-size: 61px !important;
-    font-weight: 800 !important;
-    line-height: 105% !important;
-    /* 64.05px */
+    font-size: 3.8125rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 105%; /* 4.00313rem */
 }
 
 .ms-bold {
@@ -277,7 +277,7 @@ body {
 }
 
 .ms-button {
-    color: var(--Color-Secundario-Blanco, #FFF);
+    color: var(--color-secundario-blanco, #FFF);
     text-align: center;
     /* Boton/Montserrat/Versalitas */
     font-family: Montserrat, serif !important;
