@@ -49,7 +49,7 @@ export default function Project({ params }) {
     const handleCardClick = (id) => {
         router.push(`/project/${id}`);
     };
-    
+
     const handleDeleteProject = async () => {
         const token = localStorage.getItem('token');
         const data = await eliminar_proyecto(token, proyecto.id);
@@ -83,10 +83,10 @@ export default function Project({ params }) {
                         : "Otros / Otros / " + proyecto.anio
                     }
                 </p>
-                <h1 className="display-3 fw-bold">{proyecto.titulo}</h1>
+                <h1 className="ms-bold">{proyecto.titulo}</h1>
                 <div className="d-flex flex-wrap justify-content-between align-items-center">
-                    <p className="fs-4 fw-light ms-font mt-3 mb-4">
-                        {proyecto.participantes && (proyecto.participantes.length > 0) 
+                    <p className="ms-regular mt-3 mb-4">
+                        {proyecto.participantes && (proyecto.participantes.length > 0)
                             ? proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')
                             : proyecto.usuarios.nombre_completo
                         }
@@ -122,9 +122,11 @@ export default function Project({ params }) {
                         }
                     </div>
                 </div>
-                <div className="row">
-                    <Image className="col" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit="cover" width={0} height={0} sizes="100vw" style={{ width: '65%', height: 'auto' }} alt="Project Image" />
-                    <p className="col fs-5 ms-regular">{proyecto.ficha}</p>
+                <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
+                    <div className={'position-relative'} style={{ width: '50rem', height: '28.125rem' }}>
+                        <Image className="" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={'1'} alt="Project Image" />
+                    </div>
+                    <p className="flex-grow-1 fs-5 ms-regular">{proyecto.ficha}</p>
                 </div>
                 <div className="row g-4 card-group mt-5">
                     {userProjects.length > 0 && (

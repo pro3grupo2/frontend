@@ -22,6 +22,15 @@ const crear_codigo = async (token, usos = 1, callback = undefined) => {
     return datos ? datos.data : null
 }
 
+const eliminar_codigo = async (token, codigo_id, callback = undefined) => {
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    }
+
+    const datos = await fetch_handler(`${CODIGOS_ROUTE}/${codigo_id}`, headers, "DELETE", undefined, callback)
+    return datos ? datos.data : null
+}
+
 module.exports = {
-    get_codigos, crear_codigo
+    get_codigos, crear_codigo, eliminar_codigo
 }

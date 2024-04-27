@@ -1,22 +1,22 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import {useRouter} from "next/navigation"
 
 import '../globals.css'
 import '../../styles/profile.css'
 
 import ProjectCard from "@/components/ProjectCard"
-import { aceptar_proyecto, get_me_proyectos, get_proyectos_pendientes, rechazar_proyecto } from "@/api/v1/proyectos"
-import { me } from "@/api/v1/auth"
+import {aceptar_proyecto, get_me_proyectos, get_proyectos_pendientes, rechazar_proyecto} from "@/api/v1/proyectos"
+import {me} from "@/api/v1/auth"
 import Loading from "@/components/Loading"
-import { crear_codigo, get_codigos } from "@/api/v1/codigos"
+import {crear_codigo, eliminar_codigo, get_codigos} from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
-import { ProjectSolicitudLista } from "@/components/ProjectSolicitudLista"
+import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
 
 export default function Profile() {
     const
@@ -44,7 +44,7 @@ export default function Profile() {
     const crearCodigo = async () => {
         await crear_codigo(localStorage.getItem('token'), numUsos);
         get_codigos(localStorage.getItem('token')).then(data => {
-            setCodigos(data)
+            setCodigos(data.reverse())
         });
     };
 
@@ -66,19 +66,11 @@ export default function Profile() {
             });
     }
 
-    const eliminarCodigo = (indice) => {
-        //Falta implementar lo de eliminar el código en la base de datos
-        const nuevosCodigos = codigos.filter((_, index) => index !== indice);
-        setCodigos(nuevosCodigos);
+    const eliminarCodigo = async (codigo_id, indice) => {
+        const data = await eliminar_codigo(localStorage.getItem('token'), codigo_id)
+        if (!data) return alert('Error al eliminar el código')
 
-        /* 
-         try{
-             //await eliminar_codigo(localStorage.getItem('token'), indice);
- 
-         }catch(e){
-             console.log(e);
-         }
- */
+        setCodigos(codigos.filter((_, index) => index !== indice))
     }
 
     useEffect(() => {
@@ -120,7 +112,7 @@ export default function Profile() {
         setLoading(false)
     }, [])
 
-    if (loading) return <Loading />
+    if (loading) return <Loading/>
 
     // Redirigir a la página del proyecto al hacer click en una tarjeta
     const handleCardClick = (id) => {
@@ -142,14 +134,14 @@ export default function Profile() {
             ) : null}
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
-                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
+                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
                 </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
@@ -158,12 +150,12 @@ export default function Profile() {
                     </div>
 
 
-                    <div className="image-container" style={{ width: '208px', height: '208px', position: 'relative', overflow: 'hidden' }}>
+                    <div className="image-container" style={{width: '208px', height: '208px', position: 'relative', overflow: 'hidden'}}>
                         <Image
                             className="rounded img-fluid"
                             src={user.foto}
                             alt="perfil"
-                            style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover' }}
+                            style={{position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover'}}
                             layout="responsive"
                             width={208}
                             height={208}
@@ -207,7 +199,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -223,9 +215,9 @@ export default function Profile() {
                             ? projectsSolicitudes
                                 .map((project, index) => (
                                     <>
-                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index} />
+                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index}/>
                                         {
-                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"} />
+                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"}/>
                                         }
                                     </>
                                 ))
@@ -246,16 +238,15 @@ export default function Profile() {
                                         type="number"
                                         className="rounded border-normal p-2 text-center mt-3"
                                         placeholder="Número"
-                                        style={{ maxWidth: 165, height: 48 }}
+                                        style={{maxWidth: 165, height: 48}}
                                         value={numUsos}
                                         onChange={e => setNumUsos(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-group mt-3">
-                                    <button className="btn btn-secondary mt-3" style={{ maxWidth: 262, height: 48 }} onClick={crearCodigo}>GENERAR CÓDIGO</button>
+                                    <button className="btn btn-primary mt-3" style={{maxWidth: 262, height: 48}} onClick={crearCodigo}>GENERAR CÓDIGO</button>
                                 </div>
                             </div>
-
 
 
                             <div className="col-md-6 justify-content-center mt-4">
@@ -267,7 +258,7 @@ export default function Profile() {
                                     {codigos.length > 0 ? (
                                         <div className="list-group">
                                             {codigos.map((codigo, index) => (
-                                                <div key={index} className="list-group-item d-flex align-items-center justify-content-between">
+                                                <div key={index} className={`${!codigo.usos && 'opacity-25'} list-group-item d-flex align-items-center justify-content-between`}>
                                                     <div className="d-flex align-items-center">
                                                         <img
                                                             src="icons/copiar.svg"
@@ -276,11 +267,11 @@ export default function Profile() {
                                                             onClick={() => copiarAlPortapapeles(codigo.codigo)}
                                                         />
 
-                                                        <span className='ms-semibold'>{codigo.codigo.split('').join(' - ')}</span>
+                                                        <span className='font-monospace'>{codigo.codigo.split('').join(' - ')}</span>
                                                     </div>
                                                     <div className="d-flex align-items-center">
                                                         <span className="me-5 ms-semibold">{codigo.usos}</span>
-                                                        <img src="icons/eliminar.svg" alt="Eliminar" className='me-3' onClick={() => eliminarCodigo(index)} />
+                                                        <img src="icons/eliminar.svg" alt="Eliminar" className='me-3' onClick={() => eliminarCodigo(codigo.id, index)}/>
                                                     </div>
                                                 </div>
                                             ))}
@@ -306,14 +297,14 @@ export default function Profile() {
             ) : null}
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
-                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
+                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
                 </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal mt-2"><Image src="/icons/enlace.svg" alt="enlace.svg" className="d-start w-auto h-auto" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="link-offset-1 fw-bold  color-principal mt-2"><Image src="/icons/enlace.svg" alt="enlace.svg" className="d-start w-auto h-auto" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break w-75">{user.descripcion}</p>
                         <div className="d-flex flex-column flex-sm-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
@@ -322,7 +313,7 @@ export default function Profile() {
                     </div>
 
 
-                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208} />
+                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208}/>
                 </div>
 
                 <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">
@@ -348,7 +339,7 @@ export default function Profile() {
                 <div ref={projectsValidados_ref} className="row card-group mt-5 px-3">
                     {
                         projectsValidados.length
-                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
+                            ? projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
@@ -360,7 +351,7 @@ export default function Profile() {
                 <div ref={projectsNoValidados_ref} className="d-none row card-group mt-5 px-3">
                     {
                         projectsNoValidados.length
-                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project} />)
+                            ? projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => console.log("Not possible to redirect")} project={project}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>

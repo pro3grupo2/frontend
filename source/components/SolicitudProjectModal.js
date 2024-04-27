@@ -1,8 +1,11 @@
 import React from "react"
 
 import Image from "next/image"
+import {useRouter} from "next/navigation"
 
 export default function SolicitudProjectModal({project, show, setShow, handleAceptar, handleRechazar}) {
+    const router = useRouter()
+
     return (
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
@@ -45,7 +48,7 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
 
                     <div className={"flex-grow-1 d-flex flex-column justify-content-between"}>
                         <div className={"d-flex flex-row justify-content-end gap-3"}>
-                            <button id="botonEditar" className="btn btn-outline-dark rounded-circle p-0 m-0" style={{width: 48, height: 48}}>
+                            <button id="botonEditar" className="btn btn-outline-dark rounded-circle p-0 m-0" style={{width: 48, height: 48}} onClick={() => router.push(`/project/${project.id}`)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M20.71 7.04006C21.1 6.65006 21.1 6.00006 20.71 5.63006L18.37 3.29006C18 2.90006 17.35 2.90006 16.96 3.29006L15.12 5.12006L18.87 8.87006M3 17.2501V21.0001H6.75L17.81 9.93006L14.06 6.18006L3 17.2501Z" fill="#6E7377"/>
                                 </svg>
