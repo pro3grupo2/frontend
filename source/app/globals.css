@@ -217,8 +217,6 @@ body {
 }
 
 .ms-bold {
-    color: #000;
-    /*TITULO DEL CONTENIDO*/
     color: var(--color-secundario-negro, #091229);
     /* H1/Montserrat/Bold */
     font-family: Montserrat;
