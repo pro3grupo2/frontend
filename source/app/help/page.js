@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import '../globals.css'
 import '../../styles/profile.css'
 
