@@ -1,4 +1,6 @@
-function Dropzone({ inputPortada, setInputPortada }) {
+import Image from "next/image";
+
+export default function Dropzone({ inputPortada, setInputPortada }) {
     const handleDrop = (e) => {
         e.preventDefault()
         const file = e.dataTransfer.files[0]
@@ -24,7 +26,7 @@ function Dropzone({ inputPortada, setInputPortada }) {
                 <img src={URL.createObjectURL(inputPortada)} alt="Portada" />
             ) : (
                 <>
-                    <Image src="../icons/file.svg" />
+                    <Image src="../icons/file.svg" width={1000} height={100}/>
                     <p>Arrastra o selecciona la portada desde tu ordenador</p>
                 </>
             )}

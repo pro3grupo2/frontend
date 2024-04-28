@@ -32,7 +32,7 @@ export default function SignUp() {
         const alias = email.split("@")[0]
         const data = await signup(
             email,
-            alias.replace(".", " "),
+            alias.split('.').map(text => [text[0].toUpperCase(), text.slice(1)].join("")).join(" "),
             alias,
             password,
             `Soy ${alias}`,

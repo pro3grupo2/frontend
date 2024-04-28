@@ -15,6 +15,10 @@ export default function Project({ params }) {
     const [userProjects, setUserProjects] = useState([])
     const [otherProjects, setOtherProjects] = useState([])
     const [proyectoLoaded, setProyectoLoaded] = useState(false)
+    const [isDownloadHover, setIsDownloadHover] = useState(false)
+    const [isDeleteHover, setIsDeleteHover] = useState(false)
+    const [isViewMoreHover, setIsViewMoreHover] = useState(false)
+    const [page, setPage] = useState(0)
     const router = useRouter()
 
     useEffect(() => {
@@ -32,15 +36,18 @@ export default function Project({ params }) {
                 busqueda: proyecto.usuarios.correo
             }
 
-            get_proyectos(token, 0, filters).then(data => {
-                setUserProjects(data.filter(project => project.id !== proyecto.id))
+            let indexPage = page
+            get_proyectos(token, indexPage, filters).then(data => {
+                if (userProjects.length > 0) setUserProjects([...userProjects, data.filter(project => project.id !== proyecto.id)])
+                else setUserProjects(data.filter(project => project.id !== proyecto.id))
             })
 
-            get_proyectos(token).then(data => {
-                setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
+            get_proyectos(token, indexPage).then(data => {
+                if (otherProjects.length > 0) setOtherProjects([...otherProjects, data.filter(project => project.id !== proyecto.id)])
+                else setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
             })
         }
-    }, [proyecto]);
+    }, [proyecto, page]);
 
     if (isLoading || !proyectoLoaded) {
         return <Loading />
@@ -54,6 +61,10 @@ export default function Project({ params }) {
         const token = localStorage.getItem('token');
         const data = await eliminar_proyecto(token, proyecto.id);
         if (data) history.back();
+    }
+
+    const handleViewMore = () => {
+        setPage(page + 1)
     }
 
     const processMail = (mail) => {
@@ -83,7 +94,7 @@ export default function Project({ params }) {
                         : "Otros / Otros / " + proyecto.anio
                     }
                 </p>
-                <h1 className="ms-bold">{proyecto.titulo}</h1>
+                <h1 className="ms-black">{proyecto.titulo}</h1>
                 <div className="d-flex flex-wrap justify-content-between align-items-center">
                     <p className="ms-regular mt-3 mb-4">
                         {proyecto.participantes && (proyecto.participantes.length > 0)
@@ -94,29 +105,57 @@ export default function Project({ params }) {
                     <div className="d-flex justify-content-end mb-3">
                         {user.rol === "coordinador" &&
                             <>
-                                <Link href={`${proyecto.url}`} target="_blank" id="botonDescargar" className="btn btn-outline-dark rounded-circle me-3 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M5 20H19V18H5M19 9H15V3H9V9H5L12 16L19 9Z" fill="#6E7377" />
-                                    </svg>
+                                <Link href={proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
+                                    {isDownloadHover
+                                        ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
+                                            </svg>
+                                        :
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
+                                            </svg>
+                                    }
                                 </Link>
-                                <button id="botonEditar" className="btn btn-outline-dark rounded-circle me-3 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M20.71 7.04006C21.1 6.65006 21.1 6.00006 20.71 5.63006L18.37 3.29006C18 2.90006 17.35 2.90006 16.96 3.29006L15.12 5.12006L18.87 8.87006M3 17.2501V21.0001H6.75L17.81 9.93006L14.06 6.18006L3 17.2501Z" fill="#6E7377" />
-                                    </svg>
-                                </button>
-                                <button id="botonEliminar" onClick={handleDeleteProject} className="btn btn-outline-dark rounded-circle me-3 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 20" fill="none">
-                                        <path d="M15.2917 1.66667H11.6458L10.6042 0.625H5.39583L4.35417 1.66667H0.708334V3.75H15.2917M1.75 17.2917C1.75 17.8442 1.96949 18.3741 2.36019 18.7648C2.7509 19.1555 3.2808 19.375 3.83333 19.375H12.1667C12.7192 19.375 13.2491 19.1555 13.6398 18.7648C14.0305 18.3741 14.25 17.8442 14.25 17.2917V4.79167H1.75V17.2917Z" fill="#6E7377" />
-                                    </svg>
-                                </button>
+                                <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)} onMouseLeave={() => setIsDeleteHover(false)} onClick={handleDeleteProject} className="me-3">
+                                    {isDeleteHover
+                                        ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                                <path d="M35.2917 19.6667H31.6459L30.6042 18.625H25.3959L24.3542 19.6667H20.7084V21.75H35.2917M21.75 35.2917C21.75 35.8442 21.9695 36.3741 22.3602 36.7648C22.7509 37.1555 23.2808 37.375 23.8334 37.375H32.1667C32.7192 37.375 33.2491 37.1555 33.6398 36.7648C34.0305 36.3741 34.25 35.8442 34.25 35.2917V22.7917H21.75V35.2917Z" fill="#0065F3"/>
+                                            </svg>
+                                        :
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                                <path d="M35.2917 19.6667H31.6459L30.6042 18.625H25.3959L24.3542 19.6667H20.7084V21.75H35.2917M21.75 35.2917C21.75 35.8442 21.9695 36.3741 22.3602 36.7648C22.7509 37.1555 23.2808 37.375 23.8334 37.375H32.1667C32.7192 37.375 33.2491 37.1555 33.6398 36.7648C34.0305 36.3741 34.25 35.8442 34.25 35.2917V22.7917H21.75V35.2917Z" fill="#6E7377"/>
+                                            </svg>
+                                    }
+                                </Link>
                             </>
                         }
                         {user.rol === "profesor" &&
                             <>
-                                <Link href={`${proyecto.url}`} target="_blank" id="botonDescargar" className="btn btn-outline-dark rounded-circle me-3 p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M5 20H19V18H5M19 9H15V3H9V9H5L12 16L19 9Z" fill="#6E7377" />
-                                    </svg>
+                                <Link href={`${proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
+                                    {isDownloadHover
+                                        ?
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
+                                        </svg>
+                                        :
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
+                                        </svg>
+                                    }
                                 </Link>
                             </>
                         }
@@ -137,9 +176,9 @@ export default function Project({ params }) {
                         </div>
                     )}
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center align-items-center">
                     <hr className="w-50" />
-                    <button className="w-25 btn btn-outline-secondary rounded-pill">Ver más +</button>
+                    <button onClick={handleViewMore} className={`px-5 py-2 ${isViewMoreHover ? "btn-outline-primary" : "btn-outline-secondary"} rounded text-dark`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
                     <hr className="w-50" />
                 </div>
                 <div className="row g-4 card-group mt-5">
