@@ -16,6 +16,7 @@ export default function Home() {
     const [filters, setFilters] = useState({})
     const [search, setSearch] = useState('')
     const [asignatura, setAsignatura] = useState("-1")
+    const [page, setPage] = useState(0)
     const router = useRouter()
 
     const hiddenFileInput = useRef(null)
@@ -41,7 +42,7 @@ export default function Home() {
     //
     useEffect(() => {
         const token = localStorage.getItem('token')
-        get_proyectos(token, 0, filters).then(data => {
+        get_proyectos(token, page, filters).then(data => {
             setProjects(data)
             setProyectosLoaded(true)
         })
