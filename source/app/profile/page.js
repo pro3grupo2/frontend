@@ -237,7 +237,8 @@ export default function Profile() {
                     {
                         projectsNoValidados.length
                             ?
-                            projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => {}} project={project}/>)
+                            projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => {
+                            }} project={project}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
@@ -277,6 +278,8 @@ export default function Profile() {
                                         type="number"
                                         className="rounded border-normal p-2 text-center mt-3"
                                         placeholder="Número"
+                                        min={1}
+                                        max={10}
                                         style={{maxWidth: 165, height: 48}}
                                         value={numUsos}
                                         onChange={e => setNumUsos(e.target.value)}
