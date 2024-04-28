@@ -292,7 +292,10 @@ body {
 .bg-placeholder,
 .bg-image-main,
 .bg-image-signup,
-.bg-image-signin {
+.bg-image-signup-password,
+.bg-image-signin,
+.bg-image-recover,
+.bg-image-recover-password {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -309,11 +312,23 @@ body {
 }
 
 .bg-image-signup {
-    background-image: url('../public/images/background/signup.svg');
+    background-image: url('../public/images/background/signup.png');
+}
+
+.bg-image-signup-password {
+    background-image: url('../public/images/background/signup_password.png');
 }
 
 .bg-image-signin {
-    background-image: url('../public/images/background/signin.svg');
+    background-image: url('../public/images/background/signin.png');
+}
+
+.bg-image-recover {
+    background-image: url('../public/images/background/recover.png');
+}
+
+.bg-image-recover-password {
+    background-image: url('../public/images/background/recover_password.png');
 }
 
 .btn-next,
@@ -442,4 +457,17 @@ body {
 .btn:hover {
     color: var(--color-secundario-blanco) !important;
     background-color: var(--color-secundario-negro) !important;
+    border: 1px solid var(--color-secundario-negro) !important;
+}
+
+.btn-icon:hover {
+    color: transparent !important;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+}
+
+.btn-icon-back:hover {
+    color: red !important;
+    background-color: transparent !important;
+    border: 1px solid var(--color-principal) !important;
 }

@@ -21,7 +21,11 @@
 
 
 .border-normal {
-    border: 1px solid #091229 !important;
+    border: 1px solid var(--color-secundario-negro) !important;
+}
+
+.border-normal:focus {
+    border: 3px solid var(--color-principal) !important;
 }
 
 .border-error {
@@ -41,10 +45,4 @@
     background-color: white; /* Asegúrate de que el color de fondo coincida con el de tu sitio */
     position: relative;
     top: -0.5em; /* Ajusta esto según el tamaño de tu fuente */
-}
-
-.form-control {
-    border: var(--color-secundario-negro);
-
-
 }

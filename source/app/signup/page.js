@@ -42,7 +42,7 @@ export default function SignUp() {
             2024,
             codigo.length ? codigo.join('') : undefined,
             (response) => {
-                create_alert(setAlerts, `${response.path}: ${response.msg}`, 'danger')
+                create_alert(setAlerts, `${response.path ?? ''}: ${response.msg ?? response}`, 'danger')
             }
         )
         setLoading(false)

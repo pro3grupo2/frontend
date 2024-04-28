@@ -1,19 +1,19 @@
 "use client"
 import  { useState } from 'react'
 import '../globals.css'
-import '../../styles/profile.css'
+import '../../styles/Profile.css'
 
 
 export default function Help() {
-    const [showFAQ, setShowFAQ] = useState(true);
+    const [showFAQ, setShowFAQ] = useState(true)
 
     const toggleFAQ = () => {
-        setShowFAQ(true);
-    };
+        setShowFAQ(true)
+    }
 
     const toggleAbout = () => {
-        setShowFAQ(false);
-    };
+        setShowFAQ(false)
+    }
 
     return (
         <div className="container-fluid py-3">
@@ -117,5 +117,5 @@ export default function Help() {
 
             )}
         </div>
-    );
+    )
 }

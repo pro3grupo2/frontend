@@ -15,17 +15,15 @@ export default function Notfound() {
 
                     <div className="d-flex flex-column flex-sm-row gap-3">
                         <Link href="/home" className="notfound-boton btn btn-primary w-25  color-secundario-blanco p-2" style={{ minWidth: "fit-content" }}>Proyectos</Link>
-                        <Link href="/soporte" className="notfound-boton btn btn-outline-primary w-25 p-2" style={{ minWidth: "fit-content" }}>Centro de ayuda</Link>
+                        <Link href="/help" className="notfound-boton btn btn-outline-primary w-25 p-2" style={{ minWidth: "fit-content" }}>Centro de ayuda</Link>
                     </div>
                 </div>
                 <hr />
                 <div className="notfound-footer">
                     <p>Si no encuentras lo que buscas o necesitas ayuda siempre puedes contactar con el servicio de atención al cliente llamando al <span className="notfound-footer-detail">900 373 379</span> o enviando un correo a <span className="notfound-footer-detail">reservorio@u-tad.com</span></p>
-                    <a href="https://u-tad.com/contacto/" target="_blank" className="ms-link">Centro de Ayuda</a>
+                    <a href="/help" target="_blank" className="ms-link">Centro de Ayuda</a>
                     <span className="m-3">|</span>
-                    <a href="/home" target="_blank" className="ms-link">Sobre U-Reservorio</a>
-
-
+                    <a href="https://u-tad.com/contacto/" target="_blank" className="ms-link">Sobre U-Reservorio</a>
                 </div>
             </div>
         </div>

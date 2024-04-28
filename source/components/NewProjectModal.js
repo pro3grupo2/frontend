@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import {get_asignaturas} from "@/api/v1/asignaturas"
 import {crear_proyecto, subir_ficheros} from "@/api/v1/proyectos"
 import Loading from "@/components/Loading"
-import "../styles/signup.css"
+import "../styles/Signup.css"
 
 export default function NewProjectModal({show, setShow}) {
     const

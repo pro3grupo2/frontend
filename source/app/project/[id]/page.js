@@ -1,44 +1,44 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import useAuth from '@/hooks/useAuth';
-import {eliminar_proyecto, get_proyecto, get_proyectos} from "@/api/v1/proyectos";
-import ProjectCard from '@/components/ProjectCard';
-import Link from 'next/link';
-import Loading from '@/components/Loading';
-import Image from 'next/image';
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react'
+import useAuth from '@/hooks/useAuth'
+import {eliminar_proyecto, get_proyecto, get_proyectos} from "@/api/v1/proyectos"
+import ProjectCard from '@/components/ProjectCard'
+import Link from 'next/link'
+import Loading from '@/components/Loading'
+import Image from 'next/image'
+import { useRouter } from "next/navigation"
 
 export default function Project({ params }) {
-    const { user, isLoading } = useAuth();
-    const [proyecto, setProyecto] = useState({});
-    const [userProjects, setUserProjects] = useState([]);
-    const [otherProjects, setOtherProjects] = useState([]);
-    const [proyectoLoaded, setProyectoLoaded] = useState(false);
-    const router = useRouter();
+    const { user, isLoading } = useAuth()
+    const [proyecto, setProyecto] = useState({})
+    const [userProjects, setUserProjects] = useState([])
+    const [otherProjects, setOtherProjects] = useState([])
+    const [proyectoLoaded, setProyectoLoaded] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         get_proyecto(token, params.id).then(data => {
-            setProyecto(data);
-            setProyectoLoaded(true);
-        });
-    }, [params.id]);
+            setProyecto(data)
+            setProyectoLoaded(true)
+        })
+    }, [params.id])
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
         if (proyecto.usuarios) {
             let filters = {
                 busqueda: proyecto.usuarios.correo
-            };
+            }
 
             get_proyectos(token, 0, filters).then(data => {
-                setUserProjects(data.filter(project => project.id !== proyecto.id));
-            });
+                setUserProjects(data.filter(project => project.id !== proyecto.id))
+            })
 
             get_proyectos(token).then(data => {
-                setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id));
-            });
+                setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
+            })
         }
     }, [proyecto]);
 

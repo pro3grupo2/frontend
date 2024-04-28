@@ -7,7 +7,7 @@ import Link from "next/link"
 import {useRouter} from "next/navigation"
 
 import '../globals.css'
-import '../../styles/profile.css'
+import '../../styles/Profile.css'
 
 import ProjectCard from "@/components/ProjectCard"
 import {aceptar_proyecto, get_me_proyectos, get_proyectos_pendientes, rechazar_proyecto} from "@/api/v1/proyectos"
@@ -42,28 +42,28 @@ export default function Profile() {
         [modal_show_new_project, setModalShowNewProject] = useState(false)
 
     const crearCodigo = async () => {
-        await crear_codigo(localStorage.getItem('token'), numUsos);
+        await crear_codigo(localStorage.getItem('token'), numUsos)
         get_codigos(localStorage.getItem('token')).then(data => {
             setCodigos(data.reverse())
-        });
-    };
+        })
+    }
 
     const handleAceptar = async (id) => {
         await aceptar_proyecto(localStorage.getItem('token'), id)
-    };
+    }
 
     const handleRechazar = async (id) => {
         await rechazar_proyecto(localStorage.getItem('token'), id)
-    };
+    }
 
     const copiarAlPortapapeles = (codigo) => {
         navigator.clipboard.writeText(codigo)
             .then(() => {
-                alert('¡Código copiado al portapapeles!');
+                alert('¡Código copiado al portapapeles!')
             })
             .catch(err => {
-                alert('Error al copiar el código: ' + err);
-            });
+                alert('Error al copiar el código: ' + err)
+            })
     }
 
     const eliminarCodigo = async (codigo_id, indice) => {
@@ -86,7 +86,7 @@ export default function Profile() {
                 if (data.rol === "coordinador") {
                     get_codigos(localStorage.getItem('token')).then(data => {
                         setCodigos(data)
-                    });
+                    })
 
                     get_proyectos_pendientes(localStorage.getItem('token'))
                         .then(data => {
@@ -116,8 +116,8 @@ export default function Profile() {
 
     // Redirigir a la página del proyecto al hacer click en una tarjeta
     const handleCardClick = (id) => {
-        router.push(`/project/${id}`);
-    };
+        router.push(`/project/${id}`)
+    }
 
     // Convertir la primera letra del nombre y del apellido a mayúscula
     const nombreCompletoCapitalizado = user.nombre_completo && typeof user.nombre_completo === 'string'
@@ -125,7 +125,7 @@ export default function Profile() {
             .split(' ')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
-        : "";
+        : ""
 
     if (user.rol == "coordinador") return (
         <>

@@ -4,7 +4,7 @@ import {useState} from 'react'
 import {useRouter} from "next/navigation"
 import Loading from "@/components/Loading"
 import {validate} from "@/api/v1/auth"
-import Image from "next/image";
+import Image from "next/image"
 
 export default function RecoverPassword({params}) {
     const router = useRouter()

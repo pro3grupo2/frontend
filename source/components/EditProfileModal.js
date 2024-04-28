@@ -4,7 +4,7 @@ import Image from "next/image"
 
 import { update } from "@/api/v1/account"
 import Loading from "@/components/Loading"
-import "../styles/signup.css"
+import "../styles/Signup.css"
 
 export default function EditProfileModal({ show, setShow, default_user_data }) {
     const

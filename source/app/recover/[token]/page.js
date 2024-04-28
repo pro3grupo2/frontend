@@ -1,19 +1,19 @@
 "use client"
 
-import React, { useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import {useRouter} from "next/navigation"
 
-import { EstructuraFormularios } from "@/components/Estructura"
-import { ControladorSiguienteAtras } from "@/components/Signup"
-import { AlertContainer, create_alert } from "@/components/Alerts"
+import {EstructuraFormularios} from "@/components/Estructura"
+import {ControladorSiguienteAtras} from "@/components/Signup"
+import {AlertContainer, create_alert} from "@/components/Alerts"
 import Loading from "@/components/Loading"
 
-import { update } from '@/api/v1/account'
-import { check_password } from "@/utils/validation"
+import {update} from '@/api/v1/account'
+import {check_password} from "@/utils/validation"
 
-export default function RecoverPassword({ params }) {
+export default function RecoverPassword({params}) {
     const
         [password, setPassword] = useState(''),
         [tipo_password, setTipoPassword] = useState('password'),
@@ -26,9 +26,7 @@ export default function RecoverPassword({ params }) {
         [loading, setLoading] = useState(false),
         router = useRouter()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
+    useEffect(() => {
         setPasswordChecks([])
 
         if (!check_password(
@@ -38,9 +36,23 @@ export default function RecoverPassword({ params }) {
             }
         )) return password_ref.current.classList.add('border-error')
 
+        password_ref.current.classList.remove('border-error')
+
         if (password !== password2) {
             setPasswordChecks((previous) => [...previous, 'Las contraseñas no coinciden'])
             return password2_ref.current.classList.add('border-error')
+        }
+
+        password2_ref.current.classList.remove('border-error')
+    }, [password, password2])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (password_checks.length) {
+            password_ref.current.classList.remove('border-error')
+            password2_ref.current.classList.remove('border-error')
+            return
         }
 
         setLoading(true)
@@ -55,14 +67,14 @@ export default function RecoverPassword({ params }) {
         router.push('/signin')
     }
 
-    if (loading) return <Loading />
+    if (loading) return <Loading/>
 
     return (
         <>
-            <AlertContainer alerts={alerts} />
+            <AlertContainer alerts={alerts}/>
 
-            <EstructuraFormularios>
-                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{ maxWidth: 560 }}>
+            <EstructuraFormularios clase_imagen="bg-image-recover-password">
+                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
                     <div>
                         <h1 className='fw-bold'>Recupera tu contraseña</h1>
                         <p className=' pe-1 '>Crea una nueva contraseña</p>
@@ -86,7 +98,7 @@ export default function RecoverPassword({ params }) {
                                 type="button"
                                 className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
                                 onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
-                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
                         </div>
 
@@ -107,7 +119,7 @@ export default function RecoverPassword({ params }) {
                                 type="button"
                                 className="position-absolute top-50 end-0 translate-middle-y btn btn-link"
                                 onClick={() => setTipoPassword2(tipo_password2 === 'password' ? 'text' : 'password')}>
-                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
                         </div>
 
