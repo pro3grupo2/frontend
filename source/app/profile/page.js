@@ -17,6 +17,7 @@ import {crear_codigo, eliminar_codigo, get_codigos} from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
 import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
+import ConfirmModal from "@/components/ConfirmModal";
 
 export default function Profile() {
     const
@@ -35,6 +36,8 @@ export default function Profile() {
         [loading, setLoading] = useState(true),
         [codigos, setCodigos] = useState([]),
         [numUsos, setNumUsos] = useState(''),
+        [showConfirmModal, setShowConfirmModal] = useState(false),
+        [codigoToDelete, setCodigoToDelete] = useState(null),
         router = useRouter()
 
     const
@@ -127,6 +130,21 @@ export default function Profile() {
             .join(' ')
         : ""
 
+    const handleDeleteClick = (codigoId, index) => {
+        setCodigoToDelete({ codigoId, index });
+        setShowConfirmModal(true);
+    };
+
+    const confirmDelete = async () => {
+        const { codigoId, index } = codigoToDelete;
+        const data = await eliminar_codigo(localStorage.getItem('token'), codigoId);
+        if (!data) {
+            alert('Error al eliminar el código');
+        } else {
+            setCodigos(codigos.filter((_, idx) => idx !== index));
+        }
+        setShowConfirmModal(false);
+    };
     if (user.rol == "coordinador") return (
         <>
             
@@ -137,6 +155,7 @@ export default function Profile() {
                 <div className="modal-container">
                     <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
                     <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
+                    <ConfirmModal show={showConfirmModal} setShow={setShowConfirmModal} onConfirm={confirmDelete}/>
                 </div>
                 <div className="d-flex flex-row gap-5 gap-sm-0 flex-wrap-reverse flex-sm-nowrap justify-content-center justify-content-sm-between px-5 pt-5">
                     <div className="">
@@ -277,7 +296,12 @@ export default function Profile() {
                                                     </div>
                                                     <div className="d-flex align-items-center">
                                                         <span className="me-5 ms-semibold">{codigo.usos}</span>
-                                                        <img src="icons/eliminar.svg" alt="Eliminar" className='me-3' onClick={() => eliminarCodigo(codigo.id, index)}/>
+                                                        <img
+                                                            src="icons/eliminar.svg"
+                                                            alt="Eliminar"
+                                                            className='me-3'
+                                                            onClick={() => handleDeleteClick(codigo.id, index)}
+                                                        />
                                                     </div>
                                                 </div>
                                             ))}
