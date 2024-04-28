@@ -34,7 +34,7 @@ export default function Profile() {
         [projectsNoValidados, setProjectsNoValidados] = useState([]),
         [loading, setLoading] = useState(true),
         [codigos, setCodigos] = useState([]),
-        [numUsos, setNumUsos] = useState(1),
+        [numUsos, setNumUsos] = useState(''),
         router = useRouter()
 
     const
@@ -237,13 +237,20 @@ export default function Profile() {
                                         type="number"
                                         className="rounded border-normal p-2 text-center mt-3"
                                         placeholder="Número"
-                                        style={{maxWidth: 165, height: 48}}
+                                        style={{ maxWidth: 165, height: 48 }}
                                         value={numUsos}
                                         onChange={e => setNumUsos(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-group mt-3">
-                                    <button className="btn btn-primary mt-3" style={{maxWidth: 262, height: 48}} onClick={crearCodigo}>GENERAR CÓDIGO</button>
+                                    <button
+                                        className="btn btn-primary mt-3"
+                                        style={{ maxWidth: 262, height: 48 }}
+                                        onClick={crearCodigo}
+                                        disabled={!numUsos || numUsos === 0} // Deshabilita el botón si numUsos está vacío o es cero
+                                    >
+                                        GENERAR CÓDIGO
+                                    </button>
                                 </div>
                             </div>
 
