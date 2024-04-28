@@ -7,7 +7,7 @@
     line-height: 100%;
 }
 
-.btn-font{
+.btn-font {
     font-variant: all-small-caps !important;
 }
 
@@ -17,6 +17,11 @@
     font-style: normal !important;
     font-weight: 700 !important;
     line-height: 100% !important;
+}
+
+.btn-custom:hover {
+    color: var(--color-secundario-negro) !important;
+    background-color: transparent !important;
 }
 
 .btn-active {

@@ -142,24 +142,15 @@ export default function Profile() {
                         <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
                         <b className="fw-bold fs-5">{user.correo}</b>
                         <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
-                        <p className="ms-regular text-break w-75">{user.descripcion}</p>
+                        <p className="ms-regular text-break" style={{width: '30rem'}}>{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
                             <button className="btn btn-outline-primary btn-font color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                         </div>
                     </div>
 
-
-                    <div className="image-container" style={{width: '208px', height: '208px', position: 'relative', overflow: 'hidden'}}>
-                        <Image
-                            className="rounded img-fluid"
-                            src={user.foto}
-                            alt="perfil"
-                            style={{position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', objectFit: 'cover'}}
-                            layout="responsive"
-                            width={208}
-                            height={208}
-                        />
+                    <div className={'position-relative'} style={{width: '11.99244rem', height: '12rem'}}>
+                        <Image className={"rounded"} src={user.foto} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto}/>
                     </div>
                 </div>
 
@@ -312,8 +303,9 @@ export default function Profile() {
                         </div>
                     </div>
 
-
-                    <Image className="rounded" src={user.foto} alt="perfil" width={208} height={208}/>
+                    <div className={'position-relative'} style={{width: '11.99244rem', height: '12rem'}}>
+                        <Image className={"rounded"} src={user.foto} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto}/>
+                    </div>
                 </div>
 
                 <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">

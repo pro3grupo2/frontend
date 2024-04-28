@@ -438,3 +438,8 @@ body {
     outline: none !important;
     border-color: transparent !important;
 }
+
+.btn:hover {
+    color: var(--color-secundario-blanco) !important;
+    background-color: var(--color-secundario-negro) !important;
+}

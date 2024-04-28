@@ -1,22 +1,22 @@
 function Dropzone({ inputPortada, setInputPortada }) {
     const handleDrop = (e) => {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
+        e.preventDefault()
+        const file = e.dataTransfer.files[0]
         if (file) {
-            setInputPortada(file);
+            setInputPortada(file)
         }
-    };
+    }
 
     const handleDragOver = (e) => {
-        e.preventDefault();
-    };
+        e.preventDefault()
+    }
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            const filesArray = Array.from(e.target.files);
-            setInputPortada(filesArray);
+            const filesArray = Array.from(e.target.files)
+            setInputPortada(filesArray)
         }
-    };
+    }
 
     return (
         <div className="dropzone" onDrop={handleDrop} onDragOver={handleDragOver}>
@@ -30,5 +30,5 @@ function Dropzone({ inputPortada, setInputPortada }) {
             )}
             <input className="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" onChange={handleFileChange} />
         </div>
-    );
+    )
 }

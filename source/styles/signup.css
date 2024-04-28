@@ -1,7 +1,3 @@
-:root {
-    --color-secundario-gris: #6E7377;
-}
-
 /* styles.css */
 
 /* styles.css */
@@ -31,23 +27,24 @@
 .border-error {
     border: 3px solid var(--color-error) !important;
 }
+
 /* styles/CustomHr.css */
 .linea {
     flex-grow: 1;
     border-top: 1px solid #999;
     margin: 0 20px;
-  }
-  
-  .leyenda {
+}
+
+.leyenda {
     padding: 0 10px;
     font-weight: normal;
     background-color: white; /* Asegúrate de que el color de fondo coincida con el de tu sitio */
     position: relative;
     top: -0.5em; /* Ajusta esto según el tamaño de tu fuente */
-  }
-  .form-control{
-    border: var(--color-secundario-negro);
-    
-    
+}
 
-  }
+.form-control {
+    border: var(--color-secundario-negro);
+
+
+}

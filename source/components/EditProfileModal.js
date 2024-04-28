@@ -27,8 +27,8 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
     }
 
     const handleClose = () => {
-        setShow(false);
-    };
+        setShow(false)
+    }
 
 
     if (loading) return <Loading />
@@ -54,9 +54,6 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
                     </div>
                 </div>
 
-
-
-
                 <div className="d-flex flex-column justify-content-between w-100" style={{ maxWidth: 488 }}>
                     <div className="w-100 ">
                         <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)} />
@@ -69,7 +66,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
                         </div>
                         <div class="mb-3">
                             <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
-                            <textarea className="form-control border-normal" placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
+                            <textarea className="form-control border-normal" placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value.slice(0, 140))}></textarea>
                         </div>
                     </div>
 

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import "@/styles/project-card.css"
 import SolicitudProjectModal from "@/components/SolicitudProjectModal"
-import {aceptar_proyecto, rechazar_proyecto} from "@/api/v1/proyectos";
+import {aceptar_proyecto, rechazar_proyecto} from "@/api/v1/proyectos"
 
 export function ProjectSolicitudLista({project, setProjects, index}) {
     const
