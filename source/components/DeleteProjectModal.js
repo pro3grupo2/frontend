@@ -42,7 +42,7 @@ export default function DeleteProjectModal({project, show, setShow}) {
                     </div>
                 </div>
 
-                <div className={'d-flex flex-row justify-content-end gap-3 w-100 background-color-secundario-negro p-3'}>
+                <div className={'d-flex flex-row justify-content-end gap-3 w-100 p-3'}>
                     <button className="btn btn-primary ms-button color-secundario-negro background-color-secundario-blanco p-2" style={{width: '11rem'}} onClick={() => setShow(false)}>Cancelar</button>
                     <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" style={{width: '11rem'}} onClick={handleDeleteProject}>Eliminar</button>
                 </div>
