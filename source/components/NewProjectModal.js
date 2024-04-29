@@ -26,7 +26,7 @@ export default function NewProjectModal({show, setShow}) {
         const token = localStorage.getItem('token')
         get_asignaturas(token)
             .then(data => {
-                setAsignaturas(data)
+                setAsignaturas(data ?? [])
             })
     }, [])
 
