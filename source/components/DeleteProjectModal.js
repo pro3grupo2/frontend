@@ -32,11 +32,10 @@ export default function DeleteProjectModal({project, show, setShow}) {
 
                     <div>
                         <p class={'ms-bold-body'}>
-                            Estás a punto de eliminar un código de coordinador.
+                            Estás a punto de eliminar un proyecto.
                             ¿Estás seguro de que quieres eliminarlo?
                         </p>
                         <p class={'ms-regular-subbody'}>
-                            Los códigos de coordinador son únicos y una vez eliminador pierden todos sus usos.
                             Una vez eliminado no podrás recuperarlo...
                         </p>
                     </div>
