@@ -1,10 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
 
 import Image from "next/image"
-import {useRouter} from "next/navigation"
+import Link from "next/link"
 
 export default function SolicitudProjectModal({project, show, setShow, handleAceptar, handleRechazar}) {
-    const router = useRouter()
+    const
+        [isDownloadHover, setIsDownloadHover] = useState(false),
+        [isDeleteHover, setIsDeleteHover] = useState(false)
 
     return (
         <>
@@ -13,16 +15,17 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
             <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column position-fixed gap-3 top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-auto`}>
                 <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
 
-                <div>
-                    <p className={"fs-2 fw-bold p-0 m-0"}>{project.titulo}</p>
+                <div className={'d-flex flex-column flex-nowrap gap-3'}>
+                    <p className={"ms-bold text-break p-0 m-0"}>{project.titulo}</p>
+
                     {
                         project.participantes
                             .map((participante) => (
-                                <p className={"p-0 m-0"}>{participante.correo}</p>
+                                <p className={"ms-regular p-0 m-0"}>{participante.correo}</p>
                             ))
                     }
 
-                    <p className={"fw-light p-0 m-0"}>
+                    <p className={"ms-regular-subbody p-0 m-0"}>
                         {
 
                             project.proyectos_asignaturas[0]
@@ -39,32 +42,66 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
                         width={0} height={0}
                         layout={"responsive"}
                         style={{
-                            minWidth: "300px",
                             maxWidth: "440px",
-                            minHeight: "300px",
                             maxHeight: "300px",
                         }}
                         alt={project.portada}/>
 
                     <div className={"flex-grow-1 d-flex flex-column justify-content-between"}>
                         <div className={"d-flex flex-row justify-content-end gap-3"}>
-                            <button id="botonEditar" className="btn btn-outline-dark rounded-circle p-0 m-0" style={{width: 48, height: 48}} onClick={() => router.push(`/project/${project.id}`)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M20.71 7.04006C21.1 6.65006 21.1 6.00006 20.71 5.63006L18.37 3.29006C18 2.90006 17.35 2.90006 16.96 3.29006L15.12 5.12006L18.87 8.87006M3 17.2501V21.0001H6.75L17.81 9.93006L14.06 6.18006L3 17.2501Z" fill="#6E7377"/>
-                                </svg>
-                            </button>
-                            <button id="botonDescargar" className="btn btn-outline-dark rounded-circle p-0 m-0" style={{width: 48, height: 48}} onClick={() => window.open(project.url.startsWith('http') ? project.url : `https://api.reservorio-u-tad.com${project.url}`, '_blank', 'noopener,noreferrer')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M5 20H19V18H5M19 9H15V3H9V9H5L12 16L19 9Z" fill="#6E7377"/>
-                                </svg>
-                            </button>
+                            <Link href={`/project/${project.id}`} id="botonDescargar" onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} className="me-3" style={{width: 48, height: 48}}>
+                                {isDownloadHover
+                                    ?
+                                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_396_1194)">
+                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" stroke-width="2"/>
+                                            <path d="M36.71 23.04C37.1 22.65 37.1 22 36.71 21.63L34.37 19.29C34 18.9 33.35 18.9 32.96 19.29L31.12 21.12L34.87 24.87M19 33.25V37H22.75L33.81 25.93L30.06 22.18L19 33.25Z" fill="#0065F3"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_396_1194">
+                                                <rect width="56" height="56" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    :
+                                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_396_1188)">
+                                            <rect width="56" height="56" rx="28" fill="white"/>
+                                            <path d="M36.71 23.04C37.1 22.65 37.1 22 36.71 21.63L34.37 19.29C34 18.9 33.35 18.9 32.96 19.29L31.12 21.12L34.87 24.87M19 33.25V37H22.75L33.81 25.93L30.06 22.18L19 33.25Z" fill="#6E7377"/>
+                                        </g>
+                                        <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" stroke-width="2"/>
+                                        <defs>
+                                            <clipPath id="clip0_396_1188">
+                                                <rect width="56" height="56" rx="28" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                }
+                            </Link>
+                            <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)} onMouseLeave={() => setIsDeleteHover(false)} onClick={() => window.open(project.url.startsWith('http') ? project.url : `https://api.reservorio-u-tad.com${project.url}`, '_blank', 'noopener,noreferrer')} className="me-3">
+                                {isDeleteHover
+                                    ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                        <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                        <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                        <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
+                                    </svg>
+                                    :
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                        <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                        <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                        <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
+                                    </svg>
+                                }
+                            </Link>
                         </div>
 
-                        <p className={"flex-grow-1"}>{project.ficha}</p>
+                        <p className={"flex-grow-1 ms-regular"}>{project.ficha}</p>
 
                         <div className={"d-flex flex-row justify-content-end gap-3"}>
-                            <button className={"btn btn-outline-primary color-secundario-negro w-25"} style={{minWidth: "fit-content"}} onClick={handleRechazar}>Rechazar</button>
-                            <button className={"btn btn-primary color-secundario-blanco w-25"} style={{minWidth: "fit-content"}} onClick={handleAceptar}>Aceptar</button>
+                            <button className={"btn btn-outline-primary ms-button color-secundario-negro w-25"} style={{minWidth: "fit-content"}} onClick={handleRechazar}>Rechazar</button>
+                            <button className={"btn btn-primary ms-button color-secundario-blanco w-25"} style={{minWidth: "fit-content"}} onClick={handleAceptar}>Aceptar</button>
                         </div>
                     </div>
                 </div>

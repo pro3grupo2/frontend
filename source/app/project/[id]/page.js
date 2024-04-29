@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import useAuth from '@/hooks/useAuth'
-import {eliminar_proyecto, get_proyecto, get_proyectos} from "@/api/v1/proyectos"
+import {get_proyecto, get_proyectos} from "@/api/v1/proyectos"
 import ProjectCard from '@/components/ProjectCard'
 import Link from 'next/link'
 import Loading from '@/components/Loading'
@@ -103,7 +103,7 @@ export default function Project({params}) {
                             : "Otros / Otros / " + proyecto.anio
                         }
                     </p>
-                    <h1 className="ms-bold">{proyecto.titulo}</h1>
+                    <h1 className="ms-bold">{proyecto.titulo} {proyecto.estado !== 'aceptado' && <span className={'ms-regular-subbody'}>({proyecto.estado})</span>}</h1>
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
                         <p className="ms-regular mt-3 mb-4">
                             {proyecto.participantes && (proyecto.participantes.length > 0)

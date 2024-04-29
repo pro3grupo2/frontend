@@ -143,18 +143,18 @@ export default function Profile() {
                 </div>
 
                 <div className="d-flex flex-row gap-5 gap-md-0 flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-md-between px-5 pt-5">
-                    <div className="">
-                        <p className="fs-6 fw-bolder">
+                    <div className="d-flex flex-column flex-nowrap gap-3">
+                        <p className="p-0 m-0">
                             <button className="border border-0 bg-transparent me-5" onClick={() => history.back()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
                                     <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
                                 </svg>
                             </button>
                         </p>
-                        <h1 className="ms-extra-bold">{nombreCompletoCapitalizado}</h1>
-                        <b className="ms-extra-bold-subtitle">{user.correo}</b>
-                        <p className="link-offset-1 ms-bold-body"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
-                        <p className="ms-regular text-break" style={{maxWidth: '30rem'}}>{user.descripcion}</p>
+                        <h1 className="ms-extra-bold p-0 m-0">{nombreCompletoCapitalizado}</h1>
+                        <b className="ms-extra-bold-subtitle p-0 m-0">{user.correo}</b>
+                        <p className="link-offset-1 ms-bold-body p-0 m-0"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="ms-regular text-break p-0 m-0" style={{maxWidth: '30rem'}}>{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
                             <button className="btn btn-primary ms-button p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
                             <button className="btn btn-outline-primary ms-button color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
