@@ -1,16 +1,17 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import useAuth from '@/hooks/useAuth'
 import {eliminar_proyecto, get_proyecto, get_proyectos} from "@/api/v1/proyectos"
 import ProjectCard from '@/components/ProjectCard'
 import Link from 'next/link'
 import Loading from '@/components/Loading'
 import Image from 'next/image'
-import { useRouter } from "next/navigation"
+import {useRouter} from "next/navigation"
+import DeleteProjectModal from "@/components/DeleteProjectModal";
 
-export default function Project({ params }) {
-    const { user, isLoading } = useAuth()
+export default function Project({params}) {
+    const {user, isLoading} = useAuth()
     const [proyecto, setProyecto] = useState({})
     const [userProjects, setUserProjects] = useState([])
     const [otherProjects, setOtherProjects] = useState([])
@@ -20,6 +21,9 @@ export default function Project({ params }) {
     const [isViewMoreHover, setIsViewMoreHover] = useState(false)
     const [page, setPage] = useState(0)
     const router = useRouter()
+
+    const
+        [show_delete_modal, setShowDeleteModal] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -58,18 +62,12 @@ export default function Project({ params }) {
     }, [proyecto, page]);
 
     if (isLoading || !proyectoLoaded) {
-        return <Loading />
+        return <Loading/>
     }
 
     const handleCardClick = (id) => {
         router.push(`/project/${id}`);
     };
-
-    const handleDeleteProject = async () => {
-        const token = localStorage.getItem('token');
-        const data = await eliminar_proyecto(token, proyecto.id);
-        if (data) history.back();
-    }
 
     const handleViewMore = () => {
         setPage(page + 1)
@@ -82,7 +80,7 @@ export default function Project({ params }) {
 
     if (!proyecto) {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{ height: '100vh' }}>
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
                 <div className="text-center">
                     <h1 className="display-1 ms-black">Proyecto no encontrado</h1>
                 </div>
@@ -90,115 +88,121 @@ export default function Project({ params }) {
         );
     } else {
         return (
-            <div className="container-fluid p-5">
-                <p className="fs-6 fw-bolder">
-                    <button className="border border-0 bg-transparent me-5" onClick={() => history.back()}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-                            <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3" />
-                        </svg>
-                    </button>
-                    {proyecto.proyectos_asignaturas[0]
-                        ? proyecto.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.titulo + '/ ' + proyecto.proyectos_asignaturas[0].asignaturas.titulo + '/ ' + proyecto.anio
-                        : "Otros / Otros / " + proyecto.anio
-                    }
-                </p>
-                <h1 className="ms-black">{proyecto.titulo}</h1>
-                <div className="d-flex flex-wrap justify-content-between align-items-center">
-                    <p className="ms-regular mt-3 mb-4">
-                        {proyecto.participantes && (proyecto.participantes.length > 0)
-                            ? proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')
-                            : proyecto.usuarios.nombre_completo
+            <>
+                <DeleteProjectModal project={proyecto} show={show_delete_modal} setShow={setShowDeleteModal}/>
+
+                <div className="container-fluid p-5">
+                    <p className="ms-bold-subbody">
+                        <button className="border border-0 bg-transparent me-3" onClick={() => history.back()}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                                <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
+                            </svg>
+                        </button>
+                        {proyecto.proyectos_asignaturas[0]
+                            ? proyecto.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.titulo + ' / ' + proyecto.proyectos_asignaturas[0].asignaturas.titulo + ' / ' + proyecto.anio
+                            : "Otros / Otros / " + proyecto.anio
                         }
                     </p>
-                    <div className="d-flex justify-content-end mb-3">
-                        {user.rol === "coordinador" &&
-                            <>
-                                <Link href={proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
-                                    {isDownloadHover
-                                        ?
+                    <h1 className="ms-bold">{proyecto.titulo}</h1>
+                    <div className="d-flex flex-wrap justify-content-between align-items-center">
+                        <p className="ms-regular mt-3 mb-4">
+                            {proyecto.participantes && (proyecto.participantes.length > 0)
+                                ? proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')
+                                : proyecto.usuarios.nombre_completo
+                            }
+                        </p>
+                        <div className="d-flex justify-content-end mb-3">
+                            {user.rol === "coordinador" &&
+                                <>
+                                    <Link href={proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
+                                        {isDownloadHover
+                                            ?
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                                                 <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
                                                 <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
                                                 <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
                                             </svg>
-                                        :
+                                            :
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                                                 <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
                                                 <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
                                                 <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
                                             </svg>
-                                    }
-                                </Link>
-                                <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)} onMouseLeave={() => setIsDeleteHover(false)} onClick={handleDeleteProject} className="me-3">
-                                    {isDeleteHover
-                                        ?
+                                        }
+                                    </Link>
+                                    <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)} onMouseLeave={() => setIsDeleteHover(false)} onClick={() => setShowDeleteModal(true)} className="me-3">
+                                        {isDeleteHover
+                                            ?
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                                                 <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
                                                 <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
                                                 <path d="M35.2917 19.6667H31.6459L30.6042 18.625H25.3959L24.3542 19.6667H20.7084V21.75H35.2917M21.75 35.2917C21.75 35.8442 21.9695 36.3741 22.3602 36.7648C22.7509 37.1555 23.2808 37.375 23.8334 37.375H32.1667C32.7192 37.375 33.2491 37.1555 33.6398 36.7648C34.0305 36.3741 34.25 35.8442 34.25 35.2917V22.7917H21.75V35.2917Z" fill="#0065F3"/>
                                             </svg>
-                                        :
+                                            :
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                                                 <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
                                                 <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
                                                 <path d="M35.2917 19.6667H31.6459L30.6042 18.625H25.3959L24.3542 19.6667H20.7084V21.75H35.2917M21.75 35.2917C21.75 35.8442 21.9695 36.3741 22.3602 36.7648C22.7509 37.1555 23.2808 37.375 23.8334 37.375H32.1667C32.7192 37.375 33.2491 37.1555 33.6398 36.7648C34.0305 36.3741 34.25 35.8442 34.25 35.2917V22.7917H21.75V35.2917Z" fill="#6E7377"/>
                                             </svg>
-                                    }
-                                </Link>
-                            </>
-                        }
-                        {user.rol === "profesor" &&
-                            <>
-                                <Link href={`${proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
-                                    {isDownloadHover
-                                        ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
-                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
-                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
-                                        </svg>
-                                        :
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
-                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
-                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
-                                        </svg>
-                                    }
-                                </Link>
-                            </>
-                        }
+                                        }
+                                    </Link>
+                                </>
+                            }
+                            {user.rol === "profesor" &&
+                                <>
+                                    <Link href={`${proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
+                                        {isDownloadHover
+                                            ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
+                                            </svg>
+                                            :
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
+                                            </svg>
+                                        }
+                                    </Link>
+                                </>
+                            }
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
+                        <div className={'position-relative'} style={{width: '50rem', height: '28.125rem'}}>
+                            <Image className="" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt="Project Image"/>
+                        </div>
+                        <p className="flex-grow-1 ms-regular">{proyecto.ficha}</p>
+                    </div>
+                    <div className="row g-4 card-group mt-5">
+                        {userProjects.length > 0 && (
+                            <div className="col-12">
+                                <div className="row g-4">
+                                    {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="d-flex justify-content-center align-items-center">
+                        <hr className="w-50"/>
+                        <button onClick={handleViewMore} className={`ms-regular background-color-secundario-blanco px-5 py-2 ${isViewMoreHover ? "btn-outline-primary" : "btn-outline-secondary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                        <hr className="w-50"/>
+                    </div>
+
+                    <div className="row g-4 card-group mt-5">
+                        {otherProjects.length > 0 && (
+                            <div className="col-12">
+                                <div className="row g-4">
+                                    {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-                <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
-                    <div className={'position-relative'} style={{ width: '50rem', height: '28.125rem' }}>
-                        <Image className="" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt="Project Image" />
-                    </div>
-                    <p className="flex-grow-1 fs-5 ms-regular">{proyecto.ficha}</p>
-                </div>
-                <div className="row g-4 card-group mt-5">
-                    {userProjects.length > 0 && (
-                        <div className="col-12">
-                            <div className="row g-4">
-                                {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <div className="d-flex justify-content-center align-items-center">
-                    <hr className="w-50" />
-                    <button onClick={handleViewMore} className={`px-5 py-2 ${isViewMoreHover ? "btn-outline-primary" : "btn-outline-secondary"} rounded text-dark`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
-                    <hr className="w-50" />
-                </div>
-                <div className="row g-4 card-group mt-5">
-                    {otherProjects.length > 0 && (
-                        <div className="col-12">
-                            <div className="row g-4">
-                                {otherProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} />)}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
+            </>
         );
     }
 }
