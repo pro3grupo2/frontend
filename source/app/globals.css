@@ -175,119 +175,118 @@ body {
     box-shadow: 0 0 0 0.2rem var(--color-principal);
 }
 
-/* TIPOGRAFIA FIGMA*/
-
-.ms-font,
-.ms-regular,
-.ms-light,
-.ms-extrabold,
-.ms-black,
-.ms-button,
-.ms-link,
-.ms-regular-black,
-.ms-semibold,
-.ms-extra-semibold,
-.ms-bold,
-.ms-regular,
-.custom-bold,
-.ms-button,
-.title-bold {
-    font-family: 'Montserrat', sans-serif !important;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-
-.title-bold {
-    font-weight: 700 !important;
-}
-
-.ms-light {
-    font-weight: 100 !important;
-}
-
-.ms-extrabold {
-    color: var(--color-secundario-negro, #091229);
+/* TIPOGRAFIA FIGMA */
+.ms-extra-bold {
+    color: var(--color-secundario-negro);
 
     /* H1/Montserrat/ExtraBold */
-    font-family: Montserrat;
-    font-size: 3.8125rem;
+    font-family: Montserrat, sans-serif;
+    font-size: 2.5rem;
     font-style: normal;
     font-weight: 800;
-    line-height: 105%; /* 4.00313rem */
+    line-height: 105%; /* 2.625rem */
 }
 
 .ms-bold {
-    color: var(--color-secundario-negro, #091229);
+    color: var(--color-secundario-negro);
+
     /* H1/Montserrat/Bold */
-    font-family: Montserrat;
-    font-size: 40px;
+    font-family: Montserrat, sans-serif;
+    font-size: 2rem;
+    font-style: normal;
     font-weight: 700;
-    line-height: 100%;
-    /* 40px */
+    line-height: 100%; /* 2rem */
 }
 
-.ms-semibold {
-    color: var(--color-secundario-negro, #091229);
-    /*SUBTITULO*/
+.ms-extra-bold-subtitle {
+    color: var(--color-secundario-negro);
+
+    font-family: Montserrat, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 100%; /* 1.125rem */
+}
+
+.ms-semi-bold {
+    color: var(--color-secundario-negro);
+
     /* H2/Montserrat/SemiBold */
-    font-size: 24px !important;
-    font-weight: 600 !important;
-    line-height: 100% !important;
-    /* 24px */
+    font-family: Montserrat, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 1.125rem */
 }
 
-.ms-extra-semibold {
-    /*SUBTITULO en Negrita*/
-    color: var(--color-secundario-negro, #091229);
-    font-size: 24px !important;
-    font-weight: 800 !important;
-    line-height: 100% !important;
-    /* 24px */
+.ms-bold-body {
+    color: var(--color-secundario-negro);
+
+    /* H3/Montserrat/Bold */
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 1.2rem */
 }
 
 .ms-regular {
-    color: var(--color-secundario-negro, #091229);
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    line-height: 120% !important;
-    /* 19.2px */
+    color: var(--color-secundario-negro);
+
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 1.2rem */
 }
 
-.ms-link {
-    color: var(--color-secundario-negro, #091229) !important;
-    /* H3/Montserrat/Link/Pequeño */
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    line-height: 100% !important;
-    /* 14px */
-    text-decoration-line: underline !important;
+.ms-bold-subbody {
+    color: var(--color-secundario-negro);
+
+    /* H3/Montserrat/Bold/14 */
+    font-family: Montserrat, sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 0.875rem */
 }
 
-.ms-regular-black {
-    color: var(--color-secundario-negro, #091229);
-    /* H3/Montserrat/Bold */
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 120% !important;
-    /* 19.2px */
-}
+.ms-regular-subbody {
+    color: var(--color-secundario-negro);
 
-.ms-black {
-    font-weight: 900 !important;
+    /* H3/Montserrat/Regular */
+    font-family: Montserrat, sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 1.05rem */
 }
 
 .ms-button {
-    color: var(--color-secundario-blanco, #FFF);
-    text-align: center;
+    color: var(--color-secundario-blanco);
+
     /* Boton/Montserrat/Versalitas */
-    font-family: Montserrat, serif !important;
-    font-size: 36px !important;
-    font-style: normal !important;
-    font-weight: 600 !important;
-    line-height: 80% !important;
-    /* 36px */
-    font-variant: all-small-caps !important;
+    font-family: Montserrat, sans-serif;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 1.75rem */
+    font-variant: all-small-caps;
 }
+
+.ms-button-small {
+    color: var(--color-secundario-blanco);
+
+    /* Boton/Montserrat/Versalitas/18 */
+    font-family: Montserrat, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 1.5rem */
+    font-variant: all-small-caps;
+}
+
+/* ================ */
 
 .bg-placeholder,
 .bg-image-main,
@@ -457,17 +456,11 @@ body {
 .btn:hover {
     color: var(--color-secundario-blanco) !important;
     background-color: var(--color-secundario-negro) !important;
-    border: 1px solid var(--color-secundario-negro) !important;
+    border-color: var(--color-secundario-negro) !important;
 }
 
 .btn-icon:hover {
     color: transparent !important;
     background-color: transparent !important;
-    border: 1px solid transparent !important;
-}
-
-.btn-icon-back:hover {
-    color: red !important;
-    background-color: transparent !important;
-    border: 1px solid var(--color-principal) !important;
+    border-color: var(--color-secundario-negro) !important;
 }

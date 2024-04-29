@@ -151,13 +151,13 @@ export default function Profile() {
                                 </svg>
                             </button>
                         </p>
-                        <h1 className="fw-bold display-4">{nombreCompletoCapitalizado}</h1>
-                        <b className="fw-bold fs-5">{user.correo}</b>
-                        <p className="link-offset-1 fw-bold  color-principal "><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <h1 className="ms-extra-bold">{nombreCompletoCapitalizado}</h1>
+                        <b className="ms-extra-bold-subtitle">{user.correo}</b>
+                        <p className="link-offset-1 ms-bold-body"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break" style={{maxWidth: '30rem'}}>{user.descripcion}</p>
                         <div className="d-flex flex-row gap-3">
-                            <button className="btn btn-primary btn-font p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
-                            <button className="btn btn-outline-primary btn-font color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
+                            <button className="btn btn-primary ms-button p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
+                            <button className="btn btn-outline-primary ms-button color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                         </div>
                     </div>
 
@@ -167,7 +167,7 @@ export default function Profile() {
                 </div>
 
                 <div className="d-flex flex-row gap-sm-5 mt-5 ps-sm-5 border-bottom color-secundario-gris">
-                    <button ref={projectsValidados_btn_ref} className="btn btn-custom btn-active" onClick={(e) => {
+                    <button ref={projectsValidados_btn_ref} className="btn btn-custom btn-active ms-regular-subbody" onClick={(e) => {
                         projectsValidados_ref.current.classList.remove('d-none')
                         projectsNoValidados_ref.current.classList.add('d-none')
                         projectsSolicitudes_ref.current.classList.add('d-none')
@@ -180,7 +180,7 @@ export default function Profile() {
                     }}>Proyectos subidos
                     </button>
 
-                    <button ref={projectsNoValidados_btn_ref} className={`${user.rol === "coordinador" && 'd-none'} btn btn-custom`} onClick={() => {
+                    <button ref={projectsNoValidados_btn_ref} className={`${user.rol === "coordinador" && 'd-none'} btn btn-custom ms-regular-subbody`} onClick={() => {
                         projectsValidados_ref.current.classList.add('d-none')
                         projectsNoValidados_ref.current.classList.remove('d-none')
                         projectsSolicitudes_ref.current.classList.add('d-none')
@@ -193,7 +193,7 @@ export default function Profile() {
                     }}>Solicitudes pendientes
                     </button>
 
-                    <button ref={projectsSolicitudes_btn_ref} className={`${user.rol !== "coordinador" && 'd-none'} btn btn-custom`} onClick={() => {
+                    <button ref={projectsSolicitudes_btn_ref} className={`${user.rol !== "coordinador" && 'd-none'} btn btn-custom ms-regular-subbody`} onClick={() => {
                         projectsValidados_ref.current.classList.add('d-none')
                         projectsNoValidados_ref.current.classList.add('d-none')
                         projectsSolicitudes_ref.current.classList.remove('d-none')
@@ -206,7 +206,7 @@ export default function Profile() {
                     }}>Gestionar Solicitudes
                     </button>
 
-                    <button ref={codigosAdmin_btn_ref} className={`${user.rol !== "coordinador" && 'd-none'} btn btn-custom`} onClick={() => {
+                    <button ref={codigosAdmin_btn_ref} className={`${user.rol !== "coordinador" && 'd-none'} btn btn-custom ms-regular-subbody`} onClick={() => {
                         projectsValidados_ref.current.classList.add('d-none')
                         projectsNoValidados_ref.current.classList.add('d-none')
                         projectsSolicitudes_ref.current.classList.add('d-none')
@@ -227,7 +227,7 @@ export default function Profile() {
                             projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
                             :
                             <div className="text-center mt-5">
-                                <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
+                                <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
                                 <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
                             </div>
                     }
@@ -241,7 +241,7 @@ export default function Profile() {
                             }} project={project}/>)
                             :
                             <div className="text-center mt-5">
-                                <h1 className="display-5 fw-bold">No hay solicitudes que mostrar</h1>
+                                <h1 className="ms-extra-bold">No hay solicitudes que mostrar</h1>
                                 <p className="lead">Parece que no hay solicitudes que mostrar en este momento</p>
                             </div>
                     }
@@ -262,7 +262,7 @@ export default function Profile() {
                                 ))
                             :
                             <div className="text-center mt-5">
-                                <h1 className="display-5 fw-bold">No hay proyectos que mostrar</h1>
+                                <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
                                 <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
                             </div>
                     }
@@ -287,7 +287,7 @@ export default function Profile() {
                                 </div>
                                 <div className="form-group mt-3">
                                     <button
-                                        className="btn btn-primary mt-3"
+                                        className="btn btn-primary mt-3 ms-button"
                                         style={{maxWidth: 262, height: 48}}
                                         onClick={crearCodigo}
                                         disabled={!numUsos || numUsos === 0} // Deshabilita el botón si numUsos está vacío o es cero

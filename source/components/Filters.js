@@ -27,7 +27,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
             <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
                 <div
                     onClick={() => setFilters_show(!filters_show)}
-                    className="user-select-none d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 border border-black border-1 rounded p-3"
+                    className="ms-regular-subbody user-select-none d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 border border-black border-1 rounded p-3"
                     style={{height: 40, width: 158}}>
                     Filtro
                     {
@@ -65,7 +65,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                 </div>
 
                 <select
-                    className={`${filters_show && 'd-none'} form-select border-black border-1 rounded`}
+                    className={`${filters_show && 'd-none'} ms-regular-subbody form-select border-black border-1 rounded`}
                     style={{height: 40, width: 158}}
                     onChange={(e) => {
                         const premiado = !!(parseInt(e.target.value))
@@ -78,7 +78,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                 </select>
 
                 <select
-                    className={`${filters_show && 'd-none'} form-select border-black border-1 rounded`}
+                    className={`${filters_show && 'd-none'} ms-regular-subbody form-select border-black border-1 rounded`}
                     style={{height: 40, width: 158}}
                     onChange={(e) => {
                         setFilters({...filters, titulacion: e.target.value})
@@ -105,7 +105,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     min={1900}
                     max={new Date().getFullYear()}
                     step={1}
-                    className={`${filters_show && 'd-none'} border-black border-1 rounded text-center`}
+                    className={`${filters_show && 'd-none'} ms-regular-subbody border-black border-1 rounded text-center`}
                     style={{height: 40, width: 158}}
                     defaultValue={new Date().getFullYear()}
                     onChange={(e) => {
@@ -127,7 +127,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                         onFocus={() => setFilters_input_focus(true)}
                         onChange={(e) => onSearchChange(e)}
                         onKeyDown={(e) => handleSearch(e)}
-                        className="form-control border-0 py-2 focus-ring h-100"
+                        className="ms-regular-subbody form-control border-0 py-2 focus-ring h-100"
                         type="search"
                         placeholder="Buscar un proyecto o escribir el correo de algún miembro"/>
                 </div>
@@ -164,7 +164,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
 
             <ul className="nav nav-underline d-flex flex-row justify-content-center align-items-center border-bottom">
                 <li key="0" className="nav-item me-lg-5">
-                    <button id="0" onClick={() => handleAreaClick("0")} className="nav-link text-dark active">Todo</button>
+                    <button id="0" onClick={() => handleAreaClick("0")} className="nav-link ms-regular-subbody text-dark active">TODO</button>
                 </li>
                 {
                     areas
@@ -174,8 +174,8 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                                     <button
                                         id={area.id}
                                         onClick={() => handleAreaClick(area.id.toString())}
-                                        className="nav-link text-dark">
-                                        {area.titulo}
+                                        className="nav-link ms-regular-subbody text-dark">
+                                        {area.titulo.toUpperCase()}
                                     </button>
                                 </li>
                         )

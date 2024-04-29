@@ -95,7 +95,7 @@ export default function RecoverPassword() {
                             <div className="d-flex justify-content-between align-items-center mt-5">
                                 <Link href="/signin">
                                     <button
-                                        className='btn btn-outline-primary'
+                                        className='btn btn-icon btn-outline-primary'
                                         type="button"
                                         style={{width: '48px', height: '48px'}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
@@ -108,7 +108,7 @@ export default function RecoverPassword() {
                                 </Link>
 
                                 <button
-                                    className='btn btn-primary btn-color-primary  border-5 fs-5 fw-bold'
+                                    className='btn btn-primary btn-color-primary  border-5 ms-button'
                                     type="submit">
                                     SIGUIENTE
                                 </button>
