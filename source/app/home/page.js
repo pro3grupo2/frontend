@@ -17,6 +17,7 @@ export default function Home() {
     const [search, setSearch] = useState('')
     const [asignatura, setAsignatura] = useState("-1")
     const [page, setPage] = useState(0)
+    const [isBottom, setIsBottom] = useState(false)
     const router = useRouter()
 
     const hiddenFileInput = useRef(null)
@@ -54,6 +55,28 @@ export default function Home() {
             setProjects(data)
         }).catch(console.error)
     }, [filters])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (document.body.scrollHeight - 50 <= window.scrollY + window.innerHeight) setIsBottom(true)
+            else setIsBottom(false)
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    })
+
+    useEffect(() => {
+        if (!isBottom) return
+
+        let newPage = page + 1
+        const token = localStorage.getItem('token')
+        get_proyectos(token, newPage, filters).then(data => {
+            let newProjects = projects.concat(data)
+            setProjects(newProjects)
+        }).catch(console.error)
+        setPage(newPage)
+    }, [isBottom]);
 
     if (isLoading || !proyectosLoaded) {
         return <Loading/>

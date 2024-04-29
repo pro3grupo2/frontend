@@ -22,7 +22,6 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
         })
     }, [])
 
-    console.log(filters_usuario)
     return (
         <>
             <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
