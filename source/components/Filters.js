@@ -22,6 +22,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
         })
     }, [])
 
+    console.log(filters_usuario)
     return (
         <>
             <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
@@ -33,13 +34,34 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     {
                         filters_show
                             ?
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-                                <path d="M3 7H15V5H3M0 0V2H18V0M7 12H11V10H7V12Z" fill="#6E7377"/>
-                            </svg>
+                            (
+                                Object.keys(filters_usuario).length > 0
+                                    ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <path d="M6 13H18V11H6M3 6V8H21V6M10 18H14V16H10V18Z" fill="#0065F3"/>
+                                    </svg>
+                                    :
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <path d="M6 13H18V11H6M3 6V8H21V6M10 18H14V16H10V18Z" fill="#091229"/>
+                                    </svg>
+                            )
                             :
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="18" viewBox="0 0 12 18" fill="none">
-                                <path d="M7 15L7 3L5 3L5 15M0 18L2 18L2 -8.74228e-08L-7.86805e-07 0M12 11L12 7L10 7L10 11L12 11Z" fill="#6E7377"/>
-                            </svg>
+                            (
+                                Object.keys(filters_usuario).length > 0
+                                    ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M13 18L13 6L11 6L11 18M6 21L8 21L8 3L6 3M18 14L18 10L16 10L16 14L18 14Z" fill="#0065F3"/>
+                                    </svg>
+                                    :
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none">
+                                        <path
+                                            d="M13 18L13 6L11 6L11 18M6 21L8 21L8 3L6 3M18 14L18 10L16 10L16 14L18 14Z"
+                                            fill="#091229"/>
+                                    </svg>
+                            )
                     }
                 </div>
 

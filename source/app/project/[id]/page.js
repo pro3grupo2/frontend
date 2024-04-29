@@ -38,13 +38,21 @@ export default function Project({ params }) {
 
             let indexPage = page
             get_proyectos(token, indexPage, filters).then(data => {
+                if (data.length === 0) return
+
                 if (userProjects.length > 0) setUserProjects([...userProjects, data.filter(project => project.id !== proyecto.id)])
                 else setUserProjects(data.filter(project => project.id !== proyecto.id))
+
+                //console.log(data.filter(project => project.id !== proyecto.id))
             })
 
             get_proyectos(token, indexPage).then(data => {
+                if (data.length === 0) return
+
                 if (otherProjects.length > 0) setOtherProjects([...otherProjects, data.filter(project => project.id !== proyecto.id)])
                 else setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
+
+                //console.log(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
             })
         }
     }, [proyecto, page]);
