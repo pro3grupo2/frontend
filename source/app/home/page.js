@@ -195,20 +195,6 @@ export default function Home() {
                         <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
                     </svg>
                 </div>}
-
-            <footer className={'d-flex flex-row flex-nowrap justify-content-evenly align-items-center py-3 background-color-secundario-negro ms-bold-subbody'}>
-                <Link href="/home">
-                    <Image className="img-fluid" src="/images/logos/utad_white.svg" alt="Logo de U-tad" width={127} height={40}/>
-                </Link>
-
-                <Link className="color-secundario-blanco" href="/help">
-                    Centro de ayuda
-                </Link>
-
-                <p className={'color-secundario-blanco m-0 p-0'}>900 373 379</p>
-
-                <p className={'color-secundario-blanco m-0 p-0'}>info@u-tad.com</p>
-            </footer>
         </>
     )
 }
