@@ -16,16 +16,25 @@ export default function NavBar() {
     const router = useRouter()
 
     useEffect(() => {
-        const token = localStorage.getItem('token') ?? false
-        if (token) {
-            me(token).then(data => {
-                setUser(data)
+        const fetchUser = async () => {
+            const token = localStorage.getItem('token') ?? false
+            if (token) {
+                let data = await me(token)
+                if (data) {
+                    setUser(data)
+                    setUserLoaded(true)
+                } else {
+                    localStorage.removeItem('token')
+                    setUser({})
+                    setUserLoaded(true)
+                }
+            } else {
+                setUser({})
                 setUserLoaded(true)
-            })
-        } else {
-            setUser({})
-            setUserLoaded(true)
+            }
         }
+
+        fetchUser()
     }, [])
 
     const handleMouseEnter = () => {
