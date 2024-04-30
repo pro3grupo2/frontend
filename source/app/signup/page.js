@@ -1,14 +1,14 @@
 "use client"
 
 import "../globals.css"
-import { useState } from 'react'
-import { useRouter } from "next/navigation"
+import {useState} from 'react'
+import {useRouter} from "next/navigation"
 
-import { Paso1, Paso2_live_utad_com, Paso2_utad_com, Paso_coordinador, PasoFin, PasoInicio } from "@/components/Signup"
+import {Paso1, Paso2_live_utad_com, Paso2_utad_com, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup"
 import Loading from "@/components/Loading"
 
-import { signup } from "@/api/v1/auth"
-import { create_alert } from "@/components/Alerts"
+import {signup} from "@/api/v1/auth"
+import {create_alert} from "@/components/Alerts"
 
 export default function SignUp() {
     const
@@ -52,7 +52,7 @@ export default function SignUp() {
         setPaso_final(true)
     }
 
-    if (loading) return <Loading />
+    if (loading) return <Loading/>
 
     if (paso_final) return <PasoFin
         setNextPaso={() => {
@@ -93,7 +93,6 @@ export default function SignUp() {
         setNextPaso={() => {
             if (email.endsWith("@u-tad.com")) setPaso_rol_admins(true)
             else if (email.endsWith("@live.u-tad.com")) setPaso_rol_alumnos(true)
-            else if (email.endsWith("@ext.live.u-tad.com")) console.log("Acciones para @ext.live.u-tad.com")
         }}
         setPreviousPaso={() => setPaso_password(false)}
         setPassword={setPassword}

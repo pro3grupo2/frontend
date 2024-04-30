@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import Link from 'next/link'
 import Image from "next/image"
@@ -108,14 +108,6 @@ export default function SignIn() {
 
                         />
 
-                        <div className="">
-                            {
-                                email_checks.map((check, index) => (
-                                    <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
-                                ))
-                            }
-                        </div>
-
                         <div className="position-relative d-flex mt-3">
                             <input
                                 ref={password_ref}
@@ -134,7 +126,7 @@ export default function SignIn() {
 
                             <button
                                 type="button"
-                                className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon"
+                                className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon border-0"
                                 onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                                 <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
@@ -142,10 +134,14 @@ export default function SignIn() {
 
                         {error && <p style={{color: 'red'}}>{error}</p>}
 
-                        <div className="mb-4">
+                        <div className={'my-4'}>
                             {
-                                password_checks.map((check, index) => (
-                                    <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                (email_checks.length > 0 || password_checks.length > 0) &&
+                                <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">La contraseña debe contener al menos:</p>
+                            }
+                            {
+                                [...email_checks, ...password_checks].map((check, index) => (
+                                    <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
                                 ))
                             }
                         </div>

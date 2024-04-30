@@ -24,6 +24,8 @@ export default function NewProjectModal({show, setShow}) {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
+        if (!token) return
+
         get_asignaturas(token)
             .then(data => {
                 setAsignaturas(data ?? [])
@@ -34,6 +36,8 @@ export default function NewProjectModal({show, setShow}) {
     const handleSubmit = async () => {
         setLoading(true)
         const token = localStorage.getItem('token')
+        if (!token) return
+
         let
             url_local = undefined,
             portada_local = undefined
@@ -124,7 +128,7 @@ export default function NewProjectModal({show, setShow}) {
                             <div>
                                 <label className="form-label ms-regular-black mx-md-3 ">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
                                 <select className="form-select border-normal mx-md-3" onChange={(e) => setPremiado(e.target.value)}>
-                                    <option selected value={0}>No</option>
+                                    <option value={0}>No</option>
                                     <option value={1}>Sí</option>
                                 </select>
                             </div>

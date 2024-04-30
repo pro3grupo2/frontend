@@ -44,7 +44,6 @@ const get_me_proyectos = async (token, callback = undefined) => {
     }
 
     const datos = await fetch_handler(PROYECTOS_ROUTE + '/me', headers, "GET", undefined, callback)
-    console.log(datos)
     return datos ? datos.data : null
 }
 

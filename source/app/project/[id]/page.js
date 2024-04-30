@@ -27,6 +27,8 @@ export default function Project({params}) {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
+        if (!token) return
+
         get_proyecto(token, params.id).then(data => {
             setProyecto(data)
             setProyectoLoaded(true)
@@ -35,6 +37,8 @@ export default function Project({params}) {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
+        if (!token) return
+
         if (proyecto.usuarios) {
             let filters = {
                 busqueda: proyecto.usuarios.correo
@@ -46,8 +50,6 @@ export default function Project({params}) {
 
                 if (userProjects.length > 0) setUserProjects([...userProjects, data.filter(project => project.id !== proyecto.id)])
                 else setUserProjects(data.filter(project => project.id !== proyecto.id))
-
-                //console.log(data.filter(project => project.id !== proyecto.id))
             })
 
             get_proyectos(token, indexPage).then(data => {
@@ -55,8 +57,6 @@ export default function Project({params}) {
 
                 if (otherProjects.length > 0) setOtherProjects([...otherProjects, data.filter(project => project.id !== proyecto.id)])
                 else setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
-
-                //console.log(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
             })
         }
     }, [proyecto, page]);

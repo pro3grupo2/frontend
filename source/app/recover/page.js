@@ -84,10 +84,14 @@ export default function RecoverPassword() {
                                 autoComplete="off"
                             />
 
-                            <div className="">
+                            <div className={'my-4'}>
+                                {
+                                    email_checks.length > 0 &&
+                                    <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">El correo necesita:</p>
+                                }
                                 {
                                     email_checks.map((check, index) => (
-                                        <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                        <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
                                     ))
                                 }
                             </div>

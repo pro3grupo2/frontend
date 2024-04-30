@@ -1,26 +1,24 @@
 "use client"
 
 import React, {useEffect, useRef, useState} from 'react'
-import useAuth from '@/hooks/useAuth'
 import {useRouter} from 'next/navigation'
-import {crear_proyecto, get_proyectos, subir_ficheros} from '@/api/v1/proyectos'
+import {get_proyectos} from '@/api/v1/proyectos'
 import ProjectCard from '@/components/ProjectCard'
 import Loading from '@/components/Loading'
 import Filters from '@/components/Filters'
-import Link from "next/link";
-import Image from "next/image";
 
 export default function Home() {
-    const {user, isLoading} = useAuth()
     const [projects, setProjects] = useState([])
     const [proyectosLoaded, setProyectosLoaded] = useState(false)
     const [area, setArea] = useState('0')
     const [filters, setFilters] = useState({})
     const [search, setSearch] = useState('')
-    const [asignatura, setAsignatura] = useState("-1")
     const [page, setPage] = useState(0)
     const [isBottom, setIsBottom] = useState(false)
     const router = useRouter()
+
+    const
+        [loading, setLoading] = useState(false)
 
     const hiddenFileInput = useRef(null)
 
@@ -44,18 +42,15 @@ export default function Home() {
     //  get_proyectos(token, 0, {premiado: true, anio: 2021, titulaciones: '1,2,3', busqueda: 'busqueda'})
     //
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token') ?? false
+        if (!token) return router.push('/signin')
+
+        setLoading(true)
         get_proyectos(token, page, filters).then(data => {
             setProjects(data)
             setProyectosLoaded(true)
         })
-    }, [])
-
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        get_proyectos(token, 0, filters).then(data => {
-            setProjects(data)
-        }).catch(console.error)
+        setLoading(false)
     }, [filters])
 
     useEffect(() => {
@@ -72,39 +67,18 @@ export default function Home() {
         if (!isBottom) return
 
         let newPage = page + 1
-        const token = localStorage.getItem('token')
+
+        const token = localStorage.getItem('token') ?? false
+        if (!token) return router.push('/signin')
+
+        setLoading(true)
         get_proyectos(token, newPage, filters).then(data => {
             let newProjects = projects.concat(data)
             setProjects(newProjects)
         }).catch(console.error)
         setPage(newPage)
+        setLoading(false)
     }, [isBottom]);
-
-    if (isLoading || !proyectosLoaded) {
-        return <Loading/>
-    }
-
-    const handleClick = () => {
-        const portadaFile = document.getElementById('portada').files[0]
-        const ficheroFile = document.getElementById('fichero').files[0]
-
-        const token = localStorage.getItem('token')
-        const data = subir_ficheros(token, ficheroFile, portadaFile).then(data => {
-            const proyecto = crear_proyecto(token, `Titulo ${Date.now()}`, "Ficha de descripcion del proyecto comentando de que va", data.url, data.portada, 2024, ["oscar.viudez@live.u-tad.com"], [6], ["Premio 1"], true).then(console.log)
-        })
-    }
-
-    const handleAnio = (anio) => {
-        if (anio === "null") {
-            setFilters(prevFilters => {
-                const {anio, ...restFilters} = prevFilters
-                return {...restFilters}
-            })
-            return
-        }
-
-        setFilters({...filters, anio: anio})
-    }
 
     const handleAreaClick = (id) => {
         let oldArea = document.getElementById(area)
@@ -132,32 +106,6 @@ export default function Home() {
         setSearch(event.target.value)
     }
 
-    const handleAsignatura = (clase) => {
-        let titulacion = clase.toString()
-
-        if (titulacion === "-1") {
-            setFilters(prevFilters => {
-                const {titulaciones, ...restFilters} = prevFilters
-                return {...restFilters}
-            })
-            return
-        }
-
-        setFilters({...filters, titulaciones: titulacion})
-    }
-
-    const handlePremio = (premiado) => {
-        if (premiado === "null") {
-            setFilters(prevFilters => {
-                const {premiado, ...restFilters} = prevFilters
-                return {...restFilters}
-            })
-            return
-        }
-
-        setFilters({...filters, premiado: premiado == "true"})
-    }
-
     const handleSearch = (event) => {
         if (event.key === 'Enter') {
             if (search === '') {
@@ -169,6 +117,8 @@ export default function Home() {
             setFilters({...filters, busqueda: search})
         }
     }
+
+    if (loading || !proyectosLoaded) return <Loading/>
 
     return (
         <>
@@ -190,7 +140,7 @@ export default function Home() {
             </div>
 
             {projects.length > 0 &&
-                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3" style={{width: 50 + 'px', height: 50 + 'px'}}>
+                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3 z-2" style={{width: 50 + 'px', height: 50 + 'px'}}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-100 h-100" width="40" height="40" viewBox="0 0 32 32" fill="none">
                         <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
                     </svg>

@@ -86,10 +86,14 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                         autoComplete="off"
                     />
 
-                    <div className="mb-5">
+                    <div className={'my-4'}>
+                        {
+                            email_checks.length > 0 &&
+                            <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">El correo necesita:</p>
+                        }
                         {
                             email_checks.map((check, index) => (
-                                <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
                             ))
                         }
                     </div>
@@ -174,7 +178,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
                         <button
                             type="button"
-                            className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon"
+                            className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon border-0"
                             onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                             <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                         </button>
@@ -195,16 +199,20 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
                         <button
                             type="button"
-                            className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon"
+                            className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon border-0"
                             onClick={() => setTipoPassword2(tipo_password2 === 'password' ? 'text' : 'password')}>
                             <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                         </button>
                     </div>
 
-                    <div className="">
+                    <div className={'my-4'}>
+                        {
+                            password_checks.length > 0 &&
+                            <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">La contraseña debe contener al menos:</p>
+                        }
                         {
                             password_checks.map((check, index) => (
-                                <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
+                                <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
                             ))
                         }
                     </div>

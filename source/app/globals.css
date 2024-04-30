@@ -266,7 +266,7 @@ body {
     color: var(--color-secundario-blanco);
 
     /* Boton/Montserrat/Versalitas */
-    font-family: Montserrat, sans-serif;
+    font-family: Versalitas, Montserrat, sans-serif;
     font-size: 1.75rem;
     font-style: normal;
     font-weight: 600;
@@ -278,7 +278,7 @@ body {
     color: var(--color-secundario-blanco);
 
     /* Boton/Montserrat/Versalitas/18 */
-    font-family: Montserrat, sans-serif;
+    font-family: Versalitas, Montserrat, sans-serif;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 600;

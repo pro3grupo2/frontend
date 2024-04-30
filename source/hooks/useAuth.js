@@ -9,10 +9,7 @@ const useAuth = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-
-        if (!token) {
-            return router.push('/signin')
-        }
+        if (!token) return router.push('/signin')
 
         me(token)
             .then(data => {

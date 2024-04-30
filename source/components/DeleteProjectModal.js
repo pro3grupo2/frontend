@@ -11,7 +11,9 @@ export default function DeleteProjectModal({project, show, setShow}) {
     if (loading) return <Loading/>
 
     const handleDeleteProject = async () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token')
+        if (!token) return
+
         const data = await eliminar_proyecto(token, project.id);
         if (data) history.back();
     }

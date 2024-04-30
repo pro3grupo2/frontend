@@ -13,7 +13,6 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
         [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        console.log(default_user_data)
         setPortfolio(default_user_data.portfolio)
         setDescripcion(default_user_data.descripcion)
     }, [default_user_data])
@@ -21,6 +20,8 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
     const handleSubmit = async () => {
         setLoading(true)
         const token = localStorage.getItem('token')
+        if (!token) return
+
         const data = await update(token, undefined, undefined, descripcion, portfolio, undefined, undefined)
         setLoading(false)
         if (data) window.location.reload()

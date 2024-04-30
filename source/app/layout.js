@@ -22,7 +22,7 @@ export default function RootLayout({children}) {
             <NavBar/>
             {children}
 
-            <footer className={'d-flex flex-row flex-nowrap justify-content-evenly align-items-center py-3 background-color-secundario-negro ms-bold-subbody mt-auto'}>
+            <footer className={'d-flex flex-column flex-md-row flex-nowrap justify-content-evenly align-items-center gap-4 gap-md-0 py-3 background-color-secundario-negro ms-bold-subbody mt-auto'}>
                 <Link href="/home">
                     <Image className="img-fluid" src="/images/logos/utad_white.svg" alt="Logo de U-tad" width={127} height={40}/>
                 </Link>

@@ -2,11 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import React, {useState, useRef, useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import NewProjectModal from "@/components/NewProjectModal";
 import {me} from "@/api/v1/auth";
 import {useRouter} from "next/navigation";
-import Loading from "@/components/Loading";
 
 export default function NavBar() {
     const [isProfileHover, setIsProfileHover] = useState(false)
@@ -17,7 +16,7 @@ export default function NavBar() {
     const router = useRouter()
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token') ?? false
         if (token) {
             me(token).then(data => {
                 setUser(data)
@@ -48,8 +47,6 @@ export default function NavBar() {
     const handleLogin = () => {
         router.push('/signin')
     }
-
-    if (!userLoaded) return <Loading/>
 
     return (
         <>

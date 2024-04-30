@@ -71,7 +71,6 @@ export default function Profile() {
         setLoading(true)
         me(localStorage.getItem('token'))
             .then(data => {
-                console.log("mne", data)
                 if (!data) return router.push('/signin')
                 setUser(data)
                 if (data.rol === "coordinador") {

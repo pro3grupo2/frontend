@@ -12,6 +12,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
 
     useEffect(() => {
         const token = localStorage.getItem('token')
+        if (!token) return
 
         get_areas(token).then(data => {
             setAreas(data)
