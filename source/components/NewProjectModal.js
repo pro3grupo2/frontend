@@ -61,18 +61,18 @@ export default function NewProjectModal({show, setShow}) {
 
                 <div className="d-flex flex-column justify-content-between w-100" style={{maxWidth: 488,}}>
                     <div>
-                        <div class="mb-3">
+                        <div className="mb-3">
                             <label className="form-label ms-regular-black">Titulo <span className="color-error">*</span></label>
                             <input type="text" className="form-control border-normal" placeholder=" Título del proyecto" value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
                         </div>
 
-                        <div class="mb-3">
+                        <div className="mb-3">
                             <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
                             <textarea className="form-control border-normal" placeholder=" Descripción del proyecto" value={ficha} rows={8} onChange={(e) => setFicha(e.target.value)} style={{maxHeight: 147}}></textarea>
                         </div>
 
                         <div>
-                            <div class="mb-3">
+                            <div className="mb-3">
                                 <label className="form-label ms-regular-black ">Portada de proyecto <span className="color-error">*</span></label>
                                 <p className="ms-regular">Esta será la imagen que represente tu trabajo, recomendamos una imagen horizontal.</p>
                                 <input className="form-control border-normal" type="file" accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
@@ -87,8 +87,8 @@ export default function NewProjectModal({show, setShow}) {
                             </div>
 
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text border-normal fw-semibold">Enlace URL</span>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text border-normal fw-semibold">Enlace URL</span>
                                 <input type="text" className="form-control border-normal " value={portada} placeholder="Pega tu link aqui." onChange={(e) => setPortada(e.target.value)}/>
                             </div>
                         </div>
@@ -98,15 +98,15 @@ export default function NewProjectModal({show, setShow}) {
                 <div className="d-flex flex-column justify-content-between w-100" style={{maxWidth: 488}}>
                     <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
                     <div>
-                        <div class="mb-3">
+                        <div className="mb-3">
                             <label className="form-label ms-regular-black">Autor/es del proyecto <span className="color-error">*</span></label>
                             <input type="text" className="form-control border-normal" placeholder="Escribe los correos (separados por ;)" value={participantes} onChange={(e) => setParticipantes(e.target.value)}/>
                         </div>
 
-                        <div class="mb-3">
+                        <div className="mb-3">
                             <label className="form-label ms-regular-black ">¿A qué asignatura pertenece? <span className="color-error">*</span></label>
                             <select className="form-select border-normal" onChange={(e) => setProyectosAsignaturas(e.target.value)}>
-                                <option selected disabled>Asignatura</option>
+                                <option disabled>Asignatura</option>
                                 {
                                     asignaturas.map
                                     (
@@ -132,7 +132,7 @@ export default function NewProjectModal({show, setShow}) {
 
 
                         <div>
-                            <div class="mb-3">
+                            <div className="mb-3">
                                 <label className="form-label ms-regular-black">Fichero de proyecto <span className="color-error">*</span></label>
                                 <p className="ms-regular">Sube el fichero .zip o el enlace de OneDrive donde está subido el proyecto.</p>
                                 <input className="form-control border-normal" type="file" accept=".zip,.rar,.7zip" onChange={(e) => {
@@ -146,8 +146,8 @@ export default function NewProjectModal({show, setShow}) {
                                 <div className="linea"></div>
                             </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text border-dark fw-semibold">Enlace URL</span>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text border-dark fw-semibold">Enlace URL</span>
                                 <input type="text" className="form-control border-normal" value={url} placeholder="Pega tu link aqui." onChange={(e) => setUrl(e.target.value)}/>
                             </div>
                         </div>

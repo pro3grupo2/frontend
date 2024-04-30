@@ -18,6 +18,7 @@ import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
 import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
 import ConfirmModal from "@/components/ConfirmModal"
+import {useSearchParams} from "next/navigation";
 
 export default function Profile() {
     const
@@ -38,7 +39,9 @@ export default function Profile() {
         [numUsos, setNumUsos] = useState(''),
         [showConfirmModal, setShowConfirmModal] = useState(false),
         [codigoToDelete, setCodigoToDelete] = useState(null),
-        router = useRouter()
+        [canShowCodigos, setCanShowCodigos] = useState(false),
+        router = useRouter(),
+        searchParams = useSearchParams()
 
     const
         [modal_show_edit_profile, setModalShowEditProfile] = useState(false),
@@ -72,6 +75,8 @@ export default function Profile() {
                 if (!data) return router.push('/signin')
                 setUser(data)
                 if (data.rol === "coordinador") {
+                    setCanShowCodigos(true)
+
                     get_codigos(localStorage.getItem('token')).then(data => {
                         setCodigos(data.reverse())
                     })
@@ -99,6 +104,12 @@ export default function Profile() {
 
         setLoading(false)
     }, [])
+
+    useEffect(() => {
+        if (codigosAdmin_btn_ref.current === undefined) return
+        if (!canShowCodigos) router.push("/profile")
+        if (searchParams.get('tab') === "codigos" && canShowCodigos) codigosAdmin_btn_ref.current.click()
+    }, [codigosAdmin_btn_ref.current]);
 
     if (loading) return <Loading/>
 

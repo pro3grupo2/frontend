@@ -75,7 +75,7 @@ export default function SignIn() {
         }
 
         localStorage.setItem('token', token)
-        router.push('/home')
+        window.location.href = '/home'
     }
 
     if (loading) return <Loading/>

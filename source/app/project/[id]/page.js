@@ -188,7 +188,7 @@ export default function Project({params}) {
 
                     <div className="d-flex justify-content-center align-items-center">
                         <hr className="w-50"/>
-                        <button onClick={handleViewMore} className={`ms-regular background-color-secundario-blanco px-5 py-2 ${isViewMoreHover ? "btn-outline-primary" : "btn-outline-secondary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                        <button onClick={handleViewMore} className={`ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
                         <hr className="w-50"/>
                     </div>
 
