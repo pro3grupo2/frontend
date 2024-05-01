@@ -1,24 +1,24 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Image from "next/image"
 import Link from "next/link"
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 
 import '../globals.css'
 import '../../styles/Profile.css'
 
 import ProjectCard from "@/components/ProjectCard"
-import {get_me_proyectos, get_proyectos_pendientes} from "@/api/v1/proyectos"
-import {me} from "@/api/v1/auth"
+import { get_me_proyectos, get_proyectos_pendientes } from "@/api/v1/proyectos"
+import { me } from "@/api/v1/auth"
 import Loading from "@/components/Loading"
-import {crear_codigo, eliminar_codigo, get_codigos} from "@/api/v1/codigos"
+import { crear_codigo, eliminar_codigo, get_codigos } from "@/api/v1/codigos"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
-import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
+import { ProjectSolicitudLista } from "@/components/ProjectSolicitudLista"
 import ConfirmModal from "@/components/ConfirmModal"
-import {useSearchParams} from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Profile() {
     const
@@ -110,7 +110,7 @@ export default function Profile() {
         if (searchParams.get('tab') === "codigos" && canShowCodigos) codigosAdmin_btn_ref.current.click()
     }, [codigosAdmin_btn_ref.current]);
 
-    if (loading) return <Loading/>
+    if (loading) return <Loading />
 
     // Redirigir a la página del proyecto al hacer click en una tarjeta
     const handleCardClick = (id) => {
@@ -128,12 +128,12 @@ export default function Profile() {
         ""
 
     const handleDeleteClick = (codigoId, index) => {
-        setCodigoToDelete({codigoId, index})
+        setCodigoToDelete({ codigoId, index })
         setShowConfirmModal(true)
     }
 
     const confirmDelete = async () => {
-        const {codigoId, index} = codigoToDelete
+        const { codigoId, index } = codigoToDelete
         const data = await eliminar_codigo(localStorage.getItem('token'), codigoId)
         if (!data) {
             alert('Error al eliminar el código')
@@ -147,32 +147,33 @@ export default function Profile() {
         <>
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
-                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
-                    <ConfirmModal show={showConfirmModal} setShow={setShowConfirmModal} onConfirm={confirmDelete}/>
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user} />
+                    <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject} />
+                    <ConfirmModal show={showConfirmModal} setShow={setShowConfirmModal} onConfirm={confirmDelete} />
                 </div>
 
-                <div className="d-flex flex-row gap-5 gap-md-0 flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-md-between px-5 pt-5">
+                <div className="d-flex flex-row gap-5 gap-md-0 flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-md-between px-3 pt-5">
                     <div className="d-flex flex-column flex-nowrap gap-3">
-                        <p className="p-0 m-0">
-                            <button className="border border-0 bg-transparent me-5" onClick={() => history.back()}>
+                        <div className="position-relative d-flex w-100">
+                            <button className="position-absolute top-50 start-0 translate-middle-y flex-shrink-1 border border-0 bg-transparent me-5" onClick={() => history.back()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-                                    <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
+                                    <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3" />
                                 </svg>
                             </button>
-                        </p>
-                        <h1 className="ms-extra-bold p-0 m-0">{nombreCompletoCapitalizado}</h1>
-                        <b className="ms-extra-bold-subtitle p-0 m-0">{user.correo}</b>
-                        <p className="link-offset-1 ms-bold-body p-0 m-0"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
-                        <p className="ms-regular text-break p-0 m-0" style={{maxWidth: '30rem'}}>{user.descripcion}</p>
-                        <div className="d-flex flex-row gap-3">
+                            <h1 className="ms-extra-bold mx-4 px-3 fw-bold p-0 m-0 flex-grow-1">{nombreCompletoCapitalizado}</h1>
+                        </div>
+
+                        <b className="ms-extra-bold-subtitle p-0 m-0 mx-4 px-3">{user.correo}</b>
+                        <p className="link-offset-1 ms-bold-body p-0 m-0 mx-4 px-3"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="ms-regular text-break p-0 m-0 mx-4 px-3" style={{ maxWidth: '30rem' }}>{user.descripcion}</p>
+                        <div className="d-flex flex-row gap-3 mx-4 px-3">
                             <button className="btn btn-primary ms-button p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
                             <button className="btn btn-outline-primary ms-button color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                         </div>
                     </div>
 
-                    <div className={'position-relative'} style={{width: '11.99244rem', height: '12rem'}}>
-                        <Image className={"rounded"} src={user.foto} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto}/>
+                    <div className={'position-relative'} style={{ width: '11.99244rem', height: '12rem' }}>
+                        <Image className={"rounded"} src={user.foto} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto} />
                     </div>
                 </div>
 
@@ -234,7 +235,7 @@ export default function Profile() {
                     {
                         projectsValidados.length
                             ?
-                            projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
+                            projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
@@ -248,7 +249,7 @@ export default function Profile() {
                         projectsNoValidados.length
                             ?
                             projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => {
-                            }} project={project}/>)
+                            }} project={project} />)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="ms-extra-bold">No hay solicitudes que mostrar</h1>
@@ -264,9 +265,9 @@ export default function Profile() {
                             projectsSolicitudes
                                 .map((project, index) => (
                                     <>
-                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index}/>
+                                        <ProjectSolicitudLista project={project} setProjects={setProjectsSolicitudes} index={index} />
                                         {
-                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"}/>
+                                            index + 1 < projectsSolicitudes.length && <hr className={"hr"} />
                                         }
                                     </>
                                 ))
@@ -290,7 +291,7 @@ export default function Profile() {
                                         placeholder="Número"
                                         min={1}
                                         max={10}
-                                        style={{maxWidth: 165, height: 48}}
+                                        style={{ maxWidth: 165, height: 48 }}
                                         value={numUsos}
                                         onChange={e => setNumUsos(e.target.value)}
                                     />
@@ -298,7 +299,7 @@ export default function Profile() {
                                 <div className="form-group mt-3">
                                     <button
                                         className="btn btn-primary mt-3 ms-button"
-                                        style={{maxWidth: 262, height: 48}}
+                                        style={{ maxWidth: 262, height: 48 }}
                                         onClick={crearCodigo}
                                         disabled={!numUsos || numUsos === 0} // Deshabilita el botón si numUsos está vacío o es cero
                                     >
