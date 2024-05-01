@@ -16,14 +16,14 @@ export default function Help() {
     }
 
     return (
-        <div className="container-fluid py-3">
+        <div className="container-fluid py-5">
             <div className="bg-white row">
-                <h1 className="fw-bold display-4 col-12 m-0 px-3 py-4 pt-5 ms-5">
+                <h1 className="fw-bold display-4 col-12 m-0 px-3 mt- ms-5">
                     Centro de Ayuda</h1>
             </div>
 
             <div>
-            <div className="d-flex flex-row gap-5 mt-3 ps-5 border-bottom color-secundario-gris">
+            <div className="d-flex flex-row gap-5 mt-5 ps-5 border-bottom color-secundario-gris">
                     <button className={`btn btn-custom ${showFAQ ? 'btn-active' : ''}`} onClick={toggleFAQ}>
                         Preguntas frecuentes
                     </button>

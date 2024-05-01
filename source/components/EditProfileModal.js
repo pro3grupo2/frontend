@@ -43,14 +43,14 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
                         <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
 
 
-                        <label className=" ms-regular-black">Link <span className="color-error">*</span></label>
-                        <div class="input-group mb-3">
+                        <label className=" ms-bold-body">Link <span className="color-error">*</span></label>
+                        <div class="input-group mb-3" style={{height:48,maxWidth:492}}>
                             <span class="input-group-text border-normal fw-semibold">Enlace URL</span>
                             <input type="text" className="form-control border-normal " placeholder="Pega tu link aqui." value={portfolio} onChange={(e) => setPortfolio(e.target.value)}/>
                         </div>
                         <div class="mb-3">
-                            <label className="form-label ms-regular-black">Descripción <span className="color-error">*</span></label>
-                            <textarea className="form-control border-normal" placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value.slice(0, 140))}></textarea>
+                            <label className="form-label ms-bold-body">Descripción <span className="color-error">*</span></label>
+                            <textarea className="form-control border-normal" style={{height:147,maxWidth:488}} placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value.slice(0, 140))}></textarea>
                         </div>
                     </div>
 
