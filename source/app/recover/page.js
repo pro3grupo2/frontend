@@ -30,7 +30,11 @@ export default function RecoverPassword() {
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
-        )) return email_ref.current.classList.add('border-error')
+        )) {
+            if (email.length > 0)
+                return email_ref.current.classList.add('border-error')
+            return email_ref.current.classList.remove('border-error')
+        }
 
         email_ref.current.classList.remove('border-error')
     }, [email])

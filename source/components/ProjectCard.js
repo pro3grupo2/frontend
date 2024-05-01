@@ -48,23 +48,31 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                 </div>
                 <div className="card-body d-flex flex-column justify-content-start">
                     <h5 className="card-title ms-extra-bold-subtitle">{project.titulo}</h5>
-                    <p className="card-text ms-regular-subbody">
-                        {isHovered && isHome && project.participantes.length > 0
-                            ? project.participantes.map(participante => processMail(participante.correo)).join(', ')
-                            : project.usuarios.nombre_completo
-                        }
-                    </p>
-                    {isHovered && isShown && isHome &&
+                    <p className="card-text ms-regular-subbody">{project.usuarios.nombre_completo}</p>
+                    {
+                        isHovered
+                        && isHome
+                        && project.participantes.length > 0
+                        &&
+                        <p className="card-text ms-regular-subbody">
+                            {project.participantes.map(participante => processMail(participante.correo)).join(', ')}
+                        </p>
+                    }
+                    {
+                        isHovered
+                        && isShown
+                        && isHome
+                        &&
                         <p className="card-text ms-regular">
                             {project.ficha.slice(0, 100) + (project.ficha.length > 100 ? "..." : "")}
                         </p>
                     }
                     {
-                        project.estado === 'rechazado'
-                            ? <span className="badge bg-danger ms-regular">Rechazado</span>
-                            : project.estado === 'pendiente'
-                                ? <span className="badge bg-warning ms-regular">Pendiente</span>
-                                : null
+                        project.estado !== 'aceptado'
+                        &&
+                        <span className={`badge ${project.estado === 'rechazado' ? 'bg-danger' : 'bg-warning'} ms-regular`}>
+                            {project.estado}
+                        </span>
                     }
                 </div>
             </div>

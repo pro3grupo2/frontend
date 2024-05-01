@@ -50,7 +50,7 @@ const check_email = (email, callback = undefined) => {
         if (callback) callback('Dominio de correo de U-Tad')
     }
 
-    if (!/^[a-zA-Z]+\.[a-zA-Z]+$/.test(username)) {
+    if (!/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/.test(username)) {
         check = false
         if (callback) callback('Nombre del recipiente de U-Tad')
     }

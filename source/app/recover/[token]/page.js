@@ -34,7 +34,11 @@ export default function RecoverPassword({params}) {
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
-        )) return password_ref.current.classList.add('border-error')
+        )) {
+            if (password.length > 0)
+                return password_ref.current.classList.add('border-error')
+            return password_ref.current.classList.remove('border-error')
+        }
 
         password_ref.current.classList.remove('border-error')
 

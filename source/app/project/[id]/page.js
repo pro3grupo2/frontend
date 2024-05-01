@@ -172,7 +172,7 @@ export default function Project({params}) {
                     </div>
                     <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
                         <div className={'position-relative'} style={{width: '50rem', height: '28.125rem'}}>
-                            <Image className="" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt="Project Image"/>
+                            <Image src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={'1'} alt="Project Image"/>
                         </div>
                         <p className="flex-grow-1 ms-regular">{proyecto.ficha}</p>
                     </div>

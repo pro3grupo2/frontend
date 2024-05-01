@@ -82,14 +82,14 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     className={`${filters_show && 'd-none'} ms-regular-subbody form-select border-black border-1 rounded`}
                     style={{height: 40, width: 158}}
                     onChange={(e) => {
-                        setFilters({...filters, titulacion: e.target.value})
+                        setFilters({...filters, titulaciones: e.target.value})
 
                         const
                             titulacion = asignaturas.find(a => a.id === parseInt(e.target.value)).titulo,
                             index_en = titulacion.indexOf(' en '),
                             index_en_slice = index_en !== -1 ? index_en + 4 : 0
 
-                        setFilters_usuario({...filters_usuario, titulacion: titulacion.slice(index_en_slice)})
+                        setFilters_usuario({...filters_usuario, titulaciones: titulacion.slice(index_en_slice)})
                     }}>
                     <option key={-1} value={-1} disabled selected>Titulación</option>
                     {

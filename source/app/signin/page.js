@@ -32,12 +32,18 @@ export default function SignIn() {
     useEffect(() => {
         setEmailChecks([])
 
+        if (email.length === 0) email_ref.current.classList.remove('border-error')
+
         if (!check_email(
             email,
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
-        )) return email_ref.current.classList.add('border-error')
+        )) {
+            if (email.length > 0)
+                return email_ref.current.classList.add('border-error')
+            return email_ref.current.classList.remove('border-error')
+        }
 
         email_ref.current.classList.remove('border-error')
     }, [email])
@@ -50,7 +56,11 @@ export default function SignIn() {
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
-        )) return password_ref.current.classList.add('border-error')
+        )) {
+            if (password.length > 0)
+                return password_ref.current.classList.add('border-error')
+            return password_ref.current.classList.remove('border-error')
+        }
 
         password_ref.current.classList.remove('border-error')
     }, [password])
