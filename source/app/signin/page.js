@@ -1,10 +1,9 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useRef, useState} from 'react'
 
 import Link from 'next/link'
 import Image from "next/image"
-import {useRouter} from "next/navigation"
 
 import {AlertContainer, create_alert} from "@/components/Alerts"
 import {EstructuraFormularios} from "@/components/Estructura"
@@ -26,53 +25,29 @@ export default function SignIn() {
         [password_checks, setPasswordChecks] = useState([]),
         [alerts, setAlerts] = useState([]),
         [loading, setLoading] = useState(false),
-        [error, setError] = useState(''),
-        router = useRouter()
+        [error, setError] = useState('')
 
-    useEffect(() => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
         setEmailChecks([])
-
-        if (email.length === 0) email_ref.current.classList.remove('border-error')
+        setPasswordChecks([])
 
         if (!check_email(
             email,
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
-        )) {
-            if (email.length > 0)
-                return email_ref.current.classList.add('border-error')
-            return email_ref.current.classList.remove('border-error')
-        }
-
+        )) return email_ref.current.classList.add('border-error')
         email_ref.current.classList.remove('border-error')
-    }, [email])
-
-    useEffect(() => {
-        setPasswordChecks([])
 
         if (!check_password(
             password,
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
-        )) {
-            if (password.length > 0)
-                return password_ref.current.classList.add('border-error')
-            return password_ref.current.classList.remove('border-error')
-        }
-
+        )) return password_ref.current.classList.add('border-error')
         password_ref.current.classList.remove('border-error')
-    }, [password])
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        if (email_checks.length > 0)
-            return email_ref.current.classList.add('border-error')
-
-        if (password_checks.length > 0)
-            return password_ref.current.classList.add('border-error')
 
         setLoading(true)
         const token = await signin(email, password)
@@ -118,6 +93,14 @@ export default function SignIn() {
 
                         />
 
+                        <div className={'mb-4'}>
+                            {
+                                email_checks.map((check, index) => (
+                                    <p key={index} className={'color-error ms-regular-subbody p-0 ps-4 m-0'}>{check}</p>
+                                ))
+                            }
+                        </div>
+
                         <div className="position-relative d-flex mt-3">
                             <input
                                 ref={password_ref}
@@ -140,6 +123,14 @@ export default function SignIn() {
                                 onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
                                 <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
                             </button>
+                        </div>
+
+                        <div className={'mb-4'}>
+                            {
+                                password_checks.map((check, index) => (
+                                    <p key={index} className={'color-error ms-regular-subbody p-0 ps-4 m-0'}>{check}</p>
+                                ))
+                            }
                         </div>
 
                         {error && <p style={{color: 'red'}}>{error}</p>}
