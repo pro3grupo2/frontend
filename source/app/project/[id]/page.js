@@ -93,7 +93,7 @@ export default function Project({params}) {
 
                 <div className="container-fluid p-5">
                     <p className="ms-bold-subbody">
-                        <button className="border border-0 bg-transparent me-3" onClick={() => history.back()}>
+                        <button className="border border-0 bg-transparent me-3" onClick={() => router.back()}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
                                 <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3"/>
                             </svg>
@@ -104,13 +104,15 @@ export default function Project({params}) {
                         }
                     </p>
                     <h1 className="ms-bold">{proyecto.titulo} {proyecto.estado !== 'aceptado' && <span className={'ms-regular-subbody'}>({proyecto.estado})</span>}</h1>
+                    <Link href={`/profile/${proyecto.usuarios.id}`} className="card-text ms-regular">{proyecto.usuarios.nombre_completo}</Link>
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
-                        <p className="ms-regular mt-3 mb-4">
-                            {proyecto.participantes && (proyecto.participantes.length > 0)
-                                ? proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')
-                                : proyecto.usuarios.nombre_completo
-                            }
-                        </p>
+                        {
+                            proyecto.participantes.length > 0
+                            &&
+                            <p className="card-text ms-regular-subbody">
+                                {proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')}
+                            </p>
+                        }
                         <div className="d-flex justify-content-end mb-3">
                             {user.rol === "coordinador" &&
                                 <>

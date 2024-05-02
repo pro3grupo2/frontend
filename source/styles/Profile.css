@@ -1,22 +1,5 @@
-.btn {
-    font-family: Montserrat, serif !important;
-    text-align: center;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 100%;
-}
-
-.btn-font {
-    font-variant: all-small-caps !important;
-}
-
 .btn-custom {
-    color: var(--color-secundario-gris) !important;
-    font-size: 14px !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 100% !important;
+    color: var(--color-secundario-gris);
 }
 
 .btn-custom:hover {

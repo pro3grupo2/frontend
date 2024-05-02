@@ -262,6 +262,12 @@ body {
     line-height: 120%; /* 1.05rem */
 }
 
+.ms-button,
+.ms-button-small,
+.ms-button-font {
+    font-variant: all-small-caps;
+}
+
 .ms-button {
     color: var(--color-secundario-blanco);
 
@@ -271,7 +277,6 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: 100%; /* 1.75rem */
-    font-variant: all-small-caps;
 }
 
 .ms-button-small {
@@ -283,7 +288,6 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: 100%; /* 1.5rem */
-    font-variant: all-small-caps;
 }
 
 /* ================ */

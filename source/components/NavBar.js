@@ -76,7 +76,7 @@ export default function NavBar() {
                         <p className="m-0 fs-6 p-2 mx-sm-2 mx-md-3">900 373 379</p>
 
                         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                            <Link className="mx-sm-2 mx-md-3" href="/profile">
+                            <Link className="mx-sm-2 mx-md-3" href="/profile/me">
                                 {isProfileHover
                                     ?
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 32 32"
@@ -99,7 +99,7 @@ export default function NavBar() {
                             <p className="ms-font fw-bold text-center w-100">{(JSON.stringify(user).length > 2) ? user.nombre_completo : "Usuario"}</p>
                             <hr/>
                             {JSON.stringify(user).length > 2 && <button className="nav-link text-secondary w-100 mb-2" onClick={() => setModalShowNewProject(true)}>Nuevo Proyecto</button>}
-                            {JSON.stringify(user).length > 2 && user.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile?tab=codigos")}>Códigos de Admin.</button>}
+                            {JSON.stringify(user).length > 2 && user.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile/me?tab=codigos")}>Códigos de Admin.</button>}
                             <button className="nav-link text-secondary w-100 mb-2" onClick={JSON.stringify(user).length > 2 ? handleLogout : handleLogin}>{JSON.stringify(user).length > 2 ? "Cerrar Sesión" : "Iniciar Sesión"}</button>
                         </div>
 

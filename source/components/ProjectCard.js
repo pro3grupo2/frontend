@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import "@/styles/project-card.css"
 import {useState} from "react"
+import Link from "next/link";
 
 export default function ProjectCard({project, onClick, isHome = false}) {
     const [isHovered, setIsHovered] = useState(false)

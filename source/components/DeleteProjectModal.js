@@ -3,6 +3,7 @@ import {useState} from "react"
 import Loading from "@/components/Loading"
 import "../styles/Signup.css"
 import {eliminar_proyecto} from "@/api/v1/proyectos";
+import {router} from "next/client";
 
 export default function DeleteProjectModal({project, show, setShow}) {
     const
@@ -15,7 +16,7 @@ export default function DeleteProjectModal({project, show, setShow}) {
         if (!token) return
 
         const data = await eliminar_proyecto(token, project.id);
-        if (data) history.back();
+        if (data) router.back();
     }
 
     return (
