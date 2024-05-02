@@ -78,7 +78,7 @@ export default function RecoverPassword({params}) {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-recover-password">
-                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
                     <div>
                         <h1 className='fw-bold'>Recupera tu contraseña</h1>
                         <p className=' pe-1 '>Crea una nueva contraseña</p>

@@ -17,7 +17,7 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 ref={setPreviousPasoRef}
                 type='button'
                 onClick={setPreviousPaso}
-                className='btn btn-outline-primary btn-icon-back'
+                className='btn btn-outline-primary btn-icon'
                 style={{width: '48px', height: '48px'}}>
                 <svg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16' fill='none'>
                     <path d='M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z' fill='#091229'/>
@@ -67,7 +67,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
+            <div className='d-flex flex-column gap-3 gap-xxl-5' style={{maxWidth: '42rem'}}>
                 <div>
                     <h1 className='fw-bold'>Crear cuenta</h1>
                     <p className='pe-1 '>
@@ -161,7 +161,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup-password">
-            <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
+            <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
                 <div>
                     <h1 className='fw-bold'>Termina de configura tu cuenta</h1>
                     <p className=' pe-1 '>

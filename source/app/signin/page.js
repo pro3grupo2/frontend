@@ -95,7 +95,7 @@ export default function SignIn() {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-signin">
-                <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
                     <div>
                         <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className='ms-regular'>
@@ -143,18 +143,6 @@ export default function SignIn() {
                         </div>
 
                         {error && <p style={{color: 'red'}}>{error}</p>}
-
-                        <div className={'my-4'}>
-                            {
-                                (email_checks.length > 0 || password_checks.length > 0) &&
-                                <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">La contraseña debe contener al menos:</p>
-                            }
-                            {
-                                [...email_checks, ...password_checks].map((check, index) => (
-                                    <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
-                                ))
-                            }
-                        </div>
 
                         <Link className="fw-bold ps-1 link-dark" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>

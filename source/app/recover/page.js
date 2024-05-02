@@ -65,7 +65,7 @@ export default function RecoverPassword() {
                 <AlertContainer alerts={alerts}/>
 
                 <EstructuraFormularios clase_imagen="bg-image-recover">
-                    <div className='d-flex flex-column justify-content-evenly h-100 p-0 pe-xl-5' style={{maxWidth: 560}}>
+                    <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
                         <div>
                             <h1 className="fw-bold">¿Has olvidado tu contraseña?</h1>
                             <p className='pe-1 mt-3'>
