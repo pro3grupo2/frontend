@@ -153,22 +153,22 @@ export default function Profile() {
                 </div>
 
                 <div className="d-flex flex-row gap-5 gap-md-0 flex-wrap-reverse flex-md-nowrap justify-content-center justify-content-md-between px-3 pt-5">
-                    <div className="d-flex flex-column flex-nowrap gap-3">
-                        <div className="position-relative d-flex w-100">
+                    <div className="d-flex flex-column flex-nowrap " style={{ width: 480 }}>
+                    <div className="position-relative d-flex w-100">
                             <button className="position-absolute top-50 start-0 translate-middle-y flex-shrink-1 border border-0 bg-transparent me-5" onClick={() => history.back()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
                                     <path d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z" fill="#0065F3" />
                                 </svg>
                             </button>
-                            <h1 className="ms-extra-bold mx-4 px-3 fw-bold p-0 m-0 flex-grow-1">{nombreCompletoCapitalizado}</h1>
+                            <h1 className="fw-bold mx-4 px-3 fw-bold p-0 m-0 flex-grow-1">{nombreCompletoCapitalizado}</h1>
                         </div>
 
-                        <b className="ms-extra-bold-subtitle p-0 m-0 mx-4 px-3">{user.correo}</b>
-                        <p className="link-offset-1 ms-bold-body p-0 m-0 mx-4 px-3"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
-                        <p className="ms-regular text-break p-0 m-0 mx-4 px-3" style={{ maxWidth: '30rem' }}>{user.descripcion}</p>
-                        <div className="d-flex flex-row gap-3 mx-4 px-3">
-                            <button className="btn btn-primary ms-button p-2 btn-hover" onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
-                            <button className="btn btn-outline-primary ms-button color-secundario-negro p-2" onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
+                        <b className="ms-extra-bold-subtitle p-0 m-0 mx-4 px-3 pt-3">{user.correo}</b>
+                        <p className="link-offset-1 fw-bold p-0 m-0 mx-4 px-3 pt-1"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0} /> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
+                        <p className="ms-regular text-break p-0 m-0 mx-4 px-3 pt-3" style={{ maxWidth: '30rem' }}>{user.descripcion}</p>
+                        <div className="d-flex flex-row gap-3 mx-4 px-3 pt-3">
+                            <button className="btn btn-primary ms-button p-2 btn-hover" style={{ minHeight: 48, maxWidth: 238 }} onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
+                            <button className="btn btn-outline-primary ms-button color-secundario-negro p-2" style={{ minHeight: 48, maxWidth: 192 }} onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
                         </div>
                     </div>
 
@@ -287,7 +287,7 @@ export default function Profile() {
                                 <div className="form-group">
                                     <input
                                         type="number"
-                                        className="rounded border-normal p-2 text-center mt-3"
+                                        className="rounded border-normal p-2 text-center mt-3 w-100"
                                         placeholder="Número"
                                         min={1}
                                         max={10}
@@ -298,7 +298,7 @@ export default function Profile() {
                                 </div>
                                 <div className="form-group mt-3">
                                     <button
-                                        className="btn btn-primary mt-3 ms-button"
+                                        className="btn btn-primary mt-3 ms-button w-100"
                                         style={{ maxWidth: 262, height: 48 }}
                                         onClick={crearCodigo}
                                         disabled={!numUsos || numUsos === 0} // Deshabilita el botón si numUsos está vacío o es cero
