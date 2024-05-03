@@ -190,7 +190,7 @@ export default function Profile({params}) {
                     </div>
 
                     <div className={'position-relative'} style={{width: '11.99244rem', height: '12rem'}}>
-                        <Image className={"rounded"} src={user.foto?.startsWith('http') ? user.foto : `https://api.reservorio-u-tad.com${user.foto ?? '/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto}/>
+                        <Image className={"rounded"} src={user.foto?.startsWith('http') ? user.foto : `https://api.reservorio-u-tad.com${user.foto ?? '/files/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={user.foto}/>
                     </div>
                 </div>
 

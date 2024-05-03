@@ -45,7 +45,7 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
 
             <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-auto`} style={{maxWidth: '73.5rem', maxHeight: '38.625rem'}}>
                 <div className={'position-relative w-100 h-100'} style={{maxWidth: '30.625rem'}}>
-                    <Image className={"rounded"} src={default_user_data.foto?.startsWith('http') ? default_user_data.foto : `https://api.reservorio-u-tad.com${default_user_data.foto ?? '/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={default_user_data.foto}/>
+                    <Image className={"rounded"} src={default_user_data.foto?.startsWith('http') ? default_user_data.foto : `https://api.reservorio-u-tad.com${default_user_data.foto ?? '/files/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={default_user_data.foto}/>
                 </div>
 
                 <div className="flex-grow-1 d-flex flex-column justify-content-between">
