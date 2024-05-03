@@ -96,7 +96,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                         asignaturas
                             .map(
                                 asignatura =>
-                                    <option key={asignatura.id} value={asignatura.id}>{asignatura.titulo}</option>
+                                    <option key={asignatura.id} value={asignatura.id}>{asignatura.titulo} ({asignatura.areas.titulo})</option>
                             )
                     }
                 </select>
