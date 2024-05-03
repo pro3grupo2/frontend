@@ -9,6 +9,7 @@ import Loading from '@/components/Loading'
 import Image from 'next/image'
 import {useRouter} from "next/navigation"
 import DeleteProjectModal from "@/components/DeleteProjectModal";
+import {get_user_by_id} from "@/api/v1/usuarios";
 
 export default function Project({params}) {
     const {user, isLoading} = useAuth()
@@ -23,43 +24,32 @@ export default function Project({params}) {
     const router = useRouter()
 
     const
-        [show_delete_modal, setShowDeleteModal] = useState(false)
+        [show_delete_modal, setShowDeleteModal] = useState(false),
+        [number_proyectos, setNumberProyectos] = useState(6),
+        [no_more_proyectos, setNoMoreProyectos] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        get_proyecto(token, params.id).then(data => {
-            setProyecto(data)
-            setProyectoLoaded(true)
-        })
+        get_proyecto(token, params.id)
+            .then(data => {
+                setProyecto(data)
+                setProyectoLoaded(true)
+
+                get_user_by_id(token, data.usuarios.id)
+                    .then(data2 => {
+                        setUserProjects(data2.proyectos.filter((x) => x.id !== data.id && x.estado === 'aceptado'))
+                    })
+
+                get_proyectos(token, page)
+                    .then(data3 => {
+                        if (!data3 || !data3.length) return
+
+                        setOtherProjects([...otherProjects, ...data3.filter(project => project.id !== data.id && project.usuarios.id !== data.usuarios.id)])
+                    })
+            })
     }, [params.id])
-
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        if (!token) return
-
-        if (proyecto.usuarios) {
-            let filters = {
-                busqueda: proyecto.usuarios.correo
-            }
-
-            let indexPage = page
-            get_proyectos(token, indexPage, filters).then(data => {
-                if (data.length === 0) return
-
-                if (userProjects.length > 0) setUserProjects([...userProjects, data.filter(project => project.id !== proyecto.id)])
-                else setUserProjects(data.filter(project => project.id !== proyecto.id))
-            })
-
-            get_proyectos(token, indexPage).then(data => {
-                if (data.length === 0) return
-
-                if (otherProjects.length > 0) setOtherProjects([...otherProjects, data.filter(project => project.id !== proyecto.id)])
-                else setOtherProjects(data.filter(project => project.usuarios.id !== proyecto.usuarios.id))
-            })
-        }
-    }, [proyecto, page]);
 
     if (isLoading || !proyectoLoaded) {
         return <Loading/>
@@ -70,7 +60,24 @@ export default function Project({params}) {
     };
 
     const handleViewMore = () => {
-        setPage(page + 1)
+        setNumberProyectos(number_proyectos + 6)
+    }
+
+    const handleViewMore2 = () => {
+        const token = localStorage.getItem('token')
+        if (!token) return
+
+        if (proyecto.usuarios) {
+            get_proyectos(token, page + 1)
+                .then(data => {
+                    if (!data || !data.length) return setNoMoreProyectos(true)
+
+                    setOtherProjects([...otherProjects, ...data.filter(project => project.id !== proyecto.id && project.usuarios.id !== proyecto.usuarios.id)])
+                })
+
+            setPage(page + 1)
+        }
+
     }
 
     const processMail = (mail) => {
@@ -182,7 +189,7 @@ export default function Project({params}) {
                         {userProjects.length > 0 && (
                             <div className="col-12">
                                 <div className="row g-4">
-                                    {userProjects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
+                                    {userProjects.slice(0, number_proyectos).map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick}/>)}
                                 </div>
                             </div>
                         )}
@@ -190,7 +197,7 @@ export default function Project({params}) {
 
                     <div className="d-flex justify-content-center align-items-center">
                         <hr className="w-50"/>
-                        <button onClick={handleViewMore} className={`ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                        <button onClick={handleViewMore} className={`${number_proyectos >= userProjects.length && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
                         <hr className="w-50"/>
                     </div>
 
@@ -202,6 +209,12 @@ export default function Project({params}) {
                                 </div>
                             </div>
                         )}
+                    </div>
+
+                    <div className="d-flex justify-content-center align-items-center">
+                        <hr className="w-50"/>
+                        <button onClick={handleViewMore2} className={`${no_more_proyectos && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                        <hr className="w-50"/>
                     </div>
                 </div>
             </>

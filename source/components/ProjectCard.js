@@ -1,17 +1,16 @@
 import Image from 'next/image'
 import "@/styles/project-card.css"
 import {useState} from "react"
-import Link from "next/link";
 
 export default function ProjectCard({project, onClick, isHome = false}) {
     const [isHovered, setIsHovered] = useState(false)
     const [isShown, setIsShown] = useState(false)
 
     const areaColor = {
-        1: "rgb(0,205,212)", // Ingenieria del Software
-        2: "rgb(255,55,87)", // Diseño Digitla
-        3: "rgb(0,101,243)", // Animacion
-        4: "rgb(255,61,241)", // Videojuegos
+        1: "var(--color-principal)", // Ingenieria del Software
+        2: "var(--color-principal)", // Diseño Digitla
+        3: "var(--color-principal)", // Animacion
+        4: "var(--color-principal)", // Videojuegos
     }
 
     const handleHover = (hover) => {
