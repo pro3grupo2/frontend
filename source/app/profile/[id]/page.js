@@ -252,7 +252,7 @@ export default function Profile({params}) {
                     {
                         projectsValidados.length
                             ?
-                            projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project}/>)
+                            projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} isHome={true}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
