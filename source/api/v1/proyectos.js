@@ -80,14 +80,14 @@ const crear_proyecto = async (token, titulo, ficha, url, portada, anio, particip
     return datos ? datos.data : null
 }
 
-const actualizar_proyecto = async (token, titulo, ficha, url, portada, anio, participantes, asignaturas, premios, premiado = false, callback = undefined) => {
+const actualizar_proyecto = async (token, id, ficha, url, portada, anio, participantes, asignaturas, premios, premiado = false, callback = undefined) => {
     const headers = {
         'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'
     }, body = JSON.stringify({
-        titulo: titulo, ficha: ficha, url: url, portada: portada, anio: anio, participantes: participantes, asignaturas: asignaturas, premiado: premiado, premios: premios
+        ficha: ficha, url: url, portada: portada, anio: anio, participantes: participantes, asignaturas: asignaturas, premiado: premiado, premios: premios
     })
 
-    const datos = await fetch_handler(PROYECTOS_ROUTE, headers, "PATCH", body, callback)
+    const datos = await fetch_handler(PROYECTOS_ROUTE + '/' + id, headers, "PATCH", body, callback)
     return datos ? datos.data : null
 }
 

@@ -50,7 +50,7 @@ export default function NewProjectModal({show, setShow}) {
             }
         }
 
-        const data = await crear_proyecto(token, titulo, ficha, url_local ?? url, portada_local ?? portada, parseInt(anio), participantes.split(';'), proyectos_asignaturas.split(';').map(parseInt), undefined, !!premiado)
+        const data = await crear_proyecto(token, titulo, ficha, url_local ?? url, portada_local ?? portada, parseInt(anio), participantes ? participantes.split(';') : undefined, proyectos_asignaturas.split(';').map(parseInt), undefined, !!+premiado)
         setLoading(false)
         if (data) window.location.reload()
     }
@@ -103,7 +103,7 @@ export default function NewProjectModal({show, setShow}) {
                     <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
                     <div>
                         <div className="mb-3">
-                            <label className="form-label ms-bold-body">Autor/es del proyecto <span className="color-error">*</span></label>
+                            <label className="form-label ms-bold-body">Participantes del proyecto</label>
                             <input type="text" className="form-control border-normal" style={{height: 48, maxWidth: 488}} placeholder="Escribe los correos (separados por ;)" value={participantes} onChange={(e) => setParticipantes(e.target.value)}/>
                         </div>
 
