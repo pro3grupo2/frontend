@@ -78,7 +78,7 @@ export default function RecoverPassword({params}) {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-recover-password">
-                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32.8rem'}}>
                     <div>
                         <h1 className='fw-bold'>Recupera tu contraseña</h1>
                         <p className=' pe-1 '>Crea una nueva contraseña</p>
@@ -93,6 +93,7 @@ export default function RecoverPassword({params}) {
                                 value={password}
                                 className="ms-regular flex-grow-1 form-control  background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
+                                style={{maxHeight: '3rem'}}
                                 onFocus={() => password_ref.current.classList.remove('border-error')}
                                 placeholder="Nueva contraseña"
                                 autoComplete="off"
@@ -114,6 +115,7 @@ export default function RecoverPassword({params}) {
                                 value={password2}
                                 className="ms-regular flex-grow-1 form-control  background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword2(e.target.value)}
+                                style={{maxHeight: '3rem'}}
                                 onFocus={() => password2_ref.current.classList.remove('border-error')}
                                 placeholder="Repetir nueva contraseña"
                                 autoComplete="off"

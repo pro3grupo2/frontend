@@ -41,7 +41,9 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
         email_ref = useRef(null),
         [email_checks, setEmailChecks] = useState([])
 
-    useEffect(() => {
+   
+
+    const handleNextPaso = () => {
         setEmailChecks([])
 
         if (!check_email(
@@ -49,25 +51,14 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
-        )) {
-            if (email.length > 0)
-                return email_ref.current.classList.add('border-error')
-            return email_ref.current.classList.remove('border-error')
-        }
+        )) return email_ref.current.classList.add('border-error')
 
-        email_ref.current.classList.remove('border-error')
-    }, [email])
-
-    const handleNextPaso = () => {
-        if (!email_checks.length)
-            return setNextPaso()
-
-        email_ref.current.classList.add('border-error')
+        setNextPaso()
     }
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup">
-            <div className='d-flex flex-column gap-3 gap-xxl-5' style={{maxWidth: '42rem'}}>
+            <div className='d-flex flex-column gap-3 gap-xxl-5' style={{maxWidth: '26rem'}}>
                 <div>
                     <h1 className='fw-bold'>Crear cuenta</h1>
                     <p className='pe-1 '>
@@ -85,19 +76,16 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                         value={email}
                         className="ms-regular form-control border-normal py-3 ps-4 fs-5"
                         onChange={(e) => setEmail(e.target.value)}
+                        style={{maxHeight: '3rem'}}
                         onFocus={() => email_ref.current.classList.remove('border-error')}
                         placeholder="Correo electrónico"
                         autoComplete="off"
                     />
 
-                    <div className={'my-4'}>
-                        {
-                            email_checks.length > 0 &&
-                            <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">El correo necesita:</p>
-                        }
+                    <div className="mb-5">
                         {
                             email_checks.map((check, index) => (
-                                <p key={index} className="color-secundario-gris ms-regular-subbody p-0 ps-4 m-0">{check}</p>
+                                <p key={index} className="text-danger fs-6 p-0 ps-4 m-0">{check}</p>
                             ))
                         }
                     </div>
@@ -161,9 +149,9 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
     return (
         <EstructuraFormularios clase_imagen="bg-image-signup-password">
-            <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
+            <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '30rem'}}>
                 <div>
-                    <h1 className='fw-bold'>Termina de configura tu cuenta</h1>
+                    <h1 className='fw-bold'>Termina de configurar tu cuenta</h1>
                     <p className=' pe-1 '>
                         Paso 1 de 4. Crea una contraseña para continuar
                     </p>
@@ -179,6 +167,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             value={password}
                             className="ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword(e.target.value)}
+                            style={{maxHeight: '3rem'}}
                             onFocus={() => password_ref.current.classList.remove('border-error')}
                             placeholder="Contraseña"
                             autoComplete="off"
@@ -200,6 +189,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             value={password2}
                             className=" ms-regular flex-grow-1 form-control border-normal py-3 ps-4 fs-5"
                             onChange={(e) => setPassword2(e.target.value)}
+                            style={{maxHeight: '3rem'}}
                             onFocus={() => password2_ref.current.classList.remove('border-error')}
                             placeholder="Confirmar contraseña"
                             autoComplete="off"
@@ -441,6 +431,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
                             <input
                                 key={index}
                                 type='text'
+                                style={{maxHeight: '3rem', maxWidth: '3rem', border: "2px solid #808080"}}
                                 name={`${index}`}
                                 ref={refs.current[index]}
                                 onFocus={(e) => {
@@ -457,7 +448,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
                                 maxLength={1} // Restringe la entrada a un solo carácter
                                 className='form-control text-center'
                                 autoComplete="off" // Evita la autocompletación del navegador
-                                style={{height: '48px', border: "2px solid #808080", maxWidth: 48}}
+                                
                             />
                         ))
                     }

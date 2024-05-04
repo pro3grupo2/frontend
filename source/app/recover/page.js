@@ -65,7 +65,7 @@ export default function RecoverPassword() {
                 <AlertContainer alerts={alerts}/>
 
                 <EstructuraFormularios clase_imagen="bg-image-recover">
-                    <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
+                    <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32.8rem'}}>
                         <div>
                             <h1 className="fw-bold">¿Has olvidado tu contraseña?</h1>
                             <p className='pe-1 mt-3'>
@@ -80,7 +80,7 @@ export default function RecoverPassword() {
                                 type="email"
                                 id="email"
                                 className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
-                                style={{backgroundColor: "var(--secundario-gris-claro)"}}
+                                style={{backgroundColor: "var(--secundario-gris-claro)",maxHeight: '3rem'}}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 onFocus={() => email_ref.current.classList.remove('border-error')}

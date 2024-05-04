@@ -70,7 +70,7 @@ export default function SignIn() {
             <AlertContainer alerts={alerts}/>
 
             <EstructuraFormularios clase_imagen="bg-image-signin">
-                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '42rem'}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32rem'}}>
                     <div>
                         <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className='ms-regular'>
@@ -87,6 +87,7 @@ export default function SignIn() {
                             value={email}
                             className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                             onChange={(e) => setEmail(e.target.value)}
+                            style={{maxHeight: '3rem'}}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
                             placeholder="Correo electrónico"
                             autoComplete="off"
@@ -109,6 +110,7 @@ export default function SignIn() {
                                 value={password}
                                 className="ms-regular flex-grow-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
+                                style={{maxHeight: '3rem'}}
                                 onFocus={() => {
                                     setError(null)
                                     password_ref.current.classList.remove('border-error')
