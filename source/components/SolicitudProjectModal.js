@@ -10,9 +10,9 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
 
     return (
         <>
-            <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-0 w-100 h-100`}></div>
+            <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column position-fixed gap-3 top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-1 w-75 h-75 p-5 overflow-y-auto`}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column position-fixed gap-3 top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-3 w-75 h-75 p-5 overflow-y-auto`}>
                 <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
 
                 <div className={'d-flex flex-column flex-nowrap gap-3'}>
