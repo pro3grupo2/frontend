@@ -46,13 +46,12 @@ export default function RecoverPassword() {
             return email_ref.current.classList.add('border-error')
 
         setLoading(true)
-        const data = await recover(email)
+        const data = await recover(email, (error) => {
+            create_alert(setAlerts, error, 'danger')
+        })
         setLoading(false)
 
-        if (!data) {
-            create_alert(setAlerts, 'Error al recuperar la cuenta', 'danger')
-            return
-        }
+        if (!data) return
 
         setStep(step + 1)
     }
@@ -80,7 +79,7 @@ export default function RecoverPassword() {
                                 type="email"
                                 id="email"
                                 className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
-                                style={{backgroundColor: "var(--secundario-gris-claro)",maxHeight: '3rem'}}
+                                style={{backgroundColor: "var(--secundario-gris-claro)", maxHeight: '3rem'}}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 onFocus={() => email_ref.current.classList.remove('border-error')}
