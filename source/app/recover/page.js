@@ -1,17 +1,17 @@
 "use client"
 
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Link from 'next/link'
 import Image from 'next/image'
 
-import {EstructuraFormularios} from "@/components/Estructura"
-import {ControladorSiguienteAtras} from "@/components/Signup"
-import {AlertContainer, create_alert} from "@/components/Alerts"
+import { EstructuraFormularios } from "@/components/Estructura"
+import { ControladorSiguienteAtras } from "@/components/Signup"
+import { AlertContainer, create_alert } from "@/components/Alerts"
 import Loading from "@/components/Loading"
 
-import {recover} from '@/api/v1/auth'
-import {check_email} from "@/utils/validation"
+import { recover } from '@/api/v1/auth'
+import { check_email } from "@/utils/validation"
 
 export default function RecoverPassword() {
     const
@@ -20,7 +20,8 @@ export default function RecoverPassword() {
         [email_checks, setEmailChecks] = useState([]),
         [loading, setLoading] = useState(false),
         [alerts, setAlerts] = useState([]),
-        [step, setStep] = useState(1)
+        [step, setStep] = useState(1),
+        [error, setError] = useState('')
 
     useEffect(() => {
         setEmailChecks([])
@@ -48,23 +49,26 @@ export default function RecoverPassword() {
         setLoading(true)
         const data = await recover(email, (error) => {
             create_alert(setAlerts, error, 'danger')
+            setError('Correo no registrado')
         })
         setLoading(false)
 
         if (!data) return
 
         setStep(step + 1)
+
+
     }
 
-    if (loading) return <Loading/>
+    if (loading) return <Loading />
 
     if (step === 1)
         return (
             <>
-                <AlertContainer alerts={alerts}/>
+                <AlertContainer alerts={alerts} />
 
                 <EstructuraFormularios clase_imagen="bg-image-recover">
-                    <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32.8rem'}}>
+                    <div className='d-flex flex-column gap-xxl-5' style={{ maxWidth: '32.8rem' }}>
                         <div>
                             <h1 className="fw-bold">¿Has olvidado tu contraseña?</h1>
                             <p className='pe-1 mt-3'>
@@ -79,7 +83,7 @@ export default function RecoverPassword() {
                                 type="email"
                                 id="email"
                                 className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
-                                style={{backgroundColor: "var(--secundario-gris-claro)", maxHeight: '3rem'}}
+                                style={{ backgroundColor: "var(--secundario-gris-claro)", maxHeight: '3rem' }}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 onFocus={() => email_ref.current.classList.remove('border-error')}
@@ -99,17 +103,20 @@ export default function RecoverPassword() {
                                 }
                             </div>
 
+
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
+
                             <div className="d-flex justify-content-between align-items-center mt-5">
                                 <Link href="/signin">
                                     <button
                                         className='btn btn-icon btn-outline-primary'
                                         type="button"
-                                        style={{width: '48px', height: '48px'}}>
+                                        style={{ width: '48px', height: '48px' }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16"
-                                             fill="none">
+                                            fill="none">
                                             <path
                                                 d="M10 1.4303L8.48329 -1.48327e-06L1.39876e-06 8L8.48329 16L10 14.5697L3.03342 8L10 1.4303Z"
-                                                fill="#091229"/>
+                                                fill="#091229" />
                                         </svg>
                                     </button>
                                 </Link>
@@ -127,10 +134,10 @@ export default function RecoverPassword() {
         )
 
     return (
-        <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
+        <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{ minHeight: '60vh' }}>
             <h1 className="display-5 custom-bold mb-3">¡Correo de recuperación enviado!</h1>
-            <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
-            <p className='ms-font fs-5 lead w-50'>Ya puedes cerrar esta pestaña. <br/>Revisa tu correo para recuperar tu cuenta</p>
+            <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto" />
+            <p className='ms-font fs-5 lead w-50'>Ya puedes cerrar esta pestaña. <br />Revisa tu correo para recuperar tu cuenta</p>
         </div>
     )
 }

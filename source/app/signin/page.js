@@ -1,16 +1,16 @@
 "use client"
 
-import React, {useRef, useState} from 'react'
+import React, { useRef, useState } from 'react'
 
 import Link from 'next/link'
 import Image from "next/image"
 
-import {AlertContainer, create_alert} from "@/components/Alerts"
-import {EstructuraFormularios} from "@/components/Estructura"
+import { AlertContainer, create_alert } from "@/components/Alerts"
+import { EstructuraFormularios } from "@/components/Estructura"
 import Loading from "@/components/Loading"
 
-import {check_email, check_password} from "@/utils/validation"
-import {signin} from "@/api/v1/auth"
+import { check_email, check_password } from "@/utils/validation"
+import { signin } from "@/api/v1/auth"
 
 import "../../styles/Signup.css"
 
@@ -63,14 +63,14 @@ export default function SignIn() {
         window.location.href = '/home'
     }
 
-    if (loading) return <Loading/>
+    if (loading) return <Loading />
 
     return (
         <>
-            <AlertContainer alerts={alerts}/>
+            <AlertContainer alerts={alerts} />
 
             <EstructuraFormularios clase_imagen="bg-image-signin">
-                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32rem'}}>
+                <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{ maxWidth: '32rem' }}>
                     <div>
                         <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
                         <p className='ms-regular'>
@@ -87,7 +87,7 @@ export default function SignIn() {
                             value={email}
                             className="ms-regular form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                             onChange={(e) => setEmail(e.target.value)}
-                            style={{maxHeight: '3rem'}}
+                            style={{ maxHeight: '3rem' }}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
                             placeholder="Correo electrónico"
                             autoComplete="off"
@@ -110,7 +110,7 @@ export default function SignIn() {
                                 value={password}
                                 className="ms-regular flex-grow-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
-                                style={{maxHeight: '3rem'}}
+                                style={{ maxHeight: '3rem' }}
                                 onFocus={() => {
                                     setError(null)
                                     password_ref.current.classList.remove('border-error')
@@ -123,7 +123,7 @@ export default function SignIn() {
                                 type="button"
                                 className="position-absolute top-50 end-0 translate-middle-y btn btn-link btn-icon border-0"
                                 onClick={() => setTipoPassword(tipo_password === 'password' ? 'text' : 'password')}>
-                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24}/>
+                                <Image src="/icons/Ojo.svg" alt="Mostrar/Ocultar contraseña" height={24} width={24} />
                             </button>
                         </div>
 
@@ -135,7 +135,7 @@ export default function SignIn() {
                             }
                         </div>
 
-                        {error && <p style={{color: 'red'}}>{error}</p>}
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
 
                         <Link className="fw-bold ps-1 link-dark" href="/recover">¿Has olvidado la contraseña?</Link>
                     </div>
@@ -144,7 +144,7 @@ export default function SignIn() {
                         <button
                             type="submit"
                             className="btn btn-primary mt-5 btn-lg text-center fw-bold fs-3 w-100 text-uppercase"
-                            style={{maxHeight: 54}}>
+                            style={{ maxHeight: 54 }}>
                             Iniciar sesión
                         </button>
 
