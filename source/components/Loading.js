@@ -2,7 +2,7 @@ import "@/styles/Loading.css"
 
 export default function Loading() {
     return (
-        <div className="container-fluid d-flex justify-content-center align-items-center h-100 w-100">
+        <div className="position-fixed top-50 start-50 translate-middle container-fluid d-flex justify-content-center align-items-center vh-100 vw-100 bg-white">
             <div className="loader">
                 <div className="box box0">
                     <div></div>
