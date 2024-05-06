@@ -79,14 +79,12 @@ export default function NewProjectModal({ show, setShow }) {
                             <div className="mb-3">
                                 <label className="form-label ms-bold-body ">Portada de proyecto <span className="color-error">*</span></label>
                                 <p className="ms-regular">Esta será la imagen que represente tu trabajo, recomendamos una imagen horizontal.</p>
-                                <input className="form-control border-normal" type="file" style={{height: 48, maxWidth: 488}} accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) setInputPortada(e.target.files[0])
-                                }}/>
+                               
                             </div>
 
 
 
-                                <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ height: 70, maxWidth: 488, backgroundColor: '#E4EAED',borderStyle: 'dashed',  }}>
+                                <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED',borderStyle: 'dashed',  }}>
                                     <div>
                                         <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">Arrastra o selecciona la portada desde tu ordenador.</p>
                                         <p className="ms-regular-subbody mb-0 color-secundario-gris-claro mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
@@ -139,31 +137,30 @@ export default function NewProjectModal({ show, setShow }) {
                             </select>
                         </div>
 
-                        <div className="mb-3 d-flex align-items-start">
-                            <div className="me-3 ">
-                                <label className="form-label ms-bold-body">¿Año? <span className="color-error">*</span></label>
-                                <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" style={{ height: 48, maxWidth: 144 }} value={anio} onChange={(e) => setAnio(e.target.value)} />
-                            </div>
-                            <div>
-                                <label className="form-label ms-bold-body mx-md-3 ">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
-                                <select className="form-select border-normal mx-md-3" style={{ height: 48, maxWidth: 176 }} onChange={(e) => setPremiado(e.target.value)}>
-                                    <option value={0}>No</option>
-                                    <option value={1}>Sí</option>
-                                </select>
-                            </div>
-                        </div>
+                        <div className="mb-3 d-flex flex-column flex-md-row align-items-start">
+    <div className="me-md-3 mb-md-0 mb-3"> {/* Agregamos clases de margen y ancho para dispositivos más pequeños */}
+        <label className="form-label ms-bold-body">¿Año? <span className="color-error">*</span></label>
+        <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" style={{ height: 48, maxWidth: 144 }} value={anio} onChange={(e) => setAnio(e.target.value)} />
+    </div>
+    <div>
+        <label className="form-label ms-bold-body mx-md-3">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
+        <select className="form-select border-normal mx-md-3" style={{ height: 48, maxWidth: 176 }} onChange={(e) => setPremiado(e.target.value)}>
+            <option value={0}>No</option>
+            <option value={1}>Sí</option>
+        </select>
+    </div>
+</div>
+
 
 
                         <div>
                             <div className="mb-3">
                                 <label className="form-label ms-bold-body">Fichero de proyecto <span className="color-error">*</span></label>
                                 <p className="ms-regular">Sube el fichero .zip o el enlace de OneDrive donde está subido el proyecto.</p>
-                                <input className="form-control border-normal" style={{ height: 48, maxWidth: 488 }} type="file" accept=".zip,.rar,.7zip" onChange={(e) => {
-                                    if (e.target.files && e.target.files[0]) setInputUrl(e.target.files[0])
-                                }} />
+                                
                             </div>
                             
-                            <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ height: 70, maxWidth: 488, backgroundColor: '#E4EAED', 
+                            <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED', 
                             borderStyle: 'dashed' }}>
                                     <div>
                                         <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">Arrastra o selecciona la portada desde tu ordenador.</p>
@@ -186,7 +183,7 @@ export default function NewProjectModal({ show, setShow }) {
                                 <div className="linea"></div>
                             </div>
 
-                            <div className="input-group mb-3" style={{ height: 48, maxWidth: 488 }}>
+                            <div className="input-group mb-3" style={{ minHeight: 48, maxWidth: 488 }}>
                                 <span className="input-group-text border-dark fw-semibold">Enlace URL</span>
                                 <input type="text" className="form-control border-normal" value={url} placeholder="Pega tu link aqui." onChange={(e) => setUrl(e.target.value)} />
                             </div>
