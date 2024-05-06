@@ -45,33 +45,23 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
 
             <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-3 w-75 h-75 p-5 overflow-y-auto`} style={{ maxWidth: '73.5rem', maxHeight: '38.625rem' }}>
                 <div className={'position-relative w-100 h-100'} style={{ maxWidth: '30.625rem' }}>
-                    <Image className={"rounded"} src={default_user_data.foto?.startsWith('http') ? default_user_data.foto : `https://api.reservorio-u-tad.com${default_user_data.foto ?? '/files/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={default_user_data.foto} />
+                    <label htmlFor="inputFotoPerfil" className="cursor-pointer position-absolute w-100 h-100">
+                        <Image className={"rounded"} src={default_user_data.foto?.startsWith('http') ? default_user_data.foto : `https://api.reservorio-u-tad.com${default_user_data.foto ?? '/files/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={default_user_data.foto} />
+                        <img src="/icons/Editar.svg" className="position-absolute top-0 end-0 p-2" alt="Edit" />
+
+                    </label>
+                    <input id="inputFotoPerfil" className="form-control position-absolute top-0 start-0 opacity-0 w-full h-full" type="file" style={{ zIndex: -1 }} accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) setInputFotoPerfil(e.target.files[0])
+                    }} />
                 </div>
+
 
                 <div className="flex-grow-1 d-flex flex-column justify-content-between">
 
                     <div className="w-100">
                         <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)} />
 
-                        <div className="mb-3">
-                            <label className="form-label ms-bold-body ">Foto de perfil <span className="color-error">*</span></label>
-                            <input className="form-control border-normal" type="file" style={{ height: 48, maxWidth: 488 }} accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
-                                if (e.target.files && e.target.files[0]) setInputFotoPerfil(e.target.files[0])
-                            }} />
-                            <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED',borderStyle: 'dashed',  }}>
-                                    <div>
-                                        <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">Arrastra o selecciona la foto de perfil desde tu ordenador.</p>
-                                        <p className="ms-regular-subbody mb-0 color-secundario-gris-claro mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
-                                    </div>
-                                    <div className="border border-2 border-dark-subtle rounded" style={{ display: "inline-flex", padding: "14px" }}>
-                                        <img src="/icons/file.svg" alt="File Icon" width="20" height="19" />
-                                    </div>
 
-                                    <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
-                                        if (e.target.files && e.target.files[0]) setInputFotoPerfil(e.target.files[0]);
-                                    }} style={{ display: 'none' }} />
-                                </div>
-                        </div>
 
                         <label className=" ms-bold-body">Portfolio <span className="color-error">*</span></label>
                         <div class="input-group mb-3" style={{ height: 48, maxWidth: 488 }}>
@@ -86,7 +76,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
 
                     <div className="d-flex flex-row justify-content-end gap-3">
                         <button className="btn  btn-font color-secundario-gris FW-BOLD background-color-secundario-blanco p-2" onClick={() => setShow(false)}>Cancelar</button>
-                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem' ,minHeight:48}} onClick={handleSubmit}>EDITAR PERFIL</button>
+                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem', minHeight: 48 }} onClick={handleSubmit}>EDITAR PERFIL</button>
                     </div>
                 </div>
             </div>
