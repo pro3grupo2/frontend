@@ -58,6 +58,19 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
                             <input className="form-control border-normal" type="file" style={{ height: 48, maxWidth: 488 }} accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
                                 if (e.target.files && e.target.files[0]) setInputFotoPerfil(e.target.files[0])
                             }} />
+                            <div className="form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between" style={{ minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED',borderStyle: 'dashed',  }}>
+                                    <div>
+                                        <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">Arrastra o selecciona la foto de perfil desde tu ordenador.</p>
+                                        <p className="ms-regular-subbody mb-0 color-secundario-gris-claro mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
+                                    </div>
+                                    <div className="border border-2 border-dark-subtle rounded" style={{ display: "inline-flex", padding: "14px" }}>
+                                        <img src="/icons/file.svg" alt="File Icon" width="20" height="19" />
+                                    </div>
+
+                                    <input type="file" accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
+                                        if (e.target.files && e.target.files[0]) setInputFotoPerfil(e.target.files[0]);
+                                    }} style={{ display: 'none' }} />
+                                </div>
                         </div>
 
                         <label className=" ms-bold-body">Portfolio <span className="color-error">*</span></label>
