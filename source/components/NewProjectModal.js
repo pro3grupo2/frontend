@@ -191,7 +191,7 @@ export default function NewProjectModal({ show, setShow }) {
                     </div>
 
                     <div className="d-flex flex-row justify-content-end gap-3">
-                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem' }} onClick={handleSubmit}>SUBIR PROYECTO</button>
+                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem', minHeight:48 }} onClick={handleSubmit}>SUBIR PROYECTO</button>
                     </div>
                 </div>
             </div>

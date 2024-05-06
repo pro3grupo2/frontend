@@ -73,7 +73,7 @@ export default function EditProfileModal({ show, setShow, default_user_data }) {
 
                     <div className="d-flex flex-row justify-content-end gap-3">
                         <button className="btn  btn-font color-secundario-gris FW-BOLD background-color-secundario-blanco p-2" onClick={() => setShow(false)}>Cancelar</button>
-                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem' }} onClick={handleSubmit}>EDITAR PERFIL</button>
+                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{ maxWidth: '15.6rem' ,minHeight:48}} onClick={handleSubmit}>EDITAR PERFIL</button>
                     </div>
                 </div>
             </div>
