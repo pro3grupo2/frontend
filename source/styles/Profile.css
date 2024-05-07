@@ -1,10 +1,14 @@
 .btn-custom {
     color: var(--color-secundario-gris);
+    border: none;
 }
 
 .btn-custom:hover {
     color: var(--color-secundario-negro) !important;
     background-color: transparent !important;
+    border-bottom: 2px solid var(--color-secundario-negro) !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 .btn-active {

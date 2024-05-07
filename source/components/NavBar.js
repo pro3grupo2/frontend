@@ -6,6 +6,7 @@ import React, {useEffect, useRef, useState} from "react";
 import NewProjectModal from "@/components/NewProjectModal";
 import {me} from "@/api/v1/auth";
 import {useRouter} from "next/navigation";
+import {get_proyectos_pendientes} from "@/api/v1/proyectos";
 
 export default function NavBar() {
     const [isProfileHover, setIsProfileHover] = useState(false)
@@ -15,6 +16,9 @@ export default function NavBar() {
     const [userLoaded, setUserLoaded] = useState(false)
     const router = useRouter()
 
+    const
+        [has_proyectos_pendientes, setHasProyectosPendientes] = useState(false)
+
     useEffect(() => {
         const fetchUser = async () => {
             const token = localStorage.getItem('token') ?? false
@@ -23,6 +27,12 @@ export default function NavBar() {
                 if (data) {
                     setUser(data)
                     setUserLoaded(true)
+
+                    if (data.rol === "coordinador") {
+                        const proyectos_pendientes = await get_proyectos_pendientes(token)
+                        if (proyectos_pendientes.length > 0)
+                            setHasProyectosPendientes(true)
+                    }
                 } else {
                     localStorage.removeItem('token')
                     setUser({})
@@ -76,22 +86,27 @@ export default function NavBar() {
                         <p className="m-0 fs-6 p-2 mx-sm-2 mx-md-3">900 373 379</p>
 
                         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                            <Link className="mx-sm-2 mx-md-3" href="/profile/me">
-                                {isProfileHover
-                                    ?
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 32 32"
-                                         fill="none">
-                                        <path
-                                            d="M16 0C18.1217 0 20.1566 0.842854 21.6569 2.34315C23.1571 3.84344 24 5.87827 24 8C24 10.1217 23.1571 12.1566 21.6569 13.6569C20.1566 15.1571 18.1217 16 16 16C13.8783 16 11.8434 15.1571 10.3431 13.6569C8.84285 12.1566 8 10.1217 8 8C8 5.87827 8.84285 3.84344 10.3431 2.34315C11.8434 0.842854 13.8783 0 16 0ZM16 20C24.84 20 32 23.58 32 28V32H0V28C0 23.58 7.16 20 16 20Z"
-                                            fill="#0065F3"/>
-                                    </svg>
-                                    :
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 42 42"
-                                         fill="none">
-                                        <path
-                                            d="M21 1C23.5196 1 25.9359 2.00089 27.7175 3.78249C29.4991 5.56408 30.5 7.98044 30.5 10.5C30.5 13.0196 29.4991 15.4359 27.7175 17.2175C25.9359 18.9991 23.5196 20 21 20C18.4804 20 16.0641 18.9991 14.2825 17.2175C12.5009 15.4359 11.5 13.0196 11.5 10.5C11.5 7.98044 12.5009 5.56408 14.2825 3.78249C16.0641 2.00089 18.4804 1 21 1ZM21 27.25C26.6798 27.25 31.7702 28.4022 35.4037 30.219C39.0968 32.0655 41 34.432 41 36.75V41H1V36.75C1 34.432 2.90325 32.0655 6.59628 30.219C10.2298 28.4022 15.3202 27.25 21 27.25Z"
-                                            stroke="black" strokeWidth="2"/>
-                                    </svg>
+                            <Link className="position-relative mx-sm-2 mx-md-3" href="/profile/me">
+                                {
+                                    isProfileHover
+                                        ?
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 32 32"
+                                             fill="none">
+                                            <path
+                                                d="M16 0C18.1217 0 20.1566 0.842854 21.6569 2.34315C23.1571 3.84344 24 5.87827 24 8C24 10.1217 23.1571 12.1566 21.6569 13.6569C20.1566 15.1571 18.1217 16 16 16C13.8783 16 11.8434 15.1571 10.3431 13.6569C8.84285 12.1566 8 10.1217 8 8C8 5.87827 8.84285 3.84344 10.3431 2.34315C11.8434 0.842854 13.8783 0 16 0ZM16 20C24.84 20 32 23.58 32 28V32H0V28C0 23.58 7.16 20 16 20Z"
+                                                fill="#0065F3"/>
+                                        </svg>
+                                        :
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 42 42"
+                                             fill="none">
+                                            <path
+                                                d="M21 1C23.5196 1 25.9359 2.00089 27.7175 3.78249C29.4991 5.56408 30.5 7.98044 30.5 10.5C30.5 13.0196 29.4991 15.4359 27.7175 17.2175C25.9359 18.9991 23.5196 20 21 20C18.4804 20 16.0641 18.9991 14.2825 17.2175C12.5009 15.4359 11.5 13.0196 11.5 10.5C11.5 7.98044 12.5009 5.56408 14.2825 3.78249C16.0641 2.00089 18.4804 1 21 1ZM21 27.25C26.6798 27.25 31.7702 28.4022 35.4037 30.219C39.0968 32.0655 41 34.432 41 36.75V41H1V36.75C1 34.432 2.90325 32.0655 6.59628 30.219C10.2298 28.4022 15.3202 27.25 21 27.25Z"
+                                                stroke="black" strokeWidth="2"/>
+                                        </svg>
+                                }
+                                {
+                                    has_proyectos_pendientes &&
+                                    <span class="position-absolute top-100 start-100 translate-middle p-2 border border-light rounded-circle" style={{backgroundColor: 'var(--color-principal)'}}></span>
                                 }
                             </Link>
                         </div>

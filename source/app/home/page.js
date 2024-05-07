@@ -75,10 +75,12 @@ export default function Home() {
         if (!token) return router.push('/signin')
 
         setLoading(true)
-        get_proyectos(token, newPage, filters).then(data => {
-            let newProjects = projects.concat(data)
-            setProjects(newProjects)
-        }).catch(console.error)
+        get_proyectos(token, newPage, filters)
+            .then(data => {
+                if (data)
+                    setProjects([...projects, ...data])
+            })
+            .catch(console.error)
         setPage(newPage)
         setLoading(false)
     }, [isBottom]);
