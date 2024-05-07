@@ -14,6 +14,7 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
         const token = localStorage.getItem('token')
         if (!token) return
 
+        console.log(premios)
         const data = await actualizar_proyecto(token, proyecto.id, undefined, undefined, undefined, undefined, undefined, undefined, premios, undefined, undefined)
         setLoading(false)
         if (data) window.location.reload()

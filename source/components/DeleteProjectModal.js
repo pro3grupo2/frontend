@@ -3,13 +3,14 @@ import {useState} from "react"
 import Loading from "@/components/Loading"
 import "../styles/Signup.css"
 import {eliminar_proyecto} from "@/api/v1/proyectos";
-import {router} from "next/client";
+import {useRouter} from "next/navigation"
 
 export default function DeleteProjectModal({project, show, setShow}) {
     const
         [loading, setLoading] = useState(false)
 
     if (loading) return <Loading/>
+    const router = useRouter();
 
     const handleDeleteProject = async () => {
         const token = localStorage.getItem('token')

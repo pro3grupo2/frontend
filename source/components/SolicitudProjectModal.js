@@ -8,6 +8,9 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
         [isDownloadHover, setIsDownloadHover] = useState(false),
         [isDeleteHover, setIsDeleteHover] = useState(false)
 
+
+    if (project === undefined) return <></>
+
     return (
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100`}></div>
