@@ -78,14 +78,14 @@ export default function NewProjectModal({show, setShow}) {
                             </div>
 
 
-                            <div className={`form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between ${!!portada && 'opacity-25'}`} style={{minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED', borderStyle: 'dashed',}}
+                            <div className={`form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!portada && 'opacity-25'}`} style={{minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED', borderStyle: 'dashed',}}
                                  onClick={() => !portada && input_portada_ref.current.click()}>
                                 <div>
-                                    <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">{!!input_portada ? `Archivo "${input_portada.name}" subido.` : 'Selecciona la portada desde tu ordenador.'}</p>
-                                    <p className="ms-regular-subbody mb-0 color-secundario-gris-claro mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
+                                    <p className="ms-bold-subbody mb-0 ">{!!input_portada ? `Archivo "${input_portada.name}" subido.` : 'Selecciona la portada desde tu ordenador.'}</p>
+                                    <p className="ms-regular-subbody mb-0  mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
                                 </div>
 
-                                <div className="border border-2 border-dark-subtle rounded" style={{display: "inline-flex", padding: "14px"}}>
+                                <div className="border border-2 border-dark rounded" style={{display: "inline-flex", padding: "14px"}}>
                                     <img src="/icons/file.svg" alt="File Icon" width="20" height="19"/>
                                 </div>
 
@@ -156,16 +156,16 @@ export default function NewProjectModal({show, setShow}) {
 
                             </div>
 
-                            <div className={`form-control border-2 border-dark-subtle d-flex align-items-center justify-content-between ${!!url && 'opacity-25'}`} style={{
+                            <div className={`form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!url && 'opacity-25'}`} style={{
                                 minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED',
                                 borderStyle: 'dashed'
                             }}
                                  onClick={() => !url && input_url_ref.current.click()}>
                                 <div>
-                                    <p className="ms-bold-subbody mb-0 color-secundario-gris-claro">{!!input_url ? `Archivo "${input_url.name}" subido.` : 'Selecciona la portada desde tu ordenador.'}</p>
-                                    <p className="ms-regular-subbody mb-0 color-secundario-gris-claro mt-1">Archivos PNG, JPG y WEBP inferiores a 5 MB.</p>
+                                    <p className="ms-bold-subbody mb-0 ">{!!input_url ? `Archivo "${input_url.name}" subido.` : 'Selecciona el fichero desde tu ordenador.'}</p>
+                                    <p className="ms-regular-subbody mb-0  mt-1">Archivo .zip inferior a 5 MB</p>
                                 </div>
-                                <div className="border border-2 border-dark-subtle rounded" style={{display: "inline-flex", padding: "14px"}}>
+                                <div className="border border-2 border-dark rounded" style={{display: "inline-flex", padding: "14px"}}>
                                     <img src="/icons/file.svg" alt="File Icon" width="20" height="19"/>
                                 </div>
 
