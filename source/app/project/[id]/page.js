@@ -152,7 +152,7 @@ export default function Project({params}) {
                             {
                                 ['coordinador'].includes(user.rol) &&
                                 <>
-                                    <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsAgregarPremiosHover(true)} onMouseLeave={() => setIsAgregarPremiosHover(false)} onClick={() => setShowNewPremiosModal(true)} className="me-3">
+                                    <Link href={"#"} id="botonAgregar" onMouseEnter={() => setIsAgregarPremiosHover(true)} onMouseLeave={() => setIsAgregarPremiosHover(false)} onClick={() => setShowNewPremiosModal(true)} className="me-3">
                                         {isAgregarPremiosHover
                                             ?
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="#0065F3" class="bi bi-plus-circle" viewBox="0 0 16 16">

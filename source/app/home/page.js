@@ -15,6 +15,7 @@ export default function Home() {
     const [search, setSearch] = useState('')
     const [page, setPage] = useState(0)
     const [isBottom, setIsBottom] = useState(false)
+    const [showReturnTop, setShowReturnTop] = useState(false)
     const router = useRouter()
 
     const
@@ -55,6 +56,8 @@ export default function Home() {
 
     useEffect(() => {
         const handleScroll = () => {
+            if (window.scrollY > 0) setShowReturnTop(true)
+            else setShowReturnTop(false)
             if (document.body.scrollHeight - 50 <= window.scrollY + window.innerHeight) setIsBottom(true)
             else setIsBottom(false)
         }
@@ -139,7 +142,7 @@ export default function Home() {
                 }
             </div>
 
-            {projects.length > 0 &&
+            {projects.length > 0 && showReturnTop &&
                 <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3 z-2" style={{width: 50 + 'px', height: 50 + 'px'}}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-100 h-100" width="40" height="40" viewBox="0 0 32 32" fill="none">
                         <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>

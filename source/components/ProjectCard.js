@@ -1,17 +1,19 @@
 import Image from 'next/image'
 import "@/styles/project-card.css"
-import {useState} from "react"
+import {useEffect, useState} from "react"
+import {placeholder} from "@/api/v1/image_placeholder"
 
 export default function ProjectCard({project, onClick, isHome = false}) {
     const [isHovered, setIsHovered] = useState(false)
     const [isShown, setIsShown] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [src, setSrc] = useState(placeholder())
+    const [blurUrl, setBlurUrl] = useState(placeholder())
 
-    const areaColor = {
-        1: "var(--color-principal)", // Ingenieria del Software
-        2: "var(--color-principal)", // Diseño Digitla
-        3: "var(--color-principal)", // Animacion
-        4: "var(--color-principal)", // Videojuegos
-    }
+    useEffect(() => {
+        setSrc(project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`)
+        setIsLoaded(true)
+    }, []);
 
     const handleHover = (hover) => {
         setIsHovered(hover && isHome)
@@ -30,7 +32,7 @@ export default function ProjectCard({project, onClick, isHome = false}) {
         <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
             <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} onClick={() => onClick(project.id)}>
                 {project.premiado && project.proyectos_asignaturas[0] &&
-                    <div className="position-absolute top-0 end-0 z-1 p-2" style={{borderRadius: '0rem 0.5rem', backgroundColor: areaColor[project.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.id]}}>
+                    <div className="position-absolute top-0 end-0 z-1 p-2" style={{borderRadius: '0rem 0.5rem', backgroundColor: "var(--color-principal)"}}>
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 17 20" fill="none">
                             <path
                                 d="M16.8904 17.37L12.8804 16L11.5004 20L8.42035 14L5.50035 20L4.12035 16L0.110352 17.37L3.03035 11.37C2.07035 10.17 1.50035 8.65 1.50035 7C1.50035 5.14348 2.23785 3.36301 3.5506 2.05025C4.86336 0.737498 6.64384 0 8.50035 0C10.3569 0 12.1373 0.737498 13.4501 2.05025C14.7629 3.36301 15.5004 5.14348 15.5004 7C15.5004 8.65 14.9304 10.17 13.9704 11.37L16.8904 17.37ZM3.50035 7L6.19035 8.34L6.00035 11.34L8.50035 9.68L11.0004 11.33L10.8304 8.34L13.5004 7L10.8204 5.65L11.0004 2.67L8.50035 4.31L6.00035 2.65L6.17035 5.66L3.50035 7Z"
@@ -40,21 +42,25 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                 }
                 <div id="imageSize" className="position-relative">
                     <Image
-                        src={project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`}
+                        src={src}
                         className="card-image-top w-100 h-100 position-relative object-fit-cover border rounded-top"
                         layout="fill"
+                        //onError={(e) => e.target.src = "/images/background/recover.png"} // TODO: Change to an error image
+                        //onLoad={(e) => e.target.src = project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`}
+                        placeholder="blur"
+                        blurDataURL={blurUrl}
                         alt="Project Image"
                     />
                 </div>
-                <div className="card-body d-flex flex-column justify-content-start">
-                    <h5 className="card-title ms-extra-bold-subtitle">{project.titulo}</h5>
-                    <p className="card-text ms-regular-subbody">{project.usuarios.nombre_completo}</p>
+                <div className={`card-body d-flex flex-column justify-content-start ${!isLoaded && "placeholder-glow"}`}>
+                    <h5 className={`card-title ms-extra-bold-subtitle ${!isLoaded && "placeholder"}`}>{project.titulo}</h5>
+                    <p className={`card-text ms-regular-subbody ${!isLoaded && "placeholder"}`}>{project.usuarios.nombre_completo}</p>
                     {
                         isHovered
                         && isHome
                         && project.participantes.length > 0
                         &&
-                        <p className="card-text ms-regular-subbody">
+                        <p className={`card-text ms-regular-subbody ${!isLoaded && "placeholder"}`}>
                             {project.participantes.map(participante => processMail(participante.correo)).join(', ')}
                         </p>
                     }
@@ -63,14 +69,14 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                         && isShown
                         && isHome
                         &&
-                        <p className="card-text ms-regular">
+                        <p className={`card-text ms-regular ${!isLoaded && "placeholder"}`}>
                             {project.ficha.slice(0, 100) + (project.ficha.length > 100 ? "..." : "")}
                         </p>
                     }
                     {
                         project.estado !== 'aceptado'
                         &&
-                        <span className={`badge ${project.estado === 'rechazado' ? 'bg-danger' : 'bg-warning'} ms-regular`}>
+                        <span className={`badge ${project.estado === 'rechazado' ? 'bg-danger' : 'bg-warning'} ms-regular ${!isLoaded && "placeholder"}`}>
                             {project.estado}
                         </span>
                     }
