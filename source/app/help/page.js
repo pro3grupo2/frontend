@@ -16,9 +16,9 @@ export default function Help() {
     }
 
     return (
-        <div className="container-fluid py-5">
-            <div className="bg-white row">
-                <h1 className="fw-bold display-4 col-12 m-0 px-3 mt- ms-5">
+        <div className="container-fluid">
+            <div className="bg-white row ms-5">
+                <h1 className="fw-bold display-4 col-12 m-0 pt-5 px-3">
                     Centro de Ayuda</h1>
             </div>
 
