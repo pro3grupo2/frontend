@@ -19,6 +19,7 @@ import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
 import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
 import ConfirmModal from "@/components/ConfirmModal"
+import Footer from "@/components/Footer"
 
 export default function Profile({params}) {
     const
@@ -369,6 +370,7 @@ export default function Profile({params}) {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

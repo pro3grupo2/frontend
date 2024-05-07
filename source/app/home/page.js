@@ -6,6 +6,7 @@ import {get_proyectos} from '@/api/v1/proyectos'
 import ProjectCard from '@/components/ProjectCard'
 import Loading from '@/components/Loading'
 import Filters from '@/components/Filters'
+import Footer from '@/components/Footer'
 
 export default function Home() {
     const [projects, setProjects] = useState([])
@@ -150,6 +151,9 @@ export default function Home() {
                         <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
                     </svg>
                 </div>}
+
+
+                <Footer />
         </>
     )
 }

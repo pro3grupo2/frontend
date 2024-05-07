@@ -11,6 +11,7 @@ import {useRouter} from "next/navigation"
 import DeleteProjectModal from "@/components/DeleteProjectModal";
 import {get_user_by_id} from "@/api/v1/usuarios";
 import NewPremiosModal from "@/components/NewPremiosModal";
+import Footer from '@/components/Footer'
 
 export default function Project({params}) {
     const {user, isLoading} = useAuth()
@@ -249,6 +250,7 @@ export default function Project({params}) {
                         <hr className="w-50"/>
                     </div>
                 </div>
+                <Footer/>
             </>
         );
     }
