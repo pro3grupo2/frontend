@@ -66,7 +66,10 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
                 </div>
 
                 <div className="d-flex flex-row justify-content-end gap-3">
-                    <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>Agregar premios</button>
+                    <button
+                        disabled={premios.length === 0}
+                        className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>Agregar premios
+                    </button>
                 </div>
             </div>
         </>

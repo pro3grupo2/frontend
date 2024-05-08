@@ -79,7 +79,7 @@ export default function NewProjectModal({show, setShow}) {
                             </div>
 
 
-                            <div className={`form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!portada && 'opacity-25'}`} style={{minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED', borderStyle: 'dashed',}}
+                            <div className={`clickable form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!portada && 'opacity-25'}`} style={{minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED', borderStyle: 'dashed',}}
                                  onClick={() => !portada && input_portada_ref.current.click()}>
                                 <div>
                                     <p className="ms-bold-subbody mb-0 ">{!!input_portada ? `Archivo "${input_portada.name}" subido.` : 'Selecciona la portada desde tu ordenador.'}</p>
@@ -124,7 +124,7 @@ export default function NewProjectModal({show, setShow}) {
 
                         <div className="mb-3">
                             <label className="form-label ms-bold-body ">¿A qué asignatura pertenece? <span className="color-error">*</span></label>
-                            <select className="form-select border-normal" style={{height: 48, maxWidth: 488}} onChange={(e) => setProyectosAsignaturas(e.target.value)}>
+                            <select className="clickable form-select border-normal" style={{height: 48, maxWidth: 488}} onChange={(e) => setProyectosAsignaturas(e.target.value)}>
                                 <option disabled selected>Asignatura</option>
                                 {
                                     asignaturas.map
@@ -135,14 +135,14 @@ export default function NewProjectModal({show, setShow}) {
                             </select>
                         </div>
 
-                        <div className="mb-3 d-flex flex-column flex-md-row align-items-start">
-                            <div className="me-md-3 mb-md-0 mb-3"> {/* Agregamos clases de margen y ancho para dispositivos más pequeños */}
+                        <div className="d-flex flex-column flex-md-row align-items-start gap-4 mb-3">
+                            <div style={{minWidth: '9.03675rem'}}>
                                 <label className="form-label ms-bold-body">¿Año? <span className="color-error">*</span></label>
-                                <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" style={{height: 48, maxWidth: 144}} value={anio} onChange={(e) => setAnio(e.target.value)}/>
+                                <input type="number" min={1900} max={new Date().getFullYear()} step={1} className="form-control border-normal" style={{height: '3rem'}} value={anio} onChange={(e) => setAnio(e.target.value)}/>
                             </div>
-                            <div>
-                                <label className="form-label ms-bold-body mx-md-3">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
-                                <select className="form-select border-normal mx-md-3" style={{height: 48, maxWidth: 176}} onChange={(e) => setPremiado(e.target.value)}>
+                            <div className={'flex-grow-1'}>
+                                <label className="text-nowrap form-label ms-bold-body">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
+                                <select className="clickable form-select border-normal" style={{height: '3rem'}} onChange={(e) => setPremiado(e.target.value)}>
                                     <option disabled selected>Premiado</option>
                                     <option value={0}>No</option>
                                     <option value={1}>Sí</option>
@@ -158,7 +158,7 @@ export default function NewProjectModal({show, setShow}) {
 
                             </div>
 
-                            <div className={`form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!url && 'opacity-25'}`} style={{
+                            <div className={`clickable form-control border-2 border-dark d-flex align-items-center justify-content-between ${!!url && 'opacity-25'}`} style={{
                                 minHeight: 70, maxWidth: 488, backgroundColor: '#E4EAED',
                                 borderStyle: 'dashed'
                             }}
@@ -194,9 +194,9 @@ export default function NewProjectModal({show, setShow}) {
                     </div>
 
                     <div className="d-flex flex-row justify-content-end gap-3">
-                        <button className={`
-                        ${(!titulo || !ficha || (!portada && !input_portada) || (!url && !input_url) || !proyectos_asignaturas || !anio || !premiado) && 'disabled'}
-                        btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100`} style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>SUBIR PROYECTO
+                        <button
+                            disabled={!titulo || !ficha || (!portada && !input_portada) || (!url && !input_url) || !proyectos_asignaturas || !anio || !premiado}
+                            className={`btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100`} style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>SUBIR PROYECTO
                         </button>
                     </div>
                 </div>

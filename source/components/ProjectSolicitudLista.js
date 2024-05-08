@@ -30,8 +30,8 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
         <>
             <SolicitudProjectModal project={project} show={show} setShow={setShow} handleAceptar={handleAceptar} handleRechazar={handleRechazar}/>
 
-            <div className={"col-12 d-flex flex-column flex-xl-row justify-content-between align-items-center gap-5 h-100 py-3"}>
-                <div className={"flex-grow-1 d-flex flex-column flex-xl-row justify-content-start align-items-center gap-5"} onClick={() => setShow(!show)}>
+            <div className={"clickable col-12 d-flex flex-column flex-xl-row justify-content-between align-items-center gap-5 h-100 py-3"}>
+                <div className={"flex-grow-1 d-flex flex-column flex-xl-row justify-content-start gap-5"} onClick={() => setShow(!show)}>
                     <Image
                         src={project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`}
                         className={"border rounded h-75"}
@@ -45,7 +45,7 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
                         }}
                         alt={project.portada}/>
 
-                    <div>
+                    <div className={'pt-5'}>
                         <p className={"ms-extra-bold"}>{project.titulo}</p>
                         {
                             project.participantes
@@ -57,9 +57,9 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
                     </div>
                 </div>
 
-                <div className={"d-flex flex-row justify-content-evenly gap-3"}>
-                    <button className={"btn btn-outline-primary ms-button color-secundario-negro w-25"} style={{minWidth: "fit-content", height: '3rem'}} onClick={handleRechazar}>Rechazar</button>
-                    <button className={"btn btn-primary ms-button color-secundario-blanco w-25"} style={{minWidth: "fit-content", height: '3rem'}} onClick={handleAceptar}>Aceptar</button>
+                <div className={"d-flex flex-row flex-wrap justify-content-evenly gap-3"}>
+                    <button className={"btn btn-outline-primary ms-button color-secundario-negro"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleRechazar}>Rechazar</button>
+                    <button className={"btn btn-primary ms-button color-secundario-blanco"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleAceptar}>Aceptar</button>
                 </div>
             </div>
         </>

@@ -290,6 +290,13 @@ body {
     line-height: 100%; /* 1.5rem */
 }
 
+.ms-button:hover,
+.ms-button-small:hover,
+.ms-button-font:hover,
+.clickable:hover {
+    cursor: pointer !important;
+}
+
 /* ================ */
 
 .bg-placeholder,

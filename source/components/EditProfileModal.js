@@ -40,7 +40,7 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100 backdrop`}></div>
 
             <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column flex-xl-row gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-3 w-75 h-75 p-5 overflow-y-auto`} style={{maxWidth: '73.5rem', maxHeight: '38.625rem'}}>
-                <div className={'position-relative w-100 h-100'} style={{maxWidth: '30.625rem'}} onClick={() => input_foto_perfil_ref.current.click()}>
+                <div className={'clickable position-relative w-100 h-100'} style={{maxWidth: '30.625rem'}} onClick={() => input_foto_perfil_ref.current.click()}>
                     <Image className={"rounded"} src={foto_perfil?.startsWith('http') ? foto_perfil : `https://api.reservorio-u-tad.com${foto_perfil ?? '/files/0/fcc5ccaf95f83cba44186b36a2fadde4.jpeg'}`} objectFit={'cover'} width={0} height={0} fill sizes={'1'} alt={foto_perfil}/>
                     <Image src="/icons/Editar.svg" width={32} height={32} className="position-absolute top-0 end-0 rounded p-1 m-2" style={{backgroundColor: 'var(--color-principal)'}} alt="Edit"/>
                 </div>
