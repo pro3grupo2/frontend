@@ -14,8 +14,7 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        console.log(premios)
-        const data = await actualizar_proyecto(token, proyecto.id, undefined, undefined, undefined, undefined, undefined, undefined, premios, undefined, undefined)
+        const data = await actualizar_proyecto(token, proyecto.id, undefined, undefined, undefined, undefined, undefined, undefined, premios, true, undefined)
         setLoading(false)
         if (data) window.location.reload()
     }
@@ -26,7 +25,7 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100 backdrop`}></div>
 
-            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-3 w-75 h-75 p-5 overflow-y-auto`} style={{maxWidth: 1176, minHeight: 677}}>
+            <div className={`${show ? 'd-block' : 'd-none'} d-flex flex-column gap-5 justify-content-between align-items-center align-items-xl-stretch position-fixed top-50 start-50 translate-middle rounded shadow-lg background-color-secundario-blanco z-3 w-75 p-5 overflow-y-auto`} style={{maxWidth: '40.5625rem', minHeight: '16.75rem'}}>
                 <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => {
                     setPremioInput('')
                     setPremios([])
@@ -36,7 +35,7 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
                 <div className={'d-flex flex-column flex-nowrap gap-5'}>
                     <div className="mb-3">
                         <label className="form-label ms-bold-body">Titulo <span className="color-error">*</span></label>
-                        <input type="text" className="form-control border-normal" placeholder="Nombre del premio" style={{height: 48, maxWidth: 488}} value={premio_input}
+                        <input type="text" className="form-control border-normal" placeholder="Nombre del premio" style={{height: '2.5rem'}} value={premio_input}
                                onChange={(e) => setPremioInput(e.target.value)}
                                onKeyDown={(e) => {
                                    if (e.key === 'Enter') {

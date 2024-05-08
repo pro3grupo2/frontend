@@ -122,7 +122,6 @@ export default function Home() {
 
             setFilters({...filters, busqueda: search})
         }
-        console.log('nmo')
     }
 
     if (loading || !proyectosLoaded) return <Loading/>
