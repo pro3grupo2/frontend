@@ -2,7 +2,7 @@ import {get_areas} from "@/api/v1/areas"
 import {useEffect, useState} from "react"
 import {get_titulaciones} from "@/api/v1/titulaciones"
 
-export default function Filters({onSearchChange, handleSearch, handleAreaClick, filters, setFilters}) {
+export default function Filters({onSearchChange, handleSearch, handleAreaClick, filters, setFilters, search, setSearch}) {
     const
         [areas, setAreas] = useState([]),
         [asignaturas, setAsignaturas] = useState([]),
@@ -95,8 +95,14 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     {
                         asignaturas
                             .map(
-                                asignatura =>
-                                    <option key={asignatura.id} value={asignatura.id}>{asignatura.titulo} ({asignatura.areas.titulo})</option>
+                                asignatura => {
+                                    const
+                                        titulacion = asignatura.titulo,
+                                        index_en = titulacion.indexOf(' en '),
+                                        index_en_slice = index_en !== -1 ? index_en + 4 : 0
+
+                                    return <option className={'font-monospace'} key={asignatura.id} value={asignatura.id}>({asignatura.areas.titulo.slice(0, 1)}) {titulacion.slice(index_en_slice)}</option>
+                                }
                             )
                     }
                 </select>
@@ -115,7 +121,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     }}/>
 
                 <div
-                    className={`${filters_input_focus ? 'border-primary' : 'border-black'} flex-grow-1 d-flex flex-row flex-nowrap justify-content-start align-items-center border border-1 rounded p-3`}
+                    className={`${filters_input_focus ? 'border-primary' : 'border-black'} position-relative flex-grow-1 d-flex flex-row flex-nowrap justify-content-start align-items-center border border-1 rounded p-3`}
                     style={{height: 40}}>
                     <svg className="ms-4 me-3" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                         <path
@@ -128,9 +134,15 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                         onFocus={() => setFilters_input_focus(true)}
                         onChange={(e) => onSearchChange(e)}
                         onKeyDown={(e) => handleSearch(e)}
+                        value={search}
                         className="ms-regular-subbody form-control border-0 py-2 focus-ring h-100"
                         type="search"
                         placeholder="Buscar un proyecto o escribir el correo de algún miembro"/>
+
+                    <button type="button" className="btn-close position-absolute top-50 end-0 translate-middle" aria-label="Close" onClick={() => {
+                        setSearch('')
+                        handleSearch({key: '!!Clear'})
+                    }}/>
                 </div>
             </div>
 

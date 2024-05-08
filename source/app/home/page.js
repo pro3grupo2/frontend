@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { get_proyectos } from '@/api/v1/proyectos'
+import React, {useEffect, useRef, useState} from 'react'
+import {useRouter} from 'next/navigation'
+import {get_proyectos} from '@/api/v1/proyectos'
 import ProjectCard from '@/components/ProjectCard'
 import Loading from '@/components/Loading'
 import Filters from '@/components/Filters'
@@ -96,12 +96,12 @@ export default function Home() {
         setArea(id.toString())
         if (id === '0') {
             setFilters(prevFilters => {
-                const { area, ...restFilters } = prevFilters
-                return { ...restFilters }
+                const {area, ...restFilters} = prevFilters
+                return {...restFilters}
             })
             return
         }
-        setFilters({ ...filters, area: id.toString() })
+        setFilters({...filters, area: id.toString()})
     }
 
     const handleCardClick = (id) => {
@@ -113,23 +113,24 @@ export default function Home() {
     }
 
     const handleSearch = (event) => {
-        if (event.key === 'Enter') {
-            if (search === '') {
+        if (event.key === 'Enter' || event.key === '!!Clear') {
+            if (search === '' || event.key === '!!Clear') {
                 delete filters.busqueda
-                setFilters({ ...filters })
+                setFilters({...filters})
                 return
             }
 
-            setFilters({ ...filters, busqueda: search })
+            setFilters({...filters, busqueda: search})
         }
+        console.log('nmo')
     }
 
-    if (loading || !proyectosLoaded) return <Loading />
+    if (loading || !proyectosLoaded) return <Loading/>
 
     return (
         <>
             <div className="container-fluid p-5">
-                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} filters={filters} setFilters={setFilters} />
+                <Filters onSearchChange={onSearchChange} handleSearch={handleSearch} handleAreaClick={handleAreaClick} filters={filters} setFilters={setFilters} search={search} setSearch={setSearch}/>
 
                 {
                     projects.length === 0
@@ -140,20 +141,20 @@ export default function Home() {
                         </div>
                         :
                         <div className="row g-4 card-group mt-3">
-                            {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} isHome={true} />)}
+                            {projects.map(project => <ProjectCard key={project.id} project={project} onClick={handleCardClick} isHome={true}/>)}
                         </div>
                 }
             </div>
 
             {projects.length > 0 && showReturnTop &&
-                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3 z-2" style={{ width: 50 + 'px', height: 50 + 'px' }}>
+                <div onClick={() => window.scrollTo(window.scrollY, 0)} className="position-fixed bottom-0 end-0 btn btn-primary rounded-circle me-3 mb-3 z-2" style={{width: 50 + 'px', height: 50 + 'px'}}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-100 h-100" width="40" height="40" viewBox="0 0 32 32" fill="none">
-                        <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white" />
+                        <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
                     </svg>
                 </div>}
 
 
-            <Footer />
+            <Footer/>
         </>
     )
 }

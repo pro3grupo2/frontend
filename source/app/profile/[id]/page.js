@@ -195,7 +195,7 @@ export default function Profile({params}) {
                     </div>
                 </div>
 
-                <div className="d-flex flex-row gap-sm-5 mt-5 ps-sm-5 border-bottom color-secundario-gris">
+                <div className="d-flex flex-column flex-sm-row gap-sm-5 mt-5 ps-sm-5 border-bottom color-secundario-gris">
                     <button ref={projectsValidados_btn_ref} className="btn btn-custom btn-active ms-bold-subbody" onClick={(e) => {
                         projectsValidados_ref.current.classList.remove('d-none')
                         projectsNoValidados_ref.current.classList.add('d-none')
@@ -209,7 +209,7 @@ export default function Profile({params}) {
                     }}>Proyectos subidos
                     </button>
 
-                    <button ref={projectsNoValidados_btn_ref} className={`${(is_coordinador || !is_owner) && 'd-none'} btn btn-custom ms-bold-subbody`} onClick={() => {
+                    <button ref={projectsNoValidados_btn_ref} className={`${(!is_owner) && 'd-none'} btn btn-custom ms-bold-subbody`} onClick={() => {
                         projectsValidados_ref.current.classList.add('d-none')
                         projectsNoValidados_ref.current.classList.remove('d-none')
                         projectsSolicitudes_ref.current.classList.add('d-none')
