@@ -28,10 +28,11 @@ export default function ProjectCard({project, onClick, isHome = false}) {
     }
 
     if (project.length === 0) return <></>
+
     return (
         <div className="col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
             <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} onClick={() => onClick(project.id)}>
-                {project.premiado && project.proyectos_asignaturas[0] &&
+                {project.premiado &&
                     <div className="position-absolute top-0 end-0 z-1 p-2" style={{borderRadius: '0rem 0.5rem', backgroundColor: "var(--color-principal)"}}>
                         <svg className="" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 17 20" fill="none">
                             <path
@@ -45,32 +46,23 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                         src={src}
                         className="card-image-top w-100 h-100 position-relative object-fit-cover border rounded-top"
                         layout="fill"
-                        //onError={(e) => e.target.src = "/images/background/recover.png"} // TODO: Change to an error image
-                        //onLoad={(e) => e.target.src = project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`}
                         placeholder="blur"
                         blurDataURL={blurUrl}
                         alt="Project Image"
                     />
                 </div>
-                <div className={`card-body d-flex flex-column justify-content-start ${!isLoaded && "placeholder-glow"}`}>
-                    <h5 className={`card-title ms-extra-bold-subtitle ${!isLoaded && "placeholder"}`}>{project.titulo}</h5>
-                    <p className={`card-text ms-regular-subbody ${!isLoaded && "placeholder"}`}>{project.usuarios.nombre_completo}</p>
-                    {
-                        isHovered
-                        && isHome
-                        && project.participantes.length > 0
-                        &&
-                        <p className={`card-text ms-regular-subbody ${!isLoaded && "placeholder"}`}>
-                            {project.participantes.map(participante => processMail(participante.correo)).join(', ')}
-                        </p>
-                    }
+                <div className={`card-body d-flex flex-column ${isHovered && isShown && isHome ? "justify-content-around" : "justify-content-between"} ${!isLoaded && "placeholder-glow"}`}>
+                    <div>
+                        <h5 className={`card-title fw-bold ${!isLoaded && "placeholder"}`}>{project.titulo}</h5>
+                        <p className={`card-text text-secondary ms-font mt-1 ${!isLoaded && "placeholder"}`}>{[project.usuarios.nombre_completo].concat(project.participantes.slice(0, (isHovered && isHome && project.participantes.length > 0) ? project.participantes.length : 2).map(participante => processMail(participante.correo))).reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], []).join(', ')}</p>
+                    </div>
                     {
                         isHovered
                         && isShown
                         && isHome
                         &&
-                        <p className={`card-text ms-regular ${!isLoaded && "placeholder"}`}>
-                            {project.ficha.slice(0, 100) + (project.ficha.length > 100 ? "..." : "")}
+                        <p className={`card-text text-secondary ms-regular d-none d-sm-block ${!isLoaded && "d-none"}`}>
+                            {project.ficha.slice(0, 75) + (project.ficha.length > 75 ? "..." : "")}
                         </p>
                     }
                     {

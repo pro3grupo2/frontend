@@ -156,19 +156,23 @@ export default function Project({ params }) {
                                     <Link href={"#"} id="botonAgregar" onMouseEnter={() => setIsAgregarPremiosHover(true)} onMouseLeave={() => setIsAgregarPremiosHover(false)} onClick={() => setShowNewPremiosModal(true)} className="me-3">
                                         {isAgregarPremiosHover
                                             ?
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="#0065F3" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" stroke-width="2"/>
+                                                <path d="M35 29H29V35H27V29H21V27H27V21H29V27H35V29Z" fill="#0065F3"/>
                                             </svg>
                                             :
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="#6E7377" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" stroke-width="2"/>
+                                                <path d="M35 29H29V35H27V29H21V27H27V21H29V27H35V29Z" fill="#6E7377"/>
                                             </svg>
                                         }
                                     </Link>
-                                    <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)} onMouseLeave={() => setIsDeleteHover(false)} onClick={() => setShowDeleteModal(true)} className="me-3">
-                                        {isDeleteHover
+                                    <Link href={"#"} id="botonEliminar" onMouseEnter={() => setIsDeleteHover(true)}
+                                          onMouseLeave={() => setIsDeleteHover(false)}
+                                          onClick={() => setShowDeleteModal(true)} className="me-3">
+                                    {isDeleteHover
                                             ?
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                                                 <rect x="1" y="1" width="54" height="54" rx="27" fill="white" />
