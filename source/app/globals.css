@@ -475,3 +475,27 @@ body {
     background-color: transparent !important;
     border-color: var(--color-secundario-negro) !important;
 }
+
+.blur-0 {
+    filter: blur(0px);
+}
+
+.blur-1 {
+    filter: blur(5px);
+}
+
+.blur-2 {
+    filter: blur(10px);
+}
+
+.blur-3 {
+    filter: blur(15px);
+}
+
+.blur-4 {
+    filter: blur(20px);
+}
+
+.blur-5 {
+    filter: blur(25px);
+}

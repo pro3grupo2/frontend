@@ -124,19 +124,37 @@ export default function Project({params}) {
                             {
                                 ['coordinador', 'profesor'].includes(user.rol) &&
                                 <Link href={proyecto.url.startsWith('http') ? proyecto.url : `https://api.reservorio-u-tad.com${proyecto.url}`} onMouseEnter={() => setIsDownloadHover(true)} onMouseLeave={() => setIsDownloadHover(false)} target="_blank" id="botonDescargar" className="me-3">
-                                    {isDownloadHover
+                                    {proyecto.url.startsWith('http')
                                         ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
-                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
-                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
-                                        </svg>
+                                        (isDownloadHover
+                                            ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" stroke-width="2"/>
+                                                <path d="M26.5899 29.41C26.9999 29.8 26.9999 30.44 26.5899 30.83C26.1999 31.22 25.5599 31.22 25.1699 30.83C23.2199 28.88 23.2199 25.71 25.1699 23.76L28.7099 20.22C30.6599 18.27 33.8299 18.27 35.7799 20.22C37.7299 22.17 37.7299 25.34 35.7799 27.29L34.2899 28.78C34.2999 27.96 34.1699 27.14 33.8899 26.36L34.3599 25.88C35.5399 24.71 35.5399 22.81 34.3599 21.64C33.1899 20.46 31.2899 20.46 30.1199 21.64L26.5899 25.17C25.4099 26.34 25.4099 28.24 26.5899 29.41ZM29.4099 25.17C29.7999 24.78 30.4399 24.78 30.8299 25.17C32.7799 27.12 32.7799 30.29 30.8299 32.24L27.2899 35.78C25.3399 37.73 22.1699 37.73 20.2199 35.78C18.2699 33.83 18.2699 30.66 20.2199 28.71L21.7099 27.22C21.6999 28.04 21.8299 28.86 22.1099 29.65L21.6399 30.12C20.4599 31.29 20.4599 33.19 21.6399 34.36C22.8099 35.54 24.7099 35.54 25.8799 34.36L29.4099 30.83C30.5899 29.66 30.5899 27.76 29.4099 26.59C28.9999 26.2 28.9999 25.56 29.4099 25.17Z" fill="#0065F3"/>
+                                            </svg>
+                                            :
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" stroke-width="2"/>
+                                                <path d="M26.5899 29.41C26.9999 29.8 26.9999 30.44 26.5899 30.83C26.1999 31.22 25.5599 31.22 25.1699 30.83C23.2199 28.88 23.2199 25.71 25.1699 23.76L28.7099 20.22C30.6599 18.27 33.8299 18.27 35.7799 20.22C37.7299 22.17 37.7299 25.34 35.7799 27.29L34.2899 28.78C34.2999 27.96 34.1699 27.14 33.8899 26.36L34.3599 25.88C35.5399 24.71 35.5399 22.81 34.3599 21.64C33.1899 20.46 31.2899 20.46 30.1199 21.64L26.5899 25.17C25.4099 26.34 25.4099 28.24 26.5899 29.41ZM29.4099 25.17C29.7999 24.78 30.4399 24.78 30.8299 25.17C32.7799 27.12 32.7799 30.29 30.8299 32.24L27.2899 35.78C25.3399 37.73 22.1699 37.73 20.2199 35.78C18.2699 33.83 18.2699 30.66 20.2199 28.71L21.7099 27.22C21.6999 28.04 21.8299 28.86 22.1099 29.65L21.6399 30.12C20.4599 31.29 20.4599 33.19 21.6399 34.36C22.8099 35.54 24.7099 35.54 25.8799 34.36L29.4099 30.83C30.5899 29.66 30.5899 27.76 29.4099 26.59C28.9999 26.2 28.9999 25.56 29.4099 25.17Z" fill="#6E7377"/>
+                                            </svg>
+                                        )
                                         :
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-                                            <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
-                                            <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
-                                            <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
-                                        </svg>
+                                        (isDownloadHover
+                                            ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#0065F3" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#0065F3"/>
+                                            </svg>
+                                            :
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                                                <rect x="1" y="1" width="54" height="54" rx="27" fill="white"/>
+                                                <rect x="1" y="1" width="54" height="54" rx="27" stroke="#6E7377" strokeWidth="2"/>
+                                                <path d="M21 36H35V34H21M35 25H31V19H25V25H21L28 32L35 25Z" fill="#6E7377"/>
+                                            </svg>
+                                        )
                                     }
                                 </Link>
                             }
@@ -183,8 +201,9 @@ export default function Project({params}) {
                     </div>
 
                     <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
-                        <div className={'position-relative'} style={{width: '60rem', minHeight: '10rem'}}>
-                            <Image src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={'1'} alt={proyecto.portada}/>
+                        <div className='position-relative bg-black' style={{width: '60rem', minHeight: '10rem'}}>
+                            {/*<Image className="z-0 blur-5" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>*/}
+                            <Image className="z-1" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>
                         </div>
                         <div className="d-flex flex-column">
                             <h5 className="fw-bold ms-font mb-3">Descripción del proyecto:</h5>
@@ -195,20 +214,22 @@ export default function Project({params}) {
                                     <div className="d-flex flex-row flex-wrap gap-2 mb-3">
                                         {
                                             proyecto.premios.map((premio) => (
-                                                <p className={'ms-regular border rounded-pill bg-primary text-white m-0 p-2'}>{premio.titulo}</p>
+                                                <p className='ms-regular border rounded-pill bg-primary text-white m-0 p-2'>{premio.titulo}</p>
                                             ))
                                         }
                                     </div>
                                 </>
                             }
-                            <h5 className="fw-bold ms-font mb-3">Autores del proyecto:</h5>
                             <div className="mb-3">
                                 {
                                     proyecto.participantes.length > 0
-                                    &&
-                                    <p className="card-text ms-regular-subbody">
-                                        {proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')}
-                                    </p>
+                                    && !(proyecto.participantes.length === 1 && proyecto.participantes[0].correo === proyecto.usuarios.correo) &&
+                                    <>
+                                        <h5 className="fw-bold ms-font mb-3">Autores del proyecto:</h5>
+                                        <p className="card-text ms-regular-subbody">
+                                            {proyecto.participantes.map(participante => processMail(participante.correo)).reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], []).join(', ')}
+                                        </p>
+                                    </>
                                 }
                             </div>
                             <h5 className="fw-bold ms-font mb-3">Subido por:</h5>
