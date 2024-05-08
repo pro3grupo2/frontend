@@ -62,12 +62,13 @@ export default function NewProjectModal({show, setShow}) {
                     <div>
                         <div className="mb-3">
                             <label className="form-label ms-bold-body">Titulo <span className="color-error">*</span></label>
-                            <input type="text" className="form-control border-normal" placeholder=" Título del proyecto" style={{height: 48, maxWidth: 488}} value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
+                            <input type="text" className="form-control border-normal" placeholder=" Título del proyecto" style={{height: 48, maxWidth: 488}} value={titulo} onChange={(e) => setTitulo(e.target.value.slice(0, 190))}/>
                         </div>
 
-                        <div className="mb-3">
+                        <div className="position-relative mb-3" style={{maxWidth: 488}}>
                             <label className="form-label ms-bold-body">Descripción <span className="color-error">*</span></label>
-                            <textarea className="form-control border-normal" placeholder=" Descripción del proyecto" style={{height: 142, maxWidth: 488}} value={ficha} rows={8} onChange={(e) => setFicha(e.target.value)}></textarea>
+                            <textarea className="form-control border-normal" placeholder=" Descripción del proyecto" style={{height: 142, maxWidth: 488}} value={ficha} rows={8} onChange={(e) => setFicha(e.target.value.slice(0, 600))}></textarea>
+                            <span className={`position-absolute bottom-0 end-0 ms-regular-subbody m-3 ${600 - ficha?.length <= 50 && 'color-error'}`}>{ficha?.length}/600</span>
                         </div>
 
                         <div>
@@ -124,11 +125,11 @@ export default function NewProjectModal({show, setShow}) {
                         <div className="mb-3">
                             <label className="form-label ms-bold-body ">¿A qué asignatura pertenece? <span className="color-error">*</span></label>
                             <select className="form-select border-normal" style={{height: 48, maxWidth: 488}} onChange={(e) => setProyectosAsignaturas(e.target.value)}>
-                                <option disabled>Asignatura</option>
+                                <option disabled selected>Asignatura</option>
                                 {
                                     asignaturas.map
                                     (
-                                        asignatura => <option value={asignatura.id}>{asignatura.titulo} {asignatura.titulaciones_asignaturas[0] && `(${asignatura.titulaciones_asignaturas[0].titulaciones.areas.titulo})`}</option>
+                                        asignatura => asignatura.titulaciones_asignaturas[0] && <option value={asignatura.id}>{asignatura.titulo} ({asignatura.titulaciones_asignaturas[0].titulaciones.areas.titulo})</option>
                                     )
                                 }
                             </select>
@@ -142,6 +143,7 @@ export default function NewProjectModal({show, setShow}) {
                             <div>
                                 <label className="form-label ms-bold-body mx-md-3">¿Ha obtenido algún premio? <span className="color-error">*</span></label>
                                 <select className="form-select border-normal mx-md-3" style={{height: 48, maxWidth: 176}} onChange={(e) => setPremiado(e.target.value)}>
+                                    <option disabled selected>Premiado</option>
                                     <option value={0}>No</option>
                                     <option value={1}>Sí</option>
                                 </select>
@@ -192,7 +194,10 @@ export default function NewProjectModal({show, setShow}) {
                     </div>
 
                     <div className="d-flex flex-row justify-content-end gap-3">
-                        <button className="btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>SUBIR PROYECTO</button>
+                        <button className={`
+                        ${(!titulo || !ficha || (!portada && !input_portada) || (!url && !input_url) || !proyectos_asignaturas || !anio || !premiado) && 'disabled'}
+                        btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100`} style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>SUBIR PROYECTO
+                        </button>
                     </div>
                 </div>
             </div>
