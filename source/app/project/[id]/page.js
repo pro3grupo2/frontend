@@ -117,18 +117,8 @@ export default function Project({ params }) {
                         }
                     </p>
 
-                    <h1 className="ms-bold">{proyecto.titulo} {proyecto.estado !== 'aceptado' && <span className={'ms-regular-subbody'}>({proyecto.estado})</span>}</h1>
-
-                    <Link href={`/profile/${proyecto.usuarios.id}`} className="card-text ms-regular">{proyecto.usuarios.nombre_completo}</Link>
-
                     <div className="d-flex flex-wrap justify-content-between align-items-center mb-3">
-                        {
-                            proyecto.participantes.length > 0
-                            &&
-                            <p className="card-text ms-regular-subbody">
-                                {proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')}
-                            </p>
-                        }
+                        <h1 className="fw-bold">{proyecto.titulo} {proyecto.estado !== 'aceptado' && <span className={'ms-regular-subbody'}>({proyecto.estado})</span>}</h1>
 
                         <div className="d-flex justify-content-end">
                             {
@@ -192,22 +182,38 @@ export default function Project({ params }) {
                         </div>
                     </div>
 
-                    {
-                        proyecto.premios.length > 0 &&
-                        <div className="d-flex flex-column flex-sm-row flex-nowrap gap-2 pb-5">
-                            {
-                                proyecto.premios.map((premio) => (
-                                    <p className={'ms-regular border rounded m-0 p-2'}>{premio.titulo}</p>
-                                ))
-                            }
-                        </div>
-                    }
-
                     <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
-                        <div className={'position-relative'} style={{ width: '50rem', minHeight: '10rem' }}>
+                        <div className={'position-relative'} style={{ width: '60rem', minHeight: '10rem' }}>
                             <Image src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={'1'} alt={proyecto.portada} />
                         </div>
-                        <p className="ms-regular" style={{ width: '50rem', height: '28.125rem' }}>{proyecto.ficha}</p>
+                        <div className="d-flex flex-column">
+                            <h5 className="fw-bold ms-font mb-3">Descripción del proyecto:</h5>
+                            <p className="ms-regular mb-3" style={{width: '40rem', height: '20rem'}}>{proyecto.ficha}</p>
+                            {proyecto.premiado && proyecto.premios.length > 0 &&
+                                <>
+                                    <h5 className="fw-bold ms-font mb-3">Premios:</h5>
+                                    <div className="d-flex flex-wrap gap-2 mb-3">
+                                        {
+                                            proyecto.premios.map((premio) => (
+                                                <p className={'ms-regular border rounded-pill bg-primary text-white m-0 p-2'}>{premio.titulo}</p>
+                                            ))
+                                        }
+                                    </div>
+                                </>
+                            }
+                            <h5 className="fw-bold ms-font mb-3">Autores del proyecto:</h5>
+                            <div className="mb-3">
+                                {
+                                    proyecto.participantes.length > 0
+                                    &&
+                                    <p className="card-text ms-regular-subbody">
+                                        {proyecto.participantes.map(participante => processMail(participante.correo)).join(', ')}
+                                    </p>
+                                }
+                            </div>
+                            <h5 className="fw-bold ms-font mb-3">Subido por:</h5>
+                            <Link href={`/profile/${proyecto.usuarios.id}`} className="card-text ms-regular">{proyecto.usuarios.nombre_completo}</Link>
+                        </div>
                     </div>
 
                     <div className="row g-4 card-group mt-5">
