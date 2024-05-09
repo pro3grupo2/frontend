@@ -319,7 +319,7 @@ export default function Profile({params}) {
                                         className="btn btn-primary mt-3 ms-button w-100"
                                         style={{maxWidth: 262, height: 48}}
                                         onClick={crearCodigo}
-                                        disabled={!numUsos || numUsos === 0} // Deshabilita el botón si numUsos está vacío o es cero
+                                        disabled={!numUsos || numUsos <= 0 || numUsos > 10} // Deshabilita el botón si numUsos está vacío o es cero
                                     >
                                         GENERAR CÓDIGO
                                     </button>
@@ -370,7 +370,7 @@ export default function Profile({params}) {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     )
 }
