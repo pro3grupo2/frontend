@@ -45,7 +45,7 @@ export default function NewProjectModal({show, setShow}) {
         const data_subida = await subir_ficheros(token, input_url ?? null, input_portada ?? null)
         if (!data_subida) return setLoading(false)
 
-        const data = await crear_proyecto(token, titulo, ficha, data_subida.url !== 'null' ? data_subida.url : url, data_subida.portada !== 'null' ? data_subida.portada : portada, parseInt(anio), participantes ? participantes.split(';') : undefined, proyectos_asignaturas.split(';').map(parseInt), undefined, !!+premiado)
+        const data = await crear_proyecto(token, titulo, ficha, data_subida.url !== 'null' ? data_subida.url : url, data_subida.portada !== 'null' ? data_subida.portada : portada, parseInt(anio), participantes ? participantes.split(',') : undefined, proyectos_asignaturas.split(';').map(parseInt), undefined, !!+premiado)
         setLoading(false)
         if (data) window.location.reload()
     }
@@ -119,7 +119,7 @@ export default function NewProjectModal({show, setShow}) {
                     <div>
                         <div className="mb-3">
                             <label className="form-label ms-bold-body">Participantes del proyecto</label>
-                            <input type="text" className="form-control border-normal" style={{height: 48, maxWidth: 488}} placeholder="Escribe los correos (separados por ;)" value={participantes} onChange={(e) => setParticipantes(e.target.value)}/>
+                            <input type="text" className="form-control border-normal" style={{height: 48, maxWidth: 488}} placeholder="Escribe los correos (separados por , sin espacios)" value={participantes} onChange={(e) => setParticipantes(e.target.value)}/>
                         </div>
 
                         <div className="mb-3">
