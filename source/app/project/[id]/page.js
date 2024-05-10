@@ -201,9 +201,9 @@ export default function Project({params}) {
                     </div>
 
                     <div className="d-flex flex-row flex-wrap flex-md-nowrap gap-5">
-                        <div className='position-relative bg-black' style={{width: '60rem', minHeight: '10rem'}}>
+                        <div className='position-relative ' style={{width: '60rem', minHeight: '10rem'}}>
                             {/*<Image className="z-0 blur-5" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>*/}
-                            <Image className="z-1" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'contain'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>
+                            <Image className="z-1" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>
                         </div>
                         <div className="d-flex flex-column">
                             <h5 className="fw-bold ms-font mb-3">Descripción del proyecto:</h5>
