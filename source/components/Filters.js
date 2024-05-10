@@ -28,7 +28,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
             <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
                 <div
                     onClick={() => setFilters_show(!filters_show)}
-                    className="ms-regular-subbody user-select-none d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 border border-black border-1 rounded p-3"
+                    className="clickable ms-regular-subbody user-select-none d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 border border-black border-1 rounded p-3"
                     style={{height: 40, width: 158}}>
                     Filtro
                     {
@@ -66,7 +66,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                 </div>
 
                 <select
-                    className={`${filters_show && 'd-none'} ms-regular-subbody form-select border-black border-1 rounded`}
+                    className={`${filters_show && 'd-none'} clickable ms-regular-subbody form-select border-black border-1 rounded`}
                     style={{height: 40, width: 158}}
                     onChange={(e) => {
                         const premiado = !!(parseInt(e.target.value))
@@ -79,7 +79,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                 </select>
 
                 <select
-                    className={`${filters_show && 'd-none'} ms-regular-subbody form-select border-black border-1 rounded`}
+                    className={`${filters_show && 'd-none'} clickable ms-regular-subbody form-select border-black border-1 rounded`}
                     style={{height: 40, width: 158}}
                     onChange={(e) => {
                         setFilters({...filters, titulaciones: e.target.value})
@@ -101,7 +101,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                                         index_en = titulacion.indexOf(' en '),
                                         index_en_slice = index_en !== -1 ? index_en + 4 : 0
 
-                                    return <option className={'font-monospace'} key={asignatura.id} value={asignatura.id}>({asignatura.areas.titulo.slice(0, 1)}) {titulacion.slice(index_en_slice)}</option>
+                                    return <option className={'font-monospace'} key={asignatura.id} value={asignatura.id}>{titulacion.slice(index_en_slice)} ({asignatura.areas.titulo.slice(0, 1)}) </option>
                                 }
                             )
                     }
