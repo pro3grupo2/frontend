@@ -1,18 +1,24 @@
 import {useState} from "react"
+
+import {useAuth} from "@/context/authContext"
+
+import {actualizar_proyecto} from "@/api/v1/proyectos"
+
 import Loading from "@/components/Loading"
+
 import "../styles/Signup.css"
-import {actualizar_proyecto} from "@/api/v1/proyectos";
 
 export default function NewPremiosModal({show, setShow, proyecto}) {
+    const {token} = useAuth()
+
     const
         [premio_input, setPremioInput] = useState(''),
         [premios, setPremios] = useState([]),
         [loading, setLoading] = useState(false)
 
     const handleSubmit = async () => {
-        setLoading(true)
-        const token = localStorage.getItem('token')
         if (!token) return
+        setLoading(true)
 
         const data = await actualizar_proyecto(token, proyecto.id, undefined, undefined, undefined, undefined, undefined, undefined, premios, true, undefined)
         setLoading(false)

@@ -1,12 +1,14 @@
 "use client"
 
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {useRouter} from "next/navigation"
 import Loading from "@/components/Loading"
 import {validate} from "@/api/v1/auth"
 import Image from "next/image"
+import {AuthProvider} from "@/context/authContext"
+import NavBar from "@/components/NavBar"
 
-export default function RecoverPassword({params}) {
+function ValidateComponent({params}) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
 
@@ -38,5 +40,14 @@ export default function RecoverPassword({params}) {
                 </button>
             </div>
         </div>
+    )
+}
+
+export default function Validate() {
+    return (
+        <AuthProvider redirect={false}>
+            <NavBar/>
+            <ValidateComponent/>
+        </AuthProvider>
     )
 }

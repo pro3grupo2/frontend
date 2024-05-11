@@ -2,16 +2,22 @@ import React, {useState} from "react"
 
 import Image from 'next/image'
 
-import "@/styles/project-card.css"
-import SolicitudProjectModal from "@/components/SolicitudProjectModal"
+import {useAuth} from "@/context/authContext"
+
 import {aceptar_proyecto, rechazar_proyecto} from "@/api/v1/proyectos"
 
+import SolicitudProjectModal from "@/components/SolicitudProjectModal"
+
+import "@/styles/project-card.css"
+
 export function ProjectSolicitudLista({project, setProjects, index}) {
+    const {token} = useAuth()
+
     const
         [show, setShow] = useState(false)
 
     const handleAceptar = async () => {
-        const data = await aceptar_proyecto(localStorage.getItem('token'), project.id)
+        const data = await aceptar_proyecto(token, project.id)
         if (!data) return alert("Error al aceptar el proyecto")
 
         setShow(false)
@@ -19,7 +25,7 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
     }
 
     const handleRechazar = async () => {
-        const data = await rechazar_proyecto(localStorage.getItem('token'), project.id)
+        const data = await rechazar_proyecto(token, project.id)
         if (!data) return alert("Error al rechazar el proyecto")
 
         setShow(false)

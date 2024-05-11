@@ -1,7 +1,10 @@
-import Image from 'next/image'
-import "@/styles/project-card.css"
 import {useEffect, useState} from "react"
+
+import Image from 'next/image'
+
 import {placeholder} from "@/api/v1/image_placeholder"
+
+import "@/styles/project-card.css"
 
 export default function ProjectCard({project, onClick, isHome = false}) {
     const [isHovered, setIsHovered] = useState(false)
@@ -13,7 +16,7 @@ export default function ProjectCard({project, onClick, isHome = false}) {
     useEffect(() => {
         setSrc(project.portada.startsWith('http') ? project.portada : `https://api.reservorio-u-tad.com${project.portada}`)
         setIsLoaded(true)
-    }, []);
+    }, [project])
 
     const handleHover = (hover) => {
         setIsHovered(hover && isHome)

@@ -12,12 +12,12 @@ const check_password = (password, callback = undefined) => {
         if (callback) callback('8 caracteres')
     }
 
-    if (!/[a-z]/.test(password)) {
+    if (!/[a-zñ]/.test(password)) {
         check = false
         if (callback) callback('Una minúscula')
     }
 
-    if (!/[A-Z]/.test(password)) {
+    if (!/[A-ZÑ]/.test(password)) {
         check = false
         if (callback) callback('Una mayúscula')
     }
@@ -50,7 +50,7 @@ const check_email = (email, callback = undefined) => {
         if (callback) callback('Dominio de correo de U-Tad')
     }
 
-    if (!/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/.test(username)) {
+    if (!/^[a-zA-Z0-9ñÑ]+\.[a-zA-Z0-9ñÑ]+$/.test(username)) {
         check = false
         if (callback) callback('Nombre del recipiente de U-Tad')
     }

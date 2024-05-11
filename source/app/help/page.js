@@ -1,10 +1,16 @@
 "use client"
+
 import {useState} from 'react'
+
+import {AuthProvider} from "@/context/authContext"
+
+import Footer from '@/components/Footer'
+import NavBar from "@/components/NavBar"
+
 import '../globals.css'
 import '../../styles/Profile.css'
-import Footer from '@/components/Footer'
 
-export default function Help() {
+function HelpComponent() {
     const [showFAQ, setShowFAQ] = useState(true)
 
     const toggleFAQ = () => {
@@ -121,5 +127,14 @@ export default function Help() {
 
             <Footer/>
         </>
+    )
+}
+
+export default function Help() {
+    return (
+        <AuthProvider redirect={false}>
+            <NavBar/>
+            <HelpComponent/>
+        </AuthProvider>
     )
 }

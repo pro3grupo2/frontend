@@ -1,9 +1,4 @@
-// DeleteConfirmModal.jsx
-import React from 'react';
-
-function ConfirmModal({ show, setShow, onConfirm }) {
-    if (!show) return null;
-
+function ConfirmModal({show, setShow, onConfirm}) {
     return (
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100 backdrop`}></div>
@@ -20,7 +15,7 @@ function ConfirmModal({ show, setShow, onConfirm }) {
 
                     <div>
                         <p class={'ms-bold-body'}>
-                            Estás a punto de eliminar un proyecto.
+                            Estás a punto de eliminar un codigo de acceso.
                             ¿Estás seguro de que quieres eliminarlo?
                         </p>
                         <p class={'ms-regular-subbody'}>
@@ -35,7 +30,7 @@ function ConfirmModal({ show, setShow, onConfirm }) {
                 </div>
             </div>
         </>
-    );
+    )
 }
 
-export default ConfirmModal;
+export default ConfirmModal

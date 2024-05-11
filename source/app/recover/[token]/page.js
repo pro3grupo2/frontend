@@ -12,8 +12,10 @@ import Loading from "@/components/Loading"
 
 import {update} from '@/api/v1/account'
 import {check_password} from "@/utils/validation"
+import {AuthProvider} from "@/context/authContext"
+import NavBar from "@/components/NavBar"
 
-export default function RecoverPassword({params}) {
+function RecoverPasswordComponent({params}) {
     const
         [password, setPassword] = useState(''),
         [tipo_password, setTipoPassword] = useState('password'),
@@ -150,5 +152,14 @@ export default function RecoverPassword({params}) {
                 </form>
             </EstructuraFormularios>
         </>
+    )
+}
+
+export default function RecoverPassword() {
+    return (
+        <AuthProvider redirect={false}>
+            <NavBar/>
+            <RecoverPasswordComponent/>
+        </AuthProvider>
     )
 }

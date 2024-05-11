@@ -2,26 +2,32 @@
 
 import React, {useEffect, useRef, useState} from 'react'
 
-import Image from "next/image"
-import Link from "next/link"
-import {useRouter} from "next/navigation"
+import {useRouter} from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import '../../globals.css'
-import '../../../styles/Profile.css'
+import {AuthProvider, useAuth} from "@/context/authContext"
 
-import ProjectCard from "@/components/ProjectCard"
-import {get_me_proyectos, get_proyectos_pendientes} from "@/api/v1/proyectos"
 import {me} from "@/api/v1/auth"
 import {get_user_by_id} from "@/api/v1/usuarios"
-import Loading from "@/components/Loading"
 import {crear_codigo, eliminar_codigo, get_codigos} from "@/api/v1/codigos"
+import {get_me_proyectos, get_proyectos_pendientes} from "@/api/v1/proyectos"
+
+import ProjectCard from "@/components/ProjectCard"
+import Loading from "@/components/Loading"
 import EditProfileModal from "@/components/EditProfileModal"
 import NewProjectModal from "@/components/NewProjectModal"
 import {ProjectSolicitudLista} from "@/components/ProjectSolicitudLista"
 import ConfirmModal from "@/components/ConfirmModal"
 import Footer from "@/components/Footer"
+import NavBar from "@/components/NavBar"
 
-export default function Profile({params}) {
+import '../../globals.css'
+import '../../../styles/Profile.css'
+
+function ProfileComponent({params}) {
+    const {usuario, token} = useAuth()
+
     const
         [user, setUser] = useState({}),
         [projectsValidados, setProjectsValidados] = useState([]),
@@ -51,68 +57,32 @@ export default function Profile({params}) {
         [modal_show_new_project, setModalShowNewProject] = useState(false)
 
     const crearCodigo = async () => {
-        await crear_codigo(localStorage.getItem('token'), numUsos)
-        get_codigos(localStorage.getItem('token')).then(data => {
-            setCodigos(data.reverse())
-        })
+        await crear_codigo(token, numUsos)
+        const data = await get_codigos(token)
+        if (!data) return
+        setCodigos(data.reverse())
     }
 
     const copiarAlPortapapeles = (codigo) => {
-        navigator.clipboard.writeText(codigo)
-            .then(() => {
-                alert('¡Código copiado al portapapeles!')
-            })
-            .catch(err => {
-                alert('Error al copiar el código: ' + err)
-            })
+        navigator.clipboard
+            .writeText(codigo)
+            .then(() => alert('¡Código copiado al portapapeles!'))
+            .catch(err => alert('Error al copiar el código: ' + err))
     }
 
     useEffect(() => {
-        if (!localStorage.getItem('token'))
-            return router.push('/signin')
-
         setLoading(true)
-        if (params.id === "me") {
-            me(localStorage.getItem('token'))
-                .then(data => {
-                    if (!data) return
-                    setUser(data)
-                    setIsOwner(true)
-                    if (data.rol === "coordinador") {
-                        setIsCoordinador(true)
-                        setCanShowCodigos(true)
+        if (!token) return
 
-                        get_codigos(localStorage.getItem('token')).then(data => {
-                            setCodigos(data.reverse())
-                        })
-
-                        get_proyectos_pendientes(localStorage.getItem('token'))
-                            .then(data => {
-                                setProjectsSolicitudes(data)
-                            })
-                    }
-                })
-
-            get_me_proyectos(localStorage.getItem('token'))
-                .then(data => {
-                    setProjectsValidados([])
-                    setProjectsNoValidados([])
-
-                    if (data) {
-                        for (let project of data)
-                            project.estado === 'aceptado'
-                                ? setProjectsValidados(prev => [...prev, project])
-                                : setProjectsNoValidados(prev => [...prev, project])
-                    }
-                })
-        } else
-            get_user_by_id(localStorage.getItem('token'), params.id)
+        if (params.id !== 'me')
+            get_user_by_id(token, params.id)
                 .then(data => {
                     if (!data) return
                     setUser(data)
 
                     setProjectsValidados([])
                     setProjectsNoValidados([])
+
                     for (let project of data.proyectos)
                         project.estado === 'aceptado'
                             ? setProjectsValidados(prev => [...prev, project])
@@ -120,13 +90,48 @@ export default function Profile({params}) {
                 })
 
         setLoading(false)
-    }, [])
+    }, [token])
 
-    // useEffect(() => {
-    //     if (codigosAdmin_btn_ref.current === undefined) return
-    //     if (!canShowCodigos) router.push("/home")
-    //     // if (searchParams.get('tab') === "codigos" && canShowCodigos) codigosAdmin_btn_ref.current.click()
-    // }, [codigosAdmin_btn_ref.current]);
+    useEffect(() => {
+        setLoading(true)
+        if (!token) return
+
+        if (params.id === "me") {
+            setUser(usuario)
+            setIsOwner(true)
+
+            if (usuario.rol === "coordinador") {
+                setIsCoordinador(true)
+                setCanShowCodigos(true)
+
+                get_codigos(token)
+                    .then(data => {
+                        if (!data) return
+                        setCodigos(data.reverse())
+                    })
+
+                get_proyectos_pendientes(token)
+                    .then(data => {
+                        if (!data) return
+                        setProjectsSolicitudes(data)
+                    })
+            }
+
+            get_me_proyectos(token)
+                .then(data => {
+                    setProjectsValidados([])
+                    setProjectsNoValidados([])
+
+                    if (!data) return
+                    for (let project of data)
+                        project.estado === 'aceptado'
+                            ? setProjectsValidados(prev => [...prev, project])
+                            : setProjectsNoValidados(prev => [...prev, project])
+                })
+        }
+
+        setLoading(false)
+    }, [token, usuario])
 
     if (loading) return <Loading/>
 
@@ -152,7 +157,7 @@ export default function Profile({params}) {
 
     const confirmDelete = async () => {
         const {codigoId, index} = codigoToDelete
-        const data = await eliminar_codigo(localStorage.getItem('token'), codigoId)
+        const data = await eliminar_codigo(token, codigoId)
         if (!data) {
             alert('Error al eliminar el código')
         } else {
@@ -161,11 +166,21 @@ export default function Profile({params}) {
         setShowConfirmModal(false)
     }
 
+    if (!Object.keys(user).length) {
+        return (
+            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
+                <div className="text-center">
+                    <h1 className="display-1 ms-black">Usuario no encontrado</h1>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className="container-fluid">
                 <div className="modal-container">
-                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile} default_user_data={user}/>
+                    <EditProfileModal show={modal_show_edit_profile} setShow={setModalShowEditProfile}/>
                     <NewProjectModal show={modal_show_new_project} setShow={setModalShowNewProject}/>
                     <ConfirmModal show={showConfirmModal} setShow={setShowConfirmModal} onConfirm={confirmDelete}/>
                 </div>
@@ -372,5 +387,14 @@ export default function Profile({params}) {
             </div>
             <Footer/>
         </>
+    )
+}
+
+export default function Profile({params}) {
+    return (
+        <AuthProvider>
+            <NavBar/>
+            <ProfileComponent params={params}/>
+        </AuthProvider>
     )
 }

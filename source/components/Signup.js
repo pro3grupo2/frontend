@@ -1,6 +1,7 @@
 import React, {createRef, useEffect, useRef, useState} from 'react'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 import {EstructuraFormularios} from '@/components/Estructura'
 import {AlertContainer, create_alert} from "@/components/Alerts"
@@ -8,7 +9,6 @@ import {AlertContainer, create_alert} from "@/components/Alerts"
 import {check_email, check_password} from "@/utils/validation"
 
 import "../styles/Signup.css"
-import Image from "next/image"
 
 const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
     return (
@@ -41,7 +41,6 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
         email_ref = useRef(null),
         [email_checks, setEmailChecks] = useState([])
 
-   
 
     const handleNextPaso = () => {
         setEmailChecks([])
@@ -71,7 +70,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                 <div>
                     <input
                         ref={email_ref}
-                        type="email"
+                        type="text"
                         id="email"
                         value={email}
                         className="ms-regular form-control border-normal py-3 ps-4 fs-5"
@@ -448,7 +447,7 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
                                 maxLength={1} // Restringe la entrada a un solo carácter
                                 className='form-control text-center'
                                 autoComplete="off" // Evita la autocompletación del navegador
-                                
+
                             />
                         ))
                     }

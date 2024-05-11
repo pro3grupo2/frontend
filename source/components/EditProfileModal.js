@@ -2,12 +2,17 @@ import React, {useEffect, useRef, useState} from "react"
 
 import Image from "next/image"
 
-import {update} from "@/api/v1/account"
-import Loading from "@/components/Loading"
-import "../styles/Signup.css"
-import {subir_ficheros} from "@/api/v1/proyectos";
+import {useAuth} from "@/context/authContext"
 
-export default function EditProfileModal({show, setShow, default_user_data}) {
+import {subir_ficheros} from "@/api/v1/proyectos"
+
+import Loading from "@/components/Loading"
+
+import "../styles/Signup.css"
+
+export default function EditProfileModal({show, setShow}) {
+    const {usuario, token, account_update} = useAuth()
+
     const
         [portfolio, setPortfolio] = useState(''),
         [descripcion, setDescripcion] = useState(''),
@@ -18,19 +23,17 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
         input_foto_perfil_ref = useRef(null)
 
     useEffect(() => {
-        setPortfolio(default_user_data.portfolio)
-        setDescripcion(default_user_data.descripcion)
-        setFotoPerfil(default_user_data.foto)
-    }, [default_user_data])
+        setPortfolio(usuario.portfolio)
+        setDescripcion(usuario.descripcion)
+        setFotoPerfil(usuario.foto)
+    }, [usuario])
 
     const handleSubmit = async () => {
-        setLoading(true)
-        const token = localStorage.getItem('token')
         if (!token) return setLoading(false)
 
-        const data = await update(token, undefined, undefined, descripcion, portfolio, undefined, undefined)
+        await account_update(undefined, undefined, descripcion, portfolio, undefined, undefined, () => alert('Error al actualizar el perfil'))
         setLoading(false)
-        if (data) window.location.reload()
+        setShow(false)
     }
 
     if (loading) return <Loading/>
@@ -47,16 +50,12 @@ export default function EditProfileModal({show, setShow, default_user_data}) {
 
                 <input ref={input_foto_perfil_ref} className="d-none form-control" type="file" style={{zIndex: -1}} accept="image/x-png,image/gif,image/jpeg" onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
-                        const token = localStorage.getItem('token')
                         if (!token) return setLoading(false)
 
                         subir_ficheros(token, null, e.target.files[0] ?? null)
                             .then(data => {
                                 if (!data) return
-                                update(token, undefined, undefined, undefined, undefined, data.portada !== 'null' ? data.portada : undefined, undefined)
-                                    .then(() => {
-                                        setFotoPerfil(data.portada !== 'null' && data.portada)
-                                    })
+                                account_update(undefined, undefined, undefined, undefined, data.portada !== 'null' ? data.portada : undefined, undefined, () => alert('Error al subir la imagen'))
                             })
                     }
                 }}/>

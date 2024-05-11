@@ -9,8 +9,10 @@ import Loading from "@/components/Loading"
 
 import {signup} from "@/api/v1/auth"
 import {create_alert} from "@/components/Alerts"
+import NavBar from "@/components/NavBar"
+import {AuthProvider} from "@/context/authContext"
 
-export default function SignUp() {
+function SignUpComponent() {
     const
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
@@ -105,4 +107,13 @@ export default function SignUp() {
         setEmail={setEmail}
         email={email}
     />
+}
+
+export default function SignUp() {
+    return (
+        <AuthProvider redirect={false}>
+            <NavBar/>
+            <SignUpComponent/>
+        </AuthProvider>
+    )
 }

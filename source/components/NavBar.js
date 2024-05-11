@@ -1,51 +1,34 @@
 "use client"
 
+import React, {useEffect, useRef, useState} from "react"
+
+import {useRouter} from "next/navigation"
 import Link from 'next/link'
 import Image from 'next/image'
-import React, {useEffect, useRef, useState} from "react";
-import NewProjectModal from "@/components/NewProjectModal";
-import {me} from "@/api/v1/auth";
-import {useRouter} from "next/navigation";
-import {get_proyectos_pendientes} from "@/api/v1/proyectos";
+
+import {get_proyectos_pendientes} from "@/api/v1/proyectos"
+import {useAuth} from "@/context/authContext"
+import NewProjectModal from "@/components/NewProjectModal"
 
 export default function NavBar() {
-    const [isProfileHover, setIsProfileHover] = useState(false)
-    const timerRef = useRef()
-    const [modal_show_new_project, setModalShowNewProject] = useState(false)
-    const [user, setUser] = useState({})
-    const [userLoaded, setUserLoaded] = useState(false)
-    const router = useRouter()
+    const {usuario, token, signed, auth_signout} = useAuth()
+
+    const
+        [isProfileHover, setIsProfileHover] = useState(false),
+        timerRef = useRef(),
+        [modal_show_new_project, setModalShowNewProject] = useState(false),
+        router = useRouter()
 
     const
         [has_proyectos_pendientes, setHasProyectosPendientes] = useState(false)
 
     useEffect(() => {
-        const fetchUser = async () => {
-            const token = localStorage.getItem('token') ?? false
-            if (token) {
-                let data = await me(token)
-                if (data) {
-                    setUser(data)
-                    setUserLoaded(true)
-
-                    if (data.rol === "coordinador") {
-                        const proyectos_pendientes = await get_proyectos_pendientes(token)
-                        if (proyectos_pendientes.length > 0)
-                            setHasProyectosPendientes(true)
-                    }
-                } else {
-                    localStorage.removeItem('token')
-                    setUser({})
-                    setUserLoaded(true)
-                }
-            } else {
-                setUser({})
-                setUserLoaded(true)
-            }
-        }
-
-        fetchUser()
-    }, [])
+        if (usuario?.rol === 'coordinador')
+            get_proyectos_pendientes(token)
+                .then(data => {
+                    if (data.length > 0) setHasProyectosPendientes(true)
+                })
+    }, [usuario])
 
     const handleMouseEnter = () => {
         clearTimeout(timerRef.current)
@@ -53,14 +36,11 @@ export default function NavBar() {
     }
 
     const handleMouseLeave = () => {
-        timerRef.current = setTimeout(() => {
-            setIsProfileHover(false)
-        }, 200)
+        timerRef.current = setTimeout(() => setIsProfileHover(false), 200)
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
-        window.location.href = '/signin'
+        auth_signout()
     }
 
     const handleLogin = () => {
@@ -110,18 +90,17 @@ export default function NavBar() {
                             </Link>
                         </div>
                         <div className={`position-absolute top-100 end-0 me-4 bg-white shadow p-3 border border-2 rounded-bottom border-primary ${isProfileHover ? "" : "visually-hidden"}`} onMouseEnter={handleMouseEnter} onMouseLeave={() => setIsProfileHover(false)} style={{zIndex: 100}}>
-                            <p className="ms-font fw-bold text-center w-100">{(JSON.stringify(user).length > 2) ? user.nombre_completo : "Usuario"}</p>
+                            <p className="ms-font fw-bold text-center w-100">{signed ? usuario?.nombre_completo : "Usuario"}</p>
                             <hr/>
-                            {JSON.stringify(user).length > 2 && <button className="nav-link text-secondary w-100 mb-2" onClick={() => setModalShowNewProject(true)}>Nuevo Proyecto</button>}
-                            {JSON.stringify(user).length > 2 && user.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile/me?tab=codigos")}>Códigos de Admin.</button>}
-                            <button className="nav-link text-secondary w-100 mb-2" onClick={JSON.stringify(user).length > 2 ? handleLogout : handleLogin}>{JSON.stringify(user).length > 2 ? "Cerrar Sesión" : "Iniciar Sesión"}</button>
+                            {signed && <button className="nav-link text-secondary w-100 mb-2" onClick={() => setModalShowNewProject(true)}>Nuevo Proyecto</button>}
+                            {signed && usuario?.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile/me?tab=codigos")}>Códigos de Admin.</button>}
+                            <button className="nav-link text-secondary w-100 mb-2" onClick={signed ? handleLogout : handleLogin}>{signed ? "Cerrar Sesión" : "Iniciar Sesión"}</button>
                         </div>
 
                         <button className="border-0 bg-transparent fs-6 fw-bold mx-sm-2 mx-md-3">EN</button>
                     </div>
                 </div>
             </nav>
-
         </>
     )
 }

@@ -1,11 +1,17 @@
 import {useEffect, useRef, useState} from "react"
 
+import {useAuth} from "@/context/authContext"
+
 import {get_asignaturas} from "@/api/v1/asignaturas"
 import {crear_proyecto, subir_ficheros} from "@/api/v1/proyectos"
+
 import Loading from "@/components/Loading"
+
 import "../styles/Signup.css"
 
 export default function NewProjectModal({show, setShow}) {
+    const {token} = useAuth()
+
     const
         [titulo, setTitulo] = useState(''),
         [ficha, setFicha] = useState(''),
@@ -27,20 +33,19 @@ export default function NewProjectModal({show, setShow}) {
         input_url_ref = useRef(null)
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
         if (!token) return
 
         get_asignaturas(token)
             .then(data => {
-                setAsignaturas(data ?? [])
+                if (!data) return
+                setAsignaturas(data)
             })
-    }, [])
+    }, [token])
 
 
     const handleSubmit = async () => {
-        setLoading(true)
-        const token = localStorage.getItem('token')
         if (!token) return
+        setLoading(true)
 
         const data_subida = await subir_ficheros(token, input_url ?? null, input_portada ?? null)
         if (!data_subida) return setLoading(false)
@@ -119,6 +124,7 @@ export default function NewProjectModal({show, setShow}) {
                     <div>
                         <div className="mb-3">
                             <label className="form-label ms-bold-body">Participantes del proyecto</label>
+
                             <input type="text" className="form-control border-normal" style={{height: 48, maxWidth: 488}} placeholder="Escribe los correos (separados por , sin espacios)" value={participantes} onChange={(e) => setParticipantes(e.target.value)}/>
                         </div>
 

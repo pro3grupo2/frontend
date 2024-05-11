@@ -1,8 +1,12 @@
-import {get_areas} from "@/api/v1/areas"
 import {useEffect, useState} from "react"
+
+import {get_areas} from "@/api/v1/areas"
 import {get_titulaciones} from "@/api/v1/titulaciones"
+import {useAuth} from "@/context/authContext"
 
 export default function Filters({onSearchChange, handleSearch, handleAreaClick, filters, setFilters, search, setSearch}) {
+    const {token} = useAuth()
+
     const
         [areas, setAreas] = useState([]),
         [asignaturas, setAsignaturas] = useState([]),
@@ -11,17 +15,20 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
         [filters_input_focus, setFilters_input_focus] = useState(false)
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
         if (!token) return
 
-        get_areas(token).then(data => {
-            setAreas(data)
-        })
+        get_areas(token)
+            .then(data => {
+                if (!data) return
+                setAreas(data)
+            })
 
-        get_titulaciones(token).then(data => {
-            setAsignaturas(data)
-        })
-    }, [])
+        get_titulaciones(token)
+            .then(data => {
+                if (!data) return
+                setAsignaturas(data)
+            })
+    }, [token])
 
     return (
         <>
@@ -177,7 +184,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
 
             <ul className="nav nav-underline d-flex flex-row justify-content-center align-items-center border-bottom">
                 <li key="0" className="nav-item me-lg-5">
-                    <button id="0" onClick={() => handleAreaClick("0")} className="nav-link ms-regular-subbody text-dark active">TODO</button>
+                    <button id="0" onClick={() => handleAreaClick(0)} className="nav-link ms-regular-subbody text-dark active">TODO</button>
                 </li>
                 {
                     areas

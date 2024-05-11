@@ -1,24 +1,30 @@
 import {useState} from "react"
 
-import Loading from "@/components/Loading"
-import "../styles/Signup.css"
-import {eliminar_proyecto} from "@/api/v1/proyectos";
 import {useRouter} from "next/navigation"
 
-export default function DeleteProjectModal({project, show, setShow}) {
-    const
-        [loading, setLoading] = useState(false)
+import {useAuth} from "@/context/authContext"
 
-    if (loading) return <Loading/>
-    const router = useRouter();
+import {eliminar_proyecto} from "@/api/v1/proyectos"
+
+import Loading from "@/components/Loading"
+
+import "../styles/Signup.css"
+
+export default function DeleteProjectModal({project, show, setShow}) {
+    const {token} = useAuth()
+
+    const
+        [loading, setLoading] = useState(false),
+        router = useRouter()
 
     const handleDeleteProject = async () => {
-        const token = localStorage.getItem('token')
         if (!token) return
 
-        const data = await eliminar_proyecto(token, project.id);
-        if (data) router.back();
+        const data = await eliminar_proyecto(token, project.id)
+        if (data) router.back()
     }
+
+    if (loading) return <Loading/>
 
     return (
         <>
