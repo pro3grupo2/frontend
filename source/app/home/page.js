@@ -51,6 +51,8 @@ function HomeComponent() {
     //
     useEffect(() => {
         setLoading(true)
+        if (!token) return
+
         setPage(0)
         get_proyectos(token, 0, filters)
             .then(data => {
