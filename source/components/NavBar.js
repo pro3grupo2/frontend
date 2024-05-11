@@ -23,12 +23,14 @@ export default function NavBar() {
         [has_proyectos_pendientes, setHasProyectosPendientes] = useState(false)
 
     useEffect(() => {
+        if (!token) return
+
         if (usuario?.rol === 'coordinador')
             get_proyectos_pendientes(token)
                 .then(data => {
                     if (data.length > 0) setHasProyectosPendientes(true)
                 })
-    }, [usuario])
+    }, [token, usuario])
 
     const handleMouseEnter = () => {
         clearTimeout(timerRef.current)

@@ -78,9 +78,10 @@ function HomeComponent() {
     useEffect(() => {
         if (!isBottom) return
 
-        let newPage = page + 1
-
         setLoading(true)
+        if (!token) return
+
+        let newPage = page + 1
         get_proyectos(token, newPage, filters)
             .then(data => {
                 if (!data) return
@@ -88,7 +89,7 @@ function HomeComponent() {
             })
         setPage(newPage)
         setLoading(false)
-    }, [isBottom])
+    }, [token, isBottom])
 
     const handleAreaClick = (id) => {
         let oldArea = document.getElementById(area)
