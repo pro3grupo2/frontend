@@ -37,8 +37,8 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                 {
                     project.premiado &&
                     <div className="position-absolute top-0 end-0 z-1 p-2" style={{borderRadius: '0rem 0.5rem', backgroundColor: "var(--color-principal)"}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M16 0C15.1 0 14 1 14 2H6C6 1 4.9 0 4 0H0V9C0 10 1 11 2 11H4.2C4.6 13 5.9 14.7 9 15V17.08C6 17.54 6 20 6 20H14C14 20 14 17.54 11 17.08V15C14.1 14.7 15.4 13 15.8 11H18C19 11 20 10 20 9V0H16ZM4 9H2V2H4V9ZM18 9H16V2H18V9Z"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M20.39 19.37L16.38 18L15 22L11.92 16L8.99999 22L7.61999 18L3.60999 19.37L6.52999 13.37C5.56999 12.17 4.99999 10.65 4.99999 9C4.99999 7.14348 5.73748 5.36301 7.05024 4.05025C8.36299 2.7375 10.1435 2 12 2C13.8565 2 15.637 2.7375 16.9497 4.05025C18.2625 5.36301 19 7.14348 19 9C19 10.65 18.43 12.17 17.47 13.37L20.39 19.37ZM6.99999 9L9.68999 10.34L9.49999 13.34L12 11.68L14.5 13.33L14.33 10.34L17 9L14.32 7.65L14.5 4.67L12 6.31L9.49999 4.65L9.66999 7.66L6.99999 9Z"
                                   fill="white"/>
                         </svg>
                     </div>
@@ -46,20 +46,16 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                 {
                     project.estado !== 'aceptado'
                     &&
-                    <div className="position-absolute top-0 start-0 z-1 p-2" style={{borderRadius: '0.5rem 0rem', backgroundColor: project.estado === 'rechazado' ? "var(--color-error)" : "var(--color-titulacion-anim3d)"}}>
-                        {
-                            project.estado === 'rechazado'
-                                ?
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M17.6568 7.75736L13.4142 12L17.6568 16.2426L16.2426 17.6569L12 13.4142L7.75735 17.6569L6.34313 16.2426L10.5858 12L6.34313 7.75736L7.75735 6.34315L12 10.5858L16.2426 6.34315L17.6568 7.75736Z"
-                                          fill="white"/>
-                                </svg>
-                                :
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M13 20H11V8L5.50002 13.5L4.08002 12.08L12 4.16L19.92 12.08L18.5 13.5L13 8V20Z"
-                                          fill="white"/>
-                                </svg>
-                        }
+                    <div className="position-absolute top-0 start-0 z-1 px-3 py-2" style={{borderRadius: '0.5rem 0rem', backgroundColor: project.estado === 'rechazado' ? "var(--color-error)" : "var(--color-pendiente)"}}>
+                        <p className={'ms-bold-body color-secundario-blanco m-0 p-0'}>
+                            {
+                                project.estado === 'rechazado'
+                                    ?
+                                    'RECHAZADO'
+                                    :
+                                    'PENDIENTE'
+                            }
+                        </p>
                     </div>
                 }
                 <div id="imageSize" className="position-relative">
@@ -91,7 +87,7 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                         && isHome
                         &&
                         <p className={`card-text text-secondary overflow-hidden ms-regular ${!isLoaded && "d-none"}`} style={{height: '2.5rem'}}>
-                            {project.ficha}
+                            {project.ficha.slice(0, 127).trim()}{project.ficha.length > 127 && '...'}
                         </p>
                     }
                 </div>
