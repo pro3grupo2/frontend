@@ -79,7 +79,7 @@ function SignInComponent() {
                             type="text"
                             id="email"
                             value={email}
-                            className="ms-regular form-control border-3 background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                            className="ms-regular form-control border-2 background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                             onChange={(e) => setEmail(e.target.value)}
                             style={{maxHeight: '3rem'}}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
@@ -102,7 +102,7 @@ function SignInComponent() {
                                 type={tipo_password}
                                 id="password"
                                 value={password}
-                                className="ms-regular flex-grow-1 form-control border-3 background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control border-2 background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
                                 style={{maxHeight: '3rem'}}
                                 onFocus={() => {

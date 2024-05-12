@@ -21,15 +21,15 @@
 
 
 .border-normal {
-    border: 1px solid var(--color-secundario-negro) !important;
+    border: 2px solid var(--color-secundario-negro) !important;
 }
 
 .border-normal:focus {
-    border: 3px solid var(--color-principal) !important;
+    border: 2px solid var(--color-principal) !important;
 }
 
 .border-error {
-    border: 3px solid var(--color-error) !important;
+    border: 2px solid var(--color-error) !important;
 }
 
 /* styles/CustomHr.css */
