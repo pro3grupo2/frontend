@@ -192,6 +192,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                             area =>
                                 <li key={area.id} className="nav-item me-lg-5">
                                     <button
+                                        key={area.id}
                                         id={area.id}
                                         onClick={() => handleAreaClick(area.id.toString())}
                                         className="nav-link ms-regular-subbody text-dark">

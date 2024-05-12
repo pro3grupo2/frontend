@@ -52,6 +52,7 @@ function HomeComponent() {
     useEffect(() => {
         setLoading(true)
         if (!token) return
+        if ('filters' in localStorage) localStorage.removeItem('filters')
 
         setPage(0)
         get_proyectos(token, 0, filters)
@@ -77,6 +78,7 @@ function HomeComponent() {
 
     useEffect(() => {
         if (!isBottom) return
+        if (!proyectosLoaded) return
 
         setLoading(true)
         if (!token) return
@@ -108,6 +110,7 @@ function HomeComponent() {
     }
 
     const handleCardClick = (id) => {
+        if (Object.keys(filters).length) localStorage.setItem('filters', JSON.stringify(filters))
         router.push(`/project/${id}`)
     }
 

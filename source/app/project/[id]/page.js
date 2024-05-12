@@ -58,7 +58,8 @@ function ProjectComponent({params}) {
                         setUserProjects(data2.proyectos.filter((x) => x.id !== data.id && x.estado === 'aceptado'))
                     })
 
-                get_proyectos(token, page)
+                const filters = JSON.parse(localStorage.getItem('filters')) ?? {area: data?.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.id.toString()}
+                get_proyectos(token, page, filters)
                     .then(data3 => {
                         if (!data3 || !data3.length) return
                         setOtherProjects([...otherProjects, ...data3.filter(project => project.id !== data.id && project.usuarios.id !== data.usuarios.id)])
@@ -80,8 +81,9 @@ function ProjectComponent({params}) {
 
     const handleViewMore2 = () => {
         if (!token) return
-        if (proyecto.usuarios) {
-            get_proyectos(token, page + 1)
+        if (Object.keys(proyecto).length) {
+            const filters = JSON.parse(localStorage.getItem('filters')) ?? {area: proyecto?.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.id.toString()}
+            get_proyectos(token, page + 1, filters)
                 .then(data => {
                     if (!data || !data.length) return setNoMoreProyectos(true)
                     setOtherProjects([...otherProjects, ...data.filter(project => project.id !== proyecto.id && project.usuarios.id !== proyecto.usuarios.id)])
