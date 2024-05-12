@@ -281,8 +281,7 @@ function ProfileComponent({params}) {
                     {
                         projectsNoValidados.length
                             ?
-                            projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={(id) => {
-                            }} project={project}/>)
+                            projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={console.log} project={project}/>)
                             :
                             <div className="text-center mt-5">
                                 <h1 className="ms-extra-bold">No hay solicitudes que mostrar</h1>

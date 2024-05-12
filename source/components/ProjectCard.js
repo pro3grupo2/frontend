@@ -3,6 +3,7 @@ import {useEffect, useState} from "react"
 import Image from 'next/image'
 
 import {placeholder} from "@/api/v1/image_placeholder"
+import {EMAIL_TERMINATIONS} from "@/utils/validation"
 
 import "@/styles/project-card.css"
 
@@ -27,21 +28,38 @@ export default function ProjectCard({project, onClick, isHome = false}) {
 
     const processMail = (mail) => {
         const mailParts = mail.split('@')
-        return mailParts[1] === "live.u-tad.com" || mailParts[1] === "u-tad.com" || mailParts[1] === "ext.u-tad.com" ? mailParts[0].split('.').map(text => [text[0].toUpperCase(), text.slice(1)].join("")).join(" ") : mail
+        return EMAIL_TERMINATIONS.includes(mailParts[1]) ? mailParts[0].split('.').map(text => text.charAt(0).toUpperCase() + text.slice(1)).join(" ") : mail
     }
 
-    if (project.length === 0) return <></>
-
     return (
-        <div className="clickable col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: 340}}>
+        <div className="clickable col col-lg-3 col-sm-6 col-12 col-md-4 mb-4" style={{height: '18rem'}}>
             <div className="project-card position-relative shadow card border-0 rounded h-100" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} onClick={() => onClick(project.id)}>
-                {project.premiado &&
+                {
+                    project.premiado &&
                     <div className="position-absolute top-0 end-0 z-1 p-2" style={{borderRadius: '0rem 0.5rem', backgroundColor: "var(--color-principal)"}}>
-                        <svg className="" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 17 20" fill="none">
-                            <path
-                                d="M16.8904 17.37L12.8804 16L11.5004 20L8.42035 14L5.50035 20L4.12035 16L0.110352 17.37L3.03035 11.37C2.07035 10.17 1.50035 8.65 1.50035 7C1.50035 5.14348 2.23785 3.36301 3.5506 2.05025C4.86336 0.737498 6.64384 0 8.50035 0C10.3569 0 12.1373 0.737498 13.4501 2.05025C14.7629 3.36301 15.5004 5.14348 15.5004 7C15.5004 8.65 14.9304 10.17 13.9704 11.37L16.8904 17.37ZM3.50035 7L6.19035 8.34L6.00035 11.34L8.50035 9.68L11.0004 11.33L10.8304 8.34L13.5004 7L10.8204 5.65L11.0004 2.67L8.50035 4.31L6.00035 2.65L6.17035 5.66L3.50035 7Z"
-                                fill="white"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16 0C15.1 0 14 1 14 2H6C6 1 4.9 0 4 0H0V9C0 10 1 11 2 11H4.2C4.6 13 5.9 14.7 9 15V17.08C6 17.54 6 20 6 20H14C14 20 14 17.54 11 17.08V15C14.1 14.7 15.4 13 15.8 11H18C19 11 20 10 20 9V0H16ZM4 9H2V2H4V9ZM18 9H16V2H18V9Z"
+                                  fill="white"/>
                         </svg>
+                    </div>
+                }
+                {
+                    project.estado !== 'aceptado'
+                    &&
+                    <div className="position-absolute top-0 start-0 z-1 p-2" style={{borderRadius: '0.5rem 0rem', backgroundColor: project.estado === 'rechazado' ? "var(--color-error)" : "var(--color-titulacion-anim3d)"}}>
+                        {
+                            project.estado === 'rechazado'
+                                ?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M17.6568 7.75736L13.4142 12L17.6568 16.2426L16.2426 17.6569L12 13.4142L7.75735 17.6569L6.34313 16.2426L10.5858 12L6.34313 7.75736L7.75735 6.34315L12 10.5858L16.2426 6.34315L17.6568 7.75736Z"
+                                          fill="white"/>
+                                </svg>
+                                :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M13 20H11V8L5.50002 13.5L4.08002 12.08L12 4.16L19.92 12.08L18.5 13.5L13 8V20Z"
+                                          fill="white"/>
+                                </svg>
+                        }
                     </div>
                 }
                 <div id="imageSize" className="position-relative">
@@ -57,23 +75,24 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                 <div className={`card-body d-flex flex-column ${isHovered && isShown && isHome ? "justify-content-around" : "justify-content-between"} ${!isLoaded && "placeholder-glow"}`}>
                     <div>
                         <h5 className={`card-title fw-bold ${!isLoaded && "placeholder"}`}>{project.titulo}</h5>
-                        <p className={`card-text text-secondary ms-font mt-1 ${!isLoaded && "placeholder"}`}>{[project.usuarios.nombre_completo].concat(project.participantes.slice(0, (isHovered && isHome && project.participantes.length > 0) ? project.participantes.length : 2).map(participante => processMail(participante.correo))).reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], []).join(', ')}</p>
+                        <p className={`card-text text-secondary ms-font pt-1 ${!isLoaded && "placeholder"}`}>
+                            {
+                                [project.usuarios.nombre_completo, ...project.participantes.map(participante => participante.correo)]
+                                    .map(processMail)
+                                    .reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], [])
+                                    .slice(0, !isHovered ? 2 : undefined)
+                                    .join(', ')
+                            }
+                        </p>
                     </div>
                     {
                         isHovered
                         && isShown
                         && isHome
                         &&
-                        <p className={`card-text text-secondary ms-regular d-none d-sm-block ${!isLoaded && "d-none"}`}>
-                            {project.ficha.slice(0, 75) + (project.ficha.length > 75 ? "..." : "")}
+                        <p className={`card-text text-secondary overflow-hidden ms-regular ${!isLoaded && "d-none"}`} style={{height: '2.5rem'}}>
+                            {project.ficha}
                         </p>
-                    }
-                    {
-                        project.estado !== 'aceptado'
-                        &&
-                        <span className={`badge ${project.estado === 'rechazado' ? 'bg-danger' : 'bg-warning'} ms-regular ${!isLoaded && "placeholder"}`}>
-                            {project.estado}
-                        </span>
                     }
                 </div>
             </div>
