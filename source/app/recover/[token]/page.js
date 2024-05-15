@@ -155,11 +155,11 @@ function RecoverPasswordComponent({params}) {
     )
 }
 
-export default function RecoverPassword() {
+export default function RecoverPassword({params}) {
     return (
         <AuthProvider redirect={false}>
             <NavBar/>
-            <RecoverPasswordComponent/>
+            <RecoverPasswordComponent params={params}/>
         </AuthProvider>
     )
 }

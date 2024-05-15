@@ -43,11 +43,11 @@ function ValidateComponent({params}) {
     )
 }
 
-export default function Validate() {
+export default function Validate({params}) {
     return (
         <AuthProvider redirect={false}>
             <NavBar/>
-            <ValidateComponent/>
+            <ValidateComponent params={params}/>
         </AuthProvider>
     )
 }
