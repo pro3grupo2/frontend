@@ -190,7 +190,7 @@ export default function NewProjectModal({show, setShow}) {
                             </div>
 
                             <div className={`input-group mb-3 ${!!input_url && 'opacity-25'}`} style={{minHeight: 48, maxWidth: 488}}>
-                                <span className="input-group-text border-dark fw-semibold">Enlace URL</span>
+                                <span className="input-group-text border-normal fw-semibold">Enlace URL</span>
                                 <input type="text" disabled={!!input_url} className="form-control border-normal" value={url} placeholder="Pega tu link aqui." onChange={(e) => {
                                     setInputUrl(undefined)
                                     setUrl(e.target.value)
@@ -202,7 +202,7 @@ export default function NewProjectModal({show, setShow}) {
                     <div className="d-flex flex-row justify-content-end gap-3">
                         <button
                             disabled={!titulo || !ficha || (!portada && !input_portada) || (!url && !input_url) || !proyectos_asignaturas || !anio || !premiado}
-                            className={`btn btn-primary btn-font fw-bold color-secundario-blanco background-color-principal p-2 w-100`} style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>SUBIR PROYECTO
+                            className={`btn btn-primary ms-button fw-bold color-secundario-blanco background-color-principal p-2 w-100`} style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>Subir proyecto
                         </button>
                     </div>
                 </div>
