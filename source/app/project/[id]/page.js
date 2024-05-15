@@ -98,12 +98,10 @@ function ProjectComponent({params}) {
         return mailParts[1] === "live.u-tad.com" || mailParts[1] === "u-tad.com" || mailParts[1] === "ext.u-tad.com" ? mailParts[0].split('.').map(text => [text[0].toUpperCase(), text.slice(1)].join("")).join(" ") : mail
     }
 
-    if (!Object.keys(proyecto).length) {
+    if (!Object.keys(proyecto).length || proyecto.estado !== 'aceptado') {
         return (
-            <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
-                <div className="text-center">
-                    <h1 className="display-1 ms-black">Proyecto no encontrado</h1>
-                </div>
+            <div className="container-fluid d-flex flex-column justify-content-center align-items-center" style={{height: '100vh'}}>
+                <h1 className="display-1 ms-black">Proyecto no encontrado</h1>
             </div>
         )
     }
