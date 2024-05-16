@@ -1,0 +1,76 @@
+{
+  "EN": {
+    "title": "Centro de Ayuda",
+    "button_1_text": "Preguntas frecuentes",
+    "button_2_text": "Sobre U-Reservorio",
+    "topic_1": {
+      "title": "Crear cuenta",
+      "question_1": "¿Puedo crear una cuenta con un correo externo a la U-tad?",
+      "answer_1": "No, por seguridad y privacidad, el contenido solo estará disponible para alumnos y miembros de la institución.",
+      "question_2": "¿Dónde encuentro el link para verificar mi cuenta?",
+      "answer_2": "En tu correo electrónico de la U-tad, desde la aplicación de Outlook",
+      "question_3": "¿Puedo seleccionar “profesor” cuando creo la cuenta aunque no lo sea?",
+      "answer_3": "Si no eres profesor no podrás acceder a la plataforma como tal, ya que necesitas acreditar con datos específicos."
+    },
+    "topic_2": {
+      "title": "Rol de Coord./Depto.",
+      "question_1": "¿Cómo consigo un código de Coordinador?",
+      "answer_1": "Ponte en contacto con otro coordinador/a para que genere un código y te lo pase."
+    },
+    "topic_3": {
+      "title": "Subir un trabajo",
+      "question_1": "¿Necesito elegir una portada sí o sí para subir mi proyecto?",
+      "answer_1": "Sí, es la carta de presentación y en base a lo que decidirán acceder a tu trabajo, ¡procura que sea representativa de tu proyecto!",
+      "question_2": "¿Qué pasa si algunos miembros del proyecto no tienen cuenta en la plataforma?",
+      "answer_2": "No pasa nada, inclúyelos/as como miembros/as aunque no tengan perfil en la plataforma."
+    },
+    "topic_4": {
+      "title": "No encuentro un proyecto",
+      "question_1": "Busco un proyecto pero no aparece",
+      "answer_1": "Asegúrate de que esté bien escrito el título del proyecto o busca por nombre de creador. Si sigue sin aparecer, cerciórate de que el proyecto está subido a la plataforma."
+    },
+    "about": {
+      "title": "Sobre U-Reservorio",
+      "paragraph_1": "Con el paso de los años y según nuestro centro va creciendo, los alumnos de U-Tad han creado infinidad de proyectos, trabajos y entregas a los que se intenta dar visibilidad desde diversos departamentos dentro de la universidad.",
+      "paragraph_2": "Hasta ahora no existía un punto central que sirviese como repositorio para consultar estos proyectos y, que nos pueda servir para detectar los trabajos más relevantes, conocer lo que están haciendo desde otras áreas, materias o asignaturas y que pueda servir de referencia a los propios alumnos para ver lo que han sido capaces de hacer los compañeros/as que les han precedido.",
+      "paragraph_3": "Consideramos que existe una necesidad de centralizar toda esta información creciente, de forma que quede registrada, ordenada, accesible y dinámica, facilitando acciones futuras de promoción de los alumnos y alumni de U-Tad mediante sus trabajos."
+    }
+  },
+  "ES": {
+    "title": "Help Center",
+    "button_1_text": "Frequently Asked Questions",
+    "button_2_text": "About U-Reservorio",
+    "topic_1": {
+      "title": "Create account",
+      "question_1": "Can I create an account with an email address external to U-tad?",
+      "answer_1": "No, for security and privacy, the content will only be available to students and members of the institution.",
+      "question_2": "Where do I find the link to verify my account?",
+      "answer_2": "In your U-tad email, from the Outlook application",
+      "question_3": "Can I select “teacher” when I create the account even if I am not one?",
+      "answer_3": "If you are not a teacher you will not be able to access the platform as such, since you need to accredit with specific data."
+    },
+    "topic_2": {
+      "title": "Coord./Depto. Role",
+      "question_1": "How do I get a Coordinator code?",
+      "answer_1": "Contact another coordinator to generate a code and pass it to you."
+    },
+    "topic_3": {
+      "title": "Upload a project",
+      "question_1": "It is mandatory to choose a cover to upload my project?",
+      "answer_1": "Yes, it is the presentation letter and based on what they will decide to access your work, make sure it is representative of your project!",
+      "question_2": "What happens if some members of the project do not have an account on the platform?",
+      "answer_2": "No problem, include them as members even if they don't have a profile on the platform."
+    },
+    "topic_4": {
+      "title": "I can't find a project",
+      "question_1": "I am looking for a project but it does not appear",
+      "answer_1": "Make sure the project title is spelled correctly or search by creator name. If it still does not appear, make sure the project is uploaded to the platform."
+    },
+    "about": {
+      "title": "About U-Reservorio",
+      "paragraph_1": "Over the years and as our center grows, U-Tad students have created countless projects, works and deliveries that are trying to be made visible from various departments within the university",
+      "paragraph_2": "Until now there was no central point that could serve as a repository to consult these projects and, which can help us to detect the most relevant works, know what they are doing from other areas, subjects or subjects and that can serve as a reference to the students themselves to see what they have been able to do the colleagues who have preceded them.",
+      "paragraph_3": "We consider that there is a need to centralize all this growing information, so that it is recorded, ordered, accessible and dynamic, facilitating future actions to promote U-Tad students and alumni through their work."
+    }
+  }
+}

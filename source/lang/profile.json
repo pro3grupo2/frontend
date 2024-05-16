@@ -1,0 +1,94 @@
+{
+  "EN": {
+    "clipboard": {
+      "copied": "¡Código copiado al portapapeles!",
+      "error": "Error al copiar el código: "
+    },
+    "codes": {
+      "delete_error": "Error al eliminar el código"
+    },
+    "user_not_found": "Usuario no encontrado",
+    "new_project": "Nuevo proyecto",
+    "edit_profile": "Editar perfil",
+    "topics": {
+      "uploaded": {
+        "title": "Proyectos subidos",
+        "empty": {
+          "title": "No hay proyectos que mostrar",
+          "description": "Parece que no hay proyectos que mostrar en este momento"
+        }
+      },
+      "pending": {
+        "title": "Solicitudes pendientes",
+        "empty": {
+          "title": "No hay solicitudes que mostrar",
+          "description": "Parece que no hay solicitudes que mostrar en este momento"
+        }
+      },
+      "manage": {
+        "title": "Gestionar solicitudes",
+        "empty": {
+          "title": "No hay proyectos que mostrar",
+          "description": "Parece que no hay proyectos que mostrar en este momento"
+        }
+      },
+      "codes": {
+        "title": "Códigos de Administrador",
+        "uses_title": "¿Cuántos usos tendrá este código?",
+        "uses_placeholder": "Número",
+        "generate": "GENERAR CÓDIGO",
+        "table": {
+          "code": "Código",
+          "uses": "Usos restantes",
+          "empty": "No hay códigos disponibles."
+        }
+      }
+    }
+  },
+  "ES": {
+    "clipboard": {
+      "copied": "Code copied to clipboard!",
+      "error": "Error copying code: "
+    },
+    "codes": {
+      "delete_error": "Error deleting code"
+    },
+    "user_not_found": "User not found",
+    "new_project": "New project",
+    "edit_profile": "Edit profile",
+    "topics": {
+      "uploaded": {
+        "title": "Uploaded projects",
+        "empty": {
+          "title": "No projects to show",
+          "description": "It seems there are no projects to show at the moment"
+        }
+      },
+      "pending": {
+        "title": "Pending requests",
+        "empty": {
+          "title": "No requests to show",
+          "description": "It seems there are no requests to show at the moment"
+        }
+      },
+      "manage": {
+        "title": "Manage requests",
+        "empty": {
+          "title": "No projects to show",
+          "description": "It seems there are no projects to show at the moment"
+        }
+      },
+      "codes": {
+        "title": "Admin Codes",
+        "uses_title": "How many uses will this code have?",
+        "uses_placeholder": "Number",
+        "generate": "GENERATE CODE",
+        "table": {
+          "code": "Code",
+          "uses": "Uses remaining",
+          "empty": "No codes available."
+        }
+      }
+    }
+  }
+}

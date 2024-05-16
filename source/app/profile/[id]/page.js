@@ -25,6 +25,8 @@ import NavBar from "@/components/NavBar"
 import '../../globals.css'
 import '../../../styles/Profile.css'
 
+import {profile} from "@/lang"
+
 function ProfileComponent({params}) {
     const {usuario, token} = useAuth()
 
@@ -66,8 +68,8 @@ function ProfileComponent({params}) {
     const copiarAlPortapapeles = (codigo) => {
         navigator.clipboard
             .writeText(codigo)
-            .then(() => alert('¡Código copiado al portapapeles!'))
-            .catch(err => alert('Error al copiar el código: ' + err))
+            .then(() => alert(profile.clipboard.copied))
+            .catch(err => alert(profile.clipboard.error + err))
     }
 
     useEffect(() => {
@@ -159,7 +161,7 @@ function ProfileComponent({params}) {
         const {codigoId, index} = codigoToDelete
         const data = await eliminar_codigo(token, codigoId)
         if (!data) {
-            alert('Error al eliminar el código')
+            alert(profile.codes.delete_error)
         } else {
             setCodigos(codigos.filter((_, idx) => idx !== index))
         }
@@ -170,7 +172,7 @@ function ProfileComponent({params}) {
         return (
             <div className="container-fluid p-5 d-flex flex-column justify-content-center" style={{height: '100vh'}}>
                 <div className="text-center">
-                    <h1 className="display-1 ms-black">Usuario no encontrado</h1>
+                    <h1 className="display-1 ms-black">{profile.user_not_found}</h1>
                 </div>
             </div>
         )
@@ -200,8 +202,8 @@ function ProfileComponent({params}) {
                         <p className="link-offset-1 fw-bold p-0 m-0 mx-4 px-3 pt-1"><Image src="/icons/enlace.svg" className="d-start w-auto h-auto" alt="enlace" height={0} width={0}/> {' '}<Link href={`${user.portfolio}`} target="_blank">{user.portfolio}</Link></p>
                         <p className="ms-regular text-break p-0 m-0 mx-4 px-3 pt-3" style={{maxWidth: '30rem'}}>{user.descripcion}</p>
                         <div className={`${is_owner ? 'd-flex' : 'd-none'} flex-row gap-3 mx-4 px-3 pt-3`}>
-                            <button className="btn btn-primary ms-button-small p-2 btn-hover" style={{minHeight: 48, maxWidth: 238}} onClick={() => setModalShowNewProject(true)}>Nuevo proyecto</button>
-                            <button className="btn btn-outline-primary ms-button-small color-secundario-negro p-2" style={{minHeight: 48, maxWidth: 192}} onClick={() => setModalShowEditProfile(true)}>Editar perfil</button>
+                            <button className="btn btn-primary ms-button-small p-2 btn-hover" style={{minHeight: 48, maxWidth: 238}} onClick={() => setModalShowNewProject(true)}>{profile.new_project}</button>
+                            <button className="btn btn-outline-primary ms-button-small color-secundario-negro p-2" style={{minHeight: 48, maxWidth: 192}} onClick={() => setModalShowEditProfile(true)}>{profile.edit_profile}</button>
                         </div>
                     </div>
 
@@ -221,7 +223,7 @@ function ProfileComponent({params}) {
                         projectsNoValidados_btn_ref.current.classList.remove('btn-active')
                         projectsSolicitudes_btn_ref.current.classList.remove('btn-active')
                         codigosAdmin_btn_ref.current.classList.remove('btn-active')
-                    }}>Proyectos subidos
+                    }}>{profile.topics.uploaded.title}
                     </button>
 
                     <button ref={projectsNoValidados_btn_ref} className={`${(!is_owner) && 'd-none'} btn btn-custom ms-bold-subbody`} onClick={() => {
@@ -234,7 +236,7 @@ function ProfileComponent({params}) {
                         projectsNoValidados_btn_ref.current.classList.add('btn-active')
                         projectsSolicitudes_btn_ref.current.classList.remove('btn-active')
                         codigosAdmin_btn_ref.current.classList.remove('btn-active')
-                    }}>Solicitudes pendientes
+                    }}>{profile.topics.pending.title}
                     </button>
 
                     <button ref={projectsSolicitudes_btn_ref} className={`${!is_coordinador && 'd-none'} btn btn-custom ms-bold-subbody`} onClick={() => {
@@ -247,7 +249,7 @@ function ProfileComponent({params}) {
                         projectsNoValidados_btn_ref.current.classList.remove('btn-active')
                         projectsSolicitudes_btn_ref.current.classList.add('btn-active')
                         codigosAdmin_btn_ref.current.classList.remove('btn-active')
-                    }}>Gestionar Solicitudes
+                    }}>{profile.topics.manage.title}
                     </button>
 
                     <button ref={codigosAdmin_btn_ref} className={`${!is_coordinador && 'd-none'} btn btn-custom ms-bold-subbody`} onClick={() => {
@@ -260,7 +262,7 @@ function ProfileComponent({params}) {
                         projectsNoValidados_btn_ref.current.classList.remove('btn-active')
                         projectsSolicitudes_btn_ref.current.classList.remove('btn-active')
                         codigosAdmin_btn_ref.current.classList.add('btn-active')
-                    }}>Códigos de Administrador
+                    }}>{profile.topics.codes.title}
                     </button>
                 </div>
 
@@ -271,8 +273,8 @@ function ProfileComponent({params}) {
                             projectsValidados.map(project => <ProjectCard key={project.id} onClick={handleCardClick} project={project} isHome={true}/>)
                             :
                             <div className="text-center mt-5">
-                                <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
-                                <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
+                                <h1 className="ms-extra-bold">{profile.topics.uploaded.empty.title}</h1>
+                                <p className="lead">{profile.topics.uploaded.empty.description}</p>
                             </div>
                     }
                 </div>
@@ -284,8 +286,8 @@ function ProfileComponent({params}) {
                             projectsNoValidados.map(project => <ProjectCard key={project.id} onClick={console.log} project={project} isHome={true}/>)
                             :
                             <div className="text-center mt-5">
-                                <h1 className="ms-extra-bold">No hay solicitudes que mostrar</h1>
-                                <p className="lead">Parece que no hay solicitudes que mostrar en este momento</p>
+                                <h1 className="ms-extra-bold">{profile.topics.pending.empty.title}</h1>
+                                <p className="lead">{profile.topics.pending.empty.description}</p>
                             </div>
                     }
                 </div>
@@ -305,8 +307,8 @@ function ProfileComponent({params}) {
                                 ))
                             :
                             <div className="text-center mt-5">
-                                <h1 className="ms-extra-bold">No hay proyectos que mostrar</h1>
-                                <p className="lead">Parece que no hay proyectos que mostrar en este momento</p>
+                                <h1 className="ms-extra-bold">{profile.topics.manage.empty.title}</h1>
+                                <p className="lead">{profile.topics.manage.empty.description}</p>
                             </div>
                     }
                 </div>
@@ -315,12 +317,12 @@ function ProfileComponent({params}) {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6 mx-auto text-center mt-5">
-                                <p className='fw-bold mt-5'>¿Cuántos usos tendrá este código?</p>
+                                <p className='fw-bold mt-5'>{profile.topics.codes.uses_title}</p>
                                 <div className="form-group">
                                     <input
                                         type="number"
                                         className="rounded border-normal p-2 text-center mt-3 w-100"
-                                        placeholder="Número"
+                                        placeholder={profile.topics.codes.uses_placeholder}
                                         min={1}
                                         max={10}
                                         style={{maxWidth: 165, height: 48}}
@@ -335,7 +337,7 @@ function ProfileComponent({params}) {
                                         onClick={crearCodigo}
                                         disabled={!numUsos || numUsos <= 0 || numUsos > 10} // Deshabilita el botón si numUsos está vacío o es cero
                                     >
-                                        GENERAR CÓDIGO
+                                        {profile.topics.codes.generate}
                                     </button>
                                 </div>
                             </div>
@@ -343,8 +345,8 @@ function ProfileComponent({params}) {
                             <div className="col-md-6 justify-content-center mt-4">
                                 <div className="w-100">
                                     <div className="d-flex justify-content-between align-items-center border-bottom border-2">
-                                        <p className="m-3 fw-bold">Código</p>
-                                        <p className="m-3 fw-bold">Usos restantes</p>
+                                        <p className="m-3 fw-bold">{profile.topics.codes.table.code}</p>
+                                        <p className="m-3 fw-bold">{profile.topics.codes.table.uses}</p>
                                     </div>
 
                                     {
@@ -376,7 +378,7 @@ function ProfileComponent({params}) {
                                                 ))}
                                             </div>
                                             :
-                                            <p className="text-center">No hay códigos disponibles.</p>
+                                            <p className="text-center">{profile.topics.codes.table.empty}</p>
                                     }
                                 </div>
                             </div>

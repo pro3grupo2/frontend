@@ -1,0 +1,16 @@
+{
+  "EN": {
+    "title": "Trabajos de alumnos",
+    "subtitle": "¡Descubre aquí el talento U-tad!",
+    "description_1": "Bienvenido al repositorio de proyectos oficial de la U-tad.",
+    "description_2": "Aquí podrás encontrar todo tipo de trabajos de los alumnos que se han formado aquí!",
+    "button_text": "ACCEDER"
+  },
+  "ES": {
+    "title": "Student projects",
+    "subtitle": "Discover U-tad's talent here!",
+    "description_1": "Welcome to the official U-tad project repository.",
+    "description_2": "Here you can find all kinds of works by the students who have studied here!",
+    "button_text": "ACCESS"
+  }
+}

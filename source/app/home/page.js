@@ -14,6 +14,8 @@ import Filters from '@/components/Filters'
 import Footer from '@/components/Footer'
 import NavBar from "@/components/NavBar"
 
+import {home} from "@/lang"
+
 function HomeComponent() {
     const {token} = useAuth()
 
@@ -141,8 +143,8 @@ function HomeComponent() {
                     projects.length === 0
                         ?
                         <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center mt-5">
-                            <h1 className="display-5 fw-bold w-50">Ups! No hemos encontrado resultados para su búsqueda.</h1>
-                            <p className="lead mt-3">Comprueba el nombre del proyecto o el correo de los autores.</p>
+                            <h1 className="display-5 fw-bold w-50">{home.not_found_title}</h1>
+                            <p className="lead mt-3">{home.not_found_message}</p>
                         </div>
                         :
                         <div className="row g-4 card-group mt-3">

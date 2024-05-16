@@ -1,0 +1,44 @@
+{
+  "EN": {
+    "filters": {
+      "title": "Filtro",
+      "filter_award": {
+        "title": "Premio",
+        "options": {
+          "yes": "Sí",
+          "no": "No"
+        },
+        "result": {
+          "yes": "Premiados",
+          "no": "No premiados"
+        }
+      },
+      "filter_title": {
+        "title": "Titulación"
+      }
+    },
+    "not_found_title": "Ups! No hemos encontrado resultados para su búsqueda.",
+    "not_found_message": "Comprueba el nombre del proyecto o el correo de los autores."
+  },
+  "ES": {
+    "filters": {
+      "title": "Filter",
+      "filter_award": {
+        "title": "Award",
+        "options": {
+          "yes": "Yes",
+          "no": "No"
+        },
+        "result": {
+          "yes": "Awarded",
+          "no": "Not awarded"
+        }
+      },
+      "filter_title": {
+        "title": "Title"
+      }
+    },
+    "not_found_title": "Ups! We couldn't find any results for your search.",
+    "not_found_message": "Check the project name or the authors' email."
+  }
+}

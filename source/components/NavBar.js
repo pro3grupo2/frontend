@@ -17,10 +17,15 @@ export default function NavBar() {
         [isProfileHover, setIsProfileHover] = useState(false),
         timerRef = useRef(),
         [modal_show_new_project, setModalShowNewProject] = useState(false),
+        lang_ref = useRef(null),
         router = useRouter()
 
     const
         [has_proyectos_pendientes, setHasProyectosPendientes] = useState(false)
+
+    useEffect(() => {
+        lang_ref.current.innerText = localStorage.getItem('lang') ?? 'EN'
+    }, [])
 
     useEffect(() => {
         if (!token) return
@@ -47,6 +52,17 @@ export default function NavBar() {
 
     const handleLogin = () => {
         router.push('/signin')
+    }
+
+    const handleChangeLanguage = () => {
+        if (!localStorage.getItem('lang')) localStorage.setItem('lang', 'EN')
+
+        if (localStorage.getItem('lang') === 'EN') localStorage.setItem('lang', 'ES')
+        else localStorage.setItem('lang', 'EN')
+
+        lang_ref.current.innerText = localStorage.getItem('lang')
+
+        location.reload()
     }
 
     return (
@@ -99,7 +115,7 @@ export default function NavBar() {
                             <button className="nav-link text-secondary w-100 mb-2" onClick={signed ? handleLogout : handleLogin}>{signed ? "Cerrar Sesión" : "Iniciar Sesión"}</button>
                         </div>
 
-                        <button className="border-0 bg-transparent fs-6 fw-bold mx-sm-2 mx-md-3">EN</button>
+                        <button className="border-0 bg-transparent fs-6 fw-bold mx-sm-2 mx-md-3" ref={lang_ref} onClick={() => handleChangeLanguage()}>EN</button>
                     </div>
                 </div>
             </nav>

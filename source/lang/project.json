@@ -1,0 +1,22 @@
+{
+  "EN": {
+    "not_found": "Proyecto no encontrado",
+    "description": "Descripción del proyecto:",
+    "awards": "Premios:",
+    "authors": "Autores del proyecto:",
+    "uploaded_by": "Subido por:",
+    "user_has_no_projects": " no tiene más proyectos.",
+    "view_more": "+ Ver más",
+    "no_projects": "No hemos encontrado proyectos parecidos."
+  },
+  "ES": {
+    "not_found": "Project not found",
+    "description": "Project description:",
+    "awards": "Awards:",
+    "authors": "Project authors:",
+    "uploaded_by": "Uploaded by:",
+    "user_has_no_projects": " has no more projects.",
+    "view_more": "+ View more",
+    "no_projects": "We haven't found similar projects."
+  }
+}

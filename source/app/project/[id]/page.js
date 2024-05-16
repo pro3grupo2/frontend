@@ -18,6 +18,8 @@ import NewPremiosModal from "@/components/NewPremiosModal"
 import Footer from '@/components/Footer'
 import NavBar from "@/components/NavBar"
 
+import {project} from '@/lang'
+
 function ProjectComponent({params}) {
     const {usuario, token} = useAuth()
 
@@ -101,7 +103,7 @@ function ProjectComponent({params}) {
     if (!Object.keys(proyecto).length || proyecto.estado !== 'aceptado') {
         return (
             <div className="container-fluid d-flex flex-column justify-content-center align-items-center" style={{height: '100vh'}}>
-                <h1 className="display-1 ms-black">Proyecto no encontrado</h1>
+                <h1 className="display-1 ms-black">{project.not_found}</h1>
             </div>
         )
     }
@@ -217,11 +219,11 @@ function ProjectComponent({params}) {
                         <Image className="z-1" src={proyecto.portada.startsWith('http') ? proyecto.portada : `https://api.reservorio-u-tad.com${proyecto.portada}`} objectFit={'cover'} width={0} height={0} fill sizes={"1"} alt={proyecto.portada}/>
                     </div>
                     <div className="d-flex flex-column">
-                        <h5 className="fw-bold ms-font mb-3">Descripción del proyecto:</h5>
+                        <h5 className="fw-bold ms-font mb-3">{project.description}</h5>
                         <p className="ms-regular mb-3" style={{maxWidth: '40rem', minHeight: '20rem'}}>{proyecto.ficha}</p>
                         {proyecto.premiado && proyecto.premios.length > 0 &&
                             <>
-                                <h5 className="fw-bold ms-font mb-3">Premios:</h5>
+                                <h5 className="fw-bold ms-font mb-3">{project.awards}</h5>
                                 <div className="d-flex flex-row flex-wrap gap-2 mb-3">
                                     {
                                         proyecto.premios.map((premio) => (
@@ -236,14 +238,14 @@ function ProjectComponent({params}) {
                                 proyecto.participantes.length > 0
                                 && !(proyecto.participantes.length === 1 && proyecto.participantes[0].correo === proyecto.usuarios.correo) &&
                                 <>
-                                    <h5 className="fw-bold ms-font mb-3">Autores del proyecto:</h5>
+                                    <h5 className="fw-bold ms-font mb-3">{project.authors}</h5>
                                     <p className="card-text ms-regular-subbody">
                                         {proyecto.participantes.map(participante => processMail(participante.correo)).reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], []).join(', ')}
                                     </p>
                                 </>
                             }
                         </div>
-                        <h5 className="fw-bold ms-font mb-3">Subido por:</h5>
+                        <h5 className="fw-bold ms-font mb-3">{project.uploaded_by}</h5>
                         <Link href={`/profile/${proyecto.usuarios.id}`} className="card-text ms-regular">{proyecto.usuarios.nombre_completo}</Link>
                     </div>
                 </div>
@@ -259,14 +261,14 @@ function ProjectComponent({params}) {
                             )
                             :
                             <div className="col-12 text-center">
-                                <p className="lead mt-3">{proyecto.usuarios.nombre_completo} no tiene mas proyectos.</p>
+                                <p className="lead mt-3">{proyecto.usuarios.nombre_completo}{project.user_has_no_projects}</p>
                             </div>
                     }
                 </div>
 
                 <div className="d-flex justify-content-center align-items-center">
                     <hr className="w-50"/>
-                    <button onClick={handleViewMore} className={`${number_proyectos >= userProjects.length && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                    <button onClick={handleViewMore} className={`${number_proyectos >= userProjects.length && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>{project.view_more}</button>
                     <hr className="w-50"/>
                 </div>
 
@@ -281,14 +283,14 @@ function ProjectComponent({params}) {
                             )
                             :
                             <div className="col-12 text-center">
-                                <p className="lead mt-3">No hemos encontrado proyectos parecidos.</p>
+                                <p className="lead mt-3">{project.no_projects}</p>
                             </div>
                     }
                 </div>
 
                 <div className="d-flex justify-content-center align-items-center">
                     <hr className="w-50"/>
-                    <button onClick={handleViewMore2} className={`${no_more_proyectos && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>+ Ver más</button>
+                    <button onClick={handleViewMore2} className={`${no_more_proyectos && 'd-none'} ms-regular px-5 py-2 ${isViewMoreHover ? "bg-primary border-2 border-primary border-2 text-white" : "bg-transparent btn-outline-primary"} rounded`} onMouseEnter={() => setIsViewMoreHover(true)} onMouseLeave={() => setIsViewMoreHover(false)} style={{width: 200}}>{project.view_more}</button>
                     <hr className="w-50"/>
                 </div>
             </div>
