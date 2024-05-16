@@ -1,8 +1,22 @@
 {
   "EN": {
-
+    "title": "Iniciar sesión con el correo de la U-tad",
+    "subtitle": "El desarrollo de proyectos es una carta de presentación de los conocimientos, experiencia y capacidad de trabajo en equipo.",
+    "email_placeholder": "Correo electrónico",
+    "password_placeholder": "Contraseña",
+    "recover_link": "¿Has olvidado la contraseña?",
+    "login_button": "Iniciar sesión",
+    "signup_text": "¿Aún no estas registrado?",
+    "signup_link": "¡Inscríbete ahora!"
   },
   "ES": {
-
+    "title": "Sign in with U-tad's email",
+    "subtitle": "The development of projects is a letter of introduction of knowledge, experience and teamwork capacity.",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "recover_link": "Forgot your password?",
+    "login_button": "Sign in",
+    "signup_text": "Not registered yet?",
+    "signup_link": "Sign up now!"
   }
 }

@@ -14,7 +14,7 @@ import Filters from '@/components/Filters'
 import Footer from '@/components/Footer'
 import NavBar from "@/components/NavBar"
 
-import {home} from "@/lang"
+import {home_texts} from "@/lang"
 
 function HomeComponent() {
     const {token} = useAuth()
@@ -32,25 +32,6 @@ function HomeComponent() {
     const
         [loading, setLoading] = useState(false)
 
-    //
-    // Filtros aceptados en get_proyectos:
-    //  - premiado: 'Type: Bool'
-    //  - anio: 'Type: Year (YYYY)
-    //  - titulaciones: 'Type: Int, Int, ..., Int'
-    //  - busqueda: 'Type: String, Max-Length: 100'
-    //
-    // Los filtros se pasarán como un diccionario:
-    //  {
-    //    premiado: true,
-    //    anio: 2021,
-    //    titulaciones: '1,2,3',
-    //    busqueda: 'busqueda'
-    //  }
-    // Si no se quiere aplicar un filtro, simplemente no se pasa en el diccionario.
-    //
-    // La llamada a la funcion quedara asi:
-    //  get_proyectos(token, 0, {premiado: true, anio: 2021, titulaciones: '1,2,3', busqueda: 'busqueda'})
-    //
     useEffect(() => {
         setLoading(true)
         if (!token) return
@@ -134,6 +115,8 @@ function HomeComponent() {
 
     if (loading || !proyectosLoaded) return <Loading/>
 
+    const home_json = home_texts(localStorage.getItem('lang') ?? 'EN')
+    
     return (
         <>
             <div className="container-fluid p-5">
@@ -143,8 +126,8 @@ function HomeComponent() {
                     projects.length === 0
                         ?
                         <div className="container-fluid text-center d-flex flex-column justify-content-center align-items-center mt-5">
-                            <h1 className="display-5 fw-bold w-50">{home.not_found_title}</h1>
-                            <p className="lead mt-3">{home.not_found_message}</p>
+                            <h1 className="display-5 fw-bold w-50">{home_json.not_found_title}</h1>
+                            <p className="lead mt-3">{home_json.not_found_message}</p>
                         </div>
                         :
                         <div className="row g-4 card-group mt-3">
@@ -159,7 +142,7 @@ function HomeComponent() {
                         <path d="M17.3338 26.6666H14.6671V10.6666L7.33376 18L5.44043 16.1066L16.0004 5.54663L26.5604 16.1066L24.6671 18L17.3338 10.6666V26.6666Z" fill="white"/>
                     </svg>
                 </div>}
-            <Footer/>
+            <Footer lang={localStorage.getItem("lang") ?? "EN"}/>
         </>
     )
 }
@@ -167,7 +150,7 @@ function HomeComponent() {
 export default function Home() {
     return (
         <AuthProvider>
-            <NavBar/>
+            <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>
             <HomeComponent/>
         </AuthProvider>
     )

@@ -10,7 +10,9 @@ import {get_proyectos_pendientes} from "@/api/v1/proyectos"
 import {useAuth} from "@/context/authContext"
 import NewProjectModal from "@/components/NewProjectModal"
 
-export default function NavBar() {
+import {navbar_texts} from "@/lang"
+
+export default function NavBar({lang}) {
     const {usuario, token, signed, auth_signout} = useAuth()
 
     const
@@ -20,11 +22,13 @@ export default function NavBar() {
         lang_ref = useRef(null),
         router = useRouter()
 
+    const navbar_json = navbar_texts(lang)
+
     const
         [has_proyectos_pendientes, setHasProyectosPendientes] = useState(false)
 
     useEffect(() => {
-        lang_ref.current.innerText = localStorage.getItem('lang') ?? 'EN'
+        lang_ref.current.innerText = lang
     }, [])
 
     useEffect(() => {
@@ -107,12 +111,12 @@ export default function NavBar() {
                                 }
                             </Link>
                         </div>
-                        <div className={`position-absolute top-100 end-0 me-4 bg-white shadow p-3 border border-2 rounded-bottom border-primary ${isProfileHover ? "" : "visually-hidden"}`} onMouseEnter={handleMouseEnter} onMouseLeave={() => setIsProfileHover(false)} style={{zIndex: 100}}>
-                            <p className="ms-font fw-bold text-center w-100">{signed ? usuario?.nombre_completo : "Usuario"}</p>
+                        <div className={`position-absolute top-100 end-0 ${((lang === "ES") && !signed) ? "px-4 me-5" : "me-4"} bg-white shadow p-3 border border-2 rounded-bottom border-primary ${isProfileHover ? "" : "visually-hidden"}`} onMouseEnter={handleMouseEnter} onMouseLeave={() => setIsProfileHover(false)} style={{zIndex: 100}}>
+                            <p className="ms-font fw-bold text-center w-100">{signed ? usuario?.nombre_completo : navbar_json.user_not_logged}</p>
                             <hr/>
-                            {signed && <button className="nav-link text-secondary w-100 mb-2" onClick={() => setModalShowNewProject(true)}>Nuevo Proyecto</button>}
-                            {signed && usuario?.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile/me?tab=codigos")}>Códigos de Admin.</button>}
-                            <button className="nav-link text-secondary w-100 mb-2" onClick={signed ? handleLogout : handleLogin}>{signed ? "Cerrar Sesión" : "Iniciar Sesión"}</button>
+                            {signed && <button className="nav-link text-secondary w-100 mb-2" onClick={() => setModalShowNewProject(true)}>{navbar_json.new_project}</button>}
+                            {signed && usuario?.rol === "coordinador" && <button className="nav-link text-secondary w-100 mb-2" onClick={() => router.push("/profile/me?tab=codigos")}>{navbar_json.admin_codes}</button>}
+                            <button className="nav-link text-secondary w-100 mb-2" onClick={signed ? handleLogout : handleLogin}>{signed ? navbar_json.sign_out : navbar_json.sign_in}</button>
                         </div>
 
                         <button className="border-0 bg-transparent fs-6 fw-bold mx-sm-2 mx-md-3" ref={lang_ref} onClick={() => handleChangeLanguage()}>EN</button>

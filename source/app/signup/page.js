@@ -112,7 +112,7 @@ function SignUpComponent() {
 export default function SignUp() {
     return (
         <AuthProvider redirect={false}>
-            <NavBar/>
+            <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>
             <SignUpComponent/>
         </AuthProvider>
     )

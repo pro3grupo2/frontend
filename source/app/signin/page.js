@@ -15,6 +15,8 @@ import {check_email, check_password} from "@/utils/validation"
 import "../../styles/Signup.css"
 import {AuthProvider, useAuth} from "@/context/authContext"
 
+import {recover_texts, sign_in_texts} from "@/lang"
+
 function SignInComponent() {
     const {auth_signin} = useAuth()
 
@@ -30,6 +32,8 @@ function SignInComponent() {
         [loading, setLoading] = useState(false),
         [error, setError] = useState('')
 
+    const sign_in_json = sign_in_texts(localStorage.getItem("lang") ?? "EN")
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -38,6 +42,7 @@ function SignInComponent() {
 
         if (!check_email(
             email,
+            localStorage.getItem("lang") ?? "EN",
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
@@ -46,6 +51,7 @@ function SignInComponent() {
 
         if (!check_password(
             password,
+            localStorage.getItem("lang") ?? "EN",
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
@@ -66,10 +72,9 @@ function SignInComponent() {
             <EstructuraFormularios clase_imagen="bg-image-signin">
                 <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32rem'}}>
                     <div>
-                        <h1 className='fw-bold'>Iniciar sesión con el correo de la U-tad</h1>
+                        <h1 className='fw-bold'>{sign_in_json.title}</h1>
                         <p className='ms-regular'>
-                            El desarrollo de proyectos es una carta de presentación de los
-                            conocimientos, experiencia y capacidad de trabajo en equipo.
+                            {sign_in_json.subtitle}
                         </p>
                     </div>
 
@@ -83,9 +88,8 @@ function SignInComponent() {
                             onChange={(e) => setEmail(e.target.value)}
                             style={{maxHeight: '3rem'}}
                             onFocus={() => email_ref.current.classList.remove('border-error')}
-                            placeholder="Correo electrónico"
+                            placeholder={sign_in_json.email_placeholder}
                             autoComplete="off"
-
                         />
 
                         <div className={'mb-4'}>
@@ -109,7 +113,7 @@ function SignInComponent() {
                                     setError(null)
                                     password_ref.current.classList.remove('border-error')
                                 }}
-                                placeholder="Contraseña"
+                                placeholder={sign_in_json.password_placeholder}
                                 autoComplete="off"
                             />
 
@@ -131,7 +135,7 @@ function SignInComponent() {
 
                         {error && <p style={{color: 'red'}}>{error}</p>}
 
-                        <Link className="fw-bold ps-1 link-dark" href="/recover">¿Has olvidado la contraseña?</Link>
+                        <Link className="fw-bold ps-1 link-dark" href="/recover">{sign_in_json.recover_link}</Link>
                     </div>
 
                     <div className="mt-4">
@@ -139,12 +143,12 @@ function SignInComponent() {
                             type="submit"
                             className="btn btn-primary mt-5 btn-lg text-center fw-bold fs-3 w-100 text-uppercase"
                             style={{maxHeight: 54}}>
-                            Iniciar sesión
+                            {sign_in_json.login_button}
                         </button>
 
                         <div className="text-center mt-4">
-                            <span className="pe-1 ">¿Aún no estas registrado?</span>
-                            <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">¡Inscríbete ahora!</Link>
+                            <span className="pe-1 ">{sign_in_json.signup_text}</span>
+                            <Link className="link-underline-dark link-dark fw-bold ps-1" href="/signup">{sign_in_json.signup_link}</Link>
                         </div>
                     </div>
                 </form>
@@ -156,7 +160,7 @@ function SignInComponent() {
 export default function SignIn() {
     return (
         <AuthProvider>
-            <NavBar/>
+            <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>
             <SignInComponent/>
         </AuthProvider>
     )

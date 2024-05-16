@@ -4,7 +4,7 @@ import {get_areas} from "@/api/v1/areas"
 import {get_titulaciones} from "@/api/v1/titulaciones"
 import {useAuth} from "@/context/authContext"
 
-import {home} from "@/lang"
+import {home_texts} from "@/lang"
 
 export default function Filters({onSearchChange, handleSearch, handleAreaClick, filters, setFilters, search, setSearch}) {
     const {token} = useAuth()
@@ -32,6 +32,8 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
             })
     }, [token])
 
+    const home_json = home_texts(localStorage.getItem('lang') ?? 'EN')
+    
     return (
         <>
             <div className="d-flex flex-row flex-wrap justify-content-center gap-3">
@@ -39,7 +41,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     onClick={() => setFilters_show(!filters_show)}
                     className="clickable ms-regular-subbody user-select-none d-flex flex-row flex-nowrap justify-content-center align-items-center gap-5 border border-black border-2 rounded p-3"
                     style={{height: 40, width: 158}}>
-                    {home.filters.title}
+                    {home_json.filters.title}
                     {
                         filters_show
                             ?
@@ -80,11 +82,11 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                     onChange={(e) => {
                         const premiado = !!(parseInt(e.target.value))
                         setFilters({...filters, premiado: premiado})
-                        setFilters_usuario({...filters_usuario, premiado: premiado ? home.filters.filter_award.result.yes : home.filters.filter_award.result.no})
+                        setFilters_usuario({...filters_usuario, premiado: premiado ? home_json.filters.filter_award.result.yes : home_json.filters.filter_award.result.no})
                     }}>
-                    < option value={0} disabled selected>{home.filters.filter_award.title}</option>
-                    <option value={1}>{home.filters.filter_award.options.yes}</option>
-                    <option value={0}>{home.filters.filter_award.options.no}</option>
+                    < option value={0} disabled selected>{home_json.filters.filter_award.title}</option>
+                    <option value={1}>{home_json.filters.filter_award.options.yes}</option>
+                    <option value={0}>{home_json.filters.filter_award.options.no}</option>
                 </select>
 
                 <select
@@ -100,7 +102,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
 
                         setFilters_usuario({...filters_usuario, titulaciones: titulacion.slice(index_en_slice)})
                     }}>
-                    <option key={-1} value={-1} disabled selected>{home.filters.filter_title.title}</option>
+                    <option key={-1} value={-1} disabled selected>{home_json.filters.filter_title.title}</option>
                     {
                         asignaturas
                             .map(
@@ -206,5 +208,4 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
             </ul>
         </>
     )
-
 }

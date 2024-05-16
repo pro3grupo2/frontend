@@ -1,0 +1,30 @@
+{
+  "EN": {
+    "check_password": {
+      "characters": "8 caracteres",
+      "lowercase": "Una minúscula",
+      "uppercase": "Una mayúscula",
+      "number": "Un número",
+      "special_character": "Un carácter especial"
+    },
+    "check_email": {
+      "empty": "No estar vacio",
+      "domain": "Dominio de correo de U-Tad",
+      "name": "Nombre del recipiente de U-Tad"
+    }
+  },
+  "ES": {
+    "check_password": {
+      "characters": "8 characters",
+      "lowercase": "One lowercase",
+      "uppercase": "One uppercase",
+      "number": "One number",
+      "special_character": "One special character"
+    },
+    "check_email": {
+      "empty": "Not empty",
+      "domain": "U-Tad email domain",
+      "name": "U-Tad recipient name"
+    }
+  }
+}

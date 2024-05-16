@@ -46,7 +46,7 @@ function ValidateComponent({params}) {
 export default function Validate({params}) {
     return (
         <AuthProvider redirect={false}>
-            <NavBar/>
+            <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>
             <ValidateComponent params={params}/>
         </AuthProvider>
     )

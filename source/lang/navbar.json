@@ -1,8 +1,16 @@
 {
   "EN": {
-
+    "user_not_logged": "Usuario",
+    "new_project": "Nuevo Proyecto",
+    "admin_codes": "Códigos de Admin.",
+    "sign_out": "Cerrar Sesión",
+    "sign_in": "Iniciar Sesión"
   },
   "ES": {
-
+    "user_not_logged": "User",
+    "new_project": "New Project",
+    "admin_codes": "Admin Codes",
+    "sign_out": "Sign Out",
+    "sign_in": "Sign In"
   }
 }

@@ -15,6 +15,8 @@ import {check_password} from "@/utils/validation"
 import {AuthProvider} from "@/context/authContext"
 import NavBar from "@/components/NavBar"
 
+import {recover_texts} from "@/lang"
+
 function RecoverPasswordComponent({params}) {
     const
         [password, setPassword] = useState(''),
@@ -28,11 +30,14 @@ function RecoverPasswordComponent({params}) {
         [loading, setLoading] = useState(false),
         router = useRouter()
 
+    const recover_json = recover_texts(localStorage.getItem('lang') ?? "EN").token
+
     useEffect(() => {
         setPasswordChecks([])
 
         if (!check_password(
             password,
+            localStorage.getItem('lang') ?? "EN",
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
@@ -45,7 +50,7 @@ function RecoverPasswordComponent({params}) {
         password_ref.current.classList.remove('border-error')
 
         if (password !== password2) {
-            setPasswordChecks((previous) => [...previous, 'Las contraseñas no coinciden'])
+            setPasswordChecks((previous) => [...previous, recover_json.password_not_match])
             return password2_ref.current.classList.add('border-error')
         }
 
@@ -66,7 +71,7 @@ function RecoverPasswordComponent({params}) {
         setLoading(false)
 
         if (!data) {
-            create_alert(setAlerts, 'Error al actualizar la contraseña', 'danger')
+            create_alert(setAlerts, recover_json.error_updating_password, 'danger')
             return
         }
 
@@ -82,8 +87,8 @@ function RecoverPasswordComponent({params}) {
             <EstructuraFormularios clase_imagen="bg-image-recover-password">
                 <form onSubmit={handleSubmit} className='d-flex flex-column gap-xxl-5' style={{maxWidth: '32.8rem'}}>
                     <div>
-                        <h1 className='fw-bold'>Recupera tu contraseña</h1>
-                        <p className=' pe-1 '>Crea una nueva contraseña</p>
+                        <h1 className='fw-bold'>{recover_json.title}</h1>
+                        <p className=' pe-1 '>{recover_json.subtitle}</p>
                     </div>
 
                     <div>
@@ -93,11 +98,11 @@ function RecoverPasswordComponent({params}) {
                                 type={tipo_password}
                                 id="password"
                                 value={password}
-                                className="ms-regular flex-grow-1 form-control  background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword(e.target.value)}
                                 style={{maxHeight: '3rem'}}
                                 onFocus={() => password_ref.current.classList.remove('border-error')}
-                                placeholder="Nueva contraseña"
+                                placeholder={recover_json.input_placeholder_1}
                                 autoComplete="off"
                             />
 
@@ -115,11 +120,11 @@ function RecoverPasswordComponent({params}) {
                                 type={tipo_password2}
                                 id="password"
                                 value={password2}
-                                className="ms-regular flex-grow-1 form-control  background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
+                                className="ms-regular flex-grow-1 form-control background-color-secundario-gris-claro-extra py-3 ps-4 fs-5"
                                 onChange={(e) => setPassword2(e.target.value)}
                                 style={{maxHeight: '3rem'}}
                                 onFocus={() => password2_ref.current.classList.remove('border-error')}
-                                placeholder="Repetir nueva contraseña"
+                                placeholder={recover_json.input_placeholder_2}
                                 autoComplete="off"
                             />
 
@@ -134,7 +139,7 @@ function RecoverPasswordComponent({params}) {
                         <div className={'my-4'}>
                             {
                                 password_checks.length > 0 &&
-                                <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">La contraseña debe contener al menos:</p>
+                                <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">{recover_json.needs}</p>
                             }
                             {
                                 password_checks.map((check, index) => (
@@ -146,7 +151,7 @@ function RecoverPasswordComponent({params}) {
                         <button
                             type="submit"
                             className="btn btn-primary btn-color-primary border-5 mt-3 fs-5 fw-bold w-100 btn-lg">
-                            RECUPERAR CONTRASEÑA
+                            {recover_json.button}
                         </button>
                     </div>
                 </form>
@@ -158,7 +163,7 @@ function RecoverPasswordComponent({params}) {
 export default function RecoverPassword({params}) {
     return (
         <AuthProvider redirect={false}>
-            <NavBar/>
+            <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>
             <RecoverPasswordComponent params={params}/>
         </AuthProvider>
     )

@@ -4,40 +4,45 @@ const EMAIL_TERMINATIONS = [
     "ext.u-tad.com"
 ]
 
-const check_password = (password, callback = undefined) => {
+import validation from "@/lang/validation.json"
+
+const check_password = (password, lang = "EN", callback = undefined) => {
+    const texts = validation[lang].check_password
     let check = true
 
     if (password.length < 8) {
         check = false
-        if (callback) callback('8 caracteres')
+        if (callback) callback(texts.characters)
     }
 
     if (!/[a-zñ]/.test(password)) {
         check = false
-        if (callback) callback('Una minúscula')
+        if (callback) callback(texts.lowercase)
     }
 
     if (!/[A-ZÑ]/.test(password)) {
         check = false
-        if (callback) callback('Una mayúscula')
+        if (callback) callback(texts.uppercase)
     }
 
     if (!/[0-9]/.test(password)) {
         check = false
-        if (callback) callback('Un número')
+        if (callback) callback(texts.number)
     }
 
     if (!/[!"#$%&'()*+,-./:;<=>?@[^_`{|}~]/.test(password)) {
         check = false
-        if (callback) callback('Un caracter especial')
+        if (callback) callback(texts.special_character)
     }
 
     return check
 }
 
-const check_email = (email, callback = undefined) => {
+const check_email = (email, lang = "EN", callback = undefined) => {
+    const texts = validation[lang].check_email
+
     if (!email) {
-        if (callback) callback('No estar vacio')
+        if (callback) callback(texts.empty)
         return false
     }
 
@@ -47,12 +52,12 @@ const check_email = (email, callback = undefined) => {
 
     if (!EMAIL_TERMINATIONS.includes(domain)) {
         check = false
-        if (callback) callback('Dominio de correo de U-Tad')
+        if (callback) callback(texts.domain)
     }
 
     if (!/^[a-zA-Z0-9ñÑ]+\.[a-zA-Z0-9ñÑ]+$/.test(username)) {
         check = false
-        if (callback) callback('Nombre del recipiente de U-Tad')
+        if (callback) callback(texts.name)
     }
 
     return check

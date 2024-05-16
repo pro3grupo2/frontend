@@ -10,82 +10,60 @@ import validate_json from './validate.json'
 import navbar_json from './navbar.json'
 import footer_json from './footer.json'
 
-const help = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const help_texts = (lang) => {
     return help_json[lang]
 }
 
-const home = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const home_texts = (lang) => {
     return home_json[lang]
 }
 
-const profile = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const profile_texts = (lang) => {
     return profile_json[lang]
 }
 
-const project = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const project_texts = (lang) => {
     return project_json[lang]
 }
 
-const recover = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const recover_texts = (lang) => {
     return recover_json[lang]
 }
 
-const sign_in = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const sign_in_texts = (lang) => {
     return sign_in_json[lang]
 }
 
-const sign_up = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const sign_up_texts = (lang) => {
     return sign_up_json[lang]
 }
 
-const validate = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const validate_texts = (lang) => {
     return validate_json[lang]
 }
 
-const navbar = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const navbar_texts = (lang) => {
     return navbar_json[lang]
 }
 
-const footer = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const footer_texts = (lang) => {
     return footer_json[lang]
 }
 
-const page = () => {
-    const lang = localStorage.getItem('lang') ?? 'EN'
-
+const page_texts = (lang) => {
     return page_json[lang]
 }
 
 module.exports = {
-    help: help(),
-    home: home(),
-    profile: profile(),
-    project: project(),
-    recover: recover(),
-    sign_in: sign_in(),
-    sign_up: sign_up(),
-    validate: validate(),
-    navbar: navbar(),
-    footer: footer(),
-    page: page()
+    help_texts,
+    home_texts,
+    profile_texts,
+    project_texts,
+    recover_texts,
+    sign_in_texts,
+    sign_up_texts,
+    validate_texts,
+    navbar_texts,
+    footer_texts,
+    page_texts
 }

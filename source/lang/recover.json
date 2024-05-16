@@ -1,8 +1,60 @@
 {
   "EN": {
-
+    "errors": {
+      "email_not_registered": "Correo no registrado"
+    },
+    "title": "¿Has olvidado tu contraseña?",
+    "subtitle": "Indícanos cuál es tu correo electrónico y te enviaremos un enlace para que puedas recuperar tu contraseña.",
+    "input_placeholder": "Correo electrónico",
+    "needs": {
+      "title": "El correo necesita:"
+    },
+    "buttons": {
+      "next": "Siguiente"
+    },
+    "email_sent": "¡Correo de recuperación enviado!",
+    "finished": {
+      "text_1": "Ya puedes cerrar esta pestaña.",
+      "text_2": "Revisa tu correo para recuperar tu cuenta"
+    },
+    "token": {
+      "password_not_match": "Las contraseñas no coinciden",
+      "error_updating_password": "Error al actualizar la contraseña",
+      "title": "Recupera tu contraseña",
+      "subtitle": "Crea una nueva contraseña",
+      "input_placeholder_1": "Nueva contraseña",
+      "input_placeholder_2": "Repetir nueva contraseña",
+      "needs": "La contraseña debe contener al menos:",
+      "button": "RECUPERAR CONTRASEÑA"
+    }
   },
   "ES": {
-
+    "errors": {
+      "email_not_registered": "Email not registered"
+    },
+    "title": "Did you forget your password?",
+    "subtitle": "Tell us your email and we will send you a link to recover your password.",
+    "input_placeholder": "Email",
+    "needs": {
+      "title": "The email needs:"
+    },
+    "buttons": {
+      "next": "Next"
+    },
+    "email_sent": "Recovery email sent!",
+    "finished": {
+      "text_1": "You can close this tab now.",
+      "text_2": "Check your email to recover your account."
+    },
+    "token": {
+      "password_not_match": "Passwords do not match",
+      "error_updating_password": "Error updating password",
+      "title": "Recover your password",
+      "subtitle": "Create a new password",
+      "input_placeholder_1": "New password",
+      "input_placeholder_2": "Repeat new password",
+      "needs": "The password must contain at least:",
+      "button": "RECOVER PASSWORD"
+    }
   }
 }
