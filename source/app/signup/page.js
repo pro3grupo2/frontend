@@ -1,7 +1,7 @@
 "use client"
 
 import "../globals.css"
-import {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/navigation"
 
 import {Paso1, Paso2_live_utad_com, Paso2_utad_com, Paso_coordinador, PasoFin, PasoInicio} from "@/components/Signup"
@@ -61,6 +61,7 @@ function SignUpComponent() {
             router.push("/signin")
         }}
         setPreviousPaso={() => setPaso_final(false)}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 
     if (paso_verificacion_coordinador) return <Paso_coordinador
@@ -69,6 +70,7 @@ function SignUpComponent() {
         setCodigo={setCodigo}
         alerts={alerts}
         setAlerts={setAlerts}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 
     if (paso_rol_alumnos) return <Paso2_live_utad_com
@@ -77,6 +79,7 @@ function SignUpComponent() {
         setRol={setRol}
         alerts={alerts}
         setAlerts={setAlerts}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 
     if (paso_rol_admins) return <Paso2_utad_com
@@ -89,6 +92,7 @@ function SignUpComponent() {
         setRol={setRol}
         alerts={alerts}
         setAlerts={setAlerts}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 
     if (paso_password) return <Paso1
@@ -99,6 +103,7 @@ function SignUpComponent() {
         setPreviousPaso={() => setPaso_password(false)}
         setPassword={setPassword}
         password={password}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 
     return <PasoInicio
@@ -106,10 +111,19 @@ function SignUpComponent() {
         setPreviousPaso={() => router.push("/signin")}
         setEmail={setEmail}
         email={email}
+        language={localStorage.getItem("lang") ?? "EN"}
     />
 }
 
 export default function SignUp() {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider redirect={false}>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

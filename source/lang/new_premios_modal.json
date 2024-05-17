@@ -1,0 +1,14 @@
+{
+  "EN": {
+    "title": "Titulo",
+    "placeholder": "Nombre del premio",
+    "subtitle": "Premios",
+    "button": "Agregar premios"
+  },
+  "ES": {
+    "title": "Title",
+    "placeholder": "Award name",
+    "subtitle": "Awards",
+    "button": "Add awards"
+  }
+}

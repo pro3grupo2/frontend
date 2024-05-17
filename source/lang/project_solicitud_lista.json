@@ -1,0 +1,22 @@
+{
+  "EN": {
+    "errors": {
+      "accept": "Error al aceptar el proyecto",
+      "reject": "Error al rechazar el proyecto"
+    },
+    "buttons": {
+      "accept": "Aceptar",
+      "reject": "Rechazar"
+    }
+  },
+  "ES": {
+    "errors": {
+      "accept": "Error accepting the project",
+      "reject": "Error rejecting the project"
+    },
+    "buttons": {
+      "accept": "Accept",
+      "reject": "Reject"
+    }
+  }
+}

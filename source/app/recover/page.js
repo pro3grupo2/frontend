@@ -146,6 +146,14 @@ function RecoverPasswordComponent() {
 }
 
 export default function RecoverPassword() {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider redirect={false}>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

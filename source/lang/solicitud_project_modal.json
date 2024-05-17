@@ -1,0 +1,14 @@
+{
+  "EN": {
+    "buttons": {
+      "accept": "Aceptar",
+      "reject": "Rechazar"
+    }
+  },
+  "ES": {
+    "buttons": {
+      "accept": "Accept",
+      "reject": "Reject"
+    }
+  }
+}

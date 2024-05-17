@@ -394,6 +394,14 @@ function ProfileComponent({params}) {
 }
 
 export default function Profile({params}) {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

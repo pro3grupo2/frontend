@@ -1,0 +1,36 @@
+{
+  "EN": {
+    "portfolio": "Portfolio",
+    "description": "Descripción",
+    "description_placeholder": "Escribe una descripción de ti aquí.",
+    "url": {
+      "label": "Enlace URL",
+      "placeholder": "Pega tu link aquí."
+    },
+    "buttons": {
+      "cancel": "Cancelar",
+      "save": "Guardar"
+    },
+    "errors": {
+      "update": "Error al actualizar el perfil",
+      "image": "Error al subir la imagen"
+    }
+  },
+  "ES": {
+    "portfolio": "Portfolio",
+    "description": "Description",
+    "description_placeholder": "Write a description of yourself here.",
+    "url": {
+      "label": "URL Link",
+      "placeholder": "Paste your link here."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "errors": {
+      "update": "Error updating profile",
+      "image": "Error uploading image"
+    }
+  }
+}

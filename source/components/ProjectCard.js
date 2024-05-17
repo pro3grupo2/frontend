@@ -7,7 +7,11 @@ import {EMAIL_TERMINATIONS} from "@/utils/validation"
 
 import "@/styles/project-card.css"
 
+import {project_card_texts} from "@/lang"
+
 export default function ProjectCard({project, onClick, isHome = false}) {
+    const project_json = project_card_texts(localStorage.getItem('lang') ?? "EN")
+
     const [isHovered, setIsHovered] = useState(false)
     const [isShown, setIsShown] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
@@ -51,9 +55,9 @@ export default function ProjectCard({project, onClick, isHome = false}) {
                             {
                                 project.estado === 'rechazado'
                                     ?
-                                    'RECHAZADO'
+                                    project_json.rejected
                                     :
-                                    'PENDIENTE'
+                                    project_json.pending
                             }
                         </p>
                     </div>

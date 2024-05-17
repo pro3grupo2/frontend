@@ -10,7 +10,11 @@ import SolicitudProjectModal from "@/components/SolicitudProjectModal"
 
 import "@/styles/project-card.css"
 
+import {project_solicitud_lista_texts} from "@/lang"
+
 export function ProjectSolicitudLista({project, setProjects, index}) {
+    const project_json = project_solicitud_lista_texts(localStorage.getItem('lang') ?? "EN")
+
     const {token} = useAuth()
 
     const
@@ -18,7 +22,7 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
 
     const handleAceptar = async () => {
         const data = await aceptar_proyecto(token, project.id)
-        if (!data) return alert("Error al aceptar el proyecto")
+        if (!data) return alert(project_json.errors.accept)
 
         setShow(false)
         setProjects(projects => projects.filter((_, i) => i !== index))
@@ -26,7 +30,7 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
 
     const handleRechazar = async () => {
         const data = await rechazar_proyecto(token, project.id)
-        if (!data) return alert("Error al rechazar el proyecto")
+        if (!data) return alert(project_json.errors.reject)
 
         setShow(false)
         setProjects(projects => projects.filter((_, i) => i !== index))
@@ -64,8 +68,8 @@ export function ProjectSolicitudLista({project, setProjects, index}) {
                 </div>
 
                 <div className={"d-flex flex-row flex-wrap justify-content-evenly gap-3"}>
-                    <button className={"btn btn-outline-primary ms-button color-secundario-negro"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleRechazar}>Rechazar</button>
-                    <button className={"btn btn-primary ms-button color-secundario-blanco"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleAceptar}>Aceptar</button>
+                    <button className={"btn btn-outline-primary ms-button color-secundario-negro"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleRechazar}>{project_json.buttons.reject}</button>
+                    <button className={"btn btn-primary ms-button color-secundario-blanco"} style={{minWidth: "11rem", height: '3rem'}} onClick={handleAceptar}>{project_json.buttons.accept}</button>
                 </div>
             </div>
         </>

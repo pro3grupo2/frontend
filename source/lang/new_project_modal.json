@@ -1,0 +1,132 @@
+{
+  "EN": {
+    "title": {
+      "title": "Titulo",
+      "placeholder": "Título del proyecto"
+    },
+    "description": {
+      "title": "Descripción",
+      "placeholder": "Descripción del proyecto"
+    },
+    "front_page": {
+      "title": "Portada del proyecto",
+      "description": "Esta será la imagen que represente tu trabajo, recomendamos una imagen horizontal.",
+      "button": {
+        "select": "Selecciona la portada desde tu ordenador.",
+        "change": {
+          "text_1": "Archivo",
+          "text_2": "subido"
+        },
+        "info": "Archivos PNG, JPG y WEBP inferiores a 5MB"
+      },
+      "url": {
+        "label": "Enlace URL",
+        "placeholder": "Pega tu link aqui."
+      }
+    },
+    "participants": {
+      "title": "Participantes del proyecto",
+      "placeholder": "Escribe los correos (separados por , sin espacios)"
+    },
+    "subject": {
+      "title": "¿A qué asignatura pertenece?",
+      "placeholder": "Asignatura"
+    },
+    "year": {
+      "title": "¿Año?",
+      "placeholder": "Año"
+    },
+    "award": {
+      "title": "¿Ha obtenido algún premio?",
+      "placeholder": "Premiado",
+      "options": {
+        "yes": "Sí",
+        "no": "No"
+      }
+    },
+    "project": {
+      "title": "Fichero del proyecto",
+      "description": "Sube el fichero .zip o el enlace de OneDrive donde está subido el proyecto.",
+      "button": {
+        "select": "Selecciona el fichero desde tu ordenador.",
+        "change": {
+          "text_1": "Archivo",
+          "text_2": "subido"
+        },
+        "info": "Archivo .zip inferior a 5MB"
+      },
+      "url": {
+        "label": "Enlace URL",
+        "placeholder": "Pega tu link aqui."
+      }
+    },
+    "buttons": {
+      "submit": "Subir proyecto"
+    }
+  },
+  "ES": {
+    "title": {
+      "title": "Title",
+      "placeholder": "Project title"
+    },
+    "description": {
+      "title": "Description",
+      "placeholder": "Project description"
+    },
+    "front_page": {
+      "title": "Project cover",
+      "description": "This will be the image that represents your work, we recommend a horizontal image.",
+      "button": {
+        "select": "Select the cover from your computer.",
+        "change": {
+          "text_1": "File",
+          "text_2": "uploaded"
+        },
+        "info": "PNG, JPG and WEBP files under 5MB"
+      },
+      "url": {
+        "label": "URL link",
+        "placeholder": "Paste your link here."
+      }
+    },
+    "participants": {
+      "title": "Project participants",
+      "placeholder": "Write the emails (separated by , without spaces)"
+    },
+    "subject": {
+      "title": "To which subject does it belong?",
+      "placeholder": "Subject"
+    },
+    "year": {
+      "title": "Year?",
+      "placeholder": "Year"
+    },
+    "award": {
+      "title": "Has it won any award?",
+      "placeholder": "Awarded",
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "project": {
+      "title": "Project file",
+      "description": "Upload the .zip file or the OneDrive link where the project is uploaded.",
+      "button": {
+        "select": "Select the file from your computer.",
+        "change": {
+          "text_1": "File",
+          "text_2": "uploaded"
+        },
+        "info": "File .zip under 5MB"
+      },
+      "url": {
+        "label": "URL link",
+        "placeholder": "Paste your link here."
+      }
+    },
+    "buttons": {
+      "submit": "Upload project"
+    }
+  }
+}

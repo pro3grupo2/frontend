@@ -1,4 +1,8 @@
+import {confirm_modal_texts} from "@/lang"
+
 function ConfirmModal({show, setShow, onConfirm}) {
+    const confirm_json = confirm_modal_texts(localStorage.getItem('lang') ?? "EN")
+
     return (
         <>
             <div className={`${show ? 'd-block' : 'd-none'} position-fixed z-2 w-100 h-100 backdrop`}></div>
@@ -14,19 +18,14 @@ function ConfirmModal({show, setShow, onConfirm}) {
                     </p>
 
                     <div>
-                        <p class={'ms-bold-body'}>
-                            Estás a punto de eliminar un codigo de acceso.
-                            ¿Estás seguro de que quieres eliminarlo?
-                        </p>
-                        <p class={'ms-regular-subbody'}>
-                            Una vez eliminado no podrás recuperarlo...
-                        </p>
+                        <p class={'ms-bold-body'}>{confirm_json.title}</p>
+                        <p class={'ms-regular-subbody'}>{confirm_json.description}</p>
                     </div>
                 </div>
 
                 <div className={'d-flex flex-row justify-content-end gap-3 w-100 p-3'}>
-                    <button className="btn btn-primary ms-button color-secundario-negro background-color-secundario-blanco p-2" style={{width: '11rem'}} onClick={() => setShow(false)}>Cancelar</button>
-                    <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" style={{width: '11rem'}} onClick={onConfirm}>Eliminar</button>
+                    <button className="btn btn-primary ms-button color-secundario-negro background-color-secundario-blanco p-2" style={{width: '11rem'}} onClick={() => setShow(false)}>{confirm_json.buttons.cancel}</button>
+                    <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" style={{width: '11rem'}} onClick={onConfirm}>{confirm_json.buttons.delete}</button>
                 </div>
             </div>
         </>

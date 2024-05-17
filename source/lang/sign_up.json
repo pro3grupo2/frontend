@@ -1,8 +1,136 @@
 {
   "EN": {
-
+    "controller": {
+      "next": "SIGUIENTE"
+    },
+    "step_initial": {
+      "title": "Crear cuenta",
+      "description": "Indícanos cuál es tu correo asociado a la U-tad.",
+      "input": {
+        "placeholder": "Correo electrónico"
+      },
+      "already_have_account": "¿Ya tienes cuenta?",
+      "login": "Iniciar sesión"
+    },
+    "step_1": {
+      "title": "Termina de configurar tu cuenta",
+      "description": "Paso 1 de 4. Crea una contraseña para continuar",
+      "inputs": {
+        "password": {
+          "placeholder": "Contraseña"
+        },
+        "password_confirmation": {
+          "placeholder": "Confirmar contraseña"
+        }
+      },
+      "needs": "La contraseña debe contener al menos:",
+      "errors": {
+        "passwords_not_match": "Las contraseñas no coinciden"
+      }
+    },
+    "step_2_live": {
+      "users": {
+        "student": "Alumno",
+        "alumni": "Alumni"
+      },
+      "errors": {
+        "user_type_not_selected": "Debes seleccionar un tipo de usuario"
+      },
+      "title": "¡Reservorio U-tad personalizado para ti!",
+      "description": "Paso 2 de 4. ¿Quién eres?"
+    },
+    "step_2_utad": {
+      "users": {
+        "teacher": "Profesor",
+        "coordinator": "Coordinador",
+        "department": "Departamentos"
+      },
+      "errors": {
+        "user_type_not_selected": "Debes seleccionar un tipo de usuario"
+      },
+      "title": "¡Reservorio U-tad personalizado para ti!",
+      "description": "Paso 2 de 4. ¿Quién eres?"
+    },
+    "step_coord": {
+      "title": "Verifícate",
+      "description": "Paso 2 de 4. ¡Te hemos enviado un código a tu correo para verificar que eres tu!"
+    },
+    "step_end": {
+      "title": "¡Proceso de inscripción finalizado!",
+      "description": "Revisa tu correo para empezar a navegar en la plataforma",
+      "button": "REVISAR CORREO"
+    },
+    "step_final": {
+      "title": "Finalizar inscripción",
+      "description": "Paso 4 de 4. Para completar el proceso, haga clic en el siguiente botón para acceder a Reservorio U-tad.",
+      "button": "Reservorio U-tad"
+    }
   },
   "ES": {
-
+    "controller": {
+      "next": "NEXT"
+    },
+    "step_initial": {
+      "title": "Create account",
+      "description": "Tell us what your U-tad associated email is.",
+      "input": {
+        "placeholder": "Email address"
+      },
+      "already_have_account": "Already have an account?",
+      "login": "Sign in"
+    },
+    "step_1": {
+      "title": "Finish setting up your account",
+      "description": "Step 1 of 4. Create a password to continue",
+      "inputs": {
+        "password": {
+          "placeholder": "Password"
+        },
+        "password_confirmation": {
+          "placeholder": "Confirm password"
+        }
+      },
+      "needs": "Password must contain at least:",
+      "errors": {
+        "passwords_not_match": "Passwords do not match"
+      }
+    },
+    "step_2_live": {
+      "users": {
+        "student": "Student",
+        "alumni": "Alumni"
+      },
+      "errors": {
+        "user_type_not_selected": "You must select a user type"
+      },
+      "title": "Personalized U-tad Reservoir for you!",
+      "description": "Step 2 of 4. Who are you?"
+    },
+    "step_2_utad": {
+      "users": {
+        "teacher": "Teacher",
+        "coordinator": "Coordinator",
+        "department": "Departments"
+      },
+      "errors": {
+        "user_type_not_selected": "You must select a user type"
+      },
+      "title": "Personalized U-tad Reservoir for you!",
+      "description": "Step 2 of 4. Who are you?"
+    },
+    "step_coord": {
+      "title": "Verify yourself",
+      "description": "Step 2 of 4. We have sent you a code to your email to verify that it is you!"
+    },
+    "step_end": {
+      "title": "Registration process completed!",
+      "description": "Check your email to start browsing the platform",
+      "button": "CHECK EMAIL"
+    },
+    "step_final": {
+      "title": "Finish registration",
+      "description": "Step 4 of 4. To complete the process, click on the following button to access U-tad Reservoir.",
+      "button": "U-tad Reservoir"
+    }
   }
 }

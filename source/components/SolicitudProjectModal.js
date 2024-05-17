@@ -3,7 +3,11 @@ import React, {useState} from "react"
 import Image from "next/image"
 import Link from "next/link"
 
+import {solicitud_project_modal_texts} from "@/lang"
+
 export default function SolicitudProjectModal({project, show, setShow, handleAceptar, handleRechazar}) {
+    const solicitud_json = solicitud_project_modal_texts(localStorage.getItem('lang') ?? "EN")
+
     const
         [isDownloadHover, setIsDownloadHover] = useState(false),
         [isDeleteHover, setIsDeleteHover] = useState(false)
@@ -17,7 +21,6 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
 
                 <div className={'d-flex flex-column flex-nowrap gap-3'}>
                     <p className={"ms-bold text-break p-0 m-0"}>{project.titulo}</p>
-
                     {
                         project.participantes
                             .map((participante) => (
@@ -27,7 +30,6 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
 
                     <p className={"ms-regular-subbody p-0 m-0"}>
                         {
-
                             project.proyectos_asignaturas[0]
                                 ? project.proyectos_asignaturas[0].asignaturas.titulaciones_asignaturas[0].titulaciones.areas.titulo + ' / ' + project.proyectos_asignaturas[0].asignaturas.titulo + ' / ' + project.anio
                                 : "Otros / Otros / " + project.anio
@@ -100,8 +102,8 @@ export default function SolicitudProjectModal({project, show, setShow, handleAce
                         <p className={"flex-grow-1 ms-regular"}>{project.ficha}</p>
 
                         <div className={"d-flex flex-row justify-content-end gap-3"}>
-                            <button className={"btn btn-outline-primary ms-button color-secundario-negro w-25"} style={{minWidth: "fit-content"}} onClick={handleRechazar}>Rechazar</button>
-                            <button className={"btn btn-primary ms-button color-secundario-blanco w-25"} style={{minWidth: "fit-content"}} onClick={handleAceptar}>Aceptar</button>
+                            <button className={"btn btn-outline-primary ms-button color-secundario-negro w-25"} style={{minWidth: "fit-content"}} onClick={handleRechazar}>{solicitud_json.buttons.reject}</button>
+                            <button className={"btn btn-primary ms-button color-secundario-blanco w-25"} style={{minWidth: "fit-content"}} onClick={handleAceptar}>{solicitud_json.buttons.accept}</button>
                         </div>
                     </div>
                 </div>

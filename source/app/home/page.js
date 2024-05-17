@@ -148,6 +148,14 @@ function HomeComponent() {
 }
 
 export default function Home() {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

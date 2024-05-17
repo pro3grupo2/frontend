@@ -8,7 +8,11 @@ import Loading from "@/components/Loading"
 
 import "../styles/Signup.css"
 
+import {new_premios_modal_texts} from "@/lang"
+
 export default function NewPremiosModal({show, setShow, proyecto}) {
+    const premios_json = new_premios_modal_texts(localStorage.getItem('lang') ?? "EN")
+
     const {token} = useAuth()
 
     const
@@ -40,8 +44,8 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
 
                 <div className={'d-flex flex-column flex-nowrap gap-5'}>
                     <div className="mb-3">
-                        <label className="form-label ms-bold-body">Titulo <span className="color-error">*</span></label>
-                        <input type="text" className="form-control border-normal" placeholder="Nombre del premio" style={{height: '2.5rem'}} value={premio_input}
+                        <label className="form-label ms-bold-body">{premios_json.title} <span className="color-error">*</span></label>
+                        <input type="text" className="form-control border-normal" placeholder={premios_json.placeholder} style={{height: '2.5rem'}} value={premio_input}
                                onChange={(e) => setPremioInput(e.target.value)}
                                onKeyDown={(e) => {
                                    if (e.key === 'Enter') {
@@ -56,7 +60,7 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
                     {
                         premios.length > 0 &&
                         <div className="mb-3">
-                            <label className="form-label ms-bold-body">Premios</label>
+                            <label className="form-label ms-bold-body">{premios_json.subtitle}</label>
                             <div className="d-flex flex-column gap-3">
                                 {
                                     premios.map((premio, index) => (
@@ -74,7 +78,8 @@ export default function NewPremiosModal({show, setShow, proyecto}) {
                 <div className="d-flex flex-row justify-content-end gap-3">
                     <button
                         disabled={premios.length === 0}
-                        className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>Agregar premios
+                        className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" onClick={handleSubmit}>
+                        {premios_json.button}
                     </button>
                 </div>
             </div>

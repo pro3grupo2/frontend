@@ -10,7 +10,11 @@ import Loading from "@/components/Loading"
 
 import "../styles/Signup.css"
 
+import {edit_profile_modal_texts} from "@/lang"
+
 export default function EditProfileModal({show, setShow}) {
+    const edit_json = edit_profile_modal_texts(localStorage.getItem('lang') ?? "EN")
+
     const {usuario, token, account_update} = useAuth()
 
     const
@@ -31,7 +35,7 @@ export default function EditProfileModal({show, setShow}) {
     const handleSubmit = async () => {
         if (!token) return setLoading(false)
 
-        await account_update(undefined, undefined, descripcion, portfolio, undefined, undefined, () => alert('Error al actualizar el perfil'))
+        await account_update(undefined, undefined, descripcion, portfolio, undefined, undefined, () => alert(edit_json.errors.update))
         setLoading(false)
         setShow(false)
     }
@@ -55,31 +59,29 @@ export default function EditProfileModal({show, setShow}) {
                         subir_ficheros(token, null, e.target.files[0] ?? null)
                             .then(data => {
                                 if (!data) return
-                                account_update(undefined, undefined, undefined, undefined, data.portada !== 'null' ? data.portada : undefined, undefined, () => alert('Error al subir la imagen'))
+                                account_update(undefined, undefined, undefined, undefined, data.portada !== 'null' ? data.portada : undefined, undefined, () => alert(edit_json.errors.image))
                             })
                     }
                 }}/>
 
                 <div className="flex-grow-1 d-flex flex-column justify-content-between">
-
                     <div className="w-100" style={{maxWidth: 488}}>
                         <button type="button" className="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onClick={() => setShow(false)}/>
-
-                        <label className=" ms-bold-body">Portfolio <span className="color-error">*</span></label>
+                        <label className=" ms-bold-body">{edit_json.portfolio} <span className="color-error">*</span></label>
                         <div class="input-group mb-3" style={{height: 48, maxWidth: 488}}>
-                            <span class="input-group-text border-normal fw-semibold">Enlace URL</span>
-                            <input type="text" className="form-control border-normal " placeholder="Pega tu link aqui." value={portfolio} onChange={(e) => setPortfolio(e.target.value.slice(0, 190))}/>
+                            <span class="input-group-text border-normal fw-semibold">{edit_json.url.label}</span>
+                            <input type="text" className="form-control border-normal " placeholder={edit_json.url.placeholder} value={portfolio} onChange={(e) => setPortfolio(e.target.value.slice(0, 190))}/>
                         </div>
                         <div class="position-relative mb-3">
-                            <label className="form-label ms-bold-body">Descripción <span className="color-error">*</span></label>
-                            <textarea className="form-control border-normal" style={{height: 147, maxWidth: 488}} placeholder="Descripción del proyecto " rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value.slice(0, 140))}></textarea>
+                            <label className="form-label ms-bold-body">{edit_json.description} <span className="color-error">*</span></label>
+                            <textarea className="form-control border-normal" style={{height: 147, maxWidth: 488}} placeholder={edit_json.description_placeholder} rows={6} value={descripcion} onChange={(e) => setDescripcion(e.target.value.slice(0, 140))}></textarea>
                             <span className={`position-absolute bottom-0 end-0 ms-regular-subbody m-3 ${140 - descripcion?.length <= 50 && 'color-error'}`}>{descripcion?.length}/140</span>
                         </div>
                     </div>
 
                     <div className="d-flex flex-row justify-content-end gap-3">
-                        <button className="btn ms-button color-secundario-gris FW-BOLD background-color-secundario-blanco p-2" onClick={() => setShow(false)}>Cancelar</button>
-                        <button className="btn btn-primary ms-button fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>Guardar</button>
+                        <button className="btn ms-button color-secundario-gris FW-BOLD background-color-secundario-blanco p-2" onClick={() => setShow(false)}>{edit_json.buttons.cancel}</button>
+                        <button className="btn btn-primary ms-button fw-bold color-secundario-blanco background-color-principal p-2 w-100" style={{maxWidth: '15.6rem', minHeight: 48}} onClick={handleSubmit}>{edit_json.buttons.save}</button>
                     </div>
                 </div>
             </div>

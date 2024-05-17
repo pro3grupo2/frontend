@@ -1,8 +1,12 @@
 {
   "EN": {
-
+    "title": "Finalizar inscripción",
+    "description": "Paso 4 de 4. Para completar el proceso, haga clic en el siguiente botón para validar su cuenta y acceder a Reservorio U-tad",
+    "button": "VALIDAR CUENTA"
   },
   "ES": {
-
+    "title": "Finish registration",
+    "description": "Step 4 of 4. To complete the process, click on the following button to validate your account and access Reservoir U-tad",
+    "button": "VALIDATE ACCOUNT"
   }
 }

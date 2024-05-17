@@ -1,6 +1,6 @@
 "use client"
 
-import {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {AuthProvider} from "@/context/authContext"
 
@@ -11,6 +11,7 @@ import '../globals.css'
 import '../../styles/Profile.css'
 
 import {help_texts} from "@/lang"
+import Loading from "@/components/Loading";
 
 function HelpComponent() {
     const [showFAQ, setShowFAQ] = useState(true)
@@ -121,6 +122,14 @@ function HelpComponent() {
 }
 
 export default function Help() {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider redirect={false}>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

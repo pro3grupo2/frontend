@@ -7,6 +7,8 @@ import {footer_texts} from "@/lang"
 function Footer({lang}) {
     const footer_json = footer_texts(lang)
 
+    if (!footer_json) return null
+
     return (
         <footer className={'d-flex flex-column flex-md-row bottom-0  flex-nowrap justify-content-evenly align-items-center gap-4 gap-md-0 py-3 background-color-secundario-negro ms-bold-subbody w-100 mt-auto'}>
             <Link href="/home">

@@ -5,12 +5,17 @@ import Image from 'next/image'
 
 import {EstructuraFormularios} from '@/components/Estructura'
 import {AlertContainer, create_alert} from "@/components/Alerts"
+import Loading from "@/components/Loading";
 
 import {check_email, check_password} from "@/utils/validation"
 
 import "../styles/Signup.css"
 
-const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef = null, setPreviousPasoRef = null}) => {
+import {sign_up_texts} from "@/lang"
+
+const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, language, setNextPasoRef = null, setPreviousPasoRef = null}) => {
+    const sign_up_json = sign_up_texts(language).controller
+
     return (
         <div className='d-flex gap-5 justify-content-between aligns-items-center mt-5 m-0'>
             <button
@@ -30,13 +35,15 @@ const ControladorSiguienteAtras = ({setNextPaso, setPreviousPaso, setNextPasoRef
                 onClick={setNextPaso}
                 className='btn btn-primary btn-color-primary border-5 fs-5 fw-bold'
                 style={{width: '184px', height: '48px'}}>
-                SIGUIENTE
+                {sign_up_json.next}
             </button>
         </div>
     )
 }
 
-const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
+const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail, language}) => {
+    const sign_up_json = sign_up_texts(language).step_initial
+
     const
         email_ref = useRef(null),
         [email_checks, setEmailChecks] = useState([])
@@ -47,6 +54,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
 
         if (!check_email(
             email,
+            localStorage.getItem('lang') ?? 'EN',
             (error) => {
                 setEmailChecks((previous) => [...previous, error])
             }
@@ -59,13 +67,10 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
         <EstructuraFormularios clase_imagen="bg-image-signup">
             <div className='d-flex flex-column gap-3 gap-xxl-5' style={{maxWidth: '26rem'}}>
                 <div>
-                    <h1 className='fw-bold'>Crear cuenta</h1>
-                    <p className='pe-1 '>
-                        Indícanos cuál es tu correo asociado a la U-tad.
-                    </p>
+                    <h1 className='fw-bold'>{sign_up_json.title}</h1>
+                    <p className='pe-1 '>{sign_up_json.description}</p>
                 </div>
-                <div className='mb-3'>
-                </div>
+                <div className='mb-3'></div>
 
                 <div>
                     <input
@@ -77,7 +82,7 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                         onChange={(e) => setEmail(e.target.value)}
                         style={{maxHeight: '3rem'}}
                         onFocus={() => email_ref.current.classList.remove('border-error')}
-                        placeholder="Correo electrónico"
+                        placeholder={sign_up_json.input.placeholder}
                         autoComplete="off"
                     />
 
@@ -92,19 +97,22 @@ const PasoInicio = ({setNextPaso, setPreviousPaso, email, setEmail}) => {
                     <ControladorSiguienteAtras
                         setNextPaso={handleNextPaso}
                         setPreviousPaso={setPreviousPaso}
+                        language={localStorage.getItem('lang') ?? 'EN'}
                     />
                 </div>
 
                 <div className='text-center'>
-                    <span className='pe-1 '>¿Ya tienes una cuenta?</span>
-                    <Link className='link-underline-dark link-dark fw-bold ps-1' href='/signin'>Iniciar sesión</Link>
+                    <span className='pe-1 '>{sign_up_json.already_have_account}</span>
+                    <Link className='link-underline-dark link-dark fw-bold ps-1' href='/signin'>{sign_up_json.login}</Link>
                 </div>
             </div>
         </EstructuraFormularios>
     )
 }
 
-const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
+const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password, language}) => {
+    const sign_up_json = sign_up_texts(language).step_1
+
     const
         password_ref = useRef(null),
         password2_ref = useRef(null),
@@ -118,6 +126,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
 
         if (!check_password(
             password,
+            localStorage.getItem('lang') ?? 'EN',
             (error) => {
                 setPasswordChecks((previous) => [...previous, error])
             }
@@ -130,7 +139,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
         password_ref.current.classList.remove('border-error')
 
         if (password !== password2) {
-            setPasswordChecks((previous) => [...previous, 'Las contraseñas no coinciden'])
+            setPasswordChecks((previous) => [...previous, sign_up_json.errors.passwords_not_match])
             return password2_ref.current.classList.add('border-error')
         }
 
@@ -139,8 +148,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
     }, [password, password2])
 
     const handleNextClick = () => {
-        if (!password_checks.length)
-            return setNextPaso()
+        if (!password_checks.length) return setNextPaso()
 
         password_ref.current.classList.add('border-error')
         password2_ref.current.classList.add('border-error')
@@ -150,14 +158,11 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
         <EstructuraFormularios clase_imagen="bg-image-signup-password">
             <div className='d-flex flex-column gap-xxl-5' style={{maxWidth: '30rem'}}>
                 <div>
-                    <h1 className='fw-bold'>Termina de configurar tu cuenta</h1>
-                    <p className=' pe-1 '>
-                        Paso 1 de 4. Crea una contraseña para continuar
-                    </p>
+                    <h1 className='fw-bold'>{sign_up_json.title}</h1>
+                    <p className='pe-1'>{sign_up_json.description}</p>
                 </div>
 
                 <div>
-
                     <div className="position-relative d-flex mt-3 w-100">
                         <input
                             ref={password_ref}
@@ -168,7 +173,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             onChange={(e) => setPassword(e.target.value)}
                             style={{maxHeight: '3rem'}}
                             onFocus={() => password_ref.current.classList.remove('border-error')}
-                            placeholder="Contraseña"
+                            placeholder={sign_up_json.inputs.password.placeholder}
                             autoComplete="off"
                         />
 
@@ -190,7 +195,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                             onChange={(e) => setPassword2(e.target.value)}
                             style={{maxHeight: '3rem'}}
                             onFocus={() => password2_ref.current.classList.remove('border-error')}
-                            placeholder="Confirmar contraseña"
+                            placeholder={sign_up_json.inputs.password_confirmation.placeholder}
                             autoComplete="off"
                         />
 
@@ -205,7 +210,7 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                     <div className={'my-4'}>
                         {
                             password_checks.length > 0 &&
-                            <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">La contraseña debe contener al menos:</p>
+                            <p className="color-secundario-gris ms-bold-body p-0 ps-3 m-0">{sign_up_json.needs}</p>
                         }
                         {
                             password_checks.map((check, index) => (
@@ -218,19 +223,22 @@ const Paso1 = ({setNextPaso, setPreviousPaso, setPassword, password}) => {
                 <ControladorSiguienteAtras
                     setNextPaso={handleNextClick}
                     setPreviousPaso={setPreviousPaso}
+                    language={localStorage.getItem('lang') ?? 'EN'}
                 />
             </div>
         </EstructuraFormularios>
     )
 }
 
-const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
+const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts, language}) => {
+    const sign_up_json = sign_up_texts(language).step_2_live
+
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
-        if (type === 'Alumno') {
+        if (type === sign_up_json.users.student) {
             setRol('alumno')
-        } else if (type === 'Alumni') {
+        } else if (type === sign_up_json.users.alumni) {
             setRol('alumni')
         }
         setSelectedType(type)
@@ -238,7 +246,7 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
 
     const handleNextClick = () => {
         if (!selectedType)
-            return create_alert(setAlerts, 'Debes seleccionar un tipo de usuario', 'danger')
+            return create_alert(setAlerts, sign_up_json.errors.user_type_not_selected, 'danger')
 
         setNextPaso()
     }
@@ -248,17 +256,15 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
             <AlertContainer alerts={alerts}/>
 
             <div className='container d-flex flex-column mt-5' style={{maxWidth: 480}}>
-                <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='pe-1 text-center text-lg-start'>
-                    Paso 2 de 4. ¿Quién eres?
-                </p>
+                <h1 className='fw-bold text-center text-lg-start'>{sign_up_json.title}</h1>
+                <p className='pe-1 text-center text-lg-start'>{sign_up_json.description}</p>
 
                 <div>
                     <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
-                            className={`custom-button ${selectedType === 'Alumno' ? 'selected shadow-lg' : ''} `}
-                            onClick={() => handleTypeSelection('Alumno')}
-                            style={{border: `2px solid ${selectedType === 'Alumno' ? 'var(--color-principal)' : '#808080'}`}}>
+                            className={`custom-button ${selectedType === sign_up_json.users.student ? 'selected shadow-lg' : ''} `}
+                            onClick={() => handleTypeSelection(sign_up_json.users.student)}
+                            style={{border: `2px solid ${selectedType === sign_up_json.users.student ? 'var(--color-principal)' : '#808080'}`}}>
                             <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' fill='none' xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9'/>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
@@ -276,13 +282,13 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
 
 
                             </svg>
-                            <h3 className='text-center'>Alumno</h3>
+                            <h3 className='text-center'>{sign_up_json.users.student}</h3>
                         </button>
 
                         <button
-                            className={`custom-button ${selectedType === 'Alumni' ? 'selected shadow-lg' : ''}`}
-                            onClick={() => handleTypeSelection('Alumni')}
-                            style={{border: `2px solid ${selectedType === 'Alumni' ? 'var(--color-principal)' : '#808080'}`}}>
+                            className={`custom-button ${selectedType === sign_up_json.users.alumni ? 'selected shadow-lg' : ''}`}
+                            onClick={() => handleTypeSelection(sign_up_json.users.alumni)}
+                            style={{border: `2px solid ${selectedType === sign_up_json.users.alumni ? 'var(--color-principal)' : '#808080'}`}}>
                             <svg className="d-none d-lg-block"
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
@@ -303,26 +309,32 @@ const Paso2_live_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setA
                                     <path d="M40.3575 0.719482L0.372253 13.9082L40.3575 24.6557L73.0726 17.8716V42.9975H78.8363V13.9082" fill="#0065F3"/>
                                 </svg>
                             </svg>
-                            <h3 className='text-center'>Alumni</h3>
+                            <h3 className='text-center'>{sign_up_json.users.alumni}</h3>
                         </button>
                     </div>
 
-                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+                    <ControladorSiguienteAtras
+                        setNextPaso={handleNextClick}
+                        setPreviousPaso={setPreviousPaso}
+                        language={localStorage.getItem('lang') ?? 'EN'}
+                    />
                 </div>
             </div>
         </>
     )
 }
 
-const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts}) => {
+const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts, language}) => {
+    const sign_up_json = sign_up_texts(language).step_2_utad
+
     const [selectedType, setSelectedType] = useState('')
 
     const handleTypeSelection = (type) => {
-        if (type === 'Profesor') {
+        if (type === sign_up_json.users.teacher) {
             setRol('profesor')
-        } else if (type === 'Coordinador') {
+        } else if (type === sign_up_json.users.coordinator) {
             setRol('coordinador')
-        } else if (type === 'Departamentos') {
+        } else if (type === sign_up_json.users.departments) {
             setRol('departamentos')
         }
         setSelectedType(type)
@@ -330,7 +342,7 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
 
     const handleNextClick = () => {
         if (!selectedType)
-            return create_alert(setAlerts, 'Debes seleccionar un tipo de usuario', 'danger')
+            return create_alert(setAlerts, sign_up_json.errors.user_type_not_selected, 'danger')
 
         setNextPaso()
     }
@@ -340,17 +352,15 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
             <AlertContainer alerts={alerts}/>
 
             <div className='container d-flex flex-column mt-5 ' style={{maxWidth: 480}}>
-                <h1 className='fw-bold text-center text-lg-start'>Reservorio U-tad personalizado para ti!</h1>
-                <p className='pe-1 text-center text-lg-start '>
-                    Paso 2 de 4. ¿Quién eres?
-                </p>
+                <h1 className='fw-bold text-center text-lg-start'>{sign_up_json.title}</h1>
+                <p className='pe-1 text-center text-lg-start '>{sign_up_json.description}</p>
 
                 <div>
                     <div className='d-flex flex-column flex-lg-row gap-3 gap-lg-5 justify-content-between mb-4 mt-5'>
                         <button
-                            className={`custom-button ${selectedType === 'Profesor' ? 'selected shadow-lg' : ''}`}
-                            onClick={() => handleTypeSelection('Profesor')}
-                            style={{border: `2px solid ${selectedType === 'Profesor' ? 'var(--color-principal)' : '#808080'}`}}>
+                            className={`custom-button ${selectedType === sign_up_json.users.teacher ? 'selected shadow-lg' : ''}`}
+                            onClick={() => handleTypeSelection(sign_up_json.users.teacher)}
+                            style={{border: `2px solid ${selectedType === sign_up_json.users.teacher ? 'var(--color-principal)' : '#808080'}`}}>
                             <svg className="d-none d-lg-block"
                                  width='130' height='129' viewBox='0 0 130 129' fill='none'
                                  xmlns='http://www.w3.org/2000/svg'>
@@ -370,13 +380,13 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
 
 
                             </svg>
-                            <h3 className='text-center ms-bold'>Profesor / Ext.</h3>
+                            <h3 className='text-center ms-bold'>{sign_up_json.users.teacher}{" / Ext."}</h3>
                         </button>
 
                         <button
-                            className={`custom-button ${selectedType === 'Coordinador' ? 'selected shadow-lg' : ''}`}
-                            onClick={() => handleTypeSelection('Coordinador')}
-                            style={{border: `2px solid ${selectedType === 'Coordinador' ? 'var(--color-principal)' : '#808080'}`}}>
+                            className={`custom-button ${selectedType === sign_up_json.users.coordinator ? 'selected shadow-lg' : ''}`}
+                            onClick={() => handleTypeSelection(sign_up_json.users.coordinator)}
+                            style={{border: `2px solid ${selectedType === sign_up_json.users.coordinator ? 'var(--color-principal)' : '#808080'}`}}>
                             <svg className="d-none d-lg-block" width='130' height='129' viewBox='0 0 130 129' xmlns='http://www.w3.org/2000/svg'>
                                 <circle id='Ellipse 9' cx='65' cy='64.1468' r='64.1468' fill='#D9D9D9'/>
                                 <svg xmlns="http://www.w3.org/2000/svg" x="37" y="35" width="54" height="55" viewBox="0 0 54 55" fill="none">
@@ -401,14 +411,20 @@ const Paso2_utad_com = ({setNextPaso, setPreviousPaso, setRol, alerts, setAlerts
                         </button>
                     </div>
 
-                    <ControladorSiguienteAtras setNextPaso={handleNextClick} setPreviousPaso={setPreviousPaso}/>
+                    <ControladorSiguienteAtras
+                        setNextPaso={handleNextClick}
+                        setPreviousPaso={setPreviousPaso}
+                        language={localStorage.getItem('lang') ?? 'EN'}
+                    />
                 </div>
             </div>
         </>
     )
 }
 
-const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setAlerts}) => {
+const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setAlerts, language}) => {
+    const sign_up_json = sign_up_texts(language).step_coord
+
     const
         refs = useRef([]),
         next_ref = useRef(null)
@@ -420,9 +436,8 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
             <AlertContainer alerts={alerts}/>
 
             <div className='container d-flex flex-column mt-5' style={{maxWidth: 480, maxHeight: 305}}>
-                <h1 className='fw-bold mt-5'>Verifícate</h1>
-                <p className='pe-1  '>Paso 2 de 4. Te hemos enviado un código a tu correo para verificar que eres tu!</p>
-
+                <h1 className='fw-bold mt-5'>{sign_up_json.title}</h1>
+                <p className='pe-1'>{sign_up_json.description}</p>
 
                 <div className='d-flex flex-row gap-4 mt-5'>
                     {
@@ -444,26 +459,32 @@ const Paso_coordinador = ({setNextPaso, setPreviousPaso, setCodigo, alerts, setA
 
                                     return (refs.current[index + 1] ?? next_ref).current.focus()
                                 }}
-                                maxLength={1} // Restringe la entrada a un solo carácter
+                                maxLength={1}
                                 className='form-control text-center'
-                                autoComplete="off" // Evita la autocompletación del navegador
-
+                                autoComplete="off"
                             />
                         ))
                     }
                 </div>
 
-                <ControladorSiguienteAtras setNextPaso={setNextPaso} setPreviousPaso={setPreviousPaso} setNextPasoRef={next_ref}/>
+                <ControladorSiguienteAtras
+                    setNextPaso={setNextPaso}
+                    setPreviousPaso={setPreviousPaso}
+                    setNextPasoRef={next_ref}
+                    language={localStorage.getItem('lang') ?? 'EN'}
+                />
             </div>
         </>
     )
 }
 
-const PasoFin = ({setNextPaso, setPreviousPaso}) => {
+const PasoFin = ({setNextPaso, setPreviousPaso, language}) => {
+    const sign_up_json = sign_up_texts(language).step_end
+
     return (
         <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
-            <h1 className="display-5 fw-bold mb-3">¡Proceso de inscripción finalizado!</h1>
-            <p className='ms-font fs-5 lead w-50'>Revisa tu correo para empezar a navegar en la plataforma</p>
+            <h1 className="display-5 fw-bold mb-3">{sign_up_json.title}</h1>
+            <p className='ms-font fs-5 lead w-50'>{sign_up_json.description}</p>
 
             <Image src="/icons/mail.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
 
@@ -471,17 +492,19 @@ const PasoFin = ({setNextPaso, setPreviousPaso}) => {
                 type='button'
                 onClick={setNextPaso}
                 className='btn btn-primary border-5 ms-button p-3 w-50' style={{minWidth: "fit-content"}}>
-                REVISAR CORREO
+                {sign_up_json.button}
             </button>
         </div>
     )
 }
 
-const PasoFinFin = ({setNextPaso, setPreviousPaso}) => {
+const PasoFinFin = ({setNextPaso, setPreviousPaso, language}) => {
+    const sign_up_json = sign_up_texts(language).step_final
+
     return (
         <div className='d-flex flex-column align-items-center justify-content-evenly text-center' style={{minHeight: '60vh'}}>
-            <h1 className="display-5 fw-bold mb-3">Finalizar inscripción</h1>
-            <p className='ms-font fs-5 lead w-50'>Paso 4 de 4. Para completar el proceso, haga clic en el siguiente botón para acceder a Reservorio U-tad.</p>
+            <h1 className="display-5 fw-bold mb-3">{sign_up_json.title}</h1>
+            <p className='ms-font fs-5 lead w-50'>{sign_up_json.description}</p>
 
             <Image src="/images/fin.svg" alt="mail.svg" width={0} height={0} className="d-none d-md-block w-auto h-auto"/>
 
@@ -489,7 +512,7 @@ const PasoFinFin = ({setNextPaso, setPreviousPaso}) => {
                 type='button'
                 onClick={setNextPaso}
                 className='btn btn-primary border-5 ms-button p-3 w-50' style={{minWidth: "fit-content"}}>
-                Reservorio U-tad
+                {sign_up_json.button}
             </button>
         </div>
     )

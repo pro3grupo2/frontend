@@ -1,0 +1,10 @@
+{
+  "EN": {
+    "pending": "PENDIENTE",
+    "rejected": "RECHAZADO"
+  },
+  "ES": {
+    "pending": "PENDING",
+    "rejected": "REJECTED"
+  }
+}

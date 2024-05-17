@@ -6,10 +6,20 @@ import NavBar from "@/components/NavBar"
 import {AuthProvider} from "@/context/authContext"
 
 import {page_texts} from "@/lang"
+import React, {useEffect, useState} from "react";
+import Loading from "@/components/Loading";
 
 export default function HomePage() {
     const
         router = useRouter()
+
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
 
     const page = page_texts(localStorage.getItem('lang') ?? "EN")
 

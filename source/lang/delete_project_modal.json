@@ -1,0 +1,18 @@
+{
+  "EN": {
+    "title": "Estás a punto de eliminar un proyecto. ¿Estás seguro de que quieres eliminarlo?",
+    "description": "Una vez eliminado no podrás recuperarlo...",
+    "buttons": {
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
+    }
+  },
+  "ES": {
+    "title": "You are about to delete a project. Are you sure you want to delete it?",
+    "description": "Once deleted you will not be able to recover it...",
+    "buttons": {
+      "cancel": "Cancel",
+      "delete": "Delete"
+    }
+  }
+}

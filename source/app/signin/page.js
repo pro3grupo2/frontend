@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import Link from 'next/link'
 import Image from "next/image"
@@ -158,6 +158,14 @@ function SignInComponent() {
 }
 
 export default function SignIn() {
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return <Loading/>
+
     return (
         <AuthProvider>
             <NavBar lang={localStorage.getItem("lang") ?? "EN"}/>

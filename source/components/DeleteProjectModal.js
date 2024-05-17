@@ -10,7 +10,11 @@ import Loading from "@/components/Loading"
 
 import "../styles/Signup.css"
 
+import {delete_project_modal_texts} from "@/lang"
+
 export default function DeleteProjectModal({project, show, setShow}) {
+    const delete_json = delete_project_modal_texts(localStorage.getItem('lang') ?? "EN")
+
     const {token} = useAuth()
 
     const
@@ -41,19 +45,14 @@ export default function DeleteProjectModal({project, show, setShow}) {
                     </p>
 
                     <div>
-                        <p class={'ms-bold-body'}>
-                            Estás a punto de eliminar un proyecto.
-                            ¿Estás seguro de que quieres eliminarlo?
-                        </p>
-                        <p class={'ms-regular-subbody'}>
-                            Una vez eliminado no podrás recuperarlo...
-                        </p>
+                        <p class={'ms-bold-body'}>{delete_json.title}</p>
+                        <p class={'ms-regular-subbody'}>{delete_json.description}</p>
                     </div>
                 </div>
 
                 <div className={'d-flex flex-row justify-content-end gap-3 w-100 p-3'}>
-                    <button className="btn btn-primary ms-button color-secundario-negro background-color-secundario-blanco p-2" style={{width: '11rem'}} onClick={() => setShow(false)}>Cancelar</button>
-                    <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" style={{width: '11rem'}} onClick={handleDeleteProject}>Eliminar</button>
+                    <button className="btn btn-primary ms-button color-secundario-negro background-color-secundario-blanco p-2" style={{width: '11rem'}} onClick={() => setShow(false)}>{delete_json.buttons.cancel}</button>
+                    <button className="btn btn-primary ms-button color-secundario-blanco background-color-principal p-2" style={{width: '11rem'}} onClick={handleDeleteProject}>{delete_json.buttons.delete}</button>
                 </div>
             </div>
         </>
