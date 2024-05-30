@@ -148,7 +148,7 @@ export default function Filters({onSearchChange, handleSearch, handleAreaClick, 
                         value={search}
                         className="ms-regular-subbody form-control border-0 py-2 focus-ring h-100"
                         type="search"
-                        placeholder="Buscar un proyecto o escribir el correo de algún miembro"/>
+                        placeholder={home_json.filters.filter_search.title}/>
 
                     <button type="button" className="btn-close position-absolute top-50 end-0 translate-middle" aria-label="Close" onClick={() => {
                         setSearch('')

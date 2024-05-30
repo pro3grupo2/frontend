@@ -15,6 +15,9 @@
       },
       "filter_title": {
         "title": "Titulación"
+      },
+      "filter_search": {
+        "title": "Buscar un proyecto o escribir el correo de algún miembro"
       }
     },
     "not_found_title": "Ups! No hemos encontrado resultados para su búsqueda.",
@@ -36,6 +39,9 @@
       },
       "filter_title": {
         "title": "Title"
+      },
+      "filter_search": {
+        "title": "Search for a project or write the email of a member"
       }
     },
     "not_found_title": "Ups! We couldn't find any results for your search.",
